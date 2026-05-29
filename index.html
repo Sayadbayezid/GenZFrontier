@@ -21,8 +21,8 @@
         a { text-decoration: none; color: inherit; }
         a:hover { color: var(--primary-red); }
 
-        /* Top Header (CNN Style) */
-        header { background-color: var(--dark-bg); color: var(--text-light); }
+        /* Top Header */
+        header { background-color: var(--dark-bg); color: var(--text-light); position: relative; }
         .header-top {
             display: flex;
             justify-content: space-between;
@@ -32,14 +32,20 @@
             margin: 0 auto;
         }
         .header-left { display: flex; align-items: center; gap: 20px; }
-        .menu-icon { font-size: 24px; cursor: pointer; }
+        .menu-icon { font-size: 24px; cursor: pointer; display: block; }
         .logo { font-size: 32px; font-weight: 900; color: var(--primary-red); letter-spacing: -1px; }
         .logo span { color: var(--text-light); font-weight: 400; }
-        .header-right { display: flex; align-items: center; gap: 20px; font-size: 14px; font-weight: bold; }
-        .header-btn { border: 1px solid #555; padding: 8px 15px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 5px;}
+        .header-right { display: flex; align-items: center; gap: 15px; font-size: 14px; font-weight: bold; }
+        .header-btn { border: 1px solid #555; padding: 8px 15px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 5px; background: none; color: white;}
         .header-btn.red { background-color: var(--primary-red); border: none; color: white;}
 
-        /* Navigation (Root Paths Included) */
+        /* Search Bar Toggle Overlay */
+        .search-container { background: #111; padding: 15px 20px; display: none; border-bottom: 2px solid var(--primary-red); }
+        .search-box { max-width: 600px; margin: 0 auto; display: flex; gap: 10px; }
+        .search-box input { flex: 1; padding: 10px; border-radius: 4px; border: none; font-size: 16px; }
+        .search-box button { background: var(--primary-red); color: white; border: none; padding: 0 20px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+
+        /* Navigation Menu */
         nav { background-color: var(--dark-bg); border-top: 1px solid #333; border-bottom: 1px solid #333; }
         nav ul {
             display: flex;
@@ -59,7 +65,21 @@
         }
         nav ul li a:hover, nav ul li a.active { color: var(--text-light); border-bottom: 3px solid var(--primary-red); padding-bottom: 9px; }
 
-        /* Hero Section (Dark Background) */
+        /* Mobile Slide Out Menu Overlay */
+        .mobile-menu-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999; }
+        .mobile-menu { width: 280px; background: var(--dark-card); height: 100%; padding: 20px; color: white; display: flex; flex-direction: column; gap: 20px; }
+        .mobile-menu .close-btn { font-size: 24px; align-self: flex-end; cursor: pointer; color: var(--primary-red); }
+        .mobile-menu a { font-size: 18px; font-weight: bold; border-bottom: 1px solid #222; padding-bottom: 10px; }
+
+        /* Authentication Modal Overlay */
+        .auth-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; }
+        .auth-modal { background: white; padding: 30px; border-radius: 6px; width: 100%; max-width: 400px; position: relative; }
+        .auth-modal h2 { margin-bottom: 20px; color: var(--dark-bg); text-align: center; }
+        .auth-modal input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 14px; }
+        .auth-modal button { width: 100%; padding: 12px; background: var(--primary-red); color: white; border: none; font-size: 16px; font-weight: bold; border-radius: 4px; cursor: pointer; }
+        .auth-modal .close-auth { position: absolute; top: 15px; right: 15px; font-size: 20px; cursor: pointer; color: #666; }
+
+        /* Hero Section */
         .hero-section { background-color: var(--dark-bg); color: var(--text-light); padding: 40px 20px; }
         .hero-container {
             max-width: 1300px;
@@ -79,7 +99,7 @@
         .hero-side-item img { width: 120px; height: 80px; object-fit: cover; border-radius: 2px; }
         .hero-side-item h3 { font-size: 16px; line-height: 1.3; font-weight: bold; }
 
-        /* Main Content Area (White Background) */
+        /* Main Content Area */
         .content-section { max-width: 1300px; margin: 40px auto; padding: 0 20px; }
         
         /* Section Titles */
@@ -114,34 +134,70 @@
         @media (max-width: 600px) {
             .grid-4 { grid-template-columns: 1fr; }
             .hero-main h1 { font-size: 32px; }
+            nav { display: none; } /* Hide main desktop nav on small screens */
         }
     </style>
 </head>
 <body>
 
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <div class="mobile-menu">
+            <div class="close-btn" id="closeMenuBtn">&times;</div>
+            <a href="./">Home</a>
+            <a href="./world/">World</a>
+            <a href="./politics/">Politics</a>
+            <a href="./business/">Business</a>
+            <a href="./tech/">Tech</a>
+            <a href="./science/">Science</a>
+            <a href="./health/">Health</a>
+            <a href="./sports/">Sports</a>
+            <a href="./entertainment/">Entertainment</a>
+        </div>
+    </div>
+
+    <div class="auth-overlay" id="authOverlay">
+        <div class="auth-modal">
+            <div class="close-auth" id="closeAuthBtn">&times;</div>
+            <h2 id="authTitle">Log In</h2>
+            <form id="authForm">
+                <input type="text" id="authUsername" placeholder="Username" required>
+                <input type="password" id="authPassword" placeholder="Password" required>
+                <button type="submit" id="authSubmitBtn">Submit</button>
+            </form>
+        </div>
+    </div>
+
     <header>
         <div class="header-top">
             <div class="header-left">
-                <div class="menu-icon">☰</div>
+                <div class="menu-icon" id="hamburgerMenu">☰</div>
                 <div class="logo">GenZ <span>Frontier</span></div>
             </div>
             <div class="header-right">
-                <div class="header-btn">Search 🔍</div>
-                <div class="header-btn red">Live TV</div>
-                <div class="header-btn">Log In</div>
+                <button class="header-btn" id="searchToggleBtn">Search 🔍</button>
+                <button class="header-btn red" onclick="alert('Live TV is launching soon!')">Live TV</button>
+                <button class="header-btn" id="loginBtn">Log In</button>
             </div>
         </div>
+
+        <div class="search-container" id="searchContainer">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search news titles...">
+                <button id="searchSubmitBtn">Search</button>
+            </div>
+        </div>
+
         <nav>
             <ul>
-                <li><a href="/" class="active">Home</a></li>
-                <li><a href="/world/">World</a></li>
-                <li><a href="/politics/">Politics</a></li>
-                <li><a href="/business/">Business</a></li>
-                <li><a href="/tech/">Tech</a></li>
-                <li><a href="/science/">Science</a></li>
-                <li><a href="/health/">Health</a></li>
-                <li><a href="/sports/">Sports</a></li>
-                <li><a href="/entertainment/">Entertainment</a></li>
+                <li><a href="./" class="active">Home</a></li>
+                <li><a href="./world/">World</a></li>
+                <li><a href="./politics/">Politics</a></li>
+                <li><a href="./business/">Business</a></li>
+                <li><a href="./tech/">Tech</a></li>
+                <li><a href="./science/">Science</a></li>
+                <li><a href="./health/">Health</a></li>
+                <li><a href="./sports/">Sports</a></li>
+                <li><a href="./entertainment/">Entertainment</a></li>
             </ul>
         </nav>
     </header>
@@ -160,21 +216,21 @@
                     <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Sidebar Image">
                     <div>
                         <span class="red-tag" style="color: var(--primary-red); font-size: 11px; font-weight: bold; display: block; margin-bottom: 5px;">TECH</span>
-                        <a href="/tech/"><h3>Major AI breakthroughs expected in the coming quarter</h3></a>
+                        <a href="./tech/"><h3>Major AI breakthroughs expected in the coming quarter</h3></a>
                     </div>
                 </div>
                 <div class="hero-side-item">
                     <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Sidebar Image">
                     <div>
                         <span class="red-tag" style="color: var(--primary-red); font-size: 11px; font-weight: bold; display: block; margin-bottom: 5px;">BUSINESS</span>
-                        <a href="/business/"><h3>Stock indices hit record highs amid corporate earnings</h3></a>
+                        <a href="./business/"><h3>Stock indices hit record highs amid corporate earnings</h3></a>
                     </div>
                 </div>
                 <div class="hero-side-item">
                     <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Sidebar Image">
                     <div>
                         <span class="red-tag" style="color: var(--primary-red); font-size: 11px; font-weight: bold; display: block; margin-bottom: 5px;">POLITICS</span>
-                        <a href="/politics/"><h3>Upcoming elections spark intense debate on economic policies</h3></a>
+                        <a href="./politics/"><h3>Upcoming elections spark intense debate on economic policies</h3></a>
                     </div>
                 </div>
             </div>
@@ -184,42 +240,42 @@
     <section class="content-section">
         <div class="section-header">
             <h2>Latest News</h2>
-            <a href="/latest/" class="see-all">See all →</a>
+            <a href="./world/" class="see-all">See all →</a>
         </div>
         
-        <div class="grid-4">
+        <div class="grid-4" id="newsGrid">
             <article class="news-card">
                 <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Tech News">
                 <span class="tag">Tech</span>
-                <a href="/tech/"><h3>How modern workflow automation is changing digital agencies</h3></a>
+                <a href="./tech/"><h3>How modern workflow automation is changing digital agencies</h3></a>
                 <p>Experts explain the shift from traditional methods to advanced, AI-driven solutions.</p>
             </article>
 
             <article class="news-card">
                 <img src="https://images.unsplash.com/photo-1507413245164-6160d8298b31?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Science News">
                 <span class="tag">Science</span>
-                <a href="/science/"><h3>Astronomers reveal stunning new images of distant galaxies</h3></a>
+                <a href="./science/"><h3>Astronomers reveal stunning new images of distant galaxies</h3></a>
                 <p>The latest telescope data provides unprecedented views of the early universe.</p>
             </article>
 
             <article class="news-card">
                 <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Sports News">
                 <span class="tag">Sports</span>
-                <a href="/sports/"><h3>Championship finals set to break global viewership records</h3></a>
+                <a href="./sports/"><h3>Championship finals set to break global viewership records</h3></a>
                 <p>Fans around the world prepare for one of the most anticipated matches of the decade.</p>
             </article>
 
             <article class="news-card">
                 <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Health News">
                 <span class="tag">Health</span>
-                <a href="/health/"><h3>New studies highlight the importance of daily mindfulness</h3></a>
+                <a href="./health/"><h3>New studies highlight the importance of daily mindfulness</h3></a>
                 <p>Medical professionals are recommending short meditation sessions for better mental health.</p>
             </article>
         </div>
 
         <div class="section-header">
             <h2>More top stories</h2>
-            <a href="/world/" class="see-all">See all →</a>
+            <a href="./world/" class="see-all">See all →</a>
         </div>
 
         <div class="grid-featured">
@@ -227,7 +283,7 @@
                 <img src="https://images.unsplash.com/photo-1614729939124-03290b55c9ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Space Feature">
                 <div class="overlay">
                     <span class="tag" style="color: var(--primary-red); font-weight: bold;">SPACE AND SCIENCE</span>
-                    <a href="/science/"><h3>Historic mission successfully deploys critical instruments in orbit</h3></a>
+                    <a href="./science/"><h3>Historic mission successfully deploys critical instruments in orbit</h3></a>
                 </div>
             </div>
             
@@ -235,12 +291,12 @@
                 <article class="news-card">
                     <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Business Building">
                     <span class="tag">Business</span>
-                    <a href="/business/"><h3>Commercial real estate sector sees unexpected growth</h3></a>
+                    <a href="./business/"><h3>Commercial real estate sector sees unexpected growth</h3></a>
                 </article>
                 <article class="news-card">
                     <img src="https://images.unsplash.com/photo-1517404215738-15263e9f9178?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Documentary">
                     <span class="tag">Entertainment</span>
-                    <a href="/entertainment/"><h3>Award-winning documentary sheds light on local history</h3></a>
+                    <a href="./entertainment/"><h3>Award-winning documentary sheds light on local history</h3></a>
                 </article>
             </div>
         </div>
@@ -253,5 +309,114 @@
         </div>
     </footer>
 
+    <script>
+        // 1. Mobile Hamburger Menu Toggle
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+
+        hamburgerMenu.addEventListener('click', () => {
+            mobileMenuOverlay.style.display = 'block';
+        });
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenuOverlay.style.display = 'none';
+        });
+
+        // 2. Search Toggle and Filter Functionality
+        const searchToggleBtn = document.getElementById('searchToggleBtn');
+        const searchContainer = document.getElementById('searchContainer');
+        const searchInput = document.getElementById('searchInput');
+        const searchSubmitBtn = document.getElementById('searchSubmitBtn');
+        const newsCards = document.querySelectorAll('.news-card, .hero-main, .hero-side-item');
+
+        searchToggleBtn.addEventListener('click', () => {
+            if (searchContainer.style.display === 'block') {
+                searchContainer.style.display = 'none';
+            } else {
+                searchContainer.style.display = 'block';
+                searchInput.focus();
+            }
+        });
+
+        searchSubmitBtn.addEventListener('click', performSearch);
+        searchInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') performSearch();
+        });
+
+        function performSearch() {
+            const filter = searchInput.value.toLowerCase().trim();
+            if (!filter) {
+                alert("Please enter a keyword to search.");
+                return;
+            }
+            
+            let foundCount = 0;
+            newsCards.forEach(card => {
+                const titleText = card.querySelector('h1, h3')?.innerText.toLowerCase() || '';
+                const pText = card.querySelector('p')?.innerText.toLowerCase() || '';
+                
+                if (titleText.includes(filter) || pText.includes(filter)) {
+                    card.style.display = '';
+                    card.style.border = '2px solid var(--primary-red)'; // Highlight search results
+                    foundCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            if(foundCount === 0) {
+                alert("No articles match your search criteria on this landing page.");
+            }
+        }
+
+        // 3. Local Storage Auth System
+        const loginBtn = document.getElementById('loginBtn');
+        const authOverlay = document.getElementById('authOverlay');
+        const closeAuthBtn = document.getElementById('closeAuthBtn');
+        const authForm = document.getElementById('authForm');
+        const authUsernameInput = document.getElementById('authUsername');
+        const authTitle = document.getElementById('authTitle');
+
+        // Check Login State on Page Load
+        function checkLoginStatus() {
+            const loggedInUser = localStorage.getItem('frontierUser');
+            if (loggedInUser) {
+                loginBtn.innerText = `Hi, ${loggedInUser} (Logout)`;
+                loginBtn.classList.add('red');
+            } else {
+                loginBtn.innerText = 'Log In';
+                loginBtn.classList.remove('red');
+            }
+        }
+        checkLoginStatus();
+
+        loginBtn.addEventListener('click', () => {
+            const loggedInUser = localStorage.getItem('frontierUser');
+            if (loggedInUser) {
+                // If logged in, performing a Logout action
+                localStorage.removeItem('frontierUser');
+                alert("Successfully Logged Out.");
+                checkLoginStatus();
+            } else {
+                // Open login modal
+                authOverlay.style.display = 'flex';
+            }
+        });
+
+        closeAuthBtn.addEventListener('click', () => {
+            authOverlay.style.display = 'none';
+        });
+
+        authForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = authUsernameInput.value.trim();
+            if (username) {
+                localStorage.setItem('frontierUser', username);
+                authOverlay.style.display = 'none';
+                alert(`Welcome back, ${username}! Login success.`);
+                checkLoginStatus();
+                authForm.reset();
+            }
+        });
+    </script>
 </body>
 </html>
