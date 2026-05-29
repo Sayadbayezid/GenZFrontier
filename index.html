@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenZ Frontier | Breaking News, Latest News and Videos</title>
+    <style>
+        /* Base Reset & Variables */
+        :root {
+            --primary-red: #CC0000;
+            --dark-bg: #000000;
+            --dark-card: #121212;
+            --light-bg: #FFFFFF;
+            --text-dark: #222222;
+            --text-light: #FFFFFF;
+            --gray-text: #555555;
+            --border-color: #E2E2E2;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+        body { background-color: var(--light-bg); color: var(--text-dark); line-height: 1.4; }
+        a { text-decoration: none; color: inherit; }
+        a:hover { color: var(--primary-red); }
+
+        /* Top Header (CNN Style) */
+        header { background-color: var(--dark-bg); color: var(--text-light); }
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .header-left { display: flex; align-items: center; gap: 20px; }
+        .menu-icon { font-size: 24px; cursor: pointer; }
+        .logo { font-size: 32px; font-weight: 900; color: var(--primary-red); letter-spacing: -1px; }
+        .logo span { color: var(--text-light); font-weight: 400; }
+        .header-right { display: flex; align-items: center; gap: 20px; font-size: 14px; font-weight: bold; }
+        .header-btn { border: 1px solid #555; padding: 8px 15px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 5px;}
+        .header-btn.red { background-color: var(--primary-red); border: none; color: white;}
+
+        /* Navigation (Root Paths Included) */
+        nav { background-color: var(--dark-bg); border-top: 1px solid #333; border-bottom: 1px solid #333; }
+        nav ul {
+            display: flex;
+            list-style: none;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+            overflow-x: auto;
+        }
+        nav ul li a {
+            display: block;
+            padding: 12px 15px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #CCCCCC;
+            white-space: nowrap;
+        }
+        nav ul li a:hover, nav ul li a.active { color: var(--text-light); border-bottom: 3px solid var(--primary-red); padding-bottom: 9px; }
+
+        /* Hero Section (Dark Background) */
+        .hero-section { background-color: var(--dark-bg); color: var(--text-light); padding: 40px 20px; }
+        .hero-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2.5fr 1fr;
+            gap: 30px;
+        }
+        .hero-main .red-tag { color: var(--primary-red); font-weight: bold; font-size: 14px; text-transform: uppercase; margin-bottom: 10px; display: block; }
+        .hero-main h1 { font-size: 48px; font-weight: bold; line-height: 1.1; margin-bottom: 15px; }
+        .hero-main p { font-size: 18px; color: #BBBBBB; margin-bottom: 20px; }
+        .hero-main img { width: 100%; border-radius: 2px; }
+
+        /* Hero Sidebar List */
+        .hero-sidebar { display: flex; flex-direction: column; gap: 20px; }
+        .hero-side-item { display: flex; gap: 15px; border-bottom: 1px solid #333; padding-bottom: 15px; }
+        .hero-side-item img { width: 120px; height: 80px; object-fit: cover; border-radius: 2px; }
+        .hero-side-item h3 { font-size: 16px; line-height: 1.3; font-weight: bold; }
+
+        /* Main Content Area (White Background) */
+        .content-section { max-width: 1300px; margin: 40px auto; padding: 0 20px; }
+        
+        /* Section Titles */
+        .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; border-top: 4px solid var(--primary-red); padding-top: 15px; }
+        .section-header h2 { font-size: 28px; font-weight: bold; color: var(--text-dark); }
+        .section-header .see-all { color: var(--primary-red); font-weight: bold; font-size: 14px; }
+
+        /* Card Grid Layout */
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 50px; }
+        .news-card { display: flex; flex-direction: column; }
+        .news-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 12px; border-radius: 2px; }
+        .news-card .tag { color: var(--primary-red); font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; }
+        .news-card h3 { font-size: 18px; font-weight: bold; margin-bottom: 8px; line-height: 1.25; }
+        .news-card p { font-size: 14px; color: var(--gray-text); line-height: 1.4; }
+
+        /* Featured Complex Layout */
+        .grid-featured { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; margin-bottom: 50px; }
+        .featured-large { position: relative; }
+        .featured-large img { width: 100%; height: 100%; object-fit: cover; min-height: 400px; border-radius: 2px; }
+        .featured-large .overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.9)); padding: 30px; color: white; }
+        .featured-large h3 { font-size: 32px; font-weight: bold; margin-bottom: 10px; }
+
+        /* Footer */
+        footer { background-color: var(--dark-bg); color: var(--text-light); padding: 40px 20px; border-top: 5px solid #333; }
+        .footer-content { max-width: 1300px; margin: 0 auto; text-align: center; font-size: 14px; color: #888; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-container, .grid-featured { grid-template-columns: 1fr; }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .grid-4 { grid-template-columns: 1fr; }
+            .hero-main h1 { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-top">
+            <div class="header-left">
+                <div class="menu-icon">☰</div>
+                <div class="logo">GenZ <span>Frontier</span></div>
+            </div>
+            <div class="header-right">
+                <div class="header-btn">Search 🔍</div>
+                <div class="header-btn red">Live TV</div>
+                <div class="header-btn">Log In</div>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/world/">World</a></li>
+                <li><a href="/politics/">Politics</a></li>
+                <li><a href="/business/">Business</a></li>
+                <li><a href="/tech/">Tech</a></li>
+                <li><a href="/science/">Science</a></li>
+                <li><a href="/health/">Health</a></li>
+                <li><a href="/sports/">Sports</a></li>
+                <li><a href="/entertainment/">Entertainment</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-container">
+            <div class="hero-main">
+                <span class="red-tag">LIVE UPDATES</span>
+                <h1>Global Markets React as New Tech Policies Take Effect Worldwide</h1>
+                <p>Industry leaders are closely monitoring the situation as sweeping regulatory changes impact international trade and digital assets.</p>
+                <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Main News Image">
+            </div>
+            
+            <div class="hero-sidebar">
+                <div class="hero-side-item">
+                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Sidebar Image">
+                    <div>
+                        <span class="red-tag" style="color: var(--primary-red); font-size: 11px; font-weight: bold; display: block; margin-bottom: 5px;">TECH</span>
+                        <a href="/tech/"><h3>Major AI breakthroughs expected in the coming quarter</h3></a>
+                    </div>
+                </div>
+                <div class="hero-side-item">
+                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Sidebar Image">
+                    <div>
+                        <span class="red-tag" style="color: var(--primary-red); font-size: 11px; font-weight: bold; display: block; margin-bottom: 5px;">BUSINESS</span>
+                        <a href="/business/"><h3>Stock indices hit record highs amid corporate earnings</h3></a>
+                    </div>
+                </div>
+                <div class="hero-side-item">
+                    <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Sidebar Image">
+                    <div>
+                        <span class="red-tag" style="color: var(--primary-red); font-size: 11px; font-weight: bold; display: block; margin-bottom: 5px;">POLITICS</span>
+                        <a href="/politics/"><h3>Upcoming elections spark intense debate on economic policies</h3></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-header">
+            <h2>Latest News</h2>
+            <a href="/latest/" class="see-all">See all →</a>
+        </div>
+        
+        <div class="grid-4">
+            <article class="news-card">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Tech News">
+                <span class="tag">Tech</span>
+                <a href="/tech/"><h3>How modern workflow automation is changing digital agencies</h3></a>
+                <p>Experts explain the shift from traditional methods to advanced, AI-driven solutions.</p>
+            </article>
+
+            <article class="news-card">
+                <img src="https://images.unsplash.com/photo-1507413245164-6160d8298b31?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Science News">
+                <span class="tag">Science</span>
+                <a href="/science/"><h3>Astronomers reveal stunning new images of distant galaxies</h3></a>
+                <p>The latest telescope data provides unprecedented views of the early universe.</p>
+            </article>
+
+            <article class="news-card">
+                <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Sports News">
+                <span class="tag">Sports</span>
+                <a href="/sports/"><h3>Championship finals set to break global viewership records</h3></a>
+                <p>Fans around the world prepare for one of the most anticipated matches of the decade.</p>
+            </article>
+
+            <article class="news-card">
+                <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Health News">
+                <span class="tag">Health</span>
+                <a href="/health/"><h3>New studies highlight the importance of daily mindfulness</h3></a>
+                <p>Medical professionals are recommending short meditation sessions for better mental health.</p>
+            </article>
+        </div>
+
+        <div class="section-header">
+            <h2>More top stories</h2>
+            <a href="/world/" class="see-all">See all →</a>
+        </div>
+
+        <div class="grid-featured">
+            <div class="featured-large">
+                <img src="https://images.unsplash.com/photo-1614729939124-03290b55c9ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Space Feature">
+                <div class="overlay">
+                    <span class="tag" style="color: var(--primary-red); font-weight: bold;">SPACE AND SCIENCE</span>
+                    <a href="/science/"><h3>Historic mission successfully deploys critical instruments in orbit</h3></a>
+                </div>
+            </div>
+            
+            <div class="hero-sidebar" style="gap: 30px;">
+                <article class="news-card">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Business Building">
+                    <span class="tag">Business</span>
+                    <a href="/business/"><h3>Commercial real estate sector sees unexpected growth</h3></a>
+                </article>
+                <article class="news-card">
+                    <img src="https://images.unsplash.com/photo-1517404215738-15263e9f9178?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Documentary">
+                    <span class="tag">Entertainment</span>
+                    <a href="/entertainment/"><h3>Award-winning documentary sheds light on local history</h3></a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo" style="margin-bottom: 20px;">GenZ <span>Frontier</span></div>
+            <p>&copy; 2026 GenZ Frontier. All rights reserved. Designed for optimal digital publishing.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
