@@ -5,72 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GenZ Frontier | Article</title>
     <style>
-        /* Base Reset & Variables */
-        :root {
-            --primary-red: #CC0000;
-            --dark-bg: #000000;
-            --light-bg: #FFFFFF;
-            --text-dark: #222222;
-            --text-light: #FFFFFF;
-        }
+        :root { --primary-red: #CC0000; --dark-bg: #000000; --light-bg: #FFFFFF; --text-dark: #222222; --text-light: #FFFFFF; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
-        body { background-color: #F4F4F4; color: var(--text-dark); line-height: 1.6; }
+        body { background-color: #F4F4F4; color: var(--text-dark); line-height: 1.6; padding-bottom: 50px;}
         a { text-decoration: none; color: inherit; transition: color 0.3s; }
         
-        /* CNN Style Header */
+        /* Header */
         header { background-color: var(--dark-bg); color: var(--text-light); padding: 15px 20px; border-bottom: 4px solid var(--primary-red); }
         .header-top { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
         .logo { font-size: 28px; font-weight: 900; color: var(--primary-red); letter-spacing: -1px; }
         .logo span { color: var(--text-light); font-weight: 400; }
+        .header-right { display: flex; align-items: center; gap: 15px; }
+        .live-tv-btn { background-color: var(--primary-red); color: white; border: none; padding: 6px 15px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 14px; }
         .home-link { font-size: 14px; font-weight: bold; color: #CCCCCC; }
         .home-link:hover { color: var(--primary-red); }
 
-        /* Article Container */
-        .article-container { 
-            max-width: 900px; 
-            margin: 40px auto; 
-            background: var(--light-bg); 
-            padding: 40px; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
-            border-radius: 2px;
-        }
-        
-        /* Dynamic Markdown Content Styles */
+        /* Article Content */
+        .article-container { max-width: 900px; margin: 40px auto; background: var(--light-bg); padding: 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-radius: 2px; }
         .article-content h1 { font-size: 38px; line-height: 1.2; margin-bottom: 20px; font-weight: bold; color: #111; }
         .article-content h2, .article-content h3 { margin-top: 30px; margin-bottom: 15px; color: #222; font-weight: bold; }
         .article-content p { font-size: 18px; margin-bottom: 25px; color: #333; line-height: 1.7; }
         .article-content img { max-width: 100%; height: auto; border-radius: 4px; margin: 25px 0; }
-        .article-content ul, .article-content ol { margin-left: 20px; margin-bottom: 25px; font-size: 18px; }
-        .article-content li { margin-bottom: 10px; }
-        .article-content blockquote { border-left: 4px solid var(--primary-red); padding-left: 20px; font-style: italic; color: #555; margin: 25px 0; font-size: 20px; }
+        .article-content iframe { width: 100%; height: 450px; border-radius: 6px; margin: 25px 0; border: none; }
         
-        /* Footer */
+        /* Floating Video Popup Styling */
+        .video-popup { display: none; position: fixed; bottom: 20px; right: 20px; width: 350px; background: var(--dark-bg); border: 2px solid var(--primary-red); border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000; overflow: hidden; animation: slideUp 0.4s ease-out; }
+        @keyframes slideUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .video-popup-header { background: #111; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; color: white; font-weight: bold; font-size: 13px; border-bottom: 1px solid #333; }
+        .video-popup-header span.live-dot { color: var(--primary-red); font-size: 16px; margin-right: 5px; animation: blink 1.5s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        .close-video-btn { color: #888; font-size: 22px; cursor: pointer; line-height: 1; transition: 0.2s; }
+        .close-video-btn:hover { color: var(--primary-red); }
+        .video-popup-body { width: 100%; aspect-ratio: 16/9; background: #000; display: flex; justify-content: center; align-items: center; }
+        .video-popup-body iframe { width: 100%; height: 100%; border: none; }
+        
         footer { background-color: var(--dark-bg); color: #888; text-align: center; padding: 30px 20px; margin-top: 40px; font-size: 14px; }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .article-container { margin: 20px; padding: 20px; }
-            .article-content h1 { font-size: 28px; }
-            .article-content p { font-size: 16px; }
-        }
+        @media (max-width: 768px) { .article-container { margin: 20px; padding: 20px; } .article-content h1 { font-size: 28px; } .video-popup { width: calc(100% - 40px); right: 20px; left: 20px; bottom: 20px; } }
     </style>
 </head>
 <body>
     <header>
         <div class="header-top">
             <a href="../" class="logo">GenZ <span>Frontier</span></a>
-            <a href="../" class="home-link">← Back to Home</a>
+            <div class="header-right">
+                <button class="live-tv-btn" id="liveTvBtn">Live TV</button>
+                <a href="../" class="home-link">← Back</a>
+            </div>
         </div>
     </header>
     
     <main class="article-container">
-        <article class="article-content">
+        <article class="article-content" id="articleContent">
             <p>hh</p>
         </article>
     </main>
 
+    <div class="video-popup" id="videoPopup">
+        <div class="video-popup-header">
+            <div><span class="live-dot">●</span> Featured Video</div>
+            <div class="close-video-btn" id="closeVideoBtn">&times;</div>
+        </div>
+        <div class="video-popup-body" id="videoPopupBody"></div>
+    </div>
+
     <footer>
         <p>&copy; 2026 GenZ Frontier. All rights reserved.</p>
     </footer>
+
+    <script>
+        const videoPopup = document.getElementById('videoPopup');
+        const closeVideoBtn = document.getElementById('closeVideoBtn');
+        const videoPopupBody = document.getElementById('videoPopupBody');
+        const liveTvBtn = document.getElementById('liveTvBtn');
+        const articleContent = document.getElementById('articleContent');
+
+        // Check if there is an iframe (video) inside the news content
+        const embeddedVideo = articleContent.querySelector('iframe');
+
+        // Default placeholder Live TV if no video in article
+        const defaultLiveHtml = '<iframe src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&mute=1" title="Live TV" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+
+        function openPopup(videoHtml) {
+            videoPopupBody.innerHTML = videoHtml;
+            videoPopup.style.display = 'block';
+        }
+
+        // 1. Auto Show Popup Logic (Only if article has a video)
+        if (embeddedVideo && !sessionStorage.getItem('videoPopupShown')) {
+            setTimeout(() => {
+                // Modify iframe to autoplay and mute for popup
+                let popupVideoHtml = embeddedVideo.outerHTML.replace('>', ' autoplay muted>');
+                openPopup(popupVideoHtml);
+                sessionStorage.setItem('videoPopupShown', 'true');
+            }, 3000); // Popup appears after 3 seconds
+        }
+
+        // 2. Manual "Live TV" Button Click Logic
+        liveTvBtn.addEventListener('click', () => {
+            if (embeddedVideo) {
+                openPopup(embeddedVideo.outerHTML);
+            } else {
+                openPopup(defaultLiveHtml);
+            }
+        });
+
+        // 3. Close Popup Logic
+        closeVideoBtn.addEventListener('click', () => {
+            videoPopup.style.display = 'none';
+            videoPopupBody.innerHTML = ''; // Stop video playback
+        });
+    </script>
 </body>
 </html>
