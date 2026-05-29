@@ -1,127 +1,348 @@
 import os
-import markdown
+import sys
 import shutil
+import markdown
 
-NEWS_DIR = 'news'
-OUTPUT_DIR = 'public'
+# ==========================================================
+# GenZ Frontier Build Configuration
+# ==========================================================
+
+NEWS_DIR = "news"
+OUTPUT_DIR = "public"
+TEMPLATE_FILE = "template.html"
+
+# Static pages that must always be copied
+STATIC_FILES = [
+    "index.html",
+    "404.html",
+    "contact.html",
+    "about.html",
+    "privacy-policy.html",
+    "terms.html",
+    "disclaimer.html",
+    "cookie-policy.html",
+    "CNAME",
+]
+
+# Default news categories
+DEFAULT_CATEGORIES = [
+    "world",
+    "politics",
+    "business",
+    "tech",
+    "science",
+    "health",
+    "sports",
+    "entertainment",
+]
 
 print("🚀 Starting GenZ Frontier Build Process...")
 
-# Clear out the old output directory if it exists
-if os.path.exists(OUTPUT_DIR):
-    shutil.rmtree(OUTPUT_DIR)
-os.makedirs(OUTPUT_DIR)
+# ==========================================================
+# Helper Functions
+# ==========================================================
 
-# Copy root index.html
-if os.path.exists('index.html'):
-    shutil.copy('index.html', os.path.join(OUTPUT_DIR, 'index.html'))
-    print("✅ Copied root index.html")
+def clean_output_directory():
+    """Remove old build and create fresh output directory."""
+    if os.path.exists(OUTPUT_DIR):
+        shutil.rmtree(OUTPUT_DIR)
 
-# Copy 404.html if it exists
-if os.path.exists('404.html'):
-    shutil.copy('404.html', os.path.join(OUTPUT_DIR, '404.html'))
-    print("✅ Copied 404.html")
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    print(f"✅ Created fresh '{OUTPUT_DIR}' directory")
 
-# Copy privacy-policy.html if it exists
-if os.path.exists('privacy-policy.html'):
-    shutil.copy('privacy-policy.html', os.path.join(OUTPUT_DIR, 'privacy-policy.html'))
-    print("✅ Copied privacy-policy.html")
 
-# Copy CNAME file for custom domain mapping
-if os.path.exists('CNAME'):
-    shutil.copy('CNAME', os.path.join(OUTPUT_DIR, 'CNAME'))
-    print("✅ Copied CNAME file for custom domain")
+def copy_static_files():
+    """Copy all required static files to public/."""
+    print("\n📦 Copying static files...")
 
-# Load article template
-if os.path.exists('template.html'):
-    with open('template.html', 'r', encoding='utf-8') as f:
-        template = f.read()
-    print("✅ Loaded template.html")
-else:
-    print("❌ Error: template.html not found!")
-    exit(1)
+    for filename in STATIC_FILES:
+        if os.path.exists(filename):
+            shutil.copy2(filename, os.path.join(OUTPUT_DIR, filename))
+            print(f"✅ Copied {filename}")
+        else:
+            print(f"⚠️ Skipped missing file: {filename}")
 
-md = markdown.Markdown(extensions=['meta', 'tables', 'fenced_code'])
 
-# Create a list of all categories
-categories = ['world', 'politics', 'business', 'tech', 'science', 'health', 'sports', 'entertainment']
-category_articles = {cat: [] for cat in categories}
+def load_template():
+    """Load article template and fail gracefully if missing."""
+    if not os.path.exists(TEMPLATE_FILE):
+        print(
+            "\n❌ BUILD FAILED\n"
+            f"Required template file '{TEMPLATE_FILE}' was not found.\n"
+            "Please ensure template.html exists in the repository root."
+        )
+        sys.exit(1)
 
-# Scan and convert Markdown files
+    with open(TEMPLATE_FILE, "r", encoding="utf-8") as file:
+        print("✅ Loaded template.html")
+        return file.read()
+
+
+def create_markdown_parser():
+    """Return configured markdown parser."""
+    return markdown.Markdown(
+        extensions=[
+            "meta",
+            "tables",
+            "fenced_code",
+            "toc",
+            "attr_list",
+        ]
+    )
+
+
+# ==========================================================
+# Build Setup
+# ==========================================================
+
+clean_output_directory()
+copy_static_files()
+
+template = load_template()
+md = create_markdown_parser()
+
+# Track category articles
+category_articles = {cat: [] for cat in DEFAULT_CATEGORIES}
+
+# ==========================================================
+# Markdown → HTML Conversion
+# ==========================================================
+
+print("\n📰 Processing articles...")
+
 for root, dirs, files in os.walk(NEWS_DIR):
+
     for file in files:
-        if file.endswith('.md'):
-            category = os.path.basename(root)
-            if category not in category_articles:
-                category_articles[category] = []
-            
-            out_category_dir = os.path.join(OUTPUT_DIR, category)
-            os.makedirs(out_category_dir, exist_ok=True)
-            
-            md_path = os.path.join(root, file)
-            html_filename = file.replace('.md', '.html')
-            out_html_path = os.path.join(out_category_dir, html_filename)
-            
-            with open(md_path, 'r', encoding='utf-8') as mf:
-                text = mf.read()
-                html_content = md.convert(text)
-                md.reset()
-            
-            # Generate news title from filename
-            title = file.replace('.md', '').replace('-', ' ').title()
-            category_articles[category].append({'title': title, 'filename': html_filename})
-            
-            final_html = template.replace('{{NEWS_CONTENT}}', html_content)
-            
-            with open(out_html_path, 'w', encoding='utf-8') as hf:
-                hf.write(final_html)
+
+        if not file.endswith(".md"):
+            continue
+
+        category = os.path.basename(root)
+
+        if category not in category_articles:
+            category_articles[category] = []
+
+        category_output_dir = os.path.join(OUTPUT_DIR, category)
+        os.makedirs(category_output_dir, exist_ok=True)
+
+        markdown_path = os.path.join(root, file)
+
+        html_filename = os.path.splitext(file)[0] + ".html"
+        html_output_path = os.path.join(
+            category_output_dir,
+            html_filename
+        )
+
+        try:
+            with open(markdown_path, "r", encoding="utf-8") as md_file:
+                markdown_text = md_file.read()
+
+            html_content = md.convert(markdown_text)
+            md.reset()
+
+            article_title = (
+                os.path.splitext(file)[0]
+                .replace("-", " ")
+                .title()
+            )
+
+            category_articles[category].append(
+                {
+                    "title": article_title,
+                    "filename": html_filename,
+                }
+            )
+
+            final_html = template.replace(
+                "{{NEWS_CONTENT}}",
+                html_content
+            )
+
+            with open(
+                html_output_path,
+                "w",
+                encoding="utf-8"
+            ) as output_file:
+                output_file.write(final_html)
+
             print(f"📝 Converted: {category}/{file}")
 
-# Auto-generate index.html for category folders
-for cat, articles in category_articles.items():
-    cat_dir = os.path.join(OUTPUT_DIR, cat)
-    os.makedirs(cat_dir, exist_ok=True)
-    cat_index_path = os.path.join(cat_dir, 'index.html')
-    
-    # Generate link list for the category page
-    links_html = ""
+        except Exception as error:
+            print(
+                f"❌ Failed to process "
+                f"{category}/{file}: {error}"
+            )
+
+# ==========================================================
+# Category Index Pages
+# ==========================================================
+
+print("\n📂 Generating category pages...")
+
+for category, articles in category_articles.items():
+
+    category_dir = os.path.join(OUTPUT_DIR, category)
+    os.makedirs(category_dir, exist_ok=True)
+
+    category_index = os.path.join(
+        category_dir,
+        "index.html"
+    )
+
     if articles:
-        for article in articles:
-            links_html += f"<li style='margin-bottom:15px;'><a href='{article['filename']}' style='color:#CC0000; font-size:20px; font-weight:bold; text-decoration:none;'>{article['title']} &rarr;</a></li>"
+        links_html = "\n".join(
+            [
+                (
+                    f"<li>"
+                    f"<a href='{article['filename']}'>"
+                    f"{article['title']} &rarr;"
+                    f"</a>"
+                    f"</li>"
+                )
+                for article in articles
+            ]
+        )
     else:
-        links_html = "<p style='font-size:18px; color:#666;'>No news published in this category yet. Stay tuned!</p>"
+        links_html = (
+            "<p>No news published in this category yet. "
+            "Stay tuned!</p>"
+        )
 
-    # Category page template design
-    category_page_html = f"""
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>GenZ Frontier | {cat.title()} News</title>
-        <style>
-            body {{ font-family: 'Helvetica Neue', Arial, sans-serif; background: #F4F4F4; margin: 0; padding: 0; }}
-            header {{ background-color: #000; color: #FFF; padding: 15px 20px; border-bottom: 4px solid #CC0000; }}
-            .container {{ max-width: 900px; margin: 40px auto; background: #FFF; padding: 40px; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }}
-        </style>
-    </head>
-    <body>
-        <header>
-            <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-                <a href="../" style="font-size: 28px; font-weight: 900; color: #CC0000; text-decoration: none;">GenZ <span style="color: #FFF; font-weight: 400;">Frontier</span></a>
-                <a href="../" style="color: #CCC; font-weight: bold; text-decoration: none;">&larr; Back to Home</a>
-            </div>
-        </header>
-        <div class="container">
-            <h1 style="text-transform: uppercase; border-bottom: 2px solid #CC0000; padding-bottom: 10px; color:#222; margin-top:0;">{cat.title()} NEWS</h1>
-            <ul style="list-style: none; padding: 0; margin-top: 30px;">
-                {links_html}
-            </ul>
-        </div>
-    </body>
-    </html>
-    """
-    with open(cat_index_path, 'w', encoding='utf-8') as hf:
-        hf.write(category_page_html)
+    category_html = f"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-print("🎉 Build Successful! Categories and index pages are ready.")
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GenZ Frontier | {category.title()} News</title>
+
+<meta name="description"
+      content="Latest {category.title()} news and updates from GenZ Frontier.">
+
+<meta name="robots"
+      content="index,follow">
+
+<style>
+* {{
+    box-sizing: border-box;
+}}
+
+body {{
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}}
+
+header {{
+    background: #000;
+    color: #fff;
+    padding: 15px 20px;
+    border-bottom: 4px solid #cc0000;
+}}
+
+.container {{
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
+}}
+
+h1 {{
+    border-bottom: 2px solid #cc0000;
+    padding-bottom: 10px;
+}}
+
+ul {{
+    list-style: none;
+    padding: 0;
+}}
+
+li {{
+    margin-bottom: 15px;
+}}
+
+a {{
+    color: #cc0000;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+}}
+
+a:hover {{
+    text-decoration: underline;
+}}
+
+@media (max-width: 768px) {{
+    .container {{
+        margin: 20px;
+        padding: 25px;
+    }}
+}}
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <div style="
+        max-width:900px;
+        margin:auto;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        flex-wrap:wrap;
+        gap:10px;">
+        
+        <a href="../"
+           style="
+           color:#cc0000;
+           text-decoration:none;
+           font-size:28px;
+           font-weight:900;">
+            GenZ Frontier
+        </a>
+
+        <a href="../"
+           style="
+           color:#ddd;
+           text-decoration:none;">
+            ← Back Home
+        </a>
+    </div>
+</header>
+
+<div class="container">
+
+    <h1>{category.title()} News</h1>
+
+    <ul>
+        {links_html}
+    </ul>
+
+</div>
+
+</body>
+</html>
+"""
+
+    with open(category_index, "w", encoding="utf-8") as file:
+        file.write(category_html)
+
+    print(f"✅ Generated {category}/index.html")
+
+# ==========================================================
+# Build Complete
+# ==========================================================
+
+print("\n🎉 Build Successful!")
+print("✅ Static pages copied")
+print("✅ Markdown converted")
+print("✅ Category pages generated")
+print(f"✅ Output directory: {OUTPUT_DIR}/")
