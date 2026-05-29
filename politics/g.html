@@ -27,8 +27,8 @@
     "image": [
         "https://genzfrontier.com/default-social-image.jpg"
     ],
-    "datePublished": "2026-05-29T23:06:35.355538",
-    "dateModified": "2026-05-29T23:06:35.355557",
+    "datePublished": "2026-05-29T23:21:16.422377",
+    "dateModified": "2026-05-29T23:21:16.422390",
     "author": {
         "@type": "Person",
         "name": "GenZ Frontier"
@@ -296,6 +296,154 @@
             color: #777;
         }
 
+        /* Cookie Consent Popup Styles */
+        .cookie-consent-overlay {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .cookie-consent-overlay.show {
+            display: flex;
+        }
+
+        .cookie-consent-popup {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            margin: 20px;
+            animation: slideUpCookie 0.4s ease-out;
+            position: relative;
+        }
+
+        @keyframes slideUpCookie {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .cookie-consent-header {
+            background: linear-gradient(135deg, #CC0000 0%, #990000 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cookie-consent-header h3 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .cookie-close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.2s;
+        }
+
+        .cookie-close-btn:hover {
+            opacity: 0.8;
+        }
+
+        .cookie-consent-body {
+            padding: 20px;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .cookie-consent-body p {
+            margin: 0;
+        }
+
+        .cookie-consent-actions {
+            padding: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .cookie-btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .cookie-decline {
+            background: #f0f0f0;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .cookie-decline:hover {
+            background: #e0e0e0;
+            border-color: #999;
+        }
+
+        .cookie-learn-more {
+            background: #f0f0f0;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .cookie-learn-more:hover {
+            background: #e0e0e0;
+            border-color: #999;
+        }
+
+        .cookie-privacy {
+            background: #f0f0f0;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .cookie-privacy:hover {
+            background: #e0e0e0;
+            border-color: #999;
+        }
+
+        .cookie-accept {
+            background: #CC0000;
+            color: white;
+        }
+
+        .cookie-accept:hover {
+            background: #990000;
+        }
+
         @media (max-width: 768px) { 
             .article-container { 
                 margin: 20px; 
@@ -316,6 +464,34 @@
             .footer-links {
                 flex-direction: column;
                 gap: 10px;
+            }
+
+            .cookie-consent-popup {
+                width: calc(100% - 40px);
+                margin: 10px 20px;
+            }
+
+            .cookie-consent-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .cookie-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .cookie-consent-header {
+                padding: 15px;
+            }
+
+            .cookie-consent-body {
+                padding: 15px;
+                font-size: 13px;
+            }
+
+            .cookie-consent-actions {
+                padding: 15px;
             }
         }
     </style>
@@ -419,6 +595,102 @@
             videoPopup.style.display = 'none';
             videoPopupBody.innerHTML = '';
         });
+    </script>
+
+    <!-- Cookie Consent Popup -->
+    <div class="cookie-consent-overlay" id="cookieConsentOverlay">
+        <div class="cookie-consent-popup" id="cookieConsentPopup">
+            <div class="cookie-consent-header">
+                <h3>🍪 Cookie Policy</h3>
+                <button class="cookie-close-btn" id="cookieCloseBtn">&times;</button>
+            </div>
+            <div class="cookie-consent-body">
+                <p>We use cookies to enhance your browsing experience, personalize content, and analyze traffic. By clicking "Accept", you consent to our use of cookies. You can also choose to decline or learn more about our cookie practices.</p>
+            </div>
+            <div class="cookie-consent-actions">
+                <button class="cookie-btn cookie-decline" id="cookieDeclineBtn">Decline</button>
+                <button class="cookie-btn cookie-learn-more" id="cookieLearnMoreBtn">Learn More</button>
+                <button class="cookie-btn cookie-privacy" id="cookiePrivacyBtn">Privacy Policy</button>
+                <button class="cookie-btn cookie-accept" id="cookieAcceptBtn">Accept</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cookie Consent Logic
+        (function() {
+            const COOKIE_CONSENT_KEY = 'genzfrontier_cookie_consent';
+            const COOKIE_CONSENT_TIMESTAMP = 'genzfrontier_cookie_consent_timestamp';
+            
+            const overlay = document.getElementById('cookieConsentOverlay');
+            const popup = document.getElementById('cookieConsentPopup');
+            const acceptBtn = document.getElementById('cookieAcceptBtn');
+            const declineBtn = document.getElementById('cookieDeclineBtn');
+            const learnMoreBtn = document.getElementById('cookieLearnMoreBtn');
+            const privacyBtn = document.getElementById('cookiePrivacyBtn');
+            const closeBtn = document.getElementById('cookieCloseBtn');
+
+            // Check if user has already made a choice
+            function hasUserConsented() {
+                const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
+                if (!consent) return false;
+                
+                // Refresh consent every 30 days
+                const timestamp = localStorage.getItem(COOKIE_CONSENT_TIMESTAMP);
+                if (timestamp) {
+                    const daysSinceConsent = (Date.now() - parseInt(timestamp)) / (1000 * 60 * 60 * 24);
+                    if (daysSinceConsent > 30) {
+                        localStorage.removeItem(COOKIE_CONSENT_KEY);
+                        localStorage.removeItem(COOKIE_CONSENT_TIMESTAMP);
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            // Show popup if user hasn't consented
+            function showPopupIfNeeded() {
+                if (!hasUserConsented()) {
+                    setTimeout(() => {
+                        overlay.classList.add('show');
+                    }, 500);
+                }
+            }
+
+            // Save consent choice
+            function saveConsent(accepted) {
+                localStorage.setItem(COOKIE_CONSENT_KEY, accepted ? 'accepted' : 'declined');
+                localStorage.setItem(COOKIE_CONSENT_TIMESTAMP, Date.now().toString());
+                hidePopup();
+            }
+
+            // Hide popup
+            function hidePopup() {
+                overlay.classList.remove('show');
+            }
+
+            // Event listeners
+            acceptBtn.addEventListener('click', () => saveConsent(true));
+            declineBtn.addEventListener('click', () => saveConsent(false));
+            closeBtn.addEventListener('click', hidePopup);
+
+            // Learn More button
+            learnMoreBtn.addEventListener('click', () => {
+                hidePopup();
+            });
+
+            // Privacy Policy button
+            privacyBtn.addEventListener('click', () => {
+                window.location.href = '../privacy-policy.html';
+            });
+
+            // Show popup on page load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', showPopupIfNeeded);
+            } else {
+                showPopupIfNeeded();
+            }
+        })();
     </script>
 
 </body>
