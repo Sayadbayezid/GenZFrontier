@@ -7,14 +7,22 @@ OUTPUT_DIR = 'public'
 
 print("🚀 Starting GenZ Frontier Build Process...")
 
+# Clear out the old output directory if it exists
 if os.path.exists(OUTPUT_DIR):
     shutil.rmtree(OUTPUT_DIR)
 os.makedirs(OUTPUT_DIR)
 
+# Copy root index.html
 if os.path.exists('index.html'):
     shutil.copy('index.html', os.path.join(OUTPUT_DIR, 'index.html'))
     print("✅ Copied root index.html")
 
+# Copy 404.html if it exists
+if os.path.exists('404.html'):
+    shutil.copy('404.html', os.path.join(OUTPUT_DIR, '404.html'))
+    print("✅ Copied 404.html")
+
+# Load article template
 if os.path.exists('template.html'):
     with open('template.html', 'r', encoding='utf-8') as f:
         template = f.read()
@@ -25,11 +33,11 @@ else:
 
 md = markdown.Markdown(extensions=['meta', 'tables', 'fenced_code'])
 
-# সব ক্যাটাগরির লিস্ট তৈরি
+# Create a list of all categories
 categories = ['world', 'politics', 'business', 'tech', 'science', 'health', 'sports', 'entertainment']
 category_articles = {cat: [] for cat in categories}
 
-# Markdown ফাইল স্ক্যান এবং কনভার্ট
+# Scan and convert Markdown files
 for root, dirs, files in os.walk(NEWS_DIR):
     for file in files:
         if file.endswith('.md'):
@@ -49,7 +57,7 @@ for root, dirs, files in os.walk(NEWS_DIR):
                 html_content = md.convert(text)
                 md.reset()
             
-            # ফাইলের নাম থেকে নিউজের টাইটেল তৈরি
+            # Generate news title from filename
             title = file.replace('.md', '').replace('-', ' ').title()
             category_articles[category].append({'title': title, 'filename': html_filename})
             
@@ -59,13 +67,13 @@ for root, dirs, files in os.walk(NEWS_DIR):
                 hf.write(final_html)
             print(f"📝 Converted: {category}/{file}")
 
-# ক্যাটাগরি ফোল্ডারগুলোর জন্য অটোমেটিক index.html তৈরি করা
+# Auto-generate index.html for category folders
 for cat, articles in category_articles.items():
     cat_dir = os.path.join(OUTPUT_DIR, cat)
     os.makedirs(cat_dir, exist_ok=True)
     cat_index_path = os.path.join(cat_dir, 'index.html')
     
-    # ক্যাটাগরি পেজের লিংক লিস্ট তৈরি
+    # Generate link list for the category page
     links_html = ""
     if articles:
         for article in articles:
@@ -73,7 +81,7 @@ for cat, articles in category_articles.items():
     else:
         links_html = "<p style='font-size:18px; color:#666;'>No news published in this category yet. Stay tuned!</p>"
 
-    # ক্যাটাগরি পেজের ডিজাইন
+    # Category page template design
     category_page_html = f"""
     <!DOCTYPE html>
     <html lang="en">
