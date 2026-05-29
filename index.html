@@ -171,7 +171,7 @@
         <div class="header-top">
             <div class="header-left">
                 <div class="menu-icon" id="hamburgerMenu">☰</div>
-                <div class="logo">GenZ <span>Frontier</span></div>
+                <a href="./" class="logo">GenZ <span>Frontier</span></a>
             </div>
             <div class="header-right">
                 <button class="header-btn" id="searchToggleBtn">Search 🔍</button>
@@ -304,7 +304,9 @@
 
     <footer>
         <div class="footer-content">
-            <div class="logo" style="margin-bottom: 20px;">GenZ <span>Frontier</span></div>
+            <div class="logo" style="margin-bottom: 20px;">
+                <a href="./" style="text-decoration: none; color: var(--primary-red);">GenZ <span style="color: white;">Frontier</span></a>
+            </div>
             <p>&copy; 2026 GenZ Frontier. All rights reserved. Designed for optimal digital publishing.</p>
         </div>
     </footer>
@@ -327,7 +329,7 @@
         const searchContainer = document.getElementById('searchContainer');
         const searchInput = document.getElementById('searchInput');
         const searchSubmitBtn = document.getElementById('searchSubmitBtn');
-        const newsCards = document.querySelectorAll('.news-card, .hero-main, .hero-side-item');
+        const newsCards = document.querySelectorAll('.news-card, .hero-main, .hero-side-item, .featured-large');
 
         searchToggleBtn.addEventListener('click', () => {
             if (searchContainer.style.display === 'block') {
