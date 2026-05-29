@@ -17,7 +17,7 @@
             --border-color: #E2E2E2;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
-        body { background-color: var(--light-bg); color: var(--text-dark); line-height: 1.4; }
+        body { background-color: var(--light-bg); color: var(--text-dark); line-height: 1.4; padding-bottom: 50px; }
         a { text-decoration: none; color: inherit; }
         a:hover { color: var(--primary-red); }
 
@@ -79,6 +79,17 @@
         .auth-modal button { width: 100%; padding: 12px; background: var(--primary-red); color: white; border: none; font-size: 16px; font-weight: bold; border-radius: 4px; cursor: pointer; }
         .auth-modal .close-auth { position: absolute; top: 15px; right: 15px; font-size: 20px; cursor: pointer; color: #666; }
 
+        /* Floating Video Popup Styling */
+        .video-popup { display: none; position: fixed; bottom: 20px; right: 20px; width: 350px; background: var(--dark-bg); border: 2px solid var(--primary-red); border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000; overflow: hidden; animation: slideUp 0.4s ease-out; }
+        @keyframes slideUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .video-popup-header { background: #111; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; color: white; font-weight: bold; font-size: 13px; border-bottom: 1px solid #333; }
+        .video-popup-header span.live-dot { color: var(--primary-red); font-size: 16px; margin-right: 5px; animation: blink 1.5s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        .close-video-btn { color: #888; font-size: 22px; cursor: pointer; line-height: 1; transition: 0.2s; }
+        .close-video-btn:hover { color: var(--primary-red); }
+        .video-popup-body { width: 100%; aspect-ratio: 16/9; background: #000; display: flex; justify-content: center; align-items: center; }
+        .video-popup-body iframe { width: 100%; height: 100%; border: none; }
+
         /* Hero Section */
         .hero-section { background-color: var(--dark-bg); color: var(--text-light); padding: 40px 20px; }
         .hero-container {
@@ -135,6 +146,7 @@
             .grid-4 { grid-template-columns: 1fr; }
             .hero-main h1 { font-size: 32px; }
             nav { display: none; } /* Hide main desktop nav on small screens */
+            .video-popup { width: calc(100% - 40px); right: 20px; left: 20px; bottom: 20px; }
         }
     </style>
 </head>
@@ -175,7 +187,7 @@
             </div>
             <div class="header-right">
                 <button class="header-btn" id="searchToggleBtn">Search 🔍</button>
-                <button class="header-btn red" onclick="alert('Live TV is launching soon!')">Live TV</button>
+                <button class="header-btn red" id="liveTvBtnHome">Live TV</button>
                 <button class="header-btn" id="loginBtn">Log In</button>
             </div>
         </div>
@@ -311,6 +323,14 @@
         </div>
     </footer>
 
+    <div class="video-popup" id="videoPopup">
+        <div class="video-popup-header">
+            <div><span class="live-dot">●</span> GenZ Live News</div>
+            <div class="close-video-btn" id="closeVideoBtn">&times;</div>
+        </div>
+        <div class="video-popup-body" id="videoPopupBody"></div>
+    </div>
+
     <script>
         // 1. Mobile Hamburger Menu Toggle
         const hamburgerMenu = document.getElementById('hamburgerMenu');
@@ -418,6 +438,23 @@
                 checkLoginStatus();
                 authForm.reset();
             }
+        });
+
+        // 4. Home Page Live TV Logic
+        const liveTvBtnHome = document.getElementById('liveTvBtnHome');
+        const videoPopup = document.getElementById('videoPopup');
+        const closeVideoPopupBtn = document.getElementById('closeVideoBtn'); // Renamed to avoid conflict
+        const videoPopupBody = document.getElementById('videoPopupBody');
+
+        liveTvBtnHome.addEventListener('click', () => {
+            // Default 24/7 Live Stream Placeholder (Lofi or News Stream)
+            videoPopupBody.innerHTML = '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1" title="Live TV" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+            videoPopup.style.display = 'block';
+        });
+
+        closeVideoPopupBtn.addEventListener('click', () => {
+            videoPopup.style.display = 'none';
+            videoPopupBody.innerHTML = ''; // Stop Audio
         });
     </script>
 </body>
