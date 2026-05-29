@@ -1,7 +1,8 @@
+![GenZ Frontier News Header](https://i.ibb.co/DgWCpYvc/IMG-4106.jpg)
 ---
 title: "মানবিকতার অনন্য দৃষ্টান্ত স্থাপন করলেন আনোয়ার হোসেন মোল্লা"
 description: "সাবেক ভাইস চেয়ারম্যান আনোয়ার হোসেন মোল্লার মানবিক পোস্ট সামাজিক যোগাযোগ মাধ্যমে ব্যাপক প্রশংসিত।"
-![image] (https://i.ibb.co/Vpp6Fp9r/IMG-4107.jpg)"
+image: https://i.ibb.co/Vpp6Fp9r/IMG-4107.jpg"
 date: "2026-05-30"
 keywords: "Genz Frontier ,Anowar Hosen Mulla, Political News, Tangail"
 ---
