@@ -3,12 +3,16 @@ import os
 import sys
 import shutil
 import markdown
+import json
+import re
+from datetime import datetime
 
 # ==========================================================
 # GenZ Frontier Build Configuration
 # ==========================================================
 
 NEWS_DIR = "news"
+BASE_URL = "https://genzfrontier.com/" # Replace with your actual base URL
 OUTPUT_DIR = "public"
 TEMPLATE_FILE = "template.html"
 INDEX_FILE = "index.html"
@@ -93,6 +97,67 @@ def create_markdown_parser():
     )
 
 
+def generate_meta_tags(article_data, page_type="article"):
+    """Generates SEO meta tags for an article or a general page."""
+    title = article_data.get("title", "GenZ Frontier")
+    description = article_data.get("description", "Breaking News, Latest News and Videos from GenZ Frontier.")
+    image = article_data.get("image", f"{BASE_URL}default-social-image.jpg") # Default social image
+    url = article_data.get("url", BASE_URL)
+
+    meta_tags = f"""
+    <meta name="description" content="{description}">
+    <meta property="og:title" content="{title}">
+    <meta property="og:description" content="{description}">
+    <meta property="og:image" content="{image}">
+    <meta property="og:url" content="{url}">
+    <meta property="og:type" content="{page_type}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{title}">
+    <meta name="twitter:description" content="{description}">
+    <meta name="twitter:image" content="{image}">
+    """
+    return meta_tags
+
+def generate_json_ld_schema(article_data):
+    """Generates JSON-LD NewsArticle schema for an article."""
+    if not article_data:
+        return ""
+
+    headline = article_data.get("title", "GenZ Frontier News")
+    image = article_data.get("image", f"{BASE_URL}default-social-image.jpg")
+    date_published = article_data.get("date_published", datetime.now().isoformat())
+    description = article_data.get("description", "Breaking News, Latest News and Videos from GenZ Frontier.")
+    url = article_data.get("url", BASE_URL)
+
+    schema = {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": url
+        },
+        "headline": headline,
+        "image": [
+            image
+        ],
+        "datePublished": date_published,
+        "dateModified": datetime.now().isoformat(), # Assuming modified now for simplicity
+        "author": {
+            "@type": "Person",
+            "name": article_data.get("author", "GenZ Frontier")
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "GenZ Frontier",
+            "logo": {
+                "@type": "ImageObject",
+                "url": f"{BASE_URL}logo.png" # Assuming a logo exists
+            }
+        },
+        "description": description
+    }
+    return f"<script type=\"application/ld+json\">{json.dumps(schema, indent=4)}</script>"
+
 def generate_latest_news_html(articles):
     """Generates the HTML for the latest news section."""
     latest_news_html = """
@@ -105,10 +170,10 @@ def generate_latest_news_html(articles):
     for article in articles[:4]:  # Display up to 4 latest articles
         latest_news_html += f"""
             <article class="news-card">
-                <img src="{article['image']}" alt="{article['title']}">
-                <span class="tag">{article['category'].title()}</span>
-                <a href="./{article['category']}/{article['filename']}"><h3>{article['title']}</h3></a>
-                <p>{article['description']}</p>
+                <img src="{article["image"]}" alt="{article["title"]}">
+                <span class="tag">{article["category"].title()}</span>
+                <a href="./{article["category"]}/{article["filename"]}"><h3>{article["title"]}</h3></a>
+                <p>{article["description"]}</p>
             </article>
         """
     latest_news_html += "</div>"
@@ -214,23 +279,46 @@ for root, dirs, files in os.walk(NEWS_DIR):
                     .title()
                 )
             
-            # Extract description (first paragraph) and image (first image) if available
+            # Extract description (first paragraph), image (first image), and date published
             article_description = ""
-            article_image = "https://via.placeholder.com/400x225.png?text=No+Image"
-            
-            # Simple regex to find the first paragraph
-            import re
+            article_image = f"{BASE_URL}default-social-image.jpg"
+            article_date_published = datetime.now().isoformat()
+            article_author = "GenZ Frontier"
+
+            # Extract description (first paragraph)
             first_paragraph_match = re.search(r'\n\n([^#].*?)\n\n', markdown_text, re.DOTALL)
             if first_paragraph_match:
                 article_description = first_paragraph_match.group(1).strip()
-                # Limit description length
                 if len(article_description) > 150:
                     article_description = article_description[:147] + "..."
 
-            # Simple regex to find the first image
+            # Extract first image
             first_image_match = re.search(r'!\[.*?\]\((.*?)\)', markdown_text)
             if first_image_match:
                 article_image = first_image_match.group(1)
+
+            # Extract date published (e.g., "প্রকাশিত: ৩০ মে, ২০২৬" or "Published: May 30, 2026")
+            date_match = re.search(r'(?:প্রকাশিত|Published):\s*(\d{1,2}\s+\w+,\s+\d{4})', markdown_text)
+            if date_match:
+                date_str = date_match.group(1)
+                try:
+                    # Try parsing with Bengali month names first
+                    bengali_months = {
+                        'জানুয়ারি': 'January', 'ফেব্রুয়ারি': 'February', 'মার্চ': 'March', 'এপ্রিল': 'April',
+                        'মে': 'May', 'জুন': 'June', 'জুলাই': 'July', 'আগস্ট': 'August',
+                        'সেপ্টেম্বর': 'September', 'অক্টোবর': 'October', 'নভেম্বর': 'November', 'ডিসেম্বর': 'December'
+                    }
+                    for bn, en in bengali_months.items():
+                        date_str = date_str.replace(bn, en)
+                    parsed_date = datetime.strptime(date_str, '%d %B, %Y')
+                    article_date_published = parsed_date.isoformat()
+                except ValueError:
+                    try:
+                        # Fallback to English month names
+                        parsed_date = datetime.strptime(date_str, '%d %B, %Y')
+                        article_date_published = parsed_date.isoformat()
+                    except ValueError:
+                        pass # Fallback to current datetime if parsing fails
 
             article_data = {
                 "title": article_title,
@@ -238,13 +326,29 @@ for root, dirs, files in os.walk(NEWS_DIR):
                 "category": category,
                 "description": article_description,
                 "image": article_image,
+                "date_published": article_date_published,
+                "author": article_author,
+                "url": f"{BASE_URL}{category}/{html_filename}"
             }
             category_articles[category].append(article_data)
             all_articles.append(article_data)
 
+            # Generate SEO meta tags and JSON-LD schema for the article
+            meta_tags = generate_meta_tags(article_data)
+            json_ld_schema = generate_json_ld_schema(article_data)
+
             final_html = template.replace(
+                "{{ARTICLE_TITLE}}",
+                article_title
+            ).replace(
                 "{{NEWS_CONTENT}}",
                 html_content
+            ).replace(
+                "{{META_TAGS}}",
+                meta_tags
+            ).replace(
+                "{{SCHEMA_DATA}}",
+                json_ld_schema
             )
 
             with open(
