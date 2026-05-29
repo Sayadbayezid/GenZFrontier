@@ -70,15 +70,6 @@ Professional, fast, and 100% free web utilities. From QR codes to SEO generators
 
 ---
 
-## 📌 Footer Links
 
-* [About Us](https://www.genzfrontir.com/about.html)
-* [Contact](https://www.genzfrontir.com/contact.html)
-* [Privacy Policy](https://www.genzfrontir.com/privacy-policy.html)
-* [Terms & Conditions](https://www.genzfrontir.com/terms.html)
-* [Disclaimer](https://www.genzfrontir.com/disclaimer.html)
-* [Cookie Policy](https://www.genzfrontir.com/cookie-policy.html)
-
----
 
 © 2026 GenZ Frontier. All Rights Reserved.
