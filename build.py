@@ -22,6 +22,16 @@ if os.path.exists('404.html'):
     shutil.copy('404.html', os.path.join(OUTPUT_DIR, '404.html'))
     print("✅ Copied 404.html")
 
+# Copy privacy-policy.html if it exists
+if os.path.exists('privacy-policy.html'):
+    shutil.copy('privacy-policy.html', os.path.join(OUTPUT_DIR, 'privacy-policy.html'))
+    print("✅ Copied privacy-policy.html")
+
+# Copy CNAME file for custom domain mapping
+if os.path.exists('CNAME'):
+    shutil.copy('CNAME', os.path.join(OUTPUT_DIR, 'CNAME'))
+    print("✅ Copied CNAME file for custom domain")
+
 # Load article template
 if os.path.exists('template.html'):
     with open('template.html', 'r', encoding='utf-8') as f:
