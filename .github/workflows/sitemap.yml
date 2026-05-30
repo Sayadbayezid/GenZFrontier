@@ -1,4 +1,4 @@
-name: Auto Sitemap Generator
+Name: Auto Sitemap Generator
 
 on:
   push:
@@ -57,7 +57,7 @@ jobs:
                   return datetime.utcnow().date().isoformat()
 
           def add(url, lm):
-              url = url.rstrip("/") + "/"
+              # এখানে স্লাশ এড করার লজিক রিমুভ করা হয়েছে যাতে .html ঠিক থাকে
               if url in seen:
                   return
               seen.add(url)
@@ -90,9 +90,10 @@ jobs:
                   if rel == "index.html":
                       url_path = "/"
                   elif rel.endswith("/index.html"):
-                      url_path = "/" + rel[:-11] + "/"
+                      url_path = "/" + rel.replace("index.html", "")
                   else:
-                      url_path = "/" + rel[:-5] + "/"
+                      # এখানে .html রিমুভ না করে সরাসরি পুরো ফাইলের নাম রাখা হয়েছে
+                      url_path = "/" + rel 
 
                   # REMOVE DUPLICATE PUBLIC ISSUE (IMPORTANT)
                   url_path = url_path.replace("/public/", "/")
@@ -125,7 +126,7 @@ jobs:
           with open("sitemap.xml", "wb") as f:
               f.write(pretty)
 
-          print("Sitemap generated from public folder (clean URLs)")
+          print("Sitemap generated from public folder (HTML URLs preserved)")
           EOF
 
       - name: Commit
@@ -133,5 +134,5 @@ jobs:
           git config user.name "bot"
           git config user.email "bot@github.com"
           git add sitemap.xml
-          git commit -m "fix sitemap" || exit 0
+          git commit -m "fix sitemap urls" || exit 0
           git push
