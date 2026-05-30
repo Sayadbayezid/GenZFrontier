@@ -7,13 +7,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.genzfrontir.com/ads/ads1/</loc>
+    <loc>https://www.genzfrontir.com/business/</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.genzfrontir.com/business/b/</loc>
+    <loc>https://www.genzfrontir.com/entertainment/</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -25,7 +25,19 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.genzfrontir.com/health/</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.genzfrontir.com/health/g/</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.genzfrontir.com/politics/</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -37,13 +49,25 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.genzfrontir.com/politics/g/</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.genzfrontir.com/science/</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.genzfrontir.com/science/h/</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.genzfrontir.com/sports/falcon-vs-alokito-match/</loc>
+    <loc>https://www.genzfrontir.com/sports/</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -55,7 +79,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.genzfrontir.com/sports/winfalcon-falcon-vs-alokito-match/</loc>
+    <loc>https://www.genzfrontir.com/tech/</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -73,7 +97,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.genzfrontir.com/tech/⁠smartgen-ai-vocal-remover/</loc>
+    <loc>https://www.genzfrontir.com/world/</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
