@@ -1,0 +1,197 @@
+name: Auto Sitemap Generator
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.html'
+
+  schedule:
+    - cron: '0 */12 * * *'
+
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+concurrency:
+  group: sitemap-update
+  cancel-in-progress: false
+
+jobs:
+  update-sitemap:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Generate Sitemap
+        run: |
+          python << 'EOF'
+          import os
+          import subprocess
+          import xml.etree.ElementTree as ET
+          from xml.dom import minidom
+          from datetime import datetime
+
+          BASE_URL = "https://www.genzfrontir.com"
+          SITEMAP_FILE = "sitemap.xml"
+          NAMESPACE = "http://www.sitemaps.org/schemas/sitemap/0.9"
+
+          ET.register_namespace("", NAMESPACE)
+
+          urlset = ET.Element(f"{{{NAMESPACE}}}urlset")
+
+          urls = set()   # 🔥 prevent duplicate URLs
+
+          def get_lastmod(filepath):
+              try:
+                  return subprocess.check_output(
+                      ["git", "log", "-1", "--format=%cs", "--", filepath],
+                      stderr=subprocess.DEVNULL
+                  ).decode("utf-8").strip()
+              except:
+                  return datetime.utcnow().date().isoformat()
+
+          def add_url(loc, lastmod, priority="0.8", changefreq="weekly"):
+              loc = loc.rstrip("/") + "/"
+
+              if loc in urls:
+                  return
+
+              urls.add(loc)
+
+              url = ET.SubElement(urlset, f"{{{NAMESPACE}}}url")
+
+              ET.SubElement(url, f"{{{NAMESPACE}}}loc").text = loc
+              ET.SubElement(url, f"{{{NAMESPACE}}}lastmod").text = lastmod
+              ET.SubElement(url, f"{{{NAMESPACE}}}changefreq").text = changefreq
+              ET.SubElement(url, f"{{{NAMESPACE}}}priority").text = priority
+
+          # HOME PAGE
+          if os.path.exists("index.html"):
+              add_url(
+                  f"{BASE_URL}/",
+                  get_lastmod("index.html"),
+                  "1.0",
+                  "daily"
+              )
+          else:
+              add_url(
+                  f"{BASE_URL}/",
+                  datetime.utcnow().date().isoformat(),
+                  "1.0",
+                  "daily"
+              )
+
+          # SCAN ALL HTML FILES
+          for root, dirs, files in os.walk("."):
+
+              # ignore hidden folders
+              dirs[:] = [d for d in dirs if not d.startswith(".")]
+
+              for file in files:
+
+                  if not file.endswith(".html"):
+                      continue
+
+                  filepath = os.path.join(root, file)
+
+                  rel = os.path.relpath(filepath, ".").replace("\\", "/")
+
+                  # skip 404 page
+                  if rel == "404.html":
+                      continue
+
+                  # skip github folder
+                  if rel.startswith(".github/"):
+                      continue
+
+                  # convert to URL
+                  if rel == "index.html":
+                      continue
+
+                  if rel.endswith("/index.html"):
+                      path = rel[:-11]
+                      url = f"{BASE_URL}/{path}/"
+                  else:
+                      path = rel[:-5]
+                      url = f"{BASE_URL}/{path}/"
+
+                  add_url(
+                      url,
+                      get_lastmod(rel)
+                  )
+
+          # SORT URLs
+          sorted_urls = sorted(list(urls))
+
+          # rebuild xml in order
+          urlset.clear()
+
+          for loc in sorted_urls:
+
+              url = ET.SubElement(urlset, f"{{{NAMESPACE}}}url")
+
+              ET.SubElement(url, f"{{{NAMESPACE}}}loc").text = loc
+              ET.SubElement(url, f"{{{NAMESPACE}}}lastmod").text = datetime.utcnow().date().isoformat()
+              ET.SubElement(url, f"{{{NAMESPACE}}}changefreq").text = "weekly"
+              ET.SubElement(url, f"{{{NAMESPACE}}}priority").text = "0.8"
+
+          xml_bytes = ET.tostring(urlset, encoding="utf-8")
+
+          pretty = minidom.parseString(xml_bytes).toprettyxml(
+              indent="  ",
+              encoding="utf-8"
+          )
+
+          pretty = b"\n".join(
+              line for line in pretty.splitlines()
+              if line.strip()
+          )
+
+          # check old sitemap (avoid unnecessary commits)
+          old = b""
+          if os.path.exists(SITEMAP_FILE):
+              with open(SITEMAP_FILE, "rb") as f:
+                  old = f.read()
+
+          if old == pretty:
+              print("No changes in sitemap.")
+              exit(0)
+
+          with open(SITEMAP_FILE, "wb") as f:
+              f.write(pretty)
+
+          print(f"Sitemap generated with {len(sorted_urls)} URLs")
+          EOF
+
+      - name: Commit & Push Sitemap
+        run: |
+          git config --global user.name "GitHub Action Bot"
+          git config --global user.email "action@github.com"
+
+          git add sitemap.xml
+
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+
+          git commit -m "chore: auto sitemap update"
+
+          git pull --rebase origin main
+
+          git push origin main
