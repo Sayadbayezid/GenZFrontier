@@ -171,10 +171,10 @@ def generate_json_ld_schema(article_data):
 
 def generate_latest_news_html(articles):
     """Generates the HTML for the latest news section."""
-    latest_news_html = """
+    latest_news_html = f"""
         <div class="section-header">
             <h2>Latest News</h2>
-            <a href="/world/" class="see-all">See all →</a>
+            <a href="{BASE_URL}world/" class="see-all">See all →</a>
         </div>
         <div class="grid-4" id="newsGrid">
     """
@@ -185,7 +185,7 @@ def generate_latest_news_html(articles):
             <article class="news-card">
                 <img src="{article["image"]}" alt="{article["title"]}">
                 <span class="tag">{article["category"].title()}</span>
-                <a href="/{article["category"]}/{article["filename"]}"><h3>{article["title"]}</h3></a>
+                <a href="{BASE_URL}{article["category"]}/{article["filename"]}"><h3>{article["title"]}</h3></a>
                 <p>{article["description"]}</p>
             </article>
         """
@@ -195,31 +195,31 @@ def generate_latest_news_html(articles):
 
 def generate_category_archive_links(category_articles):
     """Generates HTML for category archive links."""
-    archive_links_html = """
+    archive_links_html = f"""
         <div class="section-header">
             <h2>More top stories</h2>
-            <a href="/world/" class="see-all">See all →</a>
+            <a href="{BASE_URL}world/" class="see-all">See all →</a>
         </div>
         <div class="grid-featured">
             <div class="featured-large">
                 <img src="https://images.unsplash.com/photo-1614729939124-03290b55c9ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Space Feature">
                 <div class="overlay">
                     <span class="tag" style="color: var(--primary-red); font-weight: bold;">SPACE AND SCIENCE</span>
-                    <a href="/science/"><h3>Historic mission successfully deploys critical instruments in orbit</h3></a>
+                    <a href="{BASE_URL}science/"><h3>Historic mission successfully deploys critical instruments in orbit</h3></a>
                 </div>
             </div>
             <div class="hero-sidebar" style="gap: 30px;">
     """
-    archive_links_html += """
+    archive_links_html += f"""
                 <article class="news-card">
                     <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Business Building">
                     <span class="tag">Business</span>
-                    <a href="/business/"><h3>Commercial real estate sector sees unexpected growth</h3></a>
+                    <a href="{BASE_URL}business/"><h3>Commercial real estate sector sees unexpected growth</h3></a>
                 </article>
                 <article class="news-card">
                     <img src="https://images.unsplash.com/photo-1517404215738-15263e9f9178?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Documentary">
                     <span class="tag">Entertainment</span>
-                    <a href="/entertainment/"><h3>Award-winning documentary sheds light on local history</h3></a>
+                    <a href="{BASE_URL}entertainment/"><h3>Award-winning documentary sheds light on local history</h3></a>
                 </article>
             </div>
         </div>
@@ -319,7 +319,8 @@ for root, dirs, files in os.walk(NEWS_DIR):
             article_image = metadata.get('image', [f"{BASE_URL}default-social-image.jpg"])[0]
             
             custom_url = metadata.get('url', [""])[0]
-            ticker_url = custom_url if custom_url else f"/{category}/{html_filename}"
+            # Updated to use Absolute URL to prevent 404 errors
+            ticker_url = custom_url if custom_url else f"{BASE_URL}{category}/{html_filename}"
 
             article_date_published = datetime.now().isoformat()
             
