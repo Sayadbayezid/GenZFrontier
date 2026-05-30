@@ -5,294 +5,221 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | GenZ Frontier</title>
     <style>
-        :root { --primary-red: #CC0000; --dark-bg: #000000; --light-bg: #FFFFFF; --text-dark: #222222; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
-        body { background-color: #F4F4F4; color: var(--text-dark); line-height: 1.7; }
-        
-        /* Header */
-        header { background-color: var(--dark-bg); color: #FFF; padding: 15px 20px; border-bottom: 4px solid var(--primary-red); }
-        .header-top { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-        .logo { font-size: 28px; font-weight: 900; color: var(--primary-red); }
-        .logo span { color: #FFF; font-weight: 400; }
-        
-        /* Main Container */
-        .wrapper { max-width: 900px; margin: 40px auto; background: var(--light-bg); padding: 50px; border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        h1 { color: #CC0000; font-size: 36px; margin-bottom: 20px; text-align: center; }
-        h2 { color: #222; font-size: 24px; margin-top: 35px; border-left: 4px solid #CC0000; padding-left: 10px; }
-        p, li { margin-bottom: 15px; font-size: 16px; }
-        .core-values { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-        .value-box { background: #f9f9f9; padding: 20px; border-radius: 4px; border-top: 3px solid #CC0000; }
-        
-        /* Footer */
-        footer { background-color: #000; color: #888; text-align: center; padding: 40px 20px; margin-top: 50px; }
-        .footer-nav { margin-bottom: 25px; }
-        .footer-nav a { color: #fff; margin: 0 8px; text-decoration: none; font-size: 14px; }
-        
-        @media (max-width: 768px) { .core-values { grid-template-columns: 1fr; } .wrapper { padding: 30px; } }
+        /* Base styles matching GenZ Frontier */
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #F4F4F4;
+            color: #222;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .article-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #FFF;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-radius: 4px;
+        }
+
+        h1, h2, h3 {
+            color: #000;
+            font-weight: bold;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        h1 {
+            font-size: 32px;
+            line-height: 1.2;
+            border-bottom: 4px solid #CC0000;
+            padding-bottom: 10px;
+        }
+
+        p, ul, li {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 30px 0;
+        }
+
+        /* Professional Hyperlink Styling */
+        a {
+            color: #00599c;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        a:hover {
+            color: #cc0000;
+            text-decoration: underline;
+        }
+
+        /* SmartGen Tools Badges Layout */
+        .tools-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tools-section a img {
+            border-radius: 4px;
+            transition: transform 0.2s;
+        }
+
+        .tools-section a:hover img {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .article-container {
+                margin: 20px;
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="header-top">
-            <a href="./" style="text-decoration:none;"><div class="logo">GenZ <span>Frontier</span></div></a>
-            <a href="./" style="color:#FFF; font-weight:bold; text-decoration:none;">← Home</a>
-        </div>
-    </header>
+    <main class="article-container">
+        <h1>About GenZ Frontier: Empowering the Next Generation with Today's News</h1>
 
-    <main class="wrapper">
-        <h1>About GenZ Frontier</h1>
-        <p style="text-align: center; font-style: italic; font-size: 18px;">Empowering the Next Generation with Today's News</p>
+        <p>With the very first light of the modern digital era, GenZ Frontier started its journey to redefine how the new generation consumes information. In an era of constant information overload, doomscrolling, and clickbait, we strive to cut through the noise by delivering tech updates, career insights, and trending news that truly matter.</p>
 
-        <h2>🎯 Our Mission</h2>
-        <p><strong>GenZ Frontier</strong> is a premier digital news portal specifically designed for the Gen Z demographic. In an era of information overload, we strive to cut through the noise by delivering tech updates, career insights, and trending news that truly matter. Our goal is to provide deep analysis and unbiased information, moving beyond traditional reporting to offer a fresh, youth-centric perspective.</p>
+        <p>Because of its courageous digital journalism, rich tech-driven content, and unique, modern presentation, GenZ Frontier quickly won the hearts of the youth. Even the most sophisticated and fastidious readers have extended their loyalty toward us. Today, GenZ Frontier is lighting up the digital space, reaching tech-savvy readers across Bangladesh and the globe, and serving as a reliable compass in the fast-paced 21st century.</p>
 
-        <h2>📰 What We Cover</h2>
+        <h3>Our Mission and Vision</h3>
+        <p>GenZ Frontier is a premier digital news portal specifically designed for the Gen Z demographic and digital natives. Our mission is to empower the youth by providing deep analysis, unbiased information, and a fresh, youth-centric perspective that moves far beyond traditional reporting. We envision a digital society where young individuals are well-informed, digitally secure, and equipped with the knowledge to lead the future of technology and global culture.</p>
+
+        <h3>What We Cover</h3>
+        <p>We focus on the topics that shape tomorrow's world. Explore our dedicated sections to stay updated:</p>
         <ul>
-            <li><strong>Tech & Innovation:</strong> From the latest gadget releases to breakthroughs in AI and software, we bring you the tech updates that define the digital age.</li>
-            <li><strong>Career & Growth:</strong> Navigating the modern job market requires specialized knowledge. We provide career insights and tips for the evolving professional landscape.</li>
-            <li><strong>Global Trends:</strong> Stay informed with trending news from around the world, analyzed through the lens of the digital generation.</li>
-            <li><strong>Digital Lifestyle:</strong> Exploring how technology impacts our daily lives, mental health, and social interactions in the 21st century.</li>
+            <li><strong><a href="/world/">World</a>:</strong> Stay informed with global trends, international affairs, and news from around the world, analyzed through the lens of the digital generation.</li>
+            <li><strong><a href="/politics/">Politics</a>:</strong> Unbiased political analysis, election updates, and policies that impact our future.</li>
+            <li><strong><a href="/business/">Business</a>:</strong> Insights into the modern job market, startups, global economy, and career growth strategies.</li>
+            <li><strong><a href="/tech/">Tech</a>:</strong> From gadget releases to breakthroughs in AI and software, we bring you the tech updates that define the digital age.</li>
+            <li><strong><a href="/science/">Science</a>:</strong> Groundbreaking research, space exploration, and scientific discoveries shaping humanity's next steps.</li>
+            <li><strong><a href="/health/">Health</a>:</strong> Exploring modern wellness, mental health, and medical advancements in the 21st century.</li>
+            <li><strong><a href="/sports/">Sports</a>:</strong> Latest updates, scores, and stories from the global athletic arena.</li>
+            <li><strong><a href="/entertainment/">Entertainment</a>:</strong> Pop culture, digital creators, movies, music, and the trends dominating social media.</li>
         </ul>
 
-        <h2>💎 Our Core Values</h2>
-        <div class="core-values">
-            <div class="value-box"><strong>Objectivity:</strong> We prioritize rigorous fact-checking and neutrality in every story we publish.</div>
-            <div class="value-box"><strong>Innovation:</strong> We embrace new digital formats and storytelling techniques to engage our audience.</div>
-            <div class="value-box"><strong>Accountability:</strong> Transparency is our foundation. We clearly state our sources and correct errors promptly.</div>
-            <div class="value-box"><strong>Youth Empowerment:</strong> We believe in the power of the Gen Z voice to drive global change.</div>
+        <h3>Values and Principles</h3>
+        <p>The most contributing factor behind the unparalleled popularity of GenZ Frontier is our unwavering commitment to our core values:</p>
+        <ul>
+            <li><strong>Objectivity & Neutrality:</strong> We prioritize rigorous fact-checking and neutrality in every story we publish. Our bias is only toward the truth.</li>
+            <li><strong>Professionalism:</strong> We uphold the trend of objective and investigative journalism, ensuring our readers get the full picture.</li>
+            <li><strong>Accountability:</strong> Transparency is our foundation. We clearly state our sources, correct errors promptly, and remain accountable to our readers.</li>
+            <li><strong>Positivity & Innovation:</strong> We embrace new digital formats and storytelling techniques to engage our audience, promoting positive change and technological advancement.</li>
+            <li><strong>Youth Empowerment:</strong> We deeply believe in the power of the Gen Z voice to drive global change and stand firmly by the people.</li>
+        </ul>
+
+        <h3>The GenZ Frontier Community & Trust</h3>
+        <p>GenZ Frontier is firmly committed to the ideals of digital freedom, unbiased reporting, and the progressive spirit of the modern generation. We are equally respectful toward everyone, fostering an inclusive digital environment.</p>
+
+        <p>We highly value your digital footprint and data security. To understand how we protect our readers and manage data, please read our comprehensive <a href="/privacy-policy.html">Privacy Policy</a> and our <a href="/terms.html">Terms and Conditions</a>. Our journalists follow strict ethical guidelines regarding digital rights and cybersecurity, and we ensure our audience is always informed under our strict <a href="/disclaimer.html">Disclaimer</a> guidelines.</p>
+
+        <p>If the strength of GenZ Frontier lies in its principles, its true inspiration is its readers. You are the final arbiters and the ultimate owners of this platform. We are always listening—reach out to us anytime through our <a href="/contact.html">Contact Us</a> page. You can always return to our homepage by visiting <a href="/">GenZ Frontier</a>.</p>
+
+        <h3>Digital Initiatives & Social Responsibility</h3>
+        <p>Breaking the typical role of a news portal, GenZ Frontier proactively involves itself in various philanthropic and digital awareness activities. We strongly support humanitarian causes and digital literacy across the nation. Our ongoing initiatives include:</p>
+        <ul>
+            <li>Cybersecurity Awareness Campaigns for the Youth</li>
+            <li>Digital Literacy Funds for Disadvantaged Students</li>
+            <li>Regional Tech Fests, Hackathons, and Programming Contests</li>
+            <li>Anti-Cyberbullying and Online Mental Health Awareness Programs</li>
+        </ul>
+
+        <hr>
+
+        <h3>Our Free Utility Platform: SmartGen Tools</h3>
+        <p>As part of our commitment to empowering digital creators, developers, and marketers, we offer a massive suite of completely free, high-performance online utilities via our live platform: <a href="https://smartgentools.com" target="_blank">SmartGenTools.com</a>.</p>
+
+        <h4>Developer & Technical</h4>
+        <div class="tools-section">
+            <a href="https://smartgentools.com/base64-to-image/"><img src="https://img.shields.io/badge/Base64_to_Image-00599C?style=for-the-badge&logo=github&logoColor=white" alt="Base64 to Image"></a>
+            <a href="https://smartgentools.com/css-gradient-generator/"><img src="https://img.shields.io/badge/CSS_Gradient-00599C?style=for-the-badge&logo=github&logoColor=white" alt="CSS Gradient"></a>
+            <a href="https://smartgentools.com/hash-generator/"><img src="https://img.shields.io/badge/MD5_SHA_Hash-00599C?style=for-the-badge&logo=github&logoColor=white" alt="MD5 SHA Hash"></a>
+            <a href="https://smartgentools.com/html-code-preview/"><img src="https://img.shields.io/badge/Live_HTML_Preview-00599C?style=for-the-badge&logo=github&logoColor=white" alt="Live HTML Preview"></a>
+            <a href="https://smartgentools.com/ip-address-lookup/"><img src="https://img.shields.io/badge/IP_Address_Lookup-00599C?style=for-the-badge&logo=github&logoColor=white" alt="IP Address Lookup"></a>
+            <a href="https://smartgentools.com/json-formatter-validator/"><img src="https://img.shields.io/badge/JSON_Formatter-00599C?style=for-the-badge&logo=github&logoColor=white" alt="JSON Formatter"></a>
+            <a href="https://smartgentools.com/meta-tag-generator/"><img src="https://img.shields.io/badge/Meta_Tag_Generator-00599C?style=for-the-badge&logo=github&logoColor=white" alt="Meta Tag Generator"></a>
+            <a href="https://smartgentools.com/picture-url-generator/"><img src="https://img.shields.io/badge/Picture_URL_Generator-00599C?style=for-the-badge&logo=github&logoColor=white" alt="Picture URL Generator"></a>
+            <a href="https://smartgentools.com/qr-generator/"><img src="https://img.shields.io/badge/QR_Generator-00599C?style=for-the-badge&logo=github&logoColor=white" alt="QR Generator"></a>
+            <a href="https://smartgentools.com/random-choice-picker/"><img src="https://img.shields.io/badge/Random_Choice_Picker-00599C?style=for-the-badge&logo=github&logoColor=white" alt="Random Choice Picker"></a>
+            <a href="https://smartgentools.com/robots-txt-generator/"><img src="https://img.shields.io/badge/Robots.txt_Generator-00599C?style=for-the-badge&logo=github&logoColor=white" alt="Robots.txt Generator"></a>
+            <a href="https://smartgentools.com/schema-generator/"><img src="https://img.shields.io/badge/Schema_Generator-00599C?style=for-the-badge&logo=github&logoColor=white" alt="Schema Generator"></a>
+            <a href="https://smartgentools.com/url-encoder-decoder/"><img src="https://img.shields.io/badge/URL_Encoder_Decoder-00599C?style=for-the-badge&logo=github&logoColor=white" alt="URL Encoder Decoder"></a>
+            <a href="https://smartgentools.com/uuid-generator/"><img src="https://img.shields.io/badge/UUID_Generator-00599C?style=for-the-badge&logo=github&logoColor=white" alt="UUID Generator"></a>
+            <a href="https://smartgentools.com/text-to-changelog-json-generator/"><img src="https://img.shields.io/badge/Text_to_Changelog_JSON_Generator-00599C?style=for-the-badge&logo=github&logoColor=white" alt="Text to Changelog JSON Generator"></a>
         </div>
 
-        <h2>👨‍💼 Our Leadership</h2>
-        <p><strong>Sayad Md Bayezid Hosan</strong><br>
-        Founder & Lead Consultant</p>
-        <p>Under the visionary leadership of Sayad Bayezid, GenZ Frontier is managed by a passionate team of content creators and journalists. Bayezid dreams of making news more accessible, engaging, and relevant for the digital-first generation.</p>
-        
-        <p><em>Headquartered in Tangail, Bangladesh, serving a global audience.</em><br>
-        Email: <strong>cwb.agency@outlook.com</strong></p>
+        <h4>Marketing & Social Media</h4>
+        <div class="tools-section">
+            <a href="https://smartgentools.com/blog-title-generator/"><img src="https://img.shields.io/badge/Blog_Title_Generator-FF5722?style=for-the-badge&logo=meta&logoColor=white" alt="Blog Title Generator"></a>
+            <a href="https://smartgentools.com/disclaimer-generator/"><img src="https://img.shields.io/badge/Disclaimer_Generator-FF5722?style=for-the-badge&logo=meta&logoColor=white" alt="Disclaimer Generator"></a>
+            <a href="https://smartgentools.com/facebook-id-finder/"><img src="https://img.shields.io/badge/Facebook_ID_Finder-FF5722?style=for-the-badge&logo=facebook&logoColor=white" alt="Facebook ID Finder"></a>
+            <a href="https://smartgentools.com/hashtag-generator/"><img src="https://img.shields.io/badge/Hashtag_Generator-FF5722?style=for-the-badge&logo=meta&logoColor=white" alt="Hashtag Generator"></a>
+            <a href="https://smartgentools.com/mailto-generator/"><img src="https://img.shields.io/badge/Mailto_Generator-FF5722?style=for-the-badge&logo=gmail&logoColor=white" alt="Mailto Generator"></a>
+            <a href="https://smartgentools.com/privacy-policy-generator/"><img src="https://img.shields.io/badge/Privacy_Policy_Generator-FF5722?style=for-the-badge&logo=meta&logoColor=white" alt="Privacy Policy Generator"></a>
+            <a href="https://smartgentools.com/terms-conditions-generator/"><img src="https://img.shields.io/badge/Terms_%26_Conditions-FF5722?style=for-the-badge&logo=meta&logoColor=white" alt="Terms & Conditions"></a>
+            <a href="https://smartgentools.com/utm-builder/"><img src="https://img.shields.io/badge/UTM_Builder-FF5722?style=for-the-badge&logo=meta&logoColor=white" alt="UTM Builder"></a>
+            <a href="https://smartgentools.com/whatsapp-link/"><img src="https://img.shields.io/badge/WhatsApp_Link_Generator-FF5722?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp Link Generator"></a>
+            <a href="https://smartgentools.com/youtube-thumbnail-downloader/"><img src="https://img.shields.io/badge/YT_Thumbnail_Downloader-FF5722?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube Thumbnail Downloader"></a>
+        </div>
+
+        <h4>SEO & Content</h4>
+        <div class="tools-section">
+            <a href="https://smartgentools.com/keyword-density-checker/"><img src="https://img.shields.io/badge/Keyword_Density_Checker-4CAF50?style=for-the-badge&logo=google&logoColor=white" alt="Keyword Density Checker"></a>
+            <a href="https://smartgentools.com/lorem-ipsum-generator/"><img src="https://img.shields.io/badge/Lorem_Ipsum_Generator-4CAF50?style=for-the-badge&logo=google&logoColor=white" alt="Lorem Ipsum Generator"></a>
+            <a href="https://smartgentools.com/serp-preview-tool/"><img src="https://img.shields.io/badge/SERP_Preview_Tool-4CAF50?style=for-the-badge&logo=google&logoColor=white" alt="SERP Preview Tool"></a>
+            <a href="https://smartgentools.com/text-case-converter/"><img src="https://img.shields.io/badge/Text_Case_Converter-4CAF50?style=for-the-badge&logo=google&logoColor=white" alt="Text Case Converter"></a>
+            <a href="https://smartgentools.com/word-counter/"><img src="https://img.shields.io/badge/Word_Counter-4CAF50?style=for-the-badge&logo=google&logoColor=white" alt="Word Counter"></a>
+        </div>
+
+        <h4>Daily Utilities & Calculators</h4>
+        <div class="tools-section">
+            <a href="https://smartgentools.com/voice-remover/"><img src="https://img.shields.io/badge/AI_Vocal_Remover-9C27B0?style=for-the-badge&logo=android&logoColor=white" alt="AI Vocal Remover"></a>
+            <a href="https://smartgentools.com/age-calculator/"><img src="https://img.shields.io/badge/Age_Calculator-9C27B0?style=for-the-badge&logo=android&logoColor=white" alt="Age Calculator"></a>
+            <a href="https://smartgentools.com/bmi-bmr-calculator/"><img src="https://img.shields.io/badge/BMI_%26_BMR_Calculator-9C27B0?style=for-the-badge&logo=android&logoColor=white" alt="BMI & BMR Calculator"></a>
+            <a href="https://smartgentools.com/cpm-roi-calculator/"><img src="https://img.shields.io/badge/CPM_ROI_Calculator-9C27B0?style=for-the-badge&logo=android&logoColor=white" alt="CPM ROI Calculator"></a>
+            <a href="https://smartgentools.com/color-palette-extractor/"><img src="https://img.shields.io/badge/Color_Palette_Extractor-9C27B0?style=for-the-badge&logo=android&logoColor=white" alt="Color Palette Extractor"></a>
+            <a href="https://smartgentools.com/emi-calculator/"><img src="https://img.shields.io/badge/EMI_Calculator-9C27B0?style=for-the-badge&logo=android&logoColor=white" alt="EMI Calculator"></a>
+            <a href="https://smartgentools.com/fancy-font-generator/"><img src="https://img.shields.io/badge/Fancy_Font_Generator-9C27B0?style=for-the-badge&logo=android&logoColor=white" alt="Fancy Font Generator"></a>
+            <a href="https://smartgentools.com/image-compressor/"><img src="https://img.shields.io/badge/Image_Compressor-9C27B0?style=for-the-badge&logo=android&logoColor=white" alt="Image Compressor"></a>
+            <a href="https://smartgentools.com/image-to-base64/"><img src="https://img.shields.io/badge/Image_to_Base64-9C27B0?style=for-the-badge&logo=android&logoColor=white" alt="Image to Base64"></a>
+            <a href="https://smartgentools.com/password-generator/"><img src="https://img.shields.io/badge/Password_Generator-9C27B0?style=for-the-badge&logo=android&logoColor=white" alt="Password Generator"></a>
+            <a href="https://smartgentools.com/percentage-calculator/"><img src="https://img.shields.io/badge/Percentage_Calculator-9C27B0?style=for-the-badge&logo=android&logoColor=white" alt="Percentage Calculator"></a>
+            <a href="https://smartgentools.com/pomodoro-timer/"><img src="https://img.shields.io/badge/Pomodoro_Timer-9C27B0?style=for-the-badge&logo=android&logoColor=white" alt="Pomodoro Timer"></a>
+            <a href="https://smartgentools.com/secure-notepad/"><img src="https://img.shields.io/badge/Secure_Notepad-9C27B0?style=for-the-badge&logo=android&logoColor=white" alt="Secure Notepad"></a>
+            <a href="https://smartgentools.com/unit-converter/"><img src="https://img.shields.io/badge/Unit_Converter-9C27B0?style=for-the-badge&logo=android&logoColor=white" alt="Unit Converter"></a>
+        </div>
+
+        <hr>
+
+        <h3>Corporate Information & Sister Concerns</h3>
+        <p>GenZ Frontier is proudly developed and managed to maintain the highest standards of digital publishing. We are part of a broader network dedicated to technological advancement and digital consulting.</p>
+        <ul>
+            <li><strong>Products By:</strong> <a href="https://connectbayezid-8dcdz46v.manus.space" target="_blank">Connect with Bayezid</a></li>
+            <li><strong>Managed By:</strong> <a href="https://www.sayadbayezid.com" target="_blank">Sayad Md Bayezid Hosan</a></li>
+            <li><strong>Developer Wikidata:</strong> <a href="https://www.wikidata.org/wiki/Q139815820" target="_blank">Q139815820</a></li>
+            <li><strong>Read Our Agency Blog:</strong> <a href="https://connectwithbayezid.blogspot.com/?m=1" target="_blank">Connect with Bayezid Blog</a></li>
+            <li><strong>Contact Email:</strong> <a href="mailto:cwb.agency@outlook.com">cwb.agency@outlook.com</a></li>
+        </ul>
+
     </main>
-
-    <footer>
-        <nav class="footer-nav">
-            <a href="./about.html">About Us</a>
-            <span>|</span>
-            <a href="./contact.html">Contact</a>
-            <span>|</span>
-            <a href="./privacy-policy.html">Privacy Policy</a>
-            <span>|</span>
-            <a href="./terms.html">Terms & Conditions</a>
-            <span>|</span>
-            <a href="./disclaimer.html">Disclaimer</a>
-            <span>|</span>
-            <a href="./cookie-policy.html">Cookie Policy</a>
-        </nav>
-        <p>© 2026 GenZ Frontier. All Rights Reserved.</p>
-    </footer>
-
-    <!-- Cookie Consent Popup -->
-    <div class="cookie-consent-overlay" id="cookieConsentOverlay">
-        <div class="cookie-consent-popup" id="cookieConsentPopup">
-            <div class="cookie-consent-header">
-                <h3>🍪 Cookie Policy</h3>
-                <button class="cookie-close-btn" id="cookieCloseBtn">&times;</button>
-            </div>
-            <div class="cookie-consent-body">
-                <p>We use cookies to enhance your browsing experience, personalize content, and analyze traffic. By clicking "Accept", you consent to our use of cookies. You can also choose to decline or learn more about our cookie practices.</p>
-            </div>
-            <div class="cookie-consent-actions">
-                <button class="cookie-btn cookie-decline" id="cookieDeclineBtn">Decline</button>
-                <button class="cookie-btn cookie-learn-more" id="cookieLearnMoreBtn">Learn More</button>
-                <button class="cookie-btn cookie-privacy" id="cookiePrivacyBtn">Privacy Policy</button>
-                <button class="cookie-btn cookie-accept" id="cookieAcceptBtn">Accept</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Cookie Consent Logic
-        (function() {
-            const COOKIE_CONSENT_KEY = 'genzfrontier_cookie_consent';
-            const COOKIE_CONSENT_TIMESTAMP = 'genzfrontier_cookie_consent_timestamp';
-            
-            const overlay = document.getElementById('cookieConsentOverlay');
-            const popup = document.getElementById('cookieConsentPopup');
-            const acceptBtn = document.getElementById('cookieAcceptBtn');
-            const declineBtn = document.getElementById('cookieDeclineBtn');
-            const learnMoreBtn = document.getElementById('cookieLearnMoreBtn');
-            const privacyBtn = document.getElementById('cookiePrivacyBtn');
-            const closeBtn = document.getElementById('cookieCloseBtn');
-
-            function hasUserConsented() {
-                const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
-                if (!consent) return false;
-                const timestamp = localStorage.getItem(COOKIE_CONSENT_TIMESTAMP);
-                if (timestamp) {
-                    const daysSinceConsent = (Date.now() - parseInt(timestamp)) / (1000 * 60 * 60 * 24);
-                    if (daysSinceConsent > 30) {
-                        localStorage.removeItem(COOKIE_CONSENT_KEY);
-                        localStorage.removeItem(COOKIE_CONSENT_TIMESTAMP);
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-            function showPopupIfNeeded() {
-                if (!hasUserConsented()) {
-                    setTimeout(() => {
-                        overlay.classList.add('show');
-                    }, 500);
-                }
-            }
-
-            function saveConsent(accepted) {
-                localStorage.setItem(COOKIE_CONSENT_KEY, accepted ? 'accepted' : 'declined');
-                localStorage.setItem(COOKIE_CONSENT_TIMESTAMP, Date.now().toString());
-                hidePopup();
-            }
-
-            function hidePopup() {
-                overlay.classList.remove('show');
-            }
-
-            acceptBtn.addEventListener('click', () => saveConsent(true));
-            declineBtn.addEventListener('click', () => saveConsent(false));
-            closeBtn.addEventListener('click', hidePopup);
-            learnMoreBtn.addEventListener('click', () => hidePopup());
-            privacyBtn.addEventListener('click', () => {
-                window.location.href = './privacy-policy.html';
-            });
-
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', showPopupIfNeeded);
-            } else {
-                showPopupIfNeeded();
-            }
-        })();
-    </script>
-
-    <style>
-        .cookie-consent-overlay {
-            display: none;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            top: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 9999;
-            justify-content: center;
-            align-items: flex-end;
-        }
-        .cookie-consent-overlay.show {
-            display: flex;
-        }
-        .cookie-consent-popup {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
-            width: 90%;
-            margin: 20px;
-            animation: slideUpCookie 0.4s ease-out;
-            position: relative;
-        }
-        @keyframes slideUpCookie {
-            from { transform: translateY(100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .cookie-consent-header {
-            background: linear-gradient(135deg, #CC0000 0%, #990000 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 8px 8px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .cookie-consent-header h3 {
-            margin: 0;
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .cookie-close-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 28px;
-            cursor: pointer;
-            padding: 0;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.2s;
-        }
-        .cookie-close-btn:hover {
-            opacity: 0.8;
-        }
-        .cookie-consent-body {
-            padding: 20px;
-            font-size: 14px;
-            color: #333;
-            line-height: 1.6;
-        }
-        .cookie-consent-body p {
-            margin: 0;
-        }
-        .cookie-consent-actions {
-            padding: 20px;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-            border-top: 1px solid #e0e0e0;
-        }
-        .cookie-btn {
-            padding: 10px 16px;
-            border: none;
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-        .cookie-decline, .cookie-learn-more, .cookie-privacy {
-            background: #f0f0f0;
-            color: #333;
-            border: 1px solid #ddd;
-        }
-        .cookie-decline:hover, .cookie-learn-more:hover, .cookie-privacy:hover {
-            background: #e0e0e0;
-            border-color: #999;
-        }
-        .cookie-accept {
-            background: #CC0000;
-            color: white;
-        }
-        .cookie-accept:hover {
-            background: #990000;
-        }
-        @media (max-width: 600px) {
-            .cookie-consent-popup {
-                width: calc(100% - 40px);
-                margin: 10px 20px;
-            }
-            .cookie-consent-actions {
-                flex-direction: column;
-                gap: 8px;
-            }
-            .cookie-btn {
-                width: 100%;
-                text-align: center;
-            }
-            .cookie-consent-header { padding: 15px; }
-            .cookie-consent-body { padding: 15px; font-size: 13px; }
-            .cookie-consent-actions { padding: 15px; }
-        }
-    </style>
 
 </body>
 </html>
