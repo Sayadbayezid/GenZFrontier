@@ -5,35 +5,26 @@ on:
     branches:
       - main
     paths:
-      - 'news/**/*.md'
+      - 'public/**/*.html'
 
   schedule:
     - cron: '0 */12 * * *'
 
   workflow_dispatch:
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
-concurrency:
-  group: sitemap-update
-  cancel-in-progress: false
-
 jobs:
-  update-sitemap:
+  sitemap:
     runs-on: ubuntu-latest
 
     permissions:
       contents: write
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
@@ -56,7 +47,7 @@ jobs:
 
           seen = set()
 
-          def get_lastmod(path):
+          def lastmod(path):
               try:
                   return subprocess.check_output(
                       ["git", "log", "-1", "--format=%cs", "--", path],
@@ -65,69 +56,58 @@ jobs:
               except:
                   return datetime.utcnow().date().isoformat()
 
-          def add_url(url, lastmod, priority="0.8", changefreq="weekly"):
+          def add(url, lm):
               url = url.rstrip("/") + "/"
-
               if url in seen:
                   return
-
               seen.add(url)
 
               node = ET.SubElement(urlset, f"{{{NAMESPACE}}}url")
-
               ET.SubElement(node, f"{{{NAMESPACE}}}loc").text = url
-              ET.SubElement(node, f"{{{NAMESPACE}}}lastmod").text = lastmod
-              ET.SubElement(node, f"{{{NAMESPACE}}}changefreq").text = changefreq
-              ET.SubElement(node, f"{{{NAMESPACE}}}priority").text = priority
+              ET.SubElement(node, f"{{{NAMESPACE}}}lastmod").text = lm
+              ET.SubElement(node, f"{{{NAMESPACE}}}changefreq").text = "weekly"
+              ET.SubElement(node, f"{{{NAMESPACE}}}priority").text = "0.8"
 
-          # HOME PAGE
-          add_url(
-              f"{BASE_URL}/",
-              datetime.utcnow().date().isoformat(),
-              "1.0",
-              "daily"
-          )
-
-          # SCAN NEWS MD FILES
-          for root, dirs, files in os.walk("news"):
+          # SCAN PUBLIC ONLY
+          for root, dirs, files in os.walk("public"):
 
               dirs[:] = [d for d in dirs if not d.startswith(".")]
 
               for file in files:
 
-                  if not file.endswith(".md"):
+                  if not file.endswith(".html"):
                       continue
 
-                  full_path = os.path.join(root, file)
+                  full = os.path.join(root, file)
 
-                  rel = os.path.relpath(full_path, "news").replace("\\", "/")
+                  rel = os.path.relpath(full, "public").replace("\\", "/")
 
-                  # remove .md
-                  slug = rel[:-3]
+                  # skip 404
+                  if rel == "404.html":
+                      continue
 
-                  # SPLIT CATEGORY + FILE
-                  parts = slug.split("/", 1)
-
-                  if len(parts) == 2:
-                      category, post = parts
-                      url = f"{BASE_URL}/{category}/{post}/"
+                  # convert index.html → folder/
+                  if rel == "index.html":
+                      url_path = "/"
+                  elif rel.endswith("/index.html"):
+                      url_path = "/" + rel[:-11] + "/"
                   else:
-                      url = f"{BASE_URL}/{slug}/"
+                      url_path = "/" + rel[:-5] + "/"
 
-                  add_url(
-                      url,
-                      get_lastmod(full_path)
-                  )
+                  # REMOVE DUPLICATE PUBLIC ISSUE (IMPORTANT)
+                  url_path = url_path.replace("/public/", "/")
 
-          # SORT + BUILD XML
-          sorted_urls = sorted(list(seen))
+                  final_url = BASE_URL + url_path
+
+                  add(final_url, lastmod(full))
+
+          # SORT
+          urls = sorted(seen)
 
           urlset.clear()
 
-          for u in sorted_urls:
-
+          for u in urls:
               node = ET.SubElement(urlset, f"{{{NAMESPACE}}}url")
-
               ET.SubElement(node, f"{{{NAMESPACE}}}loc").text = u
               ET.SubElement(node, f"{{{NAMESPACE}}}lastmod").text = datetime.utcnow().date().isoformat()
               ET.SubElement(node, f"{{{NAMESPACE}}}changefreq").text = "weekly"
@@ -142,32 +122,16 @@ jobs:
 
           pretty = b"\n".join([l for l in pretty.splitlines() if l.strip()])
 
-          old = b""
-          if os.path.exists(SITEMAP_FILE):
-              with open(SITEMAP_FILE, "rb") as f:
-                  old = f.read()
-
-          if old == pretty:
-              print("No changes in sitemap")
-              exit(0)
-
-          with open(SITEMAP_FILE, "wb") as f:
+          with open("sitemap.xml", "wb") as f:
               f.write(pretty)
 
-          print(f"Generated {len(seen)} URLs")
+          print("Sitemap generated from public folder (clean URLs)")
           EOF
 
-      - name: Commit Sitemap
+      - name: Commit
         run: |
-          git config user.name "GitHub Action Bot"
-          git config user.email "action@github.com"
-
+          git config user.name "bot"
+          git config user.email "bot@github.com"
           git add sitemap.xml
-
-          if git diff --cached --quiet; then
-            exit 0
-          fi
-
-          git commit -m "chore: category-based sitemap (no /news prefix)"
-          git pull --rebase origin main
-          git push origin main
+          git commit -m "fix sitemap" || exit 0
+          git push
