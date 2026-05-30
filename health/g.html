@@ -27,8 +27,8 @@
     "image": [
         "https://genzfrontier.com/default-social-image.jpg"
     ],
-    "datePublished": "2026-05-30T02:31:00.378071",
-    "dateModified": "2026-05-30T02:31:00.378080",
+    "datePublished": "2026-05-30T02:36:56.469933",
+    "dateModified": "2026-05-30T02:36:56.469942",
     "author": {
         "@type": "Person",
         "name": "GenZ Frontier"
@@ -78,7 +78,7 @@
             background-color: var(--dark-bg); 
             color: var(--text-light); 
             padding: 15px 20px; 
-            border-bottom: 1px solid #333; 
+            border-bottom: 4px solid var(--primary-red); 
         }
 
         .header-top { 
@@ -87,18 +87,6 @@
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
-        }
-        
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .menu-icon {
-            font-size: 24px;
-            cursor: pointer;
-            display: block; /* Always visible */
         }
 
         .logo { 
@@ -138,155 +126,6 @@
 
         .home-link:hover { 
             color: var(--primary-red); 
-        }
-        
-        /* Mobile Slide Out Menu Overlay */
-        .mobile-menu-overlay { 
-            display: none; 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: rgba(0,0,0,0.7); 
-            z-index: 999; 
-        }
-        
-        .mobile-menu { 
-            width: 280px; 
-            background: #121212; 
-            height: 100%; 
-            padding: 20px; 
-            color: white; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 20px; 
-            position: relative; 
-        }
-        
-        .mobile-menu .close-btn { 
-            font-size: 30px; 
-            align-self: flex-end; 
-            cursor: pointer; 
-            color: var(--primary-red); 
-            position: absolute; 
-            top: 10px; 
-            right: 20px; 
-        }
-        
-        .mobile-menu a { 
-            font-size: 18px; 
-            font-weight: bold; 
-            border-bottom: 1px solid #222; 
-            padding-bottom: 10px; 
-            margin-top: 10px;
-        }
-
-        /* Horizontal Scrollable Nav */
-        .desktop-nav {
-            background-color: var(--dark-bg); 
-            border-top: 1px solid #333; 
-            border-bottom: 1px solid #333;
-            overflow-x: auto;
-        }
-        
-        .desktop-nav::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .desktop-nav ul {
-            display: flex; 
-            list-style: none; 
-            max-width: 900px; 
-            margin: 0 auto; 
-            padding: 0 20px; 
-            gap: 0;
-            overflow-x: auto;
-        }
-        
-        .desktop-nav a {
-            display: block; 
-            padding: 12px 15px; 
-            font-size: 14px; 
-            font-weight: 700; 
-            color: #CCCCCC; 
-            white-space: nowrap; 
-            text-decoration: none;
-        }
-        
-        .desktop-nav a:hover {
-            color: var(--text-light);
-            border-bottom: 3px solid var(--primary-red);
-        }
-
-        /* =========================
-           BREAKING NEWS TICKER
-        ==========================*/
-        .breaking-news-ticker {
-            display: flex;
-            background: var(--dark-bg);
-            color: var(--text-light);
-            height: 40px;
-            align-items: center;
-            border-bottom: 3px solid var(--primary-red);
-            overflow: hidden;
-            width: 100%;
-        }
-
-        .ticker-label {
-            background: var(--primary-red);
-            color: var(--text-light);
-            padding: 0 15px;
-            font-weight: bold;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            height: 100%;
-            z-index: 10;
-            white-space: nowrap;
-        }
-
-        .ticker-wrap {
-            flex: 1;
-            overflow: hidden;
-            position: relative;
-            height: 100%;
-        }
-
-        .ticker-move {
-            display: flex;
-            position: absolute;
-            white-space: nowrap;
-            height: 100%;
-            align-items: center;
-            animation: ticker 30s linear infinite;
-        }
-
-        .ticker-move:hover {
-            animation-play-state: paused;
-        }
-
-        .ticker-item {
-            margin-right: 40px;
-            display: flex;
-            align-items: center;
-        }
-
-        .ticker-item a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .ticker-item a:hover {
-            color: var(--primary-red);
-            text-decoration: underline;
-        }
-
-        @keyframes ticker {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); } 
         }
 
         /* Article Content */
@@ -493,7 +332,7 @@
             }
             to {
                 transform: translateY(0);
-            opacity: 1;
+                opacity: 1;
             }
         }
 
@@ -563,10 +402,37 @@
             white-space: nowrap;
         }
 
-        .cookie-decline, .cookie-learn-more, .cookie-privacy {
+        .cookie-decline {
             background: #f0f0f0;
             color: #333;
             border: 1px solid #ddd;
+        }
+
+        .cookie-decline:hover {
+            background: #e0e0e0;
+            border-color: #999;
+        }
+
+        .cookie-learn-more {
+            background: #f0f0f0;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .cookie-learn-more:hover {
+            background: #e0e0e0;
+            border-color: #999;
+        }
+
+        .cookie-privacy {
+            background: #f0f0f0;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .cookie-privacy:hover {
+            background: #e0e0e0;
+            border-color: #999;
         }
 
         .cookie-accept {
@@ -574,152 +440,139 @@
             color: white;
         }
 
-        /* Responsive */
+        .cookie-accept:hover {
+            background: #990000;
+        }
+
         @media (max-width: 768px) { 
             .article-container { 
                 margin: 20px; 
                 padding: 20px; 
             } 
+
             .article-content h1 { 
                 font-size: 28px; 
             } 
+
             .video-popup { 
                 width: calc(100% - 40px); 
                 right: 20px; 
                 left: 20px; 
                 bottom: 20px; 
             }
+
             .footer-links {
                 flex-direction: column;
                 gap: 10px;
             }
-        }
-        
-        @media (max-width: 600px) {
-            .cookie-consent-popup { width: calc(100% - 40px); margin: 10px 20px; }
-            .cookie-consent-actions { flex-direction: column; gap: 8px; }
-            .cookie-btn { width: 100%; text-align: center; }
+
+            .cookie-consent-popup {
+                width: calc(100% - 40px);
+                margin: 10px 20px;
+            }
+
+            .cookie-consent-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .cookie-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .cookie-consent-header {
+                padding: 15px;
+            }
+
+            .cookie-consent-body {
+                padding: 15px;
+                font-size: 13px;
+            }
+
+            .cookie-consent-actions {
+                padding: 15px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
-        <div class="mobile-menu">
-            <div class="close-btn" id="closeMenuBtn">&times;</div>
-            <a href="https://genzfrontier.com/">Home</a>
-            <a href="https://genzfrontier.com/world/">World</a>
-            <a href="https://genzfrontier.com/politics/">Politics</a>
-            <a href="https://genzfrontier.com/business/">Business</a>
-            <a href="https://genzfrontier.com/tech/">Tech</a>
-            <a href="https://genzfrontier.com/science/">Science</a>
-            <a href="https://genzfrontier.com/health/">Health</a>
-            <a href="https://genzfrontier.com/sports/">Sports</a>
-            <a href="https://genzfrontier.com/entertainment/">Entertainment</a>
-        </div>
-    </div>
-
     <header>
         <div class="header-top">
-            <div class="header-left">
-                <div class="menu-icon" id="hamburgerMenu">☰</div>
-                <a href="https://genzfrontier.com/" class="logo">GenZ <span>Frontier</span></a>
-            </div>
+            <a href="../" class="logo">GenZ <span>Frontier</span></a>
             <div class="header-right">
                 <button class="live-tv-btn" id="liveTvBtn">Live TV</button>
-                <a href="https://genzfrontier.com/" class="home-link">← Home</a>
+                <a href="../" class="home-link">â Back</a>
             </div>
         </div>
-        
-        <nav class="desktop-nav">
-            <ul>
-                <li><a href="https://genzfrontier.com/">Home</a></li>
-                <li><a href="https://genzfrontier.com/world/">World</a></li>
-                <li><a href="https://genzfrontier.com/politics/">Politics</a></li>
-                <li><a href="https://genzfrontier.com/business/">Business</a></li>
-                <li><a href="https://genzfrontier.com/tech/">Tech</a></li>
-                <li><a href="https://genzfrontier.com/science/">Science</a></li>
-                <li><a href="https://genzfrontier.com/health/">Health</a></li>
-                <li><a href="https://genzfrontier.com/sports/">Sports</a></li>
-                <li><a href="https://genzfrontier.com/entertainment/">Entertainment</a></li>
+        <nav style="background-color: var(--dark-bg); border-top: 1px solid #333; border-bottom: 1px solid #333; overflow-x: auto;">
+            <ul style="display: flex; list-style: none; max-width: 900px; margin: 0 auto; padding: 0 20px; gap: 0;">
+                <li><a href="../" style="display: block; padding: 12px 15px; font-size: 14px; font-weight: 700; color: #CCCCCC; white-space: nowrap; text-decoration: none;">Home</a></li>
+                <li><a href="../world/" style="display: block; padding: 12px 15px; font-size: 14px; font-weight: 700; color: #CCCCCC; white-space: nowrap; text-decoration: none;">World</a></li>
+                <li><a href="../politics/" style="display: block; padding: 12px 15px; font-size: 14px; font-weight: 700; color: #CCCCCC; white-space: nowrap; text-decoration: none;">Politics</a></li>
+                <li><a href="../business/" style="display: block; padding: 12px 15px; font-size: 14px; font-weight: 700; color: #CCCCCC; white-space: nowrap; text-decoration: none;">Business</a></li>
+                <li><a href="../tech/" style="display: block; padding: 12px 15px; font-size: 14px; font-weight: 700; color: #CCCCCC; white-space: nowrap; text-decoration: none;">Tech</a></li>
+                <li><a href="../science/" style="display: block; padding: 12px 15px; font-size: 14px; font-weight: 700; color: #CCCCCC; white-space: nowrap; text-decoration: none;">Science</a></li>
+                <li><a href="../health/" style="display: block; padding: 12px 15px; font-size: 14px; font-weight: 700; color: #CCCCCC; white-space: nowrap; text-decoration: none;">Health</a></li>
+                <li><a href="../sports/" style="display: block; padding: 12px 15px; font-size: 14px; font-weight: 700; color: #CCCCCC; white-space: nowrap; text-decoration: none;">Sports</a></li>
+                <li><a href="../entertainment/" style="display: block; padding: 12px 15px; font-size: 14px; font-weight: 700; color: #CCCCCC; white-space: nowrap; text-decoration: none;">Entertainment</a></li>
             </ul>
         </nav>
     </header>
     
-    
-    <div class="breaking-news-ticker">
-        <div class="ticker-label">BREAKING</div>
-        <div class="ticker-wrap">
-            <div class="ticker-move">
-                <span class="ticker-item"><a href="https://genzfrontier.com/sports/falcon-vs-alokito-match.html">ঈদ পরবর্তী ফুটবল উন্মাদনা: আজ মাঠে নামছে 'ফ্যালকন ১৯' বনাম 'আলোকিত ১৫'</a></span><span class="ticker-item"><a href=""https://genzfrontier.com/contact.html"">"ধামাকা অফার! আমাদের নিউজ পোর্টালে বিজ্ঞাপন বুকিংয়ে চলছে ৫০% পর্যন্ত ছাড়। আপনার প্রতিষ্ঠানের প্রসারে আজই যোগাযোগ করুন।"</a></span>
-                <span class="ticker-item"><a href="https://genzfrontier.com/sports/falcon-vs-alokito-match.html">ঈদ পরবর্তী ফুটবল উন্মাদনা: আজ মাঠে নামছে 'ফ্যালকন ১৯' বনাম 'আলোকিত ১৫'</a></span><span class="ticker-item"><a href=""https://genzfrontier.com/contact.html"">"ধামাকা অফার! আমাদের নিউজ পোর্টালে বিজ্ঞাপন বুকিংয়ে চলছে ৫০% পর্যন্ত ছাড়। আপনার প্রতিষ্ঠানের প্রসারে আজই যোগাযোগ করুন।"</a></span> 
-            </div>
-        </div>
-    </div>
-    
-
     <main class="article-container">
         <article class="article-content" id="articleContent">
             <p>hh</p>
         </article>
     </main>
 
+    <!-- Video Popup -->
     <div class="video-popup" id="videoPopup">
         <div class="video-popup-header">
-            <div><span class="live-dot">●</span> Featured Video</div>
+            <div><span class="live-dot">â</span> Featured Video</div>
             <div class="close-video-btn" id="closeVideoBtn">&times;</div>
         </div>
         <div class="video-popup-body" id="videoPopupBody"></div>
     </div>
 
+    <!-- FOOTER -->
     <footer>
         <div class="footer-container">
+
             <div class="footer-links">
-                <a href="https://genzfrontier.com/about.html">About Us</a>
-                <a href="https://genzfrontier.com/contact.html">Contact</a>
-                <a href="https://genzfrontier.com/privacy-policy.html">Privacy Policy</a>
-                <a href="https://genzfrontier.com/terms.html">Terms & Conditions</a>
-                <a href="https://genzfrontier.com/disclaimer.html">Disclaimer</a>
-                <a href="https://genzfrontier.com/cookie-policy.html">Cookie Policy</a>
+                <a href="/about.html">About Us</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/privacy-policy.html">Privacy Policy</a>
+                <a href="/terms.html">Terms & Conditions</a>
+                <a href="/disclaimer.html">Disclaimer</a>
+                <a href="/cookie-policy.html">Cookie Policy</a>
             </div>
+
             <div class="footer-divider"></div>
+
             <div class="footer-copy">
-                © 2026 GenZ Frontier. All Rights Reserved.
+                Â© 2026 GenZ Frontier. All Rights Reserved.
             </div>
+
         </div>
     </footer>
 
     <script>
-        // Mobile Menu Script
-        const hamburgerMenu = document.getElementById('hamburgerMenu');
-        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-        const closeMenuBtn = document.getElementById('closeMenuBtn');
-
-        if (hamburgerMenu && mobileMenuOverlay && closeMenuBtn) {
-            hamburgerMenu.addEventListener('click', () => {
-                mobileMenuOverlay.style.display = 'block';
-            });
-            closeMenuBtn.addEventListener('click', () => {
-                mobileMenuOverlay.style.display = 'none';
-            });
-        }
-
-        // Video Popup Script
         const videoPopup = document.getElementById('videoPopup');
         const closeVideoBtn = document.getElementById('closeVideoBtn');
         const videoPopupBody = document.getElementById('videoPopupBody');
         const liveTvBtn = document.getElementById('liveTvBtn');
         const articleContent = document.getElementById('articleContent');
 
-        const embeddedVideo = articleContent ? articleContent.querySelector('iframe') : null;
+        const embeddedVideo = articleContent.querySelector('iframe');
+
         const defaultLiveHtml = '<iframe src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&mute=1" allowfullscreen></iframe>';
 
         function openPopup(videoHtml) {
-            if(videoPopupBody && videoPopup) {
-                videoPopupBody.innerHTML = videoHtml;
-                videoPopup.style.display = 'block';
-            }
+            videoPopupBody.innerHTML = videoHtml;
+            videoPopup.style.display = 'block';
         }
 
         if (embeddedVideo && !sessionStorage.getItem('videoPopupShown')) {
@@ -730,28 +583,25 @@
             }, 3000);
         }
 
-        if (liveTvBtn) {
-            liveTvBtn.addEventListener('click', () => {
-                if (embeddedVideo) {
-                    openPopup(embeddedVideo.outerHTML);
-                } else {
-                    openPopup(defaultLiveHtml);
-                }
-            });
-        }
+        liveTvBtn.addEventListener('click', () => {
+            if (embeddedVideo) {
+                openPopup(embeddedVideo.outerHTML);
+            } else {
+                openPopup(defaultLiveHtml);
+            }
+        });
 
-        if (closeVideoBtn) {
-            closeVideoBtn.addEventListener('click', () => {
-                videoPopup.style.display = 'none';
-                videoPopupBody.innerHTML = '';
-            });
-        }
+        closeVideoBtn.addEventListener('click', () => {
+            videoPopup.style.display = 'none';
+            videoPopupBody.innerHTML = '';
+        });
     </script>
 
+    <!-- Cookie Consent Popup -->
     <div class="cookie-consent-overlay" id="cookieConsentOverlay">
         <div class="cookie-consent-popup" id="cookieConsentPopup">
             <div class="cookie-consent-header">
-                <h3>🍪 Cookie Policy</h3>
+                <h3>ðª Cookie Policy</h3>
                 <button class="cookie-close-btn" id="cookieCloseBtn">&times;</button>
             </div>
             <div class="cookie-consent-body">
@@ -767,6 +617,7 @@
     </div>
 
     <script>
+        // Cookie Consent Logic
         (function() {
             const COOKIE_CONSENT_KEY = 'genzfrontier_cookie_consent';
             const COOKIE_CONSENT_TIMESTAMP = 'genzfrontier_cookie_consent_timestamp';
@@ -779,10 +630,12 @@
             const privacyBtn = document.getElementById('cookiePrivacyBtn');
             const closeBtn = document.getElementById('cookieCloseBtn');
 
+            // Check if user has already made a choice
             function hasUserConsented() {
                 const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
                 if (!consent) return false;
                 
+                // Refresh consent every 30 days
                 const timestamp = localStorage.getItem(COOKIE_CONSENT_TIMESTAMP);
                 if (timestamp) {
                     const daysSinceConsent = (Date.now() - parseInt(timestamp)) / (1000 * 60 * 60 * 24);
@@ -795,34 +648,43 @@
                 return true;
             }
 
+            // Show popup if user hasn't consented
             function showPopupIfNeeded() {
-                if (!hasUserConsented() && overlay) {
+                if (!hasUserConsented()) {
                     setTimeout(() => {
                         overlay.classList.add('show');
                     }, 500);
                 }
             }
 
+            // Save consent choice
             function saveConsent(accepted) {
                 localStorage.setItem(COOKIE_CONSENT_KEY, accepted ? 'accepted' : 'declined');
                 localStorage.setItem(COOKIE_CONSENT_TIMESTAMP, Date.now().toString());
                 hidePopup();
             }
 
+            // Hide popup
             function hidePopup() {
-                if(overlay) overlay.classList.remove('show');
+                overlay.classList.remove('show');
             }
 
-            if(acceptBtn) acceptBtn.addEventListener('click', () => saveConsent(true));
-            if(declineBtn) declineBtn.addEventListener('click', () => saveConsent(false));
-            if(closeBtn) closeBtn.addEventListener('click', hidePopup);
+            // Event listeners
+            acceptBtn.addEventListener('click', () => saveConsent(true));
+            declineBtn.addEventListener('click', () => saveConsent(false));
+            closeBtn.addEventListener('click', hidePopup);
 
-            if(learnMoreBtn) learnMoreBtn.addEventListener('click', () => { hidePopup(); });
-
-            if(privacyBtn) privacyBtn.addEventListener('click', () => {
-                window.location.href = 'https://genzfrontier.com/privacy-policy.html';
+            // Learn More button
+            learnMoreBtn.addEventListener('click', () => {
+                hidePopup();
             });
 
+            // Privacy Policy button
+            privacyBtn.addEventListener('click', () => {
+                window.location.href = '../privacy-policy.html';
+            });
+
+            // Show popup on page load
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', showPopupIfNeeded);
             } else {
@@ -830,5 +692,6 @@
             }
         })();
     </script>
+
 </body>
 </html>
