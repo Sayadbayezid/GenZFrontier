@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - '**/*.html'
+      - 'news/**/*.md'
 
   schedule:
     - cron: '0 */12 * * *'
@@ -37,7 +37,7 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Generate Sitemap
+      - name: Generate Sitemap from Markdown Structure
         run: |
           python << 'EOF'
           import os
@@ -54,144 +54,118 @@ jobs:
 
           urlset = ET.Element(f"{{{NAMESPACE}}}urlset")
 
-          urls = set()   # 🔥 prevent duplicate URLs
+          seen = set()
 
-          def get_lastmod(filepath):
+          def get_lastmod(path):
               try:
                   return subprocess.check_output(
-                      ["git", "log", "-1", "--format=%cs", "--", filepath],
+                      ["git", "log", "-1", "--format=%cs", "--", path],
                       stderr=subprocess.DEVNULL
-                  ).decode("utf-8").strip()
+                  ).decode().strip()
               except:
                   return datetime.utcnow().date().isoformat()
 
-          def add_url(loc, lastmod, priority="0.8", changefreq="weekly"):
-              loc = loc.rstrip("/") + "/"
+          def add_url(url, lastmod, priority="0.8", changefreq="weekly"):
+              url = url.rstrip("/") + "/"
 
-              if loc in urls:
+              if url in seen:
                   return
 
-              urls.add(loc)
+              seen.add(url)
 
-              url = ET.SubElement(urlset, f"{{{NAMESPACE}}}url")
+              node = ET.SubElement(urlset, f"{{{NAMESPACE}}}url")
 
-              ET.SubElement(url, f"{{{NAMESPACE}}}loc").text = loc
-              ET.SubElement(url, f"{{{NAMESPACE}}}lastmod").text = lastmod
-              ET.SubElement(url, f"{{{NAMESPACE}}}changefreq").text = changefreq
-              ET.SubElement(url, f"{{{NAMESPACE}}}priority").text = priority
+              ET.SubElement(node, f"{{{NAMESPACE}}}loc").text = url
+              ET.SubElement(node, f"{{{NAMESPACE}}}lastmod").text = lastmod
+              ET.SubElement(node, f"{{{NAMESPACE}}}changefreq").text = changefreq
+              ET.SubElement(node, f"{{{NAMESPACE}}}priority").text = priority
 
           # HOME PAGE
-          if os.path.exists("index.html"):
-              add_url(
-                  f"{BASE_URL}/",
-                  get_lastmod("index.html"),
-                  "1.0",
-                  "daily"
-              )
-          else:
-              add_url(
-                  f"{BASE_URL}/",
-                  datetime.utcnow().date().isoformat(),
-                  "1.0",
-                  "daily"
-              )
+          add_url(
+              f"{BASE_URL}/",
+              datetime.utcnow().date().isoformat(),
+              "1.0",
+              "daily"
+          )
 
-          # SCAN ALL HTML FILES
-          for root, dirs, files in os.walk("."):
+          # SCAN NEWS MD FILES ONLY
+          for root, dirs, files in os.walk("news"):
 
-              # ignore hidden folders
               dirs[:] = [d for d in dirs if not d.startswith(".")]
 
               for file in files:
 
-                  if not file.endswith(".html"):
+                  if not file.endswith(".md"):
                       continue
 
-                  filepath = os.path.join(root, file)
+                  full_path = os.path.join(root, file)
 
-                  rel = os.path.relpath(filepath, ".").replace("\\", "/")
+                  rel = os.path.relpath(full_path, "news").replace("\\", "/")
 
-                  # skip 404 page
-                  if rel == "404.html":
+                  # SKIP ADS
+                  if rel.startswith("Ads/"):
                       continue
 
-                  # skip github folder
-                  if rel.startswith(".github/"):
-                      continue
+                  # remove .md
+                  slug = rel[:-3]
 
-                  # convert to URL
-                  if rel == "index.html":
-                      continue
-
-                  if rel.endswith("/index.html"):
-                      path = rel[:-11]
-                      url = f"{BASE_URL}/{path}/"
-                  else:
-                      path = rel[:-5]
-                      url = f"{BASE_URL}/{path}/"
+                  # FINAL URL (MD structure based)
+                  url = f"{BASE_URL}/news/{slug}/"
 
                   add_url(
                       url,
-                      get_lastmod(rel)
+                      get_lastmod(full_path)
                   )
 
-          # SORT URLs
-          sorted_urls = sorted(list(urls))
+          # SORT
+          sorted_urls = sorted(list(seen))
 
-          # rebuild xml in order
           urlset.clear()
 
-          for loc in sorted_urls:
+          for u in sorted_urls:
 
-              url = ET.SubElement(urlset, f"{{{NAMESPACE}}}url")
+              node = ET.SubElement(urlset, f"{{{NAMESPACE}}}url")
 
-              ET.SubElement(url, f"{{{NAMESPACE}}}loc").text = loc
-              ET.SubElement(url, f"{{{NAMESPACE}}}lastmod").text = datetime.utcnow().date().isoformat()
-              ET.SubElement(url, f"{{{NAMESPACE}}}changefreq").text = "weekly"
-              ET.SubElement(url, f"{{{NAMESPACE}}}priority").text = "0.8"
+              ET.SubElement(node, f"{{{NAMESPACE}}}loc").text = u
+              ET.SubElement(node, f"{{{NAMESPACE}}}lastmod").text = datetime.utcnow().date().isoformat()
+              ET.SubElement(node, f"{{{NAMESPACE}}}changefreq").text = "weekly"
+              ET.SubElement(node, f"{{{NAMESPACE}}}priority").text = "0.8"
 
-          xml_bytes = ET.tostring(urlset, encoding="utf-8")
+          xml = ET.tostring(urlset, encoding="utf-8")
 
-          pretty = minidom.parseString(xml_bytes).toprettyxml(
+          pretty = minidom.parseString(xml).toprettyxml(
               indent="  ",
               encoding="utf-8"
           )
 
-          pretty = b"\n".join(
-              line for line in pretty.splitlines()
-              if line.strip()
-          )
+          pretty = b"\n".join([l for l in pretty.splitlines() if l.strip()])
 
-          # check old sitemap (avoid unnecessary commits)
           old = b""
           if os.path.exists(SITEMAP_FILE):
               with open(SITEMAP_FILE, "rb") as f:
                   old = f.read()
 
           if old == pretty:
-              print("No changes in sitemap.")
+              print("No sitemap change")
               exit(0)
 
           with open(SITEMAP_FILE, "wb") as f:
               f.write(pretty)
 
-          print(f"Sitemap generated with {len(sorted_urls)} URLs")
+          print(f"Sitemap generated from MD structure: {len(seen)} URLs")
           EOF
 
-      - name: Commit & Push Sitemap
+      - name: Commit Sitemap
         run: |
-          git config --global user.name "GitHub Action Bot"
-          git config --global user.email "action@github.com"
+          git config user.name "GitHub Action Bot"
+          git config user.email "action@github.com"
 
           git add sitemap.xml
 
           if git diff --cached --quiet; then
-            echo "No changes"
             exit 0
           fi
 
-          git commit -m "chore: auto sitemap update"
-
+          git commit -m "chore: md-based sitemap update"
           git pull --rebase origin main
-
           git push origin main
