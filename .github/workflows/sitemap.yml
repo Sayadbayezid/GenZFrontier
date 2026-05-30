@@ -1,4 +1,4 @@
-Name: Auto Sitemap Generator
+name: Auto Sitemap Generator
 
 on:
   push:
