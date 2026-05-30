@@ -37,7 +37,7 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Generate Sitemap from Markdown Structure
+      - name: Generate Sitemap
         run: |
           python << 'EOF'
           import os
@@ -88,7 +88,7 @@ jobs:
               "daily"
           )
 
-          # SCAN NEWS MD FILES ONLY
+          # SCAN NEWS MD FILES
           for root, dirs, files in os.walk("news"):
 
               dirs[:] = [d for d in dirs if not d.startswith(".")]
@@ -102,22 +102,24 @@ jobs:
 
                   rel = os.path.relpath(full_path, "news").replace("\\", "/")
 
-                  # SKIP ADS
-                  if rel.startswith("Ads/"):
-                      continue
-
                   # remove .md
                   slug = rel[:-3]
 
-                  # FINAL URL (MD structure based)
-                  url = f"{BASE_URL}/news/{slug}/"
+                  # SPLIT CATEGORY + FILE
+                  parts = slug.split("/", 1)
+
+                  if len(parts) == 2:
+                      category, post = parts
+                      url = f"{BASE_URL}/{category}/{post}/"
+                  else:
+                      url = f"{BASE_URL}/{slug}/"
 
                   add_url(
                       url,
                       get_lastmod(full_path)
                   )
 
-          # SORT
+          # SORT + BUILD XML
           sorted_urls = sorted(list(seen))
 
           urlset.clear()
@@ -146,13 +148,13 @@ jobs:
                   old = f.read()
 
           if old == pretty:
-              print("No sitemap change")
+              print("No changes in sitemap")
               exit(0)
 
           with open(SITEMAP_FILE, "wb") as f:
               f.write(pretty)
 
-          print(f"Sitemap generated from MD structure: {len(seen)} URLs")
+          print(f"Generated {len(seen)} URLs")
           EOF
 
       - name: Commit Sitemap
@@ -166,6 +168,6 @@ jobs:
             exit 0
           fi
 
-          git commit -m "chore: md-based sitemap update"
+          git commit -m "chore: category-based sitemap (no /news prefix)"
           git pull --rebase origin main
           git push origin main
