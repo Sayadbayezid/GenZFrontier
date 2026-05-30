@@ -2,6 +2,7 @@ import os
 import sys
 import shutil
 import markdown
+import json
 import re
 from datetime import datetime
 
@@ -28,6 +29,13 @@ def get_ticker_html(breaking_arts):
     if not breaking_arts: return ""
     items = "".join([f'<span>🔴 <a href="/{a["cat"]}/{a["file"]}" style="color: white; text-decoration: none;">{a["title"]}</a></span>' for a in breaking_arts])
     return f'<div class="breaking-news-ticker"><div class="breaking-label">BREAKING</div><marquee class="breaking-marquee" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">{items}</marquee></div>'
+
+def get_meta(art):
+    return f'<meta name="description" content="{art["desc"]}"><meta property="og:title" content="{art["title"]}"><meta property="og:image" content="{art["img"]}"><meta property="og:url" content="{art["url"]}">'
+
+def get_json_ld(art):
+    schema = {"@context": "https://schema.org", "@type": "NewsArticle", "headline": art["title"], "image": [art["img"]], "description": art["desc"]}
+    return f'<script type="application/ld+json">{json.dumps(schema)}</script>'
 
 # ==========================================================
 # Main Execution
@@ -58,19 +66,23 @@ for root, _, files in os.walk(NEWS_DIR):
             "cat": cat,
             "desc": meta.get('description', [""])[0],
             "img": meta.get('image', [f"{BASE_URL}default.jpg"])[0],
-            "date": datetime.now().isoformat()
+            "date": datetime.now().isoformat(),
+            "url": f"{BASE_URL}{cat}/{file.replace('.md', '.html')}"
         }
         cat_arts[cat].append(art)
         all_arts.append(art)
         if meta.get('breaking', [''])[0].lower() == 'true': breaking_arts.append(art)
 
-        # Generate Individual Post with Related
+        # Generate Individual Post
         related_html = '<div class="related-section"><div class="section-header"><h2>Related News</h2></div><div class="grid-4">'
         for r in [a for a in cat_arts[cat] if a['file'] != art['file']][:4]:
             related_html += f'<article class="news-card"><img src="{r["img"]}"><a href="../{r["cat"]}/{r["file"]}"><h3>{r["title"]}</h3></a></article>'
         related_html += '</div></div>'
         
-        final_html = template.replace("{{NEWS_CONTENT}}", html_cont).replace("{{ARTICLE_TITLE}}", art['title']).replace("{{RELATED_POSTS}}", related_html)
+        final_html = template.replace("{{NEWS_CONTENT}}", html_cont).replace("{{ARTICLE_TITLE}}", art['title']) \
+                             .replace("{{RELATED_POSTS}}", related_html).replace("{{META_TAGS}}", get_meta(art)) \
+                             .replace("{{SCHEMA_DATA}}", get_json_ld(art)).replace("{{BREAKING_NEWS_TICKER}}", get_ticker_html(breaking_arts))
+        
         os.makedirs(os.path.join(OUTPUT_DIR, cat), exist_ok=True)
         with open(os.path.join(OUTPUT_DIR, cat, art['file']), "w", encoding="utf-8") as f: f.write(final_html)
 
@@ -84,25 +96,22 @@ hero_html = f'<section class="hero-section"><div class="hero-container"><div cla
 for a in hero_arts[1:]: hero_html += f'<div class="hero-side-item"><a href="./{a["cat"]}/{a["file"]}"><img src="{a["img"]}"></a><div><h3>{a["title"]}</h3></div></div>'
 hero_html += '</div></div></section>'
 
-# Dynamic Content (Latest Mix + Sections)
+# Dynamic Content
 dyn_html = '<div class="section-header"><h2>Latest Mix</h2></div><div class="grid-4">'
 for a in all_arts[:12]: dyn_html += f'<article class="news-card"><img src="{a["img"]}"><a href="./{a["cat"]}/{a["file"]}"><h3>{a["title"]}</h3></a></article>'
 dyn_html += '</div>'
 
 for cat in DEFAULT_CATEGORIES:
     arts = sorted(cat_arts[cat], key=lambda x: x['date'], reverse=True)
-    # Generate Category Index Pages
     cat_index_html = index_template.replace("{{HERO_SECTION}}", "").replace("{{DYNAMIC_CONTENT}}", f'<div class="section-header"><h2>{cat.title()}</h2></div><div class="grid-4">' + "".join([f'<article class="news-card"><img src="{a["img"]}"><a href="../{a["cat"]}/{a["file"]}"><h3>{a["title"]}</h3></a></article>' for a in arts]) + '</div>').replace("{{BREAKING_NEWS_TICKER}}", ticker)
     with open(os.path.join(OUTPUT_DIR, cat, "index.html"), "w", encoding="utf-8") as f: f.write(cat_index_html.replace('href="./', 'href="../'))
     
-    # Add to Home
     limit = 2 if cat == 'ads' else 10
     dyn_html += f'<div class="section-header"><h2>{cat.title()}</h2><a href="./{cat}/" class="see-all">See All →</a></div><div class="grid-4">'
     for a in arts[:limit]: dyn_html += f'<article class="news-card"><img src="{a["img"]}"><a href="./{cat}/{a["file"]}"><h3>{a["title"]}</h3></a></article>'
     dyn_html += '</div>'
 
-# Write Home Index
 with open(os.path.join(OUTPUT_DIR, INDEX_FILE), "w", encoding="utf-8") as f:
     f.write(index_template.replace("{{HERO_SECTION}}", hero_html).replace("{{DYNAMIC_CONTENT}}", dyn_html).replace("{{BREAKING_NEWS_TICKER}}", ticker))
 
-print("✅ Build Complete! Category pages and Related posts are now active.")
+print("✅ Build Complete!")
