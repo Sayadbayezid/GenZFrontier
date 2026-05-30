@@ -29,8 +29,8 @@ jobs:
           python-version: "3.11"
 
       - name: Generate Sitemap
+        shell: python
         run: |
-          python << 'EOF'
           import os
           import subprocess
           import xml.etree.ElementTree as ET
@@ -38,101 +38,85 @@ jobs:
           from datetime import datetime
 
           BASE_URL = "https://www.genzfrontir.com"
-          SITEMAP_FILE = "sitemap.xml"
           NAMESPACE = "http://www.sitemaps.org/schemas/sitemap/0.9"
 
           ET.register_namespace("", NAMESPACE)
-
           urlset = ET.Element(f"{{{NAMESPACE}}}urlset")
 
-          seen = set()
+          url_data = {}
 
           def lastmod(path):
+              # অরিজিনাল Markdown (.md) ফাইলের ডেট চেক করার লজিক
+              md_path = path.replace("public/", "news/").replace(".html", ".md")
+              target_path = md_path if os.path.exists(md_path) else path
+              
               try:
-                  return subprocess.check_output(
-                      ["git", "log", "-1", "--format=%cs", "--", path],
+                  out = subprocess.check_output(
+                      ["git", "log", "-1", "--format=%cs", "--", target_path],
                       stderr=subprocess.DEVNULL
                   ).decode().strip()
+                  if out:
+                      return out
+                  return datetime.utcnow().date().isoformat()
               except:
                   return datetime.utcnow().date().isoformat()
 
           def add(url, lm):
-              # এখানে স্লাশ এড করার লজিক রিমুভ করা হয়েছে যাতে .html ঠিক থাকে
-              if url in seen:
+              if url in url_data:
                   return
-              seen.add(url)
+              url_data[url] = lm
 
-              node = ET.SubElement(urlset, f"{{{NAMESPACE}}}url")
-              ET.SubElement(node, f"{{{NAMESPACE}}}loc").text = url
-              ET.SubElement(node, f"{{{NAMESPACE}}}lastmod").text = lm
-              ET.SubElement(node, f"{{{NAMESPACE}}}changefreq").text = "weekly"
-              ET.SubElement(node, f"{{{NAMESPACE}}}priority").text = "0.8"
-
-          # SCAN PUBLIC ONLY
+          # SCAN PUBLIC FOLDER
           for root, dirs, files in os.walk("public"):
-
               dirs[:] = [d for d in dirs if not d.startswith(".")]
 
               for file in files:
-
                   if not file.endswith(".html"):
                       continue
 
                   full = os.path.join(root, file)
-
                   rel = os.path.relpath(full, "public").replace("\\", "/")
 
                   # skip 404
                   if rel == "404.html":
                       continue
 
-                  # convert index.html → folder/
+                  # Clean URLs formatting
                   if rel == "index.html":
                       url_path = "/"
                   elif rel.endswith("/index.html"):
                       url_path = "/" + rel.replace("index.html", "")
                   else:
-                      # এখানে .html রিমুভ না করে সরাসরি পুরো ফাইলের নাম রাখা হয়েছে
                       url_path = "/" + rel 
 
-                  # REMOVE DUPLICATE PUBLIC ISSUE (IMPORTANT)
+                  # Remove duplicate public issue
                   url_path = url_path.replace("/public/", "/")
-
                   final_url = BASE_URL + url_path
 
+                  # Add URL with the correct markdown file date
                   add(final_url, lastmod(full))
 
-          # SORT
-          urls = sorted(seen)
-
-          urlset.clear()
-
-          for u in urls:
+          # SORT URLS AND BUILD XML
+          for u in sorted(url_data.keys()):
               node = ET.SubElement(urlset, f"{{{NAMESPACE}}}url")
               ET.SubElement(node, f"{{{NAMESPACE}}}loc").text = u
-              ET.SubElement(node, f"{{{NAMESPACE}}}lastmod").text = datetime.utcnow().date().isoformat()
+              ET.SubElement(node, f"{{{NAMESPACE}}}lastmod").text = url_data[u]
               ET.SubElement(node, f"{{{NAMESPACE}}}changefreq").text = "weekly"
               ET.SubElement(node, f"{{{NAMESPACE}}}priority").text = "0.8"
 
           xml = ET.tostring(urlset, encoding="utf-8")
-
-          pretty = minidom.parseString(xml).toprettyxml(
-              indent="  ",
-              encoding="utf-8"
-          )
-
+          pretty = minidom.parseString(xml).toprettyxml(indent="  ", encoding="utf-8")
           pretty = b"\n".join([l for l in pretty.splitlines() if l.strip()])
 
           with open("sitemap.xml", "wb") as f:
               f.write(pretty)
 
-          print("Sitemap generated from public folder (HTML URLs preserved)")
-          EOF
+          print("✅ Sitemap generated successfully!")
 
       - name: Commit
         run: |
           git config user.name "bot"
           git config user.email "bot@github.com"
           git add sitemap.xml
-          git commit -m "fix sitemap urls" || exit 0
+          git commit -m "update sitemap with preserved dates" || exit 0
           git push
