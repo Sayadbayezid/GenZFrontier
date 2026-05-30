@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0KNQFE6KJW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0KNQFE6KJW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-0KNQFE6KJW');
-</script>
+      gtag('config', 'G-0KNQFE6KJW');
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GenZ Frontier | Breaking News, Latest News and Videos</title>
+    
     <style>
         /* Base Reset & Variables */
         :root {
@@ -30,8 +31,16 @@
         a { text-decoration: none; color: inherit; }
         a:hover { color: var(--primary-red); }
 
-        /* Top Header */
-        header { background-color: var(--dark-bg); color: var(--text-light); position: relative; }
+        /* Top Header (Fixed/Sticky) */
+        header { 
+            background-color: var(--dark-bg); 
+            color: var(--text-light); 
+            position: sticky; 
+            top: 0; 
+            z-index: 998; 
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
         .header-top {
             display: flex;
             justify-content: space-between;
@@ -64,6 +73,10 @@
             padding: 0 20px;
             overflow-x: auto;
         }
+        /* Hide scrollbar for nav */
+        nav ul::-webkit-scrollbar { display: none; }
+        nav ul { -ms-overflow-style: none; scrollbar-width: none; }
+        
         nav ul li a {
             display: block;
             padding: 12px 15px;
@@ -74,19 +87,46 @@
         }
         nav ul li a:hover, nav ul li a.active { color: var(--text-light); border-bottom: 3px solid var(--primary-red); padding-bottom: 9px; }
 
+        /* Breaking News Marquee */
+        .breaking-news-ticker {
+            background: #111;
+            color: white;
+            padding: 10px 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid var(--primary-red);
+        }
+        .breaking-label {
+            background: var(--primary-red);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 3px;
+            font-weight: bold;
+            margin-right: 15px;
+            white-space: nowrap;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        .breaking-marquee {
+            width: 100%;
+            font-weight: 500;
+        }
+        .breaking-marquee span { margin-right: 40px; }
+
         /* Mobile Slide Out Menu Overlay */
-        .mobile-menu-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999; }
-        .mobile-menu { width: 280px; background: var(--dark-card); height: 100%; padding: 20px; color: white; display: flex; flex-direction: column; gap: 20px; }
-        .mobile-menu .close-btn { font-size: 24px; align-self: flex-end; cursor: pointer; color: var(--primary-red); }
-        .mobile-menu a { font-size: 18px; font-weight: bold; border-bottom: 1px solid #222; padding-bottom: 10px; }
+        .mobile-menu-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; }
+        .mobile-menu { width: 280px; background: var(--dark-card); height: 100%; padding: 20px; color: white; display: flex; flex-direction: column; gap: 15px; overflow-y: auto; }
+        .mobile-menu .close-btn { font-size: 28px; align-self: flex-end; cursor: pointer; color: var(--primary-red); line-height: 1; }
+        .mobile-menu a { font-size: 16px; font-weight: bold; border-bottom: 1px solid #222; padding-bottom: 10px; text-transform: capitalize; }
 
         /* Authentication Modal Overlay */
-        .auth-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; }
+        .auth-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center; }
         .auth-modal { background: white; padding: 30px; border-radius: 6px; width: 100%; max-width: 400px; position: relative; }
         .auth-modal h2 { margin-bottom: 20px; color: var(--dark-bg); text-align: center; }
         .auth-modal input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 14px; }
         .auth-modal button { width: 100%; padding: 12px; background: var(--primary-red); color: white; border: none; font-size: 16px; font-weight: bold; border-radius: 4px; cursor: pointer; }
-        .auth-modal .close-auth { position: absolute; top: 15px; right: 15px; font-size: 20px; cursor: pointer; color: #666; }
+        .auth-modal .close-auth { position: absolute; top: 15px; right: 15px; font-size: 24px; cursor: pointer; color: #666; line-height: 1;}
 
         /* Floating Video Popup Styling */
         .video-popup { display: none; position: fixed; bottom: 20px; right: 20px; width: 350px; background: var(--dark-bg); border: 2px solid var(--primary-red); border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000; overflow: hidden; animation: slideUp 0.4s ease-out; }
@@ -156,6 +196,7 @@
             .hero-main h1 { font-size: 32px; }
             nav { display: none; } /* Hide main desktop nav on small screens */
             .video-popup { width: calc(100% - 40px); right: 20px; left: 20px; bottom: 20px; }
+            .breaking-label { font-size: 10px; padding: 3px 6px; }
         }
     </style>
 </head>
@@ -173,6 +214,7 @@
             <a href="./health/">Health</a>
             <a href="./sports/">Sports</a>
             <a href="./entertainment/">Entertainment</a>
+            <a href="./ads/">Ads</a>
         </div>
     </div>
 
@@ -191,11 +233,11 @@
     <header>
         <div class="header-top">
             <div class="header-left">
-                <div class="menu-icon" id="hamburgerMenu">â°</div>
+                <div class="menu-icon" id="hamburgerMenu">☰</div>
                 <a href="./" class="logo">GenZ <span>Frontier</span></a>
             </div>
             <div class="header-right">
-                <button class="header-btn" id="searchToggleBtn">Search ð</button>
+                <button class="header-btn" id="searchToggleBtn">Search 🔍</button>
                 <button class="header-btn red" id="liveTvBtnHome">Live TV</button>
                 <button class="header-btn" id="loginBtn">Log In</button>
             </div>
@@ -219,9 +261,20 @@
                 <li><a href="./health/">Health</a></li>
                 <li><a href="./sports/">Sports</a></li>
                 <li><a href="./entertainment/">Entertainment</a></li>
+                <li><a href="./ads/">Ads</a></li>
             </ul>
         </nav>
     </header>
+
+    <div class="breaking-news-ticker">
+        <div class="breaking-label">BREAKING</div>
+        <marquee class="breaking-marquee" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+            <span>🔴 Global Markets React as New Tech Policies Take Effect Worldwide.</span>
+            <span>🔴 Major AI breakthroughs expected in the coming quarter.</span>
+            <span>🔴 Stock indices hit record highs amid corporate earnings.</span>
+            <span>🔴 Falcon 19 secures a massive 1-0 win in the final minute!</span>
+        </marquee>
+    </div>
 
     <section class="hero-section">
         <div class="hero-container">
@@ -336,7 +389,7 @@
 
     <div class="video-popup" id="videoPopup">
         <div class="video-popup-header">
-            <div><span class="live-dot">â</span> GenZ Live News</div>
+            <div><span class="live-dot">●</span> GenZ Live News</div>
             <div class="close-video-btn" id="closeVideoBtn">&times;</div>
         </div>
         <div class="video-popup-body" id="videoPopupBody"></div>
@@ -454,7 +507,7 @@
         // 4. Home Page Live TV Logic
         const liveTvBtnHome = document.getElementById('liveTvBtnHome');
         const videoPopup = document.getElementById('videoPopup');
-        const closeVideoPopupBtn = document.getElementById('closeVideoBtn'); // Renamed to avoid conflict
+        const closeVideoPopupBtn = document.getElementById('closeVideoBtn');
         const videoPopupBody = document.getElementById('videoPopupBody');
 
         liveTvBtnHome.addEventListener('click', () => {
@@ -469,11 +522,10 @@
         });
     </script>
 
-    <!-- Cookie Consent Popup -->
     <div class="cookie-consent-overlay" id="cookieConsentOverlay">
         <div class="cookie-consent-popup" id="cookieConsentPopup">
             <div class="cookie-consent-header">
-                <h3>ðª Cookie Policy</h3>
+                <h3>🍪 Cookie Policy</h3>
                 <button class="cookie-close-btn" id="cookieCloseBtn">&times;</button>
             </div>
             <div class="cookie-consent-body">
@@ -489,7 +541,6 @@
     </div>
 
     <script>
-        // Cookie Consent Logic
         (function() {
             const COOKIE_CONSENT_KEY = 'genzfrontier_cookie_consent';
             const COOKIE_CONSENT_TIMESTAMP = 'genzfrontier_cookie_consent_timestamp';
@@ -502,12 +553,10 @@
             const privacyBtn = document.getElementById('cookiePrivacyBtn');
             const closeBtn = document.getElementById('cookieCloseBtn');
 
-            // Check if user has already made a choice
             function hasUserConsented() {
                 const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
                 if (!consent) return false;
                 
-                // Refresh consent every 30 days
                 const timestamp = localStorage.getItem(COOKIE_CONSENT_TIMESTAMP);
                 if (timestamp) {
                     const daysSinceConsent = (Date.now() - parseInt(timestamp)) / (1000 * 60 * 60 * 24);
@@ -520,7 +569,6 @@
                 return true;
             }
 
-            // Show popup if user hasn't consented
             function showPopupIfNeeded() {
                 if (!hasUserConsented()) {
                     setTimeout(() => {
@@ -529,34 +577,23 @@
                 }
             }
 
-            // Save consent choice
             function saveConsent(accepted) {
                 localStorage.setItem(COOKIE_CONSENT_KEY, accepted ? 'accepted' : 'declined');
                 localStorage.setItem(COOKIE_CONSENT_TIMESTAMP, Date.now().toString());
                 hidePopup();
             }
 
-            // Hide popup
             function hidePopup() {
                 overlay.classList.remove('show');
             }
 
-            // Event listeners
             acceptBtn.addEventListener('click', () => saveConsent(true));
             declineBtn.addEventListener('click', () => saveConsent(false));
             closeBtn.addEventListener('click', hidePopup);
 
-            // Learn More button
-            learnMoreBtn.addEventListener('click', () => {
-                hidePopup();
-            });
+            learnMoreBtn.addEventListener('click', () => { hidePopup(); });
+            privacyBtn.addEventListener('click', () => { window.location.href = './privacy-policy.html'; });
 
-            // Privacy Policy button
-            privacyBtn.addEventListener('click', () => {
-                window.location.href = './privacy-policy.html';
-            });
-
-            // Show popup on page load
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', showPopupIfNeeded);
             } else {
@@ -579,11 +616,7 @@
             justify-content: center;
             align-items: flex-end;
         }
-
-        .cookie-consent-overlay.show {
-            display: flex;
-        }
-
+        .cookie-consent-overlay.show { display: flex; }
         .cookie-consent-popup {
             background: white;
             border-radius: 8px;
@@ -594,18 +627,7 @@
             animation: slideUpCookie 0.4s ease-out;
             position: relative;
         }
-
-        @keyframes slideUpCookie {
-            from {
-                transform: translateY(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
+        @keyframes slideUpCookie { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .cookie-consent-header {
             background: linear-gradient(135deg, #CC0000 0%, #990000 100%);
             color: white;
@@ -615,13 +637,7 @@
             justify-content: space-between;
             align-items: center;
         }
-
-        .cookie-consent-header h3 {
-            margin: 0;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
+        .cookie-consent-header h3 { margin: 0; font-size: 20px; font-weight: bold; }
         .cookie-close-btn {
             background: none;
             border: none;
@@ -636,22 +652,9 @@
             justify-content: center;
             transition: opacity 0.2s;
         }
-
-        .cookie-close-btn:hover {
-            opacity: 0.8;
-        }
-
-        .cookie-consent-body {
-            padding: 20px;
-            font-size: 14px;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .cookie-consent-body p {
-            margin: 0;
-        }
-
+        .cookie-close-btn:hover { opacity: 0.8; }
+        .cookie-consent-body { padding: 20px; font-size: 14px; color: #333; line-height: 1.6; }
+        .cookie-consent-body p { margin: 0; }
         .cookie-consent-actions {
             padding: 20px;
             display: flex;
@@ -660,7 +663,6 @@
             justify-content: flex-end;
             border-top: 1px solid #e0e0e0;
         }
-
         .cookie-btn {
             padding: 10px 16px;
             border: none;
@@ -671,77 +673,18 @@
             transition: all 0.3s ease;
             white-space: nowrap;
         }
-
-        .cookie-decline {
-            background: #f0f0f0;
-            color: #333;
-            border: 1px solid #ddd;
-        }
-
-        .cookie-decline:hover {
-            background: #e0e0e0;
-            border-color: #999;
-        }
-
-        .cookie-learn-more {
-            background: #f0f0f0;
-            color: #333;
-            border: 1px solid #ddd;
-        }
-
-        .cookie-learn-more:hover {
-            background: #e0e0e0;
-            border-color: #999;
-        }
-
-        .cookie-privacy {
-            background: #f0f0f0;
-            color: #333;
-            border: 1px solid #ddd;
-        }
-
-        .cookie-privacy:hover {
-            background: #e0e0e0;
-            border-color: #999;
-        }
-
-        .cookie-accept {
-            background: #CC0000;
-            color: white;
-        }
-
-        .cookie-accept:hover {
-            background: #990000;
-        }
+        .cookie-decline, .cookie-learn-more, .cookie-privacy { background: #f0f0f0; color: #333; border: 1px solid #ddd; }
+        .cookie-decline:hover, .cookie-learn-more:hover, .cookie-privacy:hover { background: #e0e0e0; border-color: #999; }
+        .cookie-accept { background: #CC0000; color: white; }
+        .cookie-accept:hover { background: #990000; }
 
         @media (max-width: 600px) {
-            .cookie-consent-popup {
-                width: calc(100% - 40px);
-                margin: 10px 20px;
-            }
-
-            .cookie-consent-actions {
-                flex-direction: column;
-                gap: 8px;
-            }
-
-            .cookie-btn {
-                width: 100%;
-                text-align: center;
-            }
-
-            .cookie-consent-header {
-                padding: 15px;
-            }
-
-            .cookie-consent-body {
-                padding: 15px;
-                font-size: 13px;
-            }
-
-            .cookie-consent-actions {
-                padding: 15px;
-            }
+            .cookie-consent-popup { width: calc(100% - 40px); margin: 10px 20px; }
+            .cookie-consent-actions { flex-direction: column; gap: 8px; }
+            .cookie-btn { width: 100%; text-align: center; }
+            .cookie-consent-header { padding: 15px; }
+            .cookie-consent-body { padding: 15px; font-size: 13px; }
+            .cookie-consent-actions { padding: 15px; }
         }
     </style>
 </body>
