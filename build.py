@@ -11,7 +11,7 @@ from datetime import datetime
 # ==========================================================
 
 NEWS_DIR = "news"
-BASE_URL = "https://genzfrontier.com/" # Replace with your actual base URL
+BASE_URL = "https://www.genzfrontir.com/" # Updated to your actual domain
 OUTPUT_DIR = "public"
 TEMPLATE_FILE = "template.html"
 INDEX_FILE = "index.html"
@@ -28,9 +28,11 @@ STATIC_FILES = [
     "disclaimer.html",
     "cookie-policy.html",
     "CNAME",
+    "sitemap.xml", # Added sitemap to copy list
+    "robots.txt"   # Added robots.txt to copy list
 ]
 
-# Default news categories
+# Default news categories (Added 'ads' here)
 DEFAULT_CATEGORIES = [
     "world",
     "politics",
@@ -40,6 +42,7 @@ DEFAULT_CATEGORIES = [
     "health",
     "sports",
     "entertainment",
+    "ads", 
 ]
 
 print("🚀 Starting GenZ Frontier Build Process...")
@@ -226,24 +229,22 @@ def generate_category_archive_links(category_articles):
     return archive_links_html
 
 def generate_breaking_news_ticker(breaking_articles):
-    """Generates HTML for the breaking news ticker."""
+    """Generates HTML for the breaking news ticker in sync with CSS."""
     if not breaking_articles:
         return ""
     
     ticker_items = ""
     for article in breaking_articles:
-        # Use relative paths for the ticker
-        ticker_items += f'<span class="ticker-item"><a href="/{article["category"]}/{article["filename"]}">{article["title"]}</a></span>'
+        # Properly formatted links for the marquee
+        ticker_items += f'<span>🔴 <a href="/{article["category"]}/{article["filename"]}" style="color: white; text-decoration: none;">{article["title"]}</a></span>'
     
+    # Exact structure that matches your CSS design
     ticker_html = f"""
     <div class="breaking-news-ticker">
-        <div class="ticker-label">BREAKING</div>
-        <div class="ticker-wrap">
-            <div class="ticker-move">
-                {ticker_items}
-                {ticker_items} <!-- Duplicate for seamless loop -->
-            </div>
-        </div>
+        <div class="breaking-label">BREAKING</div>
+        <marquee class="breaking-marquee" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+            {ticker_items}
+        </marquee>
     </div>
     """
     return ticker_html
@@ -330,7 +331,6 @@ for root, dirs, files in os.walk(NEWS_DIR):
             article_date_published = datetime.now().isoformat()
             date_match = re.search(r'(?:প্রকাশিত|Published):\s*(\d{1,2}\s+\w+,\s+\d{4})', markdown_text)
             if date_match:
-                # (Keep original date parsing logic...)
                 pass
 
             article_data = {
