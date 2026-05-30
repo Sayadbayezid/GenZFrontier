@@ -27,8 +27,8 @@
     "image": [
         "https://i.ibb.co/DfcJgm9c/IMG-4136.jpg"
     ],
-    "datePublished": "2026-05-30T01:55:13.824435",
-    "dateModified": "2026-05-30T01:55:13.824444",
+    "datePublished": "2026-05-30T01:59:41.149124",
+    "dateModified": "2026-05-30T01:59:41.149135",
     "author": {
         "@type": "Person",
         "name": "GenZ Frontier"
@@ -98,7 +98,7 @@
         .menu-icon {
             font-size: 24px;
             cursor: pointer;
-            display: none; /* Hidden on desktop */
+            display: block; /* Always visible */
         }
 
         .logo { 
@@ -182,11 +182,16 @@
             margin-top: 10px;
         }
 
-        /* Desktop Nav */
+        /* Horizontal Scrollable Nav */
         .desktop-nav {
             background-color: var(--dark-bg); 
             border-top: 1px solid #333; 
+            border-bottom: 1px solid #333;
             overflow-x: auto;
+        }
+        
+        .desktop-nav::-webkit-scrollbar {
+            display: none;
         }
         
         .desktop-nav ul {
@@ -196,6 +201,7 @@
             margin: 0 auto; 
             padding: 0 20px; 
             gap: 0;
+            overflow-x: auto;
         }
         
         .desktop-nav a {
@@ -487,7 +493,7 @@
             }
             to {
                 transform: translateY(0);
-                opacity: 1;
+            opacity: 1;
             }
         }
 
@@ -590,12 +596,6 @@
         }
         
         @media (max-width: 600px) {
-            .desktop-nav { 
-                display: none; /* Hide main desktop nav on small screens */
-            }
-            .menu-icon {
-                display: block; /* Show hamburger menu */
-            }
             .cookie-consent-popup { width: calc(100% - 40px); margin: 10px 20px; }
             .cookie-consent-actions { flex-direction: column; gap: 8px; }
             .cookie-btn { width: 100%; text-align: center; }
@@ -631,6 +631,7 @@
                 <a href="https://genzfrontier.com/" class="home-link">← Home</a>
             </div>
         </div>
+        
         <nav class="desktop-nav">
             <ul>
                 <li><a href="https://genzfrontier.com/">Home</a></li>
@@ -715,12 +716,14 @@
         const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
         const closeMenuBtn = document.getElementById('closeMenuBtn');
 
-        hamburgerMenu.addEventListener('click', () => {
-            mobileMenuOverlay.style.display = 'block';
-        });
-        closeMenuBtn.addEventListener('click', () => {
-            mobileMenuOverlay.style.display = 'none';
-        });
+        if (hamburgerMenu && mobileMenuOverlay && closeMenuBtn) {
+            hamburgerMenu.addEventListener('click', () => {
+                mobileMenuOverlay.style.display = 'block';
+            });
+            closeMenuBtn.addEventListener('click', () => {
+                mobileMenuOverlay.style.display = 'none';
+            });
+        }
 
         // Video Popup Script
         const videoPopup = document.getElementById('videoPopup');
@@ -729,12 +732,14 @@
         const liveTvBtn = document.getElementById('liveTvBtn');
         const articleContent = document.getElementById('articleContent');
 
-        const embeddedVideo = articleContent.querySelector('iframe');
+        const embeddedVideo = articleContent ? articleContent.querySelector('iframe') : null;
         const defaultLiveHtml = '<iframe src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&mute=1" allowfullscreen></iframe>';
 
         function openPopup(videoHtml) {
-            videoPopupBody.innerHTML = videoHtml;
-            videoPopup.style.display = 'block';
+            if(videoPopupBody && videoPopup) {
+                videoPopupBody.innerHTML = videoHtml;
+                videoPopup.style.display = 'block';
+            }
         }
 
         if (embeddedVideo && !sessionStorage.getItem('videoPopupShown')) {
@@ -745,18 +750,22 @@
             }, 3000);
         }
 
-        liveTvBtn.addEventListener('click', () => {
-            if (embeddedVideo) {
-                openPopup(embeddedVideo.outerHTML);
-            } else {
-                openPopup(defaultLiveHtml);
-            }
-        });
+        if (liveTvBtn) {
+            liveTvBtn.addEventListener('click', () => {
+                if (embeddedVideo) {
+                    openPopup(embeddedVideo.outerHTML);
+                } else {
+                    openPopup(defaultLiveHtml);
+                }
+            });
+        }
 
-        closeVideoBtn.addEventListener('click', () => {
-            videoPopup.style.display = 'none';
-            videoPopupBody.innerHTML = '';
-        });
+        if (closeVideoBtn) {
+            closeVideoBtn.addEventListener('click', () => {
+                videoPopup.style.display = 'none';
+                videoPopupBody.innerHTML = '';
+            });
+        }
     </script>
 
     <div class="cookie-consent-overlay" id="cookieConsentOverlay">
@@ -807,7 +816,7 @@
             }
 
             function showPopupIfNeeded() {
-                if (!hasUserConsented()) {
+                if (!hasUserConsented() && overlay) {
                     setTimeout(() => {
                         overlay.classList.add('show');
                     }, 500);
@@ -821,18 +830,16 @@
             }
 
             function hidePopup() {
-                overlay.classList.remove('show');
+                if(overlay) overlay.classList.remove('show');
             }
 
-            acceptBtn.addEventListener('click', () => saveConsent(true));
-            declineBtn.addEventListener('click', () => saveConsent(false));
-            closeBtn.addEventListener('click', hidePopup);
+            if(acceptBtn) acceptBtn.addEventListener('click', () => saveConsent(true));
+            if(declineBtn) declineBtn.addEventListener('click', () => saveConsent(false));
+            if(closeBtn) closeBtn.addEventListener('click', hidePopup);
 
-            learnMoreBtn.addEventListener('click', () => {
-                hidePopup();
-            });
+            if(learnMoreBtn) learnMoreBtn.addEventListener('click', () => { hidePopup(); });
 
-            privacyBtn.addEventListener('click', () => {
+            if(privacyBtn) privacyBtn.addEventListener('click', () => {
                 window.location.href = 'https://genzfrontier.com/privacy-policy.html';
             });
 
