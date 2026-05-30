@@ -12,7 +12,13 @@ The project is designed for ultra-fast publishing workflows where contributors c
 A custom Python build system automatically converts Markdown articles into responsive HTML pages and deploys them directly to GitHub Pages.
 
 ---
+<!-- START_LINK_CHECKER -->
 
+### ⏳ Loading link status...
+
+The automated system will update this section daily.
+
+<!-- END_LINK_CHECKER -->
 # 🌐 Live Demo
 
 👉 **Visit the Website:**  
