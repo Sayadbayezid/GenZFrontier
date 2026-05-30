@@ -40,7 +40,6 @@ DEFAULT_CATEGORIES = [
     "health",
     "sports",
     "entertainment",
-    ADS_DIR 
 ]
 
 print("🚀 Starting GenZ Frontier Build Process...")
@@ -57,6 +56,7 @@ def clean_output_directory():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     print(f"✅ Created fresh '{OUTPUT_DIR}' directory")
 
+    # Ensure ads directory exists in output
     os.makedirs(os.path.join(OUTPUT_DIR, ADS_DIR), exist_ok=True)
 
 
@@ -71,13 +71,14 @@ def copy_static_files():
         else:
             print(f"⚠️ Skipped missing file: {filename}")
     
+    # Copy ads if any
     if os.path.exists(ADS_DIR):
         for item in os.listdir(ADS_DIR):
             s = os.path.join(ADS_DIR, item)
             d = os.path.join(OUTPUT_DIR, ADS_DIR, item)
-            if os.path.isfile(s) and not s.endswith(".md"):
+            if os.path.isfile(s):
                 shutil.copy2(s, d)
-        print(f"✅ Copied static assets from {ADS_DIR}")
+        print(f"✅ Copied ads from {ADS_DIR}")
 
 
 def load_template(template_path):
@@ -112,7 +113,7 @@ def generate_meta_tags(article_data, page_type="article"):
     """Generates SEO meta tags for an article or a general page."""
     title = article_data.get("title", "GenZ Frontier")
     description = article_data.get("description", "Breaking News, Latest News and Videos from GenZ Frontier.")
-    image = article_data.get("image", f"{BASE_URL}default-social-image.jpg")
+    image = article_data.get("image", f"{BASE_URL}default-social-image.jpg") # Default social image
     url = article_data.get("url", BASE_URL)
 
     meta_tags = f"""
@@ -152,7 +153,7 @@ def generate_json_ld_schema(article_data):
             image
         ],
         "datePublished": date_published,
-        "dateModified": datetime.now().isoformat(),
+        "dateModified": datetime.now().isoformat(), # Assuming modified now for simplicity
         "author": {
             "@type": "Person",
             "name": article_data.get("author", "GenZ Frontier")
@@ -162,7 +163,7 @@ def generate_json_ld_schema(article_data):
             "name": "GenZ Frontier",
             "logo": {
                 "@type": "ImageObject",
-                "url": f"{BASE_URL}logo.png"
+                "url": f"{BASE_URL}logo.png" # Assuming a logo exists
             }
         },
         "description": description
@@ -171,21 +172,19 @@ def generate_json_ld_schema(article_data):
 
 def generate_latest_news_html(articles):
     """Generates the HTML for the latest news section."""
-    latest_news_html = f"""
+    latest_news_html = """
         <div class="section-header">
             <h2>Latest News</h2>
-            <a href="{BASE_URL}world/" class="see-all">See all →</a>
+            <a href="./world/" class="see-all">See all →</a>
         </div>
         <div class="grid-4" id="newsGrid">
     """
-    real_news = [a for a in articles if a["category"] != ADS_DIR]
-    
-    for article in real_news[:12]: 
+    for article in articles[:4]:  # Display up to 4 latest articles
         latest_news_html += f"""
             <article class="news-card">
                 <img src="{article["image"]}" alt="{article["title"]}">
                 <span class="tag">{article["category"].title()}</span>
-                <a href="{BASE_URL}{article["category"]}/{article["filename"]}"><h3>{article["title"]}</h3></a>
+                <a href="./{article["category"]}/{article["filename"]}"><h3>{article["title"]}</h3></a>
                 <p>{article["description"]}</p>
             </article>
         """
@@ -195,31 +194,31 @@ def generate_latest_news_html(articles):
 
 def generate_category_archive_links(category_articles):
     """Generates HTML for category archive links."""
-    archive_links_html = f"""
+    archive_links_html = """
         <div class="section-header">
             <h2>More top stories</h2>
-            <a href="{BASE_URL}world/" class="see-all">See all →</a>
+            <a href="./world/" class="see-all">See all →</a>
         </div>
         <div class="grid-featured">
             <div class="featured-large">
                 <img src="https://images.unsplash.com/photo-1614729939124-03290b55c9ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Space Feature">
                 <div class="overlay">
                     <span class="tag" style="color: var(--primary-red); font-weight: bold;">SPACE AND SCIENCE</span>
-                    <a href="{BASE_URL}science/"><h3>Historic mission successfully deploys critical instruments in orbit</h3></a>
+                    <a href="./science/"><h3>Historic mission successfully deploys critical instruments in orbit</h3></a>
                 </div>
             </div>
             <div class="hero-sidebar" style="gap: 30px;">
     """
-    archive_links_html += f"""
+    archive_links_html += """
                 <article class="news-card">
                     <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Business Building">
                     <span class="tag">Business</span>
-                    <a href="{BASE_URL}business/"><h3>Commercial real estate sector sees unexpected growth</h3></a>
+                    <a href="./business/"><h3>Commercial real estate sector sees unexpected growth</h3></a>
                 </article>
                 <article class="news-card">
                     <img src="https://images.unsplash.com/photo-1517404215738-15263e9f9178?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Documentary">
                     <span class="tag">Entertainment</span>
-                    <a href="{BASE_URL}entertainment/"><h3>Award-winning documentary sheds light on local history</h3></a>
+                    <a href="./entertainment/"><h3>Award-winning documentary sheds light on local history</h3></a>
                 </article>
             </div>
         </div>
@@ -233,7 +232,8 @@ def generate_breaking_news_ticker(breaking_articles):
     
     ticker_items = ""
     for article in breaking_articles:
-        ticker_items += f'<span class="ticker-item"><a href="{article["ticker_url"]}">{article["title"]}</a></span>'
+        # Use relative paths for the ticker
+        ticker_items += f'<span class="ticker-item"><a href="/{article["category"]}/{article["filename"]}">{article["title"]}</a></span>'
     
     ticker_html = f"""
     <div class="breaking-news-ticker">
@@ -241,7 +241,7 @@ def generate_breaking_news_ticker(breaking_articles):
         <div class="ticker-wrap">
             <div class="ticker-move">
                 {ticker_items}
-                {ticker_items} 
+                {ticker_items} <!-- Duplicate for seamless loop -->
             </div>
         </div>
     </div>
@@ -255,10 +255,12 @@ def generate_breaking_news_ticker(breaking_articles):
 clean_output_directory()
 copy_static_files()
 
+# Load templates
 template = load_template(TEMPLATE_FILE)
 index_template = load_template(INDEX_FILE)
 md_parser = create_markdown_parser()
 
+# Track category articles
 category_articles = {cat: [] for cat in DEFAULT_CATEGORIES}
 all_articles = []
 breaking_articles = []
@@ -267,7 +269,7 @@ breaking_articles = []
 # Markdown → HTML Conversion
 # ==========================================================
 
-print("\n📰 Processing articles and ads...")
+print("\n📰 Processing articles...")
 
 for root, dirs, files in os.walk(NEWS_DIR):
     for file in files:
@@ -275,7 +277,6 @@ for root, dirs, files in os.walk(NEWS_DIR):
             continue
 
         category = os.path.basename(root)
-            
         if category not in category_articles:
             category_articles[category] = []
 
@@ -290,11 +291,13 @@ for root, dirs, files in os.walk(NEWS_DIR):
             with open(markdown_path, "r", encoding="utf-8") as md_file:
                 markdown_text = md_file.read()
 
+            # Parse with metadata
             html_content = md_parser.convert(markdown_text)
             metadata = md_parser.Meta if hasattr(md_parser, 'Meta') else {}
             md_parser.reset()
 
-            article_title = "Untitled"
+            # Extract title from the first H1 or metadata or use filename
+            article_title = "Untitled Article"
             if 'title' in metadata:
                 article_title = metadata['title'][0]
             elif markdown_text.startswith("# "):
@@ -302,12 +305,14 @@ for root, dirs, files in os.walk(NEWS_DIR):
             else:
                 article_title = os.path.splitext(file)[0].replace("-", " ").title()
             
+            # Check for breaking news tag
             is_breaking = False
             if 'breaking' in metadata:
                 is_breaking = metadata['breaking'][0].lower() == 'true'
             elif 'breaking: true' in markdown_text.lower():
                 is_breaking = True
 
+            # Extract description, image, etc.
             article_description = metadata.get('description', [""])[0]
             if not article_description:
                 first_paragraph_match = re.search(r'\n\n([^#].*?)\n\n', markdown_text, re.DOTALL)
@@ -317,13 +322,17 @@ for root, dirs, files in os.walk(NEWS_DIR):
                         article_description = article_description[:147] + "..."
 
             article_image = metadata.get('image', [f"{BASE_URL}default-social-image.jpg"])[0]
-            
-            custom_url = metadata.get('url', [""])[0]
-            # Updated to use Absolute URL to prevent 404 errors
-            ticker_url = custom_url if custom_url else f"{BASE_URL}{category}/{html_filename}"
+            if article_image == f"{BASE_URL}default-social-image.jpg":
+                first_image_match = re.search(r'!\[.*?\]\((.*?)\)', markdown_text)
+                if first_image_match:
+                    article_image = first_image_match.group(1)
 
             article_date_published = datetime.now().isoformat()
-            
+            date_match = re.search(r'(?:প্রকাশিত|Published):\s*(\d{1,2}\s+\w+,\s+\d{4})', markdown_text)
+            if date_match:
+                # (Keep original date parsing logic...)
+                pass
+
             article_data = {
                 "title": article_title,
                 "filename": html_filename,
@@ -333,7 +342,6 @@ for root, dirs, files in os.walk(NEWS_DIR):
                 "date_published": article_date_published,
                 "author": metadata.get('author', ["GenZ Frontier"])[0],
                 "url": f"{BASE_URL}{category}/{html_filename}",
-                "ticker_url": ticker_url,
                 "breaking": is_breaking
             }
             
@@ -342,6 +350,7 @@ for root, dirs, files in os.walk(NEWS_DIR):
             if is_breaking:
                 breaking_articles.append(article_data)
 
+            # Generate SEO meta tags and JSON-LD schema
             meta_tags = generate_meta_tags(article_data)
             json_ld_schema = generate_json_ld_schema(article_data)
 
@@ -353,11 +362,12 @@ for root, dirs, files in os.walk(NEWS_DIR):
             with open(html_output_path, "w", encoding="utf-8") as output_file:
                 output_file.write(final_html)
 
-            print(f"📝 Converted: {category}/{file} {'[BREAKING/AD]' if is_breaking else ''}")
+            print(f"📝 Converted: {category}/{file} {'[BREAKING]' if is_breaking else ''}")
 
         except Exception as error:
             print(f"❌ Failed to process {category}/{file}: {error}")
 
+# Sort all articles
 all_articles.sort(key=lambda x: x['date_published'], reverse=True)
 breaking_articles.sort(key=lambda x: x['date_published'], reverse=True)
 
@@ -378,42 +388,22 @@ final_index_html = index_template.replace("{{LATEST_NEWS_SECTION}}", latest_news
 with open(os.path.join(OUTPUT_DIR, INDEX_FILE), "w", encoding="utf-8") as file:
     file.write(final_index_html)
 
-# ==========================================================
-# Generate Category Archive Pages
-# ==========================================================
-
-print("📂 Generating category archive pages...")
-for cat_name, cat_articles in category_articles.items():
-    if cat_name == ADS_DIR or not cat_articles:
-        continue
-        
-    cat_dir = os.path.join(OUTPUT_DIR, cat_name)
-    os.makedirs(cat_dir, exist_ok=True)
-    
-    cat_articles.sort(key=lambda x: x['date_published'], reverse=True)
-    cat_news_html = generate_latest_news_html(cat_articles)
-    
-    cat_page_html = index_template.replace("{{LATEST_NEWS_SECTION}}", cat_news_html) \
-                                  .replace("{{CATEGORY_ARCHIVE_LINKS}}", "") \
-                                  .replace("{{BREAKING_NEWS_TICKER}}", breaking_ticker_html)
-                                  
-    with open(os.path.join(cat_dir, "index.html"), "w", encoding="utf-8") as f:
-        f.write(cat_page_html)
-
-# ==========================================================
-# Inject Ticker Into Public HTML Files ONLY
-# ==========================================================
-
-print("🔄 Injecting ticker into all output pages...")
+# Also update all generated articles and template with the ticker
+print("🔄 Injecting ticker into all pages...")
 ticker_placeholder = "{{BREAKING_NEWS_TICKER}}"
 
+# Update template for future builds
+template = template.replace(ticker_placeholder, breaking_ticker_html)
+with open(TEMPLATE_FILE, "w", encoding="utf-8") as f:
+    f.write(template)
+
+# Update all files in public
 for root, dirs, files in os.walk(OUTPUT_DIR):
     for file in files:
         if file.endswith(".html"):
             path = os.path.join(root, file)
             with open(path, "r", encoding="utf-8") as f:
                 content = f.read()
-            
             if ticker_placeholder in content:
                 content = content.replace(ticker_placeholder, breaking_ticker_html)
                 with open(path, "w", encoding="utf-8") as f:
