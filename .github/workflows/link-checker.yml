@@ -1,0 +1,117 @@
+Name: Automated Broken Link Checker - GenzFrontir
+
+on:
+  schedule:
+    # Runs everyday at 6:00 PM Bangladesh Time (UTC 12:00)
+    - cron: '0 12 * * *'
+  workflow_dispatch: # Manual trigger from Actions tab
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Check Links and Update README
+        run: |
+          python -c "
+          import urllib.request
+          import urllib.error
+          import xml.etree.ElementTree as ET
+          import re
+
+          sitemap_url = 'https://www.genzfrontir.com/sitemap.xml'
+          broken_links = []
+
+          try:
+              # Fetch Sitemap
+              req = urllib.request.Request(
+                  sitemap_url,
+                  headers={'User-Agent': 'Mozilla/5.0'}
+              )
+              response = urllib.request.urlopen(req)
+              xml_data = response.read()
+
+              # Parse XML
+              root = ET.fromstring(xml_data)
+              namespaces = {'ns': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+              urls = [elem.text for elem in root.findall('.//ns:loc', namespaces)]
+
+              # Check each URL
+              for url in urls:
+                  try:
+                      check_req = urllib.request.Request(
+                          url,
+                          method='HEAD',
+                          headers={'User-Agent': 'Mozilla/5.0'}
+                      )
+                      urllib.request.urlopen(check_req)
+
+                  except urllib.error.HTTPError as e:
+                      broken_links.append((url, e.code))
+
+                  except urllib.error.URLError:
+                      broken_links.append((url, 'Failed'))
+
+          except Exception as e:
+              print(f'Sitemap Error: {e}')
+
+          # Generate Markdown Report
+          if broken_links:
+              report = '### ⚠️ Link Status Report\\n\\n| Broken URL | Error Code |\\n|---|---|\\n'
+
+              for link, status in broken_links:
+                  report += f'| {link} | {status} |\\n'
+
+          else:
+              report = (
+                  '### ✅ All Systems Operational\\n\\n'
+                  '**Status:** All pages in GenzFrontir sitemap are working perfectly! '
+                  'No broken links found.\\n'
+              )
+
+          # Read README.md
+          with open('README.md', 'r', encoding='utf-8') as f:
+              content = f.read()
+
+          # Replace ONLY between markers
+          pattern = r'<!-- START_LINK_CHECKER -->.*?<!-- END_LINK_CHECKER -->'
+
+          replacement = (
+              '<!-- START_LINK_CHECKER -->\\n\\n'
+              + report +
+              '\\n<!-- END_LINK_CHECKER -->'
+          )
+
+          new_content = re.sub(
+              pattern,
+              replacement,
+              content,
+              flags=re.DOTALL
+          )
+
+          # Write updated README.md
+          with open('README.md', 'w', encoding='utf-8') as f:
+              f.write(new_content)
+          "
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "GitHub Action Bot"
+          git config --global user.email "action@github.com"
+
+          git add README.md
+
+          git diff --quiet && git diff --staged --quiet || (
+            git commit -m "chore: auto-update broken link report [skip ci]" &&
+            git push
+          )
