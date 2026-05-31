@@ -1,3 +1,4 @@
+![Sabila Nur Rockstar Image](https://i.ibb.co/yBg04bJV/IMG-4276.jpg)
 ---
 title: "সাবিলা নূরের অভিনয় বিবর্তন: নিশাত, চিত্রা এবং মীরা হয়ে ওঠার এক গভীর মনস্তাত্ত্বিক ক্যানভাস"
 description: "সাবিলা নূরের অভিনয় বিবর্তন: নিশাত, চিত্রা এবং মীরা হয়ে ওঠার এক গভীর মনস্তাত্ত্বিক ক্যানভাস। GenZ Frontier Entertainment."
