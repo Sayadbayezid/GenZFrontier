@@ -1,111 +1,152 @@
-<?xml version="1.0" encoding="utf-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://www.genzfrontir.com/</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.genzfrontir.com/business/</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.genzfrontir.com/entertainment/</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.genzfrontir.com/entertainment/g.html</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.genzfrontir.com/health/</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.genzfrontir.com/health/g.html</loc>
-    <lastmod>2026-05-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.genzfrontir.com/politics/</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.genzfrontir.com/politics/anwar-hossain-molla-humanity-viral-selfie.html</loc>
-    <lastmod>2026-05-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.genzfrontir.com/politics/g.html</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.genzfrontir.com/science/</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.genzfrontir.com/science/h.html</loc>
-    <lastmod>2026-05-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.genzfrontir.com/sports/</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.genzfrontir.com/sports/g.html</loc>
-    <lastmod>2026-05-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.genzfrontir.com/tech/</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.genzfrontir.com/tech/g.html</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.genzfrontir.com/tech/meta-ai-update.html</loc>
-    <lastmod>2026-05-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.genzfrontir.com/world/</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.genzfrontir.com/world/g.html</loc>
-    <lastmod>2026-05-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://www.genzfrontir.com/</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/world/</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/politics/</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/business/</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/tech/</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/science/</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/health/</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/sports/</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/entertainment/</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/ads/</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/tech/%E2%81%A0smartgen-ai-vocal-remover.html</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/ads/ads1.html</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/sports/winfalcon-falcon-vs-alokito-match.html</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/sports/falcon-vs-alokito-match.html</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/politics/anwar-hossain-molla-humanity-viral-selfie.html</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/sports/g.html</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/business/b.html</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/health/g.html</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/world/g.html</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/entertainment/sabila-nur-nishat-chitra-mira.html</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/tech/meta-ai-update.html</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/science/h.html</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/about.html</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/contact.html</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/privacy-policy.html</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/terms.html</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/disclaimer.html</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.genzfrontir.com/cookie-policy.html</loc>
+  <lastmod>2026-05-31T15:19:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+
+
 </urlset>
