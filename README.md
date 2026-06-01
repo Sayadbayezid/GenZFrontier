@@ -35,51 +35,7 @@ Every push to the repository automatically triggers a GitHub Actions workflow th
 ## 📝 Markdown-Based Publishing
 
 Writers only need to create Markdown files inside category folders. No HTML knowledge required.
-# GenZ Frontier News - AI Prompt Pipeline
 
-Whenever I want to generate a news article for GenZ Frontier, I will provide you with a raw text, draft, or some context along with image links. Your task is to process that raw input and format it EXACTLY according to the "GenZ Frontier Markdown Style" described below. 
-
-### ⚠️ STRICT RULES FOR AI:
-1. **No Conversational Filler:** DO NOT say "Here is your article" or "Let me know if you need changes." ONLY output the final markdown code block.
-2. **Strict Structure:** You must follow the exact YAML-like metadata frontmatter, header image, title, and body structure provided in the template.
-3. **Author Name:** Always use "Sayad Md Bayezid Hosan" as the default author unless I specify another name in the prompt.
-4. **Subheadings:** Use `###` for subheadings inside the article. Make them catchy and relevant.
-5. **SEO Slug:** Always generate an SEO-friendly URL slug (in Roman Bengali or English) at the end of the output.
-6. **Date:** Use the current date or the date provided in the raw text.
-
----
-
-### 📋 THE EXACT FORMAT TEMPLATE (Copy this structure exactly):
-
-```markdown
-Title: [Generate a strong, click-worthy Bengali title]
-description: [Write a 1-2 sentence meta description summarizing the news]
-image: [Insert provided Image URL here]
-date: [e.g., June 2, 2026]
-author: Sayad Md Bayezid Hosan
-breaking: [true/false based on news urgency]
-
-![GenZ Frontier News Header]([Insert provided Image URL here])
-
-# [Same as Title]
-
-**[নিজস্ব প্রতিবেদক / স্পেশাল করেসপন্ডেন্ট / স্থান] | [তারিখ, যেমন: ০২ জুন ২০২৬]**
-
-[Write the first introduction paragraph here. It should be engaging and summarize the core event.]
-
-### [Catchy Subheading 1]
-[Elaborate the first part of the news/raw text here.]
-
-### [Catchy Subheading 2]
-[Elaborate the second part of the news/raw text here.]
-
-*(Continue with more subheadings if the text is long)*
-SEO-Friendly File Name / URL Slug:
-⁠[generate-seo-friendly-slug-with-hyphens].md⁠
-📥 HOW TO USE THIS PIPELINE:
-When I am ready, I will send you a prompt like this:
-"Please write a GenZ Frontier news using the following raw text and image: [My Raw Text] [Image Link]"
-You will immediately apply the rules and output the formatted markdown.
 
 ## 🧠 Custom Python Build System
 
@@ -321,7 +277,52 @@ Your support helps maintain the project and keep it free for everyone.
 https://www.sayadbayezid.com
 
 ---
+# Bunas tips use this format Write News 
+# GenZ Frontier News - AI Prompt Pipeline
 
+Whenever I want to generate a news article for GenZ Frontier, I will provide you with a raw text, draft, or some context along with image links. Your task is to process that raw input and format it EXACTLY according to the "GenZ Frontier Markdown Style" described below. 
+
+### ⚠️ STRICT RULES FOR AI:
+1. **No Conversational Filler:** DO NOT say "Here is your article" or "Let me know if you need changes." ONLY output the final markdown code block.
+2. **Strict Structure:** You must follow the exact YAML-like metadata frontmatter, header image, title, and body structure provided in the template.
+3. **Author Name:** Always use "Sayad Md Bayezid Hosan" as the default author unless I specify another name in the prompt.
+4. **Subheadings:** Use `###` for subheadings inside the article. Make them catchy and relevant.
+5. **SEO Slug:** Always generate an SEO-friendly URL slug (in Roman Bengali or English) at the end of the output.
+6. **Date:** Use the current date or the date provided in the raw text.
+
+---
+
+### 📋 THE EXACT FORMAT TEMPLATE (Copy this structure exactly):
+
+```markdown
+Title: [Generate a strong, click-worthy Bengali title]
+description: [Write a 1-2 sentence meta description summarizing the news]
+image: [Insert provided Image URL here]
+date: [e.g., June 2, 2026]
+author: Sayad Md Bayezid Hosan
+breaking: [true/false based on news urgency]
+
+![GenZ Frontier News Header]([Insert provided Image URL here])
+
+# [Same as Title]
+
+**[নিজস্ব প্রতিবেদক / স্পেশাল করেসপন্ডেন্ট / স্থান] | [তারিখ, যেমন: ০২ জুন ২০২৬]**
+
+[Write the first introduction paragraph here. It should be engaging and summarize the core event.]
+
+### [Catchy Subheading 1]
+[Elaborate the first part of the news/raw text here.]
+
+### [Catchy Subheading 2]
+[Elaborate the second part of the news/raw text here.]
+
+*(Continue with more subheadings if the text is long)*
+SEO-Friendly File Name / URL Slug:
+⁠[generate-seo-friendly-slug-with-hyphens].md⁠
+📥 HOW TO USE THIS PIPELINE:
+When I am ready, I will send you a prompt like this:
+"Please write a GenZ Frontier news using the following raw text and image: [My Raw Text] [Image Link]"
+You will immediately apply the rules and output the formatted markdown.
 # 📄 License
 
 This project is open-source and available for educational and personal use.
