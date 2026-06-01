@@ -2,7 +2,7 @@ title: Gen Z's Secret Weapon: SmartGen AI Vocal Remover - Powering the Next Wave
 description: In the fast-paced, highly visual, and audio-driven world of Gen Z, SmartGen AI Vocal Remover is revolutionizing content creation with Demucs v4 AI, offering free, private, and high-quality audio stem separation for creators worldwide.
 date: 2026-05-30
 author: Sayad Md Bayezid Hosan
-breaking: true
+breaking: false
 image: https://i.ibb.co/WWfJSHQD/IMG-4064.jpg
 
 ![GenZ Frontier News Header](https://i.ibb.co/WWfJSHQD/IMG-4064.jpg)
