@@ -96,7 +96,7 @@ If your channel is flagged for a monetization policy violation, follow these ste
 
 > **Academic Edge with AI**
 > Students, unlock your full potential! Discover the best free AI tools available in 2026 to supercharge your studies and research projects.
-> [See Student AI Tools →](https://www.genzfrontir.com/2026/04/best-free-ai-tools-for-students-in-2026_26.html?m=1)
+> [See Student AI Tools →](https://www.smartgentools.com)
 
 ---
 
@@ -124,7 +124,7 @@ Copyright is a fundamental aspect of content creation, and YouTube takes it very
 
 > **Mastering Autonomous Agents**
 > Explore the cutting-edge world of AI with our complete guide to Manus AI and autonomous agents, understanding their capabilities in 2026.
-> [Explore Manus AI →](https://www.genzfrontir.com/2026/04/manus-ai-complete-guide-2026-autonomous_28.html?m=1)
+> [Explore Manus AI →](https://connectwithbayezid.blogspot.com/2026/04/how-to-build-ai-powered-telegram.html)
 
 ---
 
@@ -162,7 +162,7 @@ AdSense is the payment backbone for YouTube monetization. While generally reliab
 
 > **ঘরে বসে অনলাইন ইনকাম: ২০২৬ সালের সেরা ডিজিটাল স্কিল**
 > আপনার ঘরে বসে অনলাইন আয়ের সুযোগ খুঁজছেন? ২০২৬ সালের সেরা ৫টি ডিজিটাল স্কিল সম্পর্কে জানুন এবং আপনার ক্যারিয়ার গড়ুন।
-> [ইনকাম স্কিল গাইড দেখুন →](https://www.genzfrontir.com/2026/03/top-5-high-income-skills-for-gen-z-2026.html?m=1)
+> [ইনকাম স্কিল গাইড দেখুন →](https://genzfrontier.blogspot.com/2026/03/top-5-high-income-skills-for-gen-z-2026.html)
 
 ---
 
@@ -196,7 +196,7 @@ Understanding these principles allows you to create content that works with the 
 
 > **AI Prompt Engineering শিখে ক্যারিয়ার গড়ার পূর্ণাঙ্গ গাইড ২০২৬**
 > এআই প্রম্পট ইঞ্জিনিয়ারিং শিখে কীভাবে একটি সফল ক্যারিয়ার গড়বেন? ২০২৬ সালের জন্য একটি পূর্ণাঙ্গ গাইডলাইন এখানে দেওয়া হলো।
-> [প্রম্পট ইঞ্জিনিয়ারিং গাইড →](https://www.genzfrontir.com/2026/03/ai-prompt-engineering-guide-2026.html?m=0)
+> [প্রম্পট ইঞ্জিনিয়ারিং গাইড →](https://genzfrontier.blogspot.com/2026/03/ai-prompt-engineering-guide-2026.html)
 
 ---
 
