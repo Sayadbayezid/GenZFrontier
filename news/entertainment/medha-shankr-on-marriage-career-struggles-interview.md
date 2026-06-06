@@ -1,25 +1,3 @@
-<!-- Meta Tags & Person Schema -->
-<meta name="keywords" content="Medha Shankr, 12th Fail, Ginni Weds Sunny 2, Bollywood Actress, Medha Shankr Interview, National Crush">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Medha Shankr",
-  "jobTitle": "Actress",
-  "knownFor": [
-    {
-      "@type": "Movie",
-      "name": "12th Fail"
-    },
-    {
-      "@type": "Movie",
-      "name": "Ginni Weds Sunny 2"
-    }
-  ],
-  "nationality": "Indian",
-  "gender": "Female"
-}
-</script>
 Title: ‘ভুল মানুষের সঙ্গে বিয়ে হলে কেউই সুখী হবে না’— ক্যারিয়ার ও ব্যক্তিজীবন নিয়ে অকপট মেধা শংকর
 description: 'টুয়েলভথ ফেল' খ্যাত মেধা শংকর সম্প্রতি 'গিন্নি ওয়েডস সানি ২' সিনেমার প্রচারে এসে বিয়ে, ক্যারিয়ারের সংগ্রাম এবং পরিবারের দৃষ্টিভঙ্গি নিয়ে খোলামেলা কথা বলেছেন।
 image: https://i.ibb.co/xqctc06V/IMG-4618.jpg
