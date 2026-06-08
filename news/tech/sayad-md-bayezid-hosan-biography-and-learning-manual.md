@@ -1,3 +1,7 @@
+![Sayad Md Bayezid Hosan - Senior Software Architect](https://i.ibb.co/FbRCJpM3/IMG-4773.jpg)
+*Senior Software Architect | Digital Marketing Specialist | Open-Source Developer*
+
+---
 Sayad Md Bayezid Hosan
 
 Professional Biography, Technology Portfolio & Digital Innovation Journey
