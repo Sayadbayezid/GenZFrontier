@@ -1,3 +1,11 @@
+Title: who Is Sayad Md Bayezid Hosan
+description:Senior Software Architect Digital Marketing Specialist Open-Source Fullstack Developer is a visionary Bangladeshi digital marketing specialist, senior software architect, and technical consultant. Based in Tangail, Bangladesh, Sayad sits at the unique intersection of media administration, enterprise-level digital asset management, and open-source software engineering.
+image: https://i.ibb.co/FbRCJpM3/IMG-4773.jpg
+date: June 9, 2026
+author: GenZ Frontier Editorial Team - [Sayad Md Bayezid Hosan](https://www.sayadbayezid.com)
+breaking: false
+
+![GenZ Frontier News Header](https://i.ibb.co/FbRCJpM3/IMG-4773.jpg)
 # 🚀 Sayad Md Bayezid Hosan: Executive Biography & Complete Technical Portfolio
 
 ![Sayad Md Bayezid Hosan - Senior Software Architect](https://i.ibb.co/FbRCJpM3/IMG-4773.jpg)
