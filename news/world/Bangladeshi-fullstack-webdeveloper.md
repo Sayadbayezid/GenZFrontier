@@ -1,3 +1,16 @@
+Title: Professional Contact & Connectivity Hub sayad Md Bayezid Hosan 
+
+description: Sayad Md Bayezid Hosan  digital connectivity hub. Here you can find all my official platforms, professional repositories, and ways to reach Sayad Md Bayezid Hosan is a Bangladeshi technology enthusiast, digital entrepreneur, software developer, technical writer, automation specialist, and digital product creator known for building practical web solutions, productivity tools, automation systems, and digital platforms that serve developers, marketers, businesses, and content creators.
+image: https://d2xsxph8kpxj0f.cloudfront.net/310519663557681386/8DCdz46vKMnJXpqVqTsHd3/IMG_1083_3995bfc6.PNG
+date: June 5, 2026
+author: Rubayet Purba Riya
+breaking: false
+
+![GenZ Frontier News Header](https://d2xsxph8kpxj0f.cloudfront.net/310519663557681386/8DCdz46vKMnJXpqVqTsHd3/IMG_1083_3995bfc6.PNG)
+Connect with Sayad Md Bayezid Hosan
+
+** Welcome to my digital connectivity hub. Here you can find all my official platforms, professional repositories, and ways to reach me.
+# [Who is Sayad Md Bayezid Hosan ](https://www.genzfrontir.com/business/who-is-sayad-md-bayezid-hosan.html)
 <!-- Main Biography Title -->
 <h1>
   <a href="https://sayadbayezid.com" target="_blank">
@@ -96,29 +109,7 @@
   <li><a href="https://www.behance.net/syedbayxed" target="_blank">Behance</a></li>
 </ul>
 
-a{
-    color:#60a5fa;
-    text-decoration:none;
-    transition:0.3s;
-}
-
-a:hover{
-    color:#93c5fd;
-    text-decoration:underline;
-}
-
-h1 a,
-h2 a,
-h3 a{
-    color:inherit;
-}
-
-h1 a:hover,
-h2 a:hover,
-h3 a:hover{
-    color:#60a5fa;
-}
-
+# [Professional Biography, Technology Portfolio & Digital Innovation Journey](https://www.genzfrontir.com/science/sayad-md-bayezid-hosan-biography.html)
 # Sayad Md Bayezid Hosan
 
 ![Sayad Md Bayezid Hosan](https://i.ibb.co/FbRCJpM3/IMG-4773.jpg)
