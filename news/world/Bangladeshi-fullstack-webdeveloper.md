@@ -1,12 +1,12 @@
-Title:Professional Contact & Connectivity Hub sayad Md Bayezid Hosan 
-description: Sayad Md Bayezid Hosan  digital connectivity hub. Here you can find all my official platforms, professional repositories, and ways to reach Sayad Md Bayezid Hosan is a Bangladeshi technology enthusiast, digital entrepreneur, software developer, technical writer, automation specialist, and digital product creator known for building practical web solutions, productivity tools, automation systems, and digital platforms that serve developers, marketers, businesses, and content creators.
-image:https://i.ibb.co/6cvVzrSp/IMG-4780.png
-date: June 5, 2026
-author: Rubayet Purba Riya
-breaking: false
+Title: Professional Contact & Connectivity Hub sayad Md Bayezid Hosan 
+description: Sayad Md Bayezid Hosan  digital connectivity hub. Here you can find all of official platforms
+image: https://i.ibb.co/VYr6gghk/IMG-4781.jpg
+date:June 9, 2026
+author: Hazera Sultana
+breaking: true
 
-![GenZ Frontier News Header](https://d2xsxph8kpxj0f.cloudfront.net/310519663557681386/8DCdz46vKMnJXpqVqTsHd3/IMG_1083_3995bfc6.PNG)
-Connect with Sayad Md Bayezid Hosan
+![GenZ Frontier News Header](https://i.ibb.co/VYr6gghk/IMG-4781.jpg)
+Connect with Sayad Md Bayezid Hosan All Platfrom
 
 ** Welcome to my digital connectivity hub. Here you can find all my official platforms, professional repositories, and ways to reach me.
 # [Who is Sayad Md Bayezid Hosan ](https://www.genzfrontir.com/business/who-is-sayad-md-bayezid-hosan.html)
