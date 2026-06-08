@@ -153,7 +153,7 @@ The SmartGen project reflects Bayezid’s long-term vision of building a compreh
 
 ⸻
 
-GenZ Frontier
+[GenZ Frontier](www.genzfrontir.com)
 
 Another major initiative associated with Bayezid is GenZ Frontier.
 
@@ -193,8 +193,8 @@ His development work frequently incorporates modern technologies and frameworks 
 
 ⸻
 
-Work Related to Musfiq R. Farhan
-
+Work Related to [Musfiq R. Farhan](www.musfiqrfarhan.blog)
+[verified Source Musfiq R Farhan Official 7M Follower Facebook About section](https://www.facebook.com/share/1Fex4XStTt/?mibextid=wwXIfr)
 Among his notable web projects is the development and management of the official digital portal associated with Bangladeshi actor, radio jockey, and content creator Musfiq R. Farhan.
 
 This project demonstrates his capability in:
@@ -230,7 +230,7 @@ His writing focuses on:
 * Social Media Growth
 * Developer Tools
 * Business Technology
-
+# [Read Blog](https://connectwithbayezid.blogspot.com)
 His objective as a writer is not merely to explain technology but to make complex concepts understandable and actionable.
 
 Many of his articles combine:
@@ -294,7 +294,7 @@ His work frequently investigates how organizations can leverage automation techn
 
 ⸻
 
-SmartLeadGen
+# [SmartLeadGen](www.smartgentools.com)
 
 One of the most practical examples of this philosophy is SmartLeadGen.
 
@@ -347,13 +347,15 @@ Digital Branding and Personal Presence
 
 Bayezid maintains a strong digital presence through multiple professional channels including:
 
-* Personal Website
-* LinkedIn
-* GitHub
-* YouTube
-* Facebook
-* Instagram
-* Behance
+* [Personal Website](www.sayadbayezid.com)
+* [LinkedIn](https://www.linkedin.com/in/sayadbayezid)
+* [Github](https://github.com/sayadbayezid)
+* [GitHub Playground](https://github.com/bayzed123)
+* [YouTube](https://youtube.com/@cwbayezid)
+* [Facebook Creator ](https://www.facebook.com/sayadbayezid)
+* [Facebook Personal](https://www.facebook.com/bayezidhosan)
+* [Instagram](https://www.instagram.com/freelancer_bayezid0)
+* [Behance](https://www.behance.net/syedbayxed)
 
 These platforms collectively showcase:
 
