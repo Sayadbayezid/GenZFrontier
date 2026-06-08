@@ -12,7 +12,7 @@ Professional Biography, Technology Portfolio & Digital Innovation Journey
 
 Introduction
 
-![Sayad Md Bayezid Hosan](www.sayadbayezid.com) is a Bangladeshi technology enthusiast, digital entrepreneur, software developer, technical writer, automation specialist, and digital product creator known for building practical web solutions, productivity tools, automation systems, and digital platforms that serve developers, marketers, businesses, and content creators.
+[Sayad Md Bayezid Hosan](www.sayadbayezid.com) is a Bangladeshi technology enthusiast, digital entrepreneur, software developer, technical writer, automation specialist, and digital product creator known for building practical web solutions, productivity tools, automation systems, and digital platforms that serve developers, marketers, businesses, and content creators.
 
 Born on 26 June 2003, Bayezid belongs to a new generation of technology professionals who combine software development, digital marketing, automation, content strategy, and entrepreneurship into a unified ecosystem. His work reflects a strong commitment to creating accessible technology solutions, privacy-focused web applications, open-source projects, and educational resources that help individuals and organizations improve their digital capabilities.
 
