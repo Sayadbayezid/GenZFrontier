@@ -1,6 +1,6 @@
 Title: Beyond the Code: The Comprehensive Story of Sayad Md Bayezid Hosan and the Future of Digital Innovation in Bangladesh
 description: An exhaustive, journalistic deep dive into the life, career, open-source contributions, and digital philosophy of Sayad Md Bayezid Hosan.
-image: https://i.ibb.co/FbRCJpM3/IMG-4773.jpg
+image: https://lh3.googleusercontent.com/d/1Cu4SbMQI7dxOWGfOsIKawduFX6jVe4EA=w1000?authuser=0
 date: June 9, 2026
 author: GenZ Frontier Editorial Board
 breaking: false
