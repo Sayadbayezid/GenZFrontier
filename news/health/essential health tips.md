@@ -23,7 +23,7 @@ This article covers everything from **nutrition** and **fitness** to **mental we
 
 ## 1. Stay Hydrated: The Foundation of Health
 
-![Young person drinking water outdoors for hydration and wellness - health tip for healthy lifestyle](https://images.unsplash.com/photo-1550572017-4814c5c3a2a6?w=800&q=80)
+![Young person drinking water outdoors for hydration and wellness - health tip for healthy lifestyle](https://i.ibb.co/jZbZSBHr/Genz-Frontier-Health-www-genzfrontir-com-The-Foundation-of-Health.webp)
 
 **Water is life.** It sounds simple, but proper hydration is one of the most overlooked aspects of a **healthy lifestyle**. Your body is approximately 60% water, and every system depends on it—from regulating body temperature to flushing out toxins.
 
@@ -303,3 +303,5 @@ Remember: **health is wealth.** Invest in yourself today, and your future self w
 **Keywords:** health tips, healthy lifestyle, wellness, nutrition, mental health, fitness, preventive care, hydration, sleep quality, stress management, balanced diet, exercise routine, self-care, holistic health, wellness guide
 
 ---
+[About Genz Frontier](https://www.genzfrontir.com/about.html)
+[Share Your Article](https://www.genzfrontir.com/contact.html)
