@@ -1,10 +1,9 @@
 # 🚀 GenZ Frontier News Portal
-genzFrontier logo(https://i.ibb.co/LXZv7DjY/IMG-4776.jpg)
 ![GitHub Pages](https://img.shields.io/badge/Hosted_on-GitHub_Pages-181717?style=flat-square&logo=github)
 ![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen?style=flat-square)
 ![Automation](https://img.shields.io/badge/Automation-GitHub_Actions-2088FF?style=flat-square&logo=github-actions)
 ![Python](https://img.shields.io/badge/Script-Python_3.10-3776AB?style=flat-square&logo=python)
-
+![genzfrontier logo](https://i.ibb.co/LXZv7DjY/IMG-4776.jpg)
 GenZ Frontier is a modern, automated, and serverless news publishing platform built entirely with **Markdown**, **Python**, and **GitHub Actions**.
 
 The project is designed for ultra-fast publishing workflows where contributors can create articles using simple `.md` files without touching HTML or backend infrastructure.
