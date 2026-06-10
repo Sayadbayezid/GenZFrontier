@@ -1,5 +1,5 @@
 # 🚀 GenZ Frontier News Portal
-[genzFrontier logo](https://i.ibb.co/LXZv7DjY/IMG-4776.jpg)
+genzFrontier logo(https://i.ibb.co/LXZv7DjY/IMG-4776.jpg)
 ![GitHub Pages](https://img.shields.io/badge/Hosted_on-GitHub_Pages-181717?style=flat-square&logo=github)
 ![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen?style=flat-square)
 ![Automation](https://img.shields.io/badge/Automation-GitHub_Actions-2088FF?style=flat-square&logo=github-actions)
