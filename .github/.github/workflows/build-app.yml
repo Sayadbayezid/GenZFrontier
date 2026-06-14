@@ -1,0 +1,71 @@
+name: GenZ Frontier App Builder
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Manually run korar jonno
+
+jobs:
+  build-android-app:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Code Checkout
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      # Step 2: Environment Setup
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      # Step 3: Web Files Arrange Kora
+      - name: Prepare Web Directory
+        run: |
+          mkdir -p www
+          # HTML, CSS, JS sob www folder-e move kora
+          rsync -av --exclude='www' --exclude='.git' --exclude='.github' . www/
+
+      # Step 4: Capacitor Diye HTML ke App-e Convert Kora
+      - name: Initialize Capacitor App
+        run: |
+          npm init -y
+          npm install @capacitor/cli @capacitor/core
+          npx cap init "GenZ Frontier" "www.genzfrontir.com" --web-dir www
+          npm install @capacitor/android
+          npx cap add android
+
+      # Step 5: Official Keystore Toiri O SHA Print
+      - name: Generate Official Keystore & Fingerprints
+        run: |
+          keytool -genkey -v -keystore android/app/genz_official.jks -alias genz_alias -keyalg RSA -keysize 2048 -validity 10000 -storepass 12345678 -keypass 12345678 -dname "CN=Sayad Md Bayezid Hosan, OU=Connect With Bayezid, O=GenZ Frontier, L=Kalihati, ST=Tangail, C=BD"
+          
+          echo "==========================================================="
+          echo "🔥 FIREBASE FINGERPRINTS (4b:9a:e2:1f:7c:3d:88:05:a1:6e:b9:4c:d2:f7:55:30:19:8e:a4:62)(9C:12:F5:A8:33:BE:47:D0:61:9F:C4:2A:B7:8E:0D:55:F1:36:9C:2B)
+
+ "
+          echo "==========================================================="
+          keytool -list -v -keystore android/app/genz_official.jks -alias genz_alias -storepass 12345678 | grep "SHA"
+          echo "==========================================================="
+
+      # Step 6: APK Build Kora
+      - name: Build Android APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      # Step 7: Ready APK Download er jonno Upload Kora
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: GenZ-Frontier-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
