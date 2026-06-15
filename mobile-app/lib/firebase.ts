@@ -5,7 +5,7 @@ import { getStorage, connectStorageEmulator } from 'firebase/storage';
 
 // Firebase configuration from google-services.json
 const firebaseConfig = {
-  apiKey: 'AIzaSyAU6ymfgej2yZ5YoDulBf6smcvWLcB6x4w',
+  apiKey: 'apikeygenzfrontier',
   authDomain: 'genz-frontier.firebaseapp.com',
   projectId: 'genz-frontier',
   storageBucket: 'genz-frontier.firebasestorage.app',
