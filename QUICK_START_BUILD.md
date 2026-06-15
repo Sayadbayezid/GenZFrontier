@@ -183,7 +183,7 @@ mobile-app/
 Your app is already configured with Firebase:
 
 - **Project ID**: genz-frontier
-- **API Key**: AIzaSyAU6ymfgej2yZ5YoDulBf6smcvWLcB6x4w
+- **API Key**: apikeygenzfrontier
 - **Storage Bucket**: genz-frontier.firebasestorage.app
 - **Config File**: `google-services.json` (already in place)
 
