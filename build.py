@@ -75,14 +75,22 @@ for root, _, files in os.walk(NEWS_DIR):
         if meta.get('breaking', [''])[0].lower() == 'true': breaking_arts.append(art)
 
         # Generate Individual Post
-        related_html = '<div class="related-section"><div class="section-header"><h2>Related News</h2></div><div class="grid-4">'
-        for r in [a for a in cat_arts[cat] if a['file'] != art['file']][:4]:
+        # Enhanced Related/Suggested News System
+        related_arts = [a for a in cat_arts[cat] if a['file'] != art['file']]
+        # If not enough in same category, pull from others
+        if len(related_arts) < 4:
+            other_arts = [a for a in all_arts if a['cat'] != cat and a['file'] != art['file']]
+            related_arts += other_arts[:(4 - len(related_arts))]
+        
+        related_html = '<div class="related-section"><div class="section-header"><h2>Suggested For You</h2></div><div class="grid-4">'
+        for r in related_arts[:8]: # Show up to 8 suggested news items
             related_html += f'<article class="news-card"><img src="{r["img"]}"><a href="../{r["cat"]}/{r["file"]}"><h3>{r["title"]}</h3></a></article>'
         related_html += '</div></div>'
         
         final_html = template.replace("{{NEWS_CONTENT}}", html_cont).replace("{{ARTICLE_TITLE}}", art['title']) \
                              .replace("{{RELATED_POSTS}}", related_html).replace("{{META_TAGS}}", get_meta(art)) \
-                             .replace("{{SCHEMA_DATA}}", get_json_ld(art)).replace("{{BREAKING_NEWS_TICKER}}", get_ticker_html(breaking_arts))
+                             .replace("{{SCHEMA_DATA}}", get_json_ld(art)).replace("{{BREAKING_NEWS_TICKER}}", get_ticker_html(breaking_arts)) \
+                             .replace("{{CANONICAL_URL}}", art['url'])
         
         os.makedirs(os.path.join(OUTPUT_DIR, cat), exist_ok=True)
         with open(os.path.join(OUTPUT_DIR, cat, art['file']), "w", encoding="utf-8") as f: f.write(final_html)
