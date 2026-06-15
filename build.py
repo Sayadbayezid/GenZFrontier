@@ -5,6 +5,7 @@ import markdown
 import json
 import re
 from datetime import datetime
+import subprocess
 
 # ==========================================================
 # GenZ Frontier Build Configuration
@@ -16,13 +17,13 @@ TEMPLATE_FILE = "template.html"
 INDEX_FILE = "index.html"
 ADS_DIR = "ads"
 
-DEFAULT_CATEGORIES = ["world", "politics", "business", "tech", "science", "health", "sports", "entertainment", "ads"]
+DEFAULT_CATEGORIES = ["world", "politics", "business", "tech", "science", "health", "sports", "entertainment", "careers", "ads"]
 
 def clean_and_prepare():
     if os.path.exists(OUTPUT_DIR): shutil.rmtree(OUTPUT_DIR)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     os.makedirs(os.path.join(OUTPUT_DIR, ADS_DIR), exist_ok=True)
-    for f in ["index.html", "404.html", "contact.html", "about.html", "privacy-policy.html", "terms.html", "disclaimer.html", "cookie-policy.html", "CNAME", "sitemap.xml", "robots.txt"]:
+    for f in ["index.html", "404.html", "contact.html", "about.html", "privacy-policy.html", "terms.html", "disclaimer.html", "cookie-policy.html", "submit-guest-post.html", "CNAME", "sitemap.xml", "robots.txt"]:
         if os.path.exists(f): shutil.copy2(f, os.path.join(OUTPUT_DIR, f))
 
 def get_ticker_html(breaking_arts):
@@ -113,5 +114,12 @@ for cat in DEFAULT_CATEGORIES:
 
 with open(os.path.join(OUTPUT_DIR, INDEX_FILE), "w", encoding="utf-8") as f:
     f.write(index_template.replace("{{HERO_SECTION}}", hero_html).replace("{{DYNAMIC_CONTENT}}", dyn_html).replace("{{BREAKING_NEWS_TICKER}}", ticker))
+
+# Run Sitemap Generator
+print("Generating Sitemap...")
+try:
+    subprocess.run(["python3", "sitemap_generator.py"], check=True)
+except Exception as e:
+    print(f"❌ Sitemap generation failed: {e}")
 
 print("✅ Build Complete!")
