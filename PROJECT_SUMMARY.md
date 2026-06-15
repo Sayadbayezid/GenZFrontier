@@ -156,7 +156,7 @@ eas build --platform android --type app-bundle
 ### Project Details
 - **Project ID**: genz-frontier
 - **Storage Bucket**: genz-frontier.firebasestorage.app
-- **API Key**: AIzaSyAU6ymfgej2yZ5YoDulBf6smcvWLcB6x4w
+- **API Key**: apikeygenzfrontier
 - **Messaging Sender ID**: 967263604043
 
 ### Database Structure
