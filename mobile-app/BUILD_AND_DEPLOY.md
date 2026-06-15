@@ -27,7 +27,7 @@ The Firebase configuration is already set up in `google-services.json` and `lib/
 
 - Project ID: `genz-frontier`
 - Storage Bucket: `genz-frontier.firebasestorage.app`
-- API Key: `AIzaSyAU6ymfgej2yZ5YoDulBf6smcvWLcB6x4w`
+- API Key: `apikeygenzfrontier`
 
 ## Step 3: Create Android Keystore
 
