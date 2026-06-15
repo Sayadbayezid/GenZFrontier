@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "967263604043",
+    "project_id": "genz-frontier",
+    "storage_bucket": "genz-frontier.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967263604043:android:8e06ab50e999fbd3e86cce",
+        "android_client_info": {
+          "package_name": "com.smartgentools.Smartgen"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU6ymfgej2yZ5YoDulBf6smcvWLcB6x4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967263604043:android:09e3e1e0e62eb6e7e86cce",
+        "android_client_info": {
+          "package_name": "www.genzfrontir.com"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU6ymfgej2yZ5YoDulBf6smcvWLcB6x4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
