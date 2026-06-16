@@ -1,5 +1,6 @@
 import { COOKIE_NAME, ONE_YEAR_MS } from "../../shared/const.js";
 import type { Express, Request, Response } from "express";
+import rateLimit from "express-rate-limit";
 import { getUserByOpenId, upsertUser } from "../db";
 import { getSessionCookieOptions } from "./cookies";
 import { sdk } from "./sdk";
@@ -62,6 +63,14 @@ function buildUserResponse(
 }
 
 export function registerOAuthRoutes(app: Express) {
+  const authMeRateLimiter = rateLimit({
+    windowMs: 60 * 1000, // 1 minute
+    max: 60, // max 60 requests per minute per IP
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { error: "Too many requests" },
+  });
+
   app.get("/api/oauth/callback", async (req: Request, res: Response) => {
     const code = getQueryParam(req, "code");
     const state = getQueryParam(req, "state");
@@ -135,7 +144,7 @@ export function registerOAuthRoutes(app: Express) {
   });
 
   // Get current authenticated user - works with both cookie (web) and Bearer token (mobile)
-  app.get("/api/auth/me", async (req: Request, res: Response) => {
+  app.get("/api/auth/me", authMeRateLimiter, async (req: Request, res: Response) => {
     try {
       const user = await sdk.authenticateRequest(req);
       res.json({ user: buildUserResponse(user) });
