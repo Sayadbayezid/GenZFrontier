@@ -56,11 +56,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.genzfrontir.com/legacy-archives/</loc>
-    <lastmod>2026-06-20T00:43:26+06:00</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.genzfrontir.com/legacy-archives/legacy-of-sheikh-russel.html</loc>
     <lastmod>2026-06-20T00:36:08+06:00</lastmod>
     <priority>0.6</priority>
@@ -144,6 +139,11 @@
     <loc>https://www.genzfrontir.com/business/imf-global-growth-forecast.html</loc>
     <lastmod>2026-06-19T17:36:21Z</lastmod>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.genzfrontir.com/legacy-archives/</loc>
+    <lastmod>2026-06-19T17:36:21Z</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.genzfrontir.com/world/abdul-latif-talukdar-appointed-kalihati-representative-the-financial-post.html</loc>
