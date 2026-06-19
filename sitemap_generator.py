@@ -1,5 +1,6 @@
 import os
 import subprocess
+import urllib.parse
 from datetime import datetime
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
@@ -45,7 +46,7 @@ def generate_sitemap():
                 
                 rel_path = rel_path.replace("\\", "/")
                 
-                # --- NEW FIX: Remove 'public/' prefix from the URL ---
+                # Remove 'public/' prefix from the URL
                 if rel_path.startswith("public/"):
                     rel_path = rel_path[7:]
                 
@@ -57,6 +58,9 @@ def generate_sitemap():
                 else:
                     url_path = rel_path
                 
+                # NEW FIX: Encode spaces and special characters for a valid URL
+                url_path = urllib.parse.quote(url_path, safe='/')
+                
                 full_url = f"{BASE_URL}{url_path}"
                 
                 # 3. Duplicate Checker
@@ -65,14 +69,13 @@ def generate_sitemap():
                 
                 added_links.add(full_url)
                 
-                # 4. XML Element Creation
+                # 4. XML Element Creation (Matches your exact format)
                 url_elem = ET.SubElement(urlset, "url")
                 
                 loc = ET.SubElement(url_elem, "loc")
                 loc.text = full_url
                 
                 lastmod = ET.SubElement(url_elem, "lastmod")
-                # get_seo_date file er asol path nibe, tai URL e public/ na thakleo date thik pabe
                 lastmod.text = get_seo_date(os.path.join(root, file))
                 
                 priority = ET.SubElement(url_elem, "priority")
@@ -83,13 +86,18 @@ def generate_sitemap():
                 else:
                     priority.text = "0.6"
 
+    # Convert to standard XML and pretty print
     xml_str = ET.tostring(urlset, encoding='utf-8')
+    # Use minidom to format exactly like your example
     pretty_xml = minidom.parseString(xml_str).toprettyxml(indent="  ")
+    
+    # Remove the extra blank line minidom sometimes adds at the top
+    pretty_xml = os.linesep.join([s for s in pretty_xml.splitlines() if s.strip()])
     
     with open("sitemap.xml", "w", encoding="utf-8") as f:
         f.write(pretty_xml)
     
-    print(f"✅ Root sitemap.xml successfully generated with {len(added_links)} unique HTML links (Fixed public/ URL format).")
+    print(f"✅ Root sitemap.xml successfully generated in the exact requested format with {len(added_links)} links.")
 
 if __name__ == "__main__":
     generate_sitemap()
