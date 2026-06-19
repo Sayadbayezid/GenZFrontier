@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="bn" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Meta Titles & Descriptions -->
+    <title>শহীদ শেখ রাসেল আর্কাইভ | GenZ Frontier Legacy</title>
+    <meta name="description" content="বঙ্গবন্ধু পুত্র শহীদ শেখ রাসেলের অমূল্য স্মৃতি ও ঐতিহাসিক প্রামাণ্যচিত্রের ডিজিটাল আর্কাইভ। GenZ Frontier এবং Sayad Md Bayezid Hosan-এর একটি উদ্যোগ।">
+    
+    <!-- Local Geo-Tags for Bangladesh -->
+    <meta name="geo.region" content="BD" />
+    <meta name="geo.placename" content="Dhaka" />
+    <meta name="geo.position" content="23.7511;90.3736" />
+    <meta name="ICBM" content="23.7511, 90.3736" />
+
+    <!-- JSON-LD Person Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Sheikh Russel",
+      "alternateName": "শিশু রাসেল",
+      "birthDate": "1964-10-18",
+      "deathDate": "1975-08-15",
+      "birthPlace": {
+        "@type": "Place",
+        "name": "Dhanmondi, Dhaka, Bangladesh"
+      },
+      "parents": [
+        {
+          "@type": "Person",
+          "name": "Sheikh Mujibur Rahman"
+        },
+        {
+          "@type": "Person",
+          "name": "Sheikh Fazilatunnesa Mujib"
+        }
+      ],
+      "description": "The youngest child of the founding father and first President of Bangladesh, Bangabandhu Sheikh Mujibur Rahman. Named after the philosopher Bertrand Russell.",
+      "image": "https://i.ibb.co/BHSXLtLf/IMG-5306.png",
+      "sameAs": "https://en.wikipedia.org/wiki/Sheikh_Russel"
+    }
+    </script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        /* Typography Setup */
+        @import url('https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&family=Inter:wght@300;400;500;600&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9; /* Soft Light Gray Background */
+            color: #1e293b;
+        }
+        h1, h2, h3, h4, .bangla-font {
+            font-family: 'Tiro Bangla', serif;
+        }
+
+        /* Glassmorphism Header */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        /* Hero Overlay */
+        .hero-gradient {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
+        }
+
+        /* Infinite Marquee */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            padding: 12px 0;
+            display: flex;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: scrollText 35s linear infinite;
+        }
+        .marquee-content span {
+            font-size: 1.1rem;
+            font-family: 'Tiro Bangla', serif;
+            margin-right: 40px;
+            letter-spacing: 1px;
+        }
+        @keyframes scrollText {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Premium Blog Card Style for Masonry */
+        .blog-card {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .blog-card:hover {
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
+        }
+        .card-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-bottom: 1px solid #f1f5f9;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-900 selection:text-white">
+
+    <!-- NAVIGATION -->
+    <nav class="glass-nav fixed w-full z-50 top-0 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-white font-bold text-xl bangla-font">রা</div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-bold bangla-font tracking-wide text-slate-900 leading-none">শহীদ শেখ রাসেল</span>
+                    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">GenZ Frontier Archive</span>
+                </div>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600 bangla-font">
+                <a href="#about" class="hover:text-slate-900 transition-colors">জীবনী ও ইতিহাস</a>
+                <a href="#gallery" class="hover:text-slate-900 transition-colors">ঐতিহাসিক ব্লগ গ্যালারি</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative w-full min-h-screen flex items-center justify-center pt-20">
+        <div class="absolute inset-0 z-0">
+            <img src="https://i.ibb.co/BHSXLtLf/IMG-5306.png" alt="Sheikh Russel Hero" class="w-full h-full object-cover object-top opacity-50 grayscale">
+        </div>
+        <div class="absolute inset-0 z-10 hero-gradient"></div>
+
+        <div class="relative z-20 max-w-4xl mx-auto px-6 text-center">
+            <span class="inline-block py-1 px-4 rounded-full bg-slate-800/60 border border-slate-600 text-slate-300 text-sm font-semibold tracking-widest uppercase mb-6 bangla-font">১৯৬৪ - ১৯৭৫</span>
+            <h1 class="text-5xl md:text-7xl font-bold bangla-font text-white mb-6 drop-shadow-lg leading-tight">
+                নিস্পাপ শৈশবের<br><span class="text-slate-300 text-4xl md:text-6xl font-light">অকাল প্রস্থান</span>
+            </h1>
+            
+            <p class="text-base md:text-xl text-slate-300 bangla-font leading-relaxed mb-10 text-justify md:text-center px-4 md:border-t border-slate-600 pt-8">
+                "ইতিহাসের পাতা থেকে উঠে আসা এক বেদনাবিধুর অথচ অমূল্য স্মৃতি। আর্কাইভের ধুলোমাখা প্রামাণ্যচিত্র থেকে উদ্ধার করা বঙ্গবন্ধু পুত্র শহীদ শেখ রাসেলের এই বিরল দৃশ্যটি আমাদের ফিরিয়ে নিয়ে যায় সেই সময়টাতে, যখন এই নিষ্পাপ হাসিটি পুরো পরিবারের আনন্দ হয়ে ছিল। ১৯৭৫ সালের ১৫ আগস্টের কালরাতে যে সম্ভাবনাময় শিশুটিকে আমরা অকালে হারিয়েছি, এই দুর্লভ ঐতিহাসিক ফুটেজটি যেন তারই এক নীরব সাক্ষী।"
+            </p>
+
+            <a href="#about" class="inline-block bg-white text-slate-900 bangla-font px-8 py-3 rounded-full font-bold hover:bg-slate-200 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
+                ইতিহাস জানুন
+            </a>
+        </div>
+    </section>
+
+    <!-- HORIZONTAL MARQUEE -->
+    <div class="marquee-container border-y border-slate-700 shadow-inner">
+        <div class="marquee-content">
+            <span>✦ ১৮ অক্টোবর ১৯৬৪ - জন্ম</span>
+            <span>✦ দার্শনিক বার্ট্রান্ড রাসেলের নামে নামকরণ</span>
+            <span>✦ বঙ্গবন্ধু শেখ মুজিবুর রহমানের কনিষ্ঠ পুত্র</span>
+            <span>✦ ইউনিভার্সিটি ল্যাবরেটরি স্কুলের ছাত্র</span>
+            <span>✦ ১৫ আগস্ট ১৯৭৫ - নির্মম শাহাদাত</span>
+            <span>✦ GenZ Frontier Legacy Archive</span>
+            <!-- Duplicate for infinite loop -->
+            <span>✦ ১৮ অক্টোবর ১৯৬৪ - জন্ম</span>
+            <span>✦ দার্শনিক বার্ট্রান্ড রাসেলের নামে নামকরণ</span>
+            <span>✦ বঙ্গবন্ধু শেখ মুজিবুর রহমানের কনিষ্ঠ পুত্র</span>
+            <span>✦ ইউনিভার্সিটি ল্যাবরেটরি স্কুলের ছাত্র</span>
+            <span>✦ ১৫ আগস্ট ১৯৭৫ - নির্মম শাহাদাত</span>
+            <span>✦ GenZ Frontier Legacy Archive</span>
+        </div>
+    </div>
+
+    <!-- BIOGRAPHY / HISTORY SECTION (New Addition) -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-blue-600 font-bold tracking-widest uppercase text-xs mb-2 block">Biography</span>
+                    <h2 class="text-3xl md:text-4xl font-bold bangla-font text-slate-900 mb-6">ইতিহাসের পাতায় শিশু রাসেল</h2>
+                    <div class="space-y-4 text-slate-600 bangla-font text-lg leading-relaxed text-justify">
+                        <p>
+                            ১৯৬৪ সালের ১৮ অক্টোবর ধানমন্ডির ঐতিহাসিক ৩২ নম্বর বাড়িতে জন্মগ্রহণ করেন শেখ রাসেল। জাতির পিতা বঙ্গবন্ধু শেখ মুজিবুর রহমান এবং বঙ্গমাতা শেখ ফজিলাতুন্নেছা মুজিবের সর্বকনিষ্ঠ সন্তান তিনি। বঙ্গবন্ধু ছিলেন বিশ্ববিখ্যাত ব্রিটিশ দার্শনিক ও নোবেলজয়ী <strong>বার্ট্রান্ড রাসেলের (Bertrand Russell)</strong> চরম ভক্ত। সেই দার্শনিকের নামের সাথেই মিল রেখে তিনি আদরের ছোট ছেলের নাম রাখেন 'রাসেল'।
+                        </p>
+                        <p>
+                            ছোটবেলা থেকেই রাসেল ছিলেন অত্যন্ত দুরন্ত ও প্রাণোচ্ছল। তিনি ঢাকা ইউনিভার্সিটি ল্যাবরেটরি স্কুল অ্যান্ড কলেজের চতুর্থ শ্রেণির ছাত্র ছিলেন। পড়াশোনার পাশাপাশি সাইকেল চালানো এবং কবুতর পালন ছিল তার প্রিয় শখ। 
+                        </p>
+                        <p>
+                            ১৯৭৫ সালের ১৫ আগস্ট কালরাতে স্বাধীনতাবিরোধী ঘাতক চক্রের হাতে বঙ্গবন্ধু সপরিবারে নির্মমভাবে নিহত হন। সেদিন ঘাতকদের বুলেটের হাত থেকে রক্ষা পায়নি নিষ্পাপ শিশু রাসেলও। <em>"আমি মায়ের কাছে যাব"</em>— এই আকুতি বুকে নিয়েই ঘাতকের নির্মম বুলেটে প্রাণ হারাতে হয় সম্ভাবনাময় এই শিশুটিকে।
+                        </p>
+                        
+                        <!-- Wikipedia Link -->
+                        <a href="https://en.wikipedia.org/wiki/Sheikh_Russel" target="_blank" class="inline-flex items-center gap-2 mt-6 text-blue-600 font-bold hover:text-blue-800 transition-colors border border-blue-200 bg-blue-50 px-5 py-2.5 rounded-full text-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            উইকিপিডিয়া থেকে আরও তথ্য জানুন
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Biography Image Placeholder -->
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                    <img src="https://i.ibb.co/3YhZjsX7/IMG-5299.png" alt="Sheikh Russel with Family" class="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700">
+                    <div class="absolute bottom-0 w-full p-6 bg-gradient-to-t from-slate-900 to-transparent">
+                        <p class="text-white bangla-font text-lg drop-shadow-md">পরিবারের সাথে এক নির্মল আনন্দময় মুহূর্ত</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HIGH-VALUE BLOG GALLERY (MASONRY LAYOUT) -->
+    <section id="gallery" class="py-24 bg-[#f1f5f9]">
+        <div class="max-w-[90rem] mx-auto px-4 sm:px-6">
+            
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold bangla-font text-slate-900 mb-3">স্মৃতির পাতা থেকে</h2>
+                <p class="text-slate-600 bangla-font text-lg max-w-2xl mx-auto">প্রতিটি ছবি একটি না বলা গল্প। GenZ Frontier আর্কাইভ থেকে উদ্ধারকৃত শহীদ শেখ রাসেলের জীবনের অমূল্য মুহূর্তগুলো নিচে লিপিবদ্ধ করা হলো।</p>
+                <div class="w-20 h-1 bg-slate-800 mx-auto rounded-full mt-6"></div>
+            </div>
+
+            <!-- Masonry Grid Layout -->
+            <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6">
+                
+                <!-- Blog Cards (All images preserved from previous step) -->
+                <article class="blog-card">
+                    <img src="https://i.ibb.co/Kjx9FzVz/IMG-5305.png" alt="স্মৃতির পাতায় রাসেল" class="card-img grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-5">
+                        <h3 class="bangla-font font-bold text-xl text-slate-800 mb-2">অমলিন শৈশব</h3>
+                        <p class="text-sm text-slate-600 bangla-font leading-relaxed">ধানমন্ডির ৩২ নম্বরের বারান্দায় বা মাঠে ছুটে বেড়ানো দুরন্ত এক শিশুর প্রতিকৃতি, যার চোখে ছিল আগামীর হাজারো স্বপ্ন।</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="https://i.ibb.co/8n0fzHH4/IMG-5304.png" alt="নিষ্পাপ চাহনি" class="card-img grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-5">
+                        <h3 class="bangla-font font-bold text-xl text-slate-800 mb-2">নিষ্পাপ চাহনি</h3>
+                        <p class="text-sm text-slate-600 bangla-font leading-relaxed">যে বয়সের শিশুদের পৃথিবীটা থাকে শুধু খেলার, সেই বয়সেই এই শিশুটি দেখেছে যুদ্ধের বিভীষিকা।</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="https://i.ibb.co/20KT3Gfh/IMG-5303.png" alt="অমূল্য প্রামাণ্যচিত্র" class="card-img grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-5">
+                        <h3 class="bangla-font font-bold text-xl text-slate-800 mb-2">ইতিহাসের পাতা</h3>
+                        <p class="text-sm text-slate-600 bangla-font leading-relaxed">আর্কাইভ থেকে পাওয়া এই দুর্লভ ছবিটি আমাদের বারবার মনে করিয়ে দেয়, আমরা একটি সম্ভাবনাময় নক্ষত্রকে হারিয়েছি।</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="https://i.ibb.co/DDxXB67T/IMG-5302.png" alt="শৈশবের আনন্দ" class="card-img grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-5">
+                        <h3 class="bangla-font font-bold text-xl text-slate-800 mb-2">সাধারণ এক শিশু</h3>
+                        <p class="text-sm text-slate-600 bangla-font leading-relaxed">খেলনা আর বইয়ের মাঝে হারিয়ে থাকা এক সাধারণ শিশু। সুযোগ পেলে হয়তো তিনি হতে পারতেন দেশের এক অনন্য সম্পদ।</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="https://i.ibb.co/TM8bb6sd/IMG-5301.png" alt="বড় বোনের বিয়ের দিনে" class="card-img grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-5">
+                        <h3 class="bangla-font font-bold text-xl text-slate-800 mb-2">বোনের বিয়ের আনন্দ</h3>
+                        <p class="text-sm text-slate-600 bangla-font leading-relaxed">প্রিয় বড় বোন শেখ হাসিনার বিয়ের আনন্দঘন পরিবেশে ছোট্ট রাসেলের এই উচ্ছ্বল হাসি আজ শুধুই একটি বেদনাবিধুর স্মৃতিচিত্র।</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="https://i.ibb.co/Kc48ZKPv/IMG-5298.png" alt="বাবার পদচিহ্ন ধরে" class="card-img grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-5">
+                        <h3 class="bangla-font font-bold text-xl text-slate-800 mb-2">বজ্রকণ্ঠের ছায়ায়</h3>
+                        <p class="text-sm text-slate-600 bangla-font leading-relaxed">বাবার ঐতিহাসিক জনসভায় মঞ্চের এক কোণে দাঁড়িয়ে থাকা শিশু রাসেল। পিতার বিশাল রাজনৈতিক কর্মযজ্ঞের নীরব দর্শক।</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="https://i.ibb.co/ynWBvwxm/IMG-5297.png" alt="জাপানে ট্রেন ভ্রমণ" class="card-img grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-5">
+                        <h3 class="bangla-font font-bold text-xl text-slate-800 mb-2">জাপানে রাষ্ট্রীয় সফর</h3>
+                        <p class="text-sm text-slate-600 bangla-font leading-relaxed">বঙ্গবন্ধুর জাপান সফরকালে শেখ রেহানা ও রাসেলের ট্রেন ভ্রমণের এই বিরল মুহূর্তটি জানান দেয় অকৃত্রিম স্নেহের কথা।</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="https://i.ibb.co/dJmmHGJs/IMG-5296.png" alt="চির অম্লান স্মৃতি" class="card-img grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-5">
+                        <h3 class="bangla-font font-bold text-xl text-slate-800 mb-2">চির অম্লান স্মৃতি</h3>
+                        <p class="text-sm text-slate-600 bangla-font leading-relaxed">স্মৃতির পাতা থেকে সংগ্রহ করা এই ঐতিহাসিক ছবিটি আমাদের জাতীয় শোকের এক নীরব সাক্ষী হয়ে থাকবে।</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="https://i.ibb.co/r2vRxx75/IMG-5282.png" alt="মাছ ধরার আনন্দ" class="card-img grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-5">
+                        <h3 class="bangla-font font-bold text-xl text-slate-800 mb-2">বিজয়ের উল্লাস</h3>
+                        <p class="text-sm text-slate-600 bangla-font leading-relaxed">জাতীয় নেতাদের সাথে পুকুরে বড় মাছ ধরার পর শিশু রাসেলের চোখেমুখে যে বিজয়ের আনন্দ, তা হার মানায় যেকোনো প্রাপ্তিকে।</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="https://i.ibb.co/bg41J7BQ/IMG-5283.png" alt="টুঙ্গিপাড়ার ধুলোমাটিতে" class="card-img grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-5">
+                        <h3 class="bangla-font font-bold text-xl text-slate-800 mb-2">মাটির টান</h3>
+                        <p class="text-sm text-slate-600 bangla-font leading-relaxed">রাষ্ট্রপতির সন্তান হয়েও টুঙ্গিপাড়ার সাধারণ মানুষদের সাথে মিশে যাওয়ার এক অসাধারণ ও অকৃত্রিম মুহূর্ত।</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="https://i.ibb.co/whw7mN0K/IMG-5286.png" alt="স্নেহের চাদরে" class="card-img grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-5">
+                        <h3 class="bangla-font font-bold text-xl text-slate-800 mb-2">স্নেহের চাদরে</h3>
+                        <p class="text-sm text-slate-600 bangla-font leading-relaxed">পরিবারের প্রতিটি সদস্যের চোখের মণি ছিলেন রাসেল। এই ছবিটি সেই নিখাদ ভালোবাসার এক উজ্জ্বল দৃষ্টান্ত।</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="https://i.ibb.co/sJW1tMTp/IMG-5288.png" alt="প্রকৃতির সান্নিধ্যে" class="card-img grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-5">
+                        <h3 class="bangla-font font-bold text-xl text-slate-800 mb-2">প্রকৃতির সান্নিধ্যে</h3>
+                        <p class="text-sm text-slate-600 bangla-font leading-relaxed">পুকুর পাড়ে একাকী দাঁড়িয়ে প্রকৃতির সাথে মিতালি করা এক দুরন্ত কিশোরের প্রতিচ্ছবি।</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="https://i.ibb.co/xSmxnqtX/IMG-5287.png" alt="পার্কের দুরন্তপনা" class="card-img grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-5">
+                        <h3 class="bangla-font font-bold text-xl text-slate-800 mb-2">খোলা মাঠে দুরন্তপনা</h3>
+                        <p class="text-sm text-slate-600 bangla-font leading-relaxed">সব শিশুর মতোই পার্কের খোলা মাঠে ছুটে বেড়ানোই ছিল তার শখ। নিষ্পাপ সেই মুহূর্তটি ফ্রেমবন্দি করা হয়েছে এখানে।</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="https://i.ibb.co/prx07FHg/IMG-5284.png" alt="পিতার ছায়াসঙ্গী" class="card-img grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-5">
+                        <h3 class="bangla-font font-bold text-xl text-slate-800 mb-2">পিতার ছায়াসঙ্গী</h3>
+                        <p class="text-sm text-slate-600 bangla-font leading-relaxed">রাষ্ট্রপতি বা প্রধানমন্ত্রী নয়, বরং একজন স্নেহশীল পিতার সাথে সন্তানের দেশভ্রমণের এই ছবিটি গভীরভাবে আবেগঘন।</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="https://i.ibb.co/svg5vMn2/IMG-5294.png" alt="খাবার টেবিলের স্মৃতি" class="card-img grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-5">
+                        <h3 class="bangla-font font-bold text-xl text-slate-800 mb-2">খাবার টেবিলের আড্ডা</h3>
+                        <p class="text-sm text-slate-600 bangla-font leading-relaxed">রাষ্ট্রীয় সব প্রটোকলের বাইরে পরিবারের সবার সাথে খাবার টেবিলে বসে থাকা ছোট্ট রাসেল। একটি নিখুঁত বাঙালি পরিবার।</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="https://i.ibb.co/RkbN4SLY/IMG-5290.png" alt="রাজনৈতিক আবহে" class="card-img grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-5">
+                        <h3 class="bangla-font font-bold text-xl text-slate-800 mb-2">রাজনৈতিক আবহে বেড়ে ওঠা</h3>
+                        <p class="text-sm text-slate-600 bangla-font leading-relaxed">বাবার সাথে বিভিন্ন কর্মশালায় গিয়ে খুব কাছ থেকে দেশের মানুষের প্রতি বঙ্গবন্ধুর নিঃস্বার্থ ভালোবাসা উপলব্ধি করতেন রাসেল।</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="https://i.ibb.co/1fJSpVhb/IMG-5291.png" alt="ভাই-বোনের খুনসুটি" class="card-img grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-5">
+                        <h3 class="bangla-font font-bold text-xl text-slate-800 mb-2">মধুর খুনসুটি</h3>
+                        <p class="text-sm text-slate-600 bangla-font leading-relaxed">পিতা দাঁড়িয়ে আছেন, আর প্রিয় বোনের সাথে খুনসুটিতে মেতে উঠেছেন রাসেল। এই হাসিমাখা মুখটি আজও কাঁদায় পুরো জাতিকে।</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="https://i.ibb.co/35JZdtMt/IMG-5289.png" alt="ডামি হাতে প্যারেড" class="card-img grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-5">
+                        <h3 class="bangla-font font-bold text-xl text-slate-800 mb-2">মুক্তিযুদ্ধের চেতনা</h3>
+                        <p class="text-sm text-slate-600 bangla-font leading-relaxed">মুক্তিযুদ্ধের চেতনায় উদ্বুদ্ধ হয়ে শিক্ষানবিশ হিসেবে ডামি বন্দুক হাতে প্যারেড করা। দেশের প্রতি ভালোবাসার অনন্য প্রমাণ।</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="https://i.ibb.co/YTKq5tzC/IMG-5293.png" alt="যোগ্য উত্তরসূরি" class="card-img grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-5">
+                        <h3 class="bangla-font font-bold text-xl text-slate-800 mb-2">যোগ্য উত্তরসূরির প্রতিচ্ছবি</h3>
+                        <p class="text-sm text-slate-600 bangla-font leading-relaxed">পিতার সাথে পরম শ্রদ্ধায় করমর্দনরত রাসেল। যেন আগামীর বাংলাদেশের হাল ধরার এক প্রচ্ছন্ন প্রস্তুতি ছিল এই আত্মবিশ্বাসী শিশুর মাঝে।</p>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER WITH EXTENDED CREDITS -->
+    <footer class="bg-slate-900 py-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row justify-between items-center gap-10">
+            
+            <!-- Left Side: Title -->
+            <div class="text-center lg:text-left">
+                <h3 class="text-3xl font-bold bangla-font text-white mb-2">শহীদ শেখ রাসেল <span class="text-slate-500 font-light">লিগ্যাসি আর্কাইভ</span></h3>
+                <p class="text-sm text-slate-400 bangla-font">ইতিহাস ও অমূল্য স্মৃতি সংরক্ষণে একটি ডিজিটাল উদ্যোগ।</p>
+            </div>
+            
+            <!-- Right Side: Developer Credits -->
+            <div class="flex items-center gap-5 bg-slate-800/60 px-6 py-4 rounded-2xl border border-slate-700 shadow-xl">
+                <!-- Branding Icon -->
+                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-900 border-2 border-blue-400/30 flex items-center justify-center text-white font-bold text-xl shadow-[0_0_15px_rgba(37,99,235,0.4)]">
+                    GF
+                </div>
+                
+                <!-- Credit Details -->
+                <div class="text-left">
+                    <p class="text-[10px] text-slate-400 tracking-widest uppercase mb-0.5">Archived & Developed By</p>
+                    <p class="text-lg font-bold text-white tracking-wide leading-tight mb-1">GenZ Frontier</p>
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        <p class="text-xs text-blue-300 font-medium tracking-wide">
+                            Lead Architect: <span class="text-white font-bold">Sayad Md Bayezid Hosan</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>
