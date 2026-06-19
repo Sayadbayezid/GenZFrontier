@@ -24,7 +24,8 @@ The automated system will update this section daily.
 https://sayadbayezid.github.io/GenZFrontier/
 
 ---
-
+# how to managed legacy Page 
+Following [LEGACY_ARCHIVES_GUIDE](LEGACY_ARCHIVES_GUIDE.md)
 # ✨ Core Features
 
 ## ⚡ Fully Automated Deployment
