@@ -26,9 +26,11 @@ def clean_and_prepare():
     for f in ["index.html", "404.html", "contact.html", "about.html", "privacy-policy.html", "terms.html", "disclaimer.html", "cookie-policy.html", "submit-guest-post.html", "CNAME", "sitemap.xml", "robots.txt"]:
         if os.path.exists(f): shutil.copy2(f, os.path.join(OUTPUT_DIR, f))
     
-    # Copy legacy-archives folder
+    # Copy legacy-archives folder (prioritize root legacy-archives, then news/legacy-archives)
     if os.path.exists("legacy-archives"):
         shutil.copytree("legacy-archives", os.path.join(OUTPUT_DIR, "legacy-archives"), dirs_exist_ok=True)
+    elif os.path.exists(os.path.join(NEWS_DIR, "legacy-archives")):
+        shutil.copytree(os.path.join(NEWS_DIR, "legacy-archives"), os.path.join(OUTPUT_DIR, "legacy-archives"), dirs_exist_ok=True)
 
 def get_ticker_html(breaking_arts):
     if not breaking_arts: return ""
