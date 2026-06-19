@@ -17,7 +17,7 @@ TEMPLATE_FILE = "template.html"
 INDEX_FILE = "index.html"
 ADS_DIR = "ads"
 
-DEFAULT_CATEGORIES = ["world", "politics", "business", "tech", "science", "health", "sports", "entertainment", "careers", "ads"]
+DEFAULT_CATEGORIES = ["world", "politics", "business", "tech", "science", "health", "sports", "entertainment", "careers", "ads", "legacy-archives"]
 
 def clean_and_prepare():
     if os.path.exists(OUTPUT_DIR): shutil.rmtree(OUTPUT_DIR)
@@ -25,6 +25,10 @@ def clean_and_prepare():
     os.makedirs(os.path.join(OUTPUT_DIR, ADS_DIR), exist_ok=True)
     for f in ["index.html", "404.html", "contact.html", "about.html", "privacy-policy.html", "terms.html", "disclaimer.html", "cookie-policy.html", "submit-guest-post.html", "CNAME", "sitemap.xml", "robots.txt"]:
         if os.path.exists(f): shutil.copy2(f, os.path.join(OUTPUT_DIR, f))
+    
+    # Copy legacy-archives folder
+    if os.path.exists("legacy-archives"):
+        shutil.copytree("legacy-archives", os.path.join(OUTPUT_DIR, "legacy-archives"), dirs_exist_ok=True)
 
 def get_ticker_html(breaking_arts):
     if not breaking_arts: return ""
