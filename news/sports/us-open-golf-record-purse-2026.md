@@ -1,11 +1,11 @@
 Title: রেকর্ড প্রাইজমানি: ইউএস ওপেন গলফে বিজয়ীদের জন্য ২২.৫ মিলিয়ন ডলারের পুরস্কার
 description: ২০২৬ সালের ইউএস ওপেন গলফ টুর্নামেন্ট ইতিহাস গড়তে যাচ্ছে রেকর্ড ২২.৫ মিলিয়ন ডলারের প্রাইজমানি ঘোষণা করে, যা গলফ বিশ্বে চাঞ্চল্য সৃষ্টি করেছে।
-image: https://genzfrontier.news/assets/sports-5.jpg
+image: https://i.ibb.co/TF2NCX9/IMG-5268.jpg
 date: June 18, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](https://genzfrontier.news/assets/sports-5.jpg)
+![GenZ Frontier News Header](https://i.ibb.co/TF2NCX9/IMG-5268.jpg)
 
 # রেকর্ড প্রাইজমানি: ইউএস ওপেন গলফে বিজয়ীদের জন্য ২২.৫ মিলিয়ন ডলারের পুরস্কার
 
