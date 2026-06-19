@@ -1,0 +1,49 @@
+name: Automated Sitemap Generator
+
+on:
+  push:
+    branches:
+      - main
+    # Prevent workflow loops when only sitemap files are updated
+    paths-ignore:
+      - 'sitemap.xml'
+      - 'public/sitemap.xml'
+
+permissions:
+  contents: write
+
+jobs:
+  generate-sitemap:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # 2. Set up the Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      # 3. Install required dependencies
+      - name: Install Dependencies
+        run: pip install markdown
+
+      # 4. Build the site to generate the public folder and HTML files
+      - name: Run Build Script
+        run: python build.py
+
+      # 5. Run the sitemap generator script
+      - name: Generate Sitemap
+        run: python sitemap_generator.py
+
+      # 6. Commit and push the generated sitemap files
+      - name: Commit and Push Sitemap
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml public/sitemap.xml
+          # Commit only if sitemap files have changed
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: automated sitemap update [skip ci]" && git push)
