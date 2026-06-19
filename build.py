@@ -27,10 +27,73 @@ def clean_and_prepare():
         if os.path.exists(f): shutil.copy2(f, os.path.join(OUTPUT_DIR, f))
     
     # Copy legacy-archives folder (prioritize root legacy-archives, then news/legacy-archives)
-    if os.path.exists("legacy-archives"):
-        shutil.copytree("legacy-archives", os.path.join(OUTPUT_DIR, "legacy-archives"), dirs_exist_ok=True)
-    elif os.path.exists(os.path.join(NEWS_DIR, "legacy-archives")):
-        shutil.copytree(os.path.join(NEWS_DIR, "legacy-archives"), os.path.join(OUTPUT_DIR, "legacy-archives"), dirs_exist_ok=True)
+    legacy_src = "legacy-archives" if os.path.exists("legacy-archives") else os.path.join(NEWS_DIR, "legacy-archives")
+    if os.path.exists(legacy_src):
+        shutil.copytree(legacy_src, os.path.join(OUTPUT_DIR, "legacy-archives"), dirs_exist_ok=True)
+        
+        # Auto-generate cards for legacy-archives/index.html
+        legacy_index_path = os.path.join(OUTPUT_DIR, "legacy-archives", "index.html")
+        if os.path.exists(legacy_index_path):
+            with open(legacy_index_path, "r", encoding="utf-8") as f:
+                legacy_index_content = f.read()
+            
+            cards_html = ""
+            for file in sorted(os.listdir(legacy_src)):
+                if file.endswith(".html") and file != "index.html":
+                    with open(os.path.join(legacy_src, file), "r", encoding="utf-8") as f:
+                        html_content = f.read()
+                    
+                    # Extract title, image, and description using regex
+                    title_match = re.search(r"<title>(.*?)</title>", html_content, re.IGNORECASE | re.DOTALL)
+                    title = title_match.group(1).split("|")[0].strip() if title_match else file.replace(".html", "").title()
+                    
+                    desc_match = re.search(r'<meta name="description" content="(.*?)">', html_content, re.IGNORECASE)
+                    desc = desc_match.group(1).strip() if desc_match else "আর্কাইভের বিস্তারিত দেখতে ক্লিক করুন।"
+                    
+                    img_match = re.search(r'image": "(.*?)"', html_content, re.IGNORECASE)
+                    if not img_match:
+                        img_match = re.search(r'background-image: url\(\'(.*?)\'\)', html_content, re.IGNORECASE)
+                    if not img_match:
+                        img_match = re.search(r'<img src="(.*?)"', html_content, re.IGNORECASE)
+                    
+                    img_url = img_match.group(1) if img_match else "https://www.genzfrontir.com/default.jpg"
+                    
+                    card_link = file.replace(".html", "")
+                    cards_html += f'''
+                <a href="/legacy-archives/{card_link}" class="archive-card group block bg-[#0f172a] border border-slate-800 rounded-2xl overflow-hidden relative">
+                    <div class="card-img-wrapper h-64 w-full bg-slate-900 relative">
+                        <img src="{img_url}" alt="{title}" class="card-img w-full h-full object-cover object-top opacity-70 group-hover:opacity-100 grayscale group-hover:grayscale-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent"></div>
+                        <span class="absolute top-4 left-4 bg-red-600/80 text-white text-xs font-bold px-3 py-1 rounded-full bangla-font backdrop-blur-sm">Legacy</span>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold bangla-font text-white mb-3 group-hover:text-cyan-400 transition-colors">{title}</h3>
+                        <p class="text-slate-400 bangla-font text-sm leading-relaxed mb-6">{desc}</p>
+                        <div class="flex items-center text-cyan-500 font-bold bangla-font text-sm">
+                            আর্কাইভ দেখুন <span class="ml-2 transition-transform group-hover:translate-x-2">→</span>
+                        </div>
+                    </div>
+                </a>'''
+            
+            # Add a "Coming Soon" card at the end
+            cards_html += '''
+                <div class="archive-card group block bg-[#0f172a] border border-slate-800 border-dashed rounded-2xl overflow-hidden relative cursor-not-allowed">
+                    <div class="card-img-wrapper h-64 w-full bg-slate-900/50 flex items-center justify-center relative">
+                        <svg class="w-16 h-16 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent"></div>
+                    </div>
+                    <div class="p-8 opacity-60">
+                        <h3 class="text-2xl font-bold bangla-font text-slate-500 mb-3">নতুন আর্কাইভ</h3>
+                        <p class="text-slate-500 bangla-font text-sm leading-relaxed mb-6">আমাদের গবেষণা ও তথ্য সংগ্রহের কাজ চলমান রয়েছে। খুব শীঘ্রই নতুন আর্কাইভ যুক্ত করা হবে।</p>
+                        <div class="flex items-center text-slate-600 font-bold bangla-font text-sm">
+                            শীঘ্রই আসছে...
+                        </div>
+                    </div>
+                </div>'''
+            
+            new_index_content = legacy_index_content.replace("{{LEGACY_CARDS_PLACEHOLDER}}", cards_html)
+            with open(legacy_index_path, "w", encoding="utf-8") as f:
+                f.write(new_index_content)
 
 def get_ticker_html(breaking_arts):
     if not breaking_arts: return ""
