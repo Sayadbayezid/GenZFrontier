@@ -40,3 +40,45 @@ Once you have added your files:
 3. The GitHub Actions will automatically deploy the updated `public/` folder.
 
 **Note:** Never manually edit files inside the `public/` folder, as they will be overwritten by the build script. Always edit the source files in the root or `news/` directory.
+# use this format automated build all injection no need manually add 
+following the stracture 
+# 📚 GenZ Frontier - Legacy Archives Guide
+
+This project uses a custom automated build system (`build.py`) to generate archive cards. You do not need to edit the `index.html` file manually to add new archive cards. 
+
+## 🛠️ How to Add a New Legacy Archive
+
+**Step 1:** Create a new `.html` file inside the `legacy-archives/` folder. Use lowercase letters and hyphens for the filename (e.g., `historic-speech-1971.html`).
+
+**Step 2:** Copy and paste the following valid HTML boilerplate into your new file. The `build.py` script specifically looks for the `<title>`, `<meta name="description">`, and image tags to generate the UI card.
+
+### ✅ Valid HTML Format (Boilerplate)
+
+```html
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>আপনার আর্কাইভের শিরোনাম | GenZ Frontier</title>
+    
+    <meta name="description" content="আর্কাইভের একটি সুন্দর এবং সংক্ষিপ্ত বিবরণ এখানে লিখুন যা কার্ডে প্রদর্শিত হবে।">
+    
+    <meta property="og:title" content="আপনার আর্কাইভের শিরোনাম">
+    <meta property="og:description" content="আর্কাইভের একটি সুন্দর এবং সংক্ষিপ্ত বিবরণ এখানে লিখুন।">
+    <meta property="og:image" content="[https://www.genzfrontir.com/images/your-hero-image.jpg](https://www.genzfrontir.com/images/your-hero-image.jpg)">
+</head>
+<body>
+
+    <div class="hero-section">
+        <img src="[https://www.genzfrontir.com/images/your-hero-image.jpg](https://www.genzfrontir.com/images/your-hero-image.jpg)" alt="Hero Image">
+    </div>
+
+    <main>
+        <h1>আপনার আর্কাইভের শিরোনাম</h1>
+        <p>বিস্তারিত ইতিহাস বা আর্কাইভের কনটেন্ট...</p>
+    </main>
+
+</body>
+</html>
