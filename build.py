@@ -153,7 +153,7 @@ def generate_sitemap(articles):
             lastmod = ET.SubElement(url_elem, "lastmod")
             # For static pages, use the git date of the file in the root directory
             lastmod.text = get_git_date(page) or datetime.now().isoformat()
-            priority = ET.SubElement(url_elem, "1.0" if page == "" else "0.8")
+            priority = ET.SubElement(url_elem, "priority")
             priority.text = "1.0" if page == "" else "0.8"
             added_links.add(full_url)
 
@@ -215,7 +215,7 @@ for root, _, files in os.walk(NEWS_DIR):
             "desc": meta.get('description', [""])[0],
             "img": meta.get('image', [f"{BASE_URL}default.jpg"])[0],
             "date": meta.get("date", [get_git_date(os.path.join(root, file)) or datetime.now().isoformat()])[0],
-            "url": f"{BASE_URL}{cat}/{file.replace(".md", ".html")}",
+            "url": f"{BASE_URL}{cat}/{file.replace('.md', '.html')}",
             "video_url": extract_video_url(html_cont)
         }
         cat_arts[cat].append(art)
@@ -239,7 +239,7 @@ for root, _, files in os.walk(NEWS_DIR):
                              .replace("{{RELATED_POSTS}}", related_html).replace("{{META_TAGS}}", get_meta(art)) \
                              .replace("{{SCHEMA_DATA}}", get_json_ld(art)).replace("{{BREAKING_NEWS_TICKER}}", get_ticker_html(breaking_arts)) \
                              .replace("{{CANONICAL_URL}}", art["url"]) \
-                             .replace("{{VIDEO_URL}}", art["video_url"] if "video_url" in art else "")
+                             .replace("{{VIDEO_URL}}", art["video_url"] if art.get("video_url") else "")
         
         os.makedirs(os.path.join(OUTPUT_DIR, cat), exist_ok=True)
         with open(os.path.join(OUTPUT_DIR, cat, art['file']), "w", encoding="utf-8") as f: f.write(final_html)
@@ -260,6 +260,8 @@ for a in all_arts[:12]: dyn_html += f'<article class="news-card"><img src="{a["i
 dyn_html += '</div>'
 
 for cat in DEFAULT_CATEGORIES:
+    if cat == "legacy-archives":
+        continue
     arts = sorted(cat_arts[cat], key=lambda x: x['date'], reverse=True)
     cat_index_html = index_template.replace("{{HERO_SECTION}}", "").replace("{{DYNAMIC_CONTENT}}", f'<div class="section-header"><h2>{cat.title()}</h2></div><div class="grid-4">' + "".join([f'<article class="news-card"><img src="{a["img"]}"><a href="../{a["cat"]}/{a["file"]}"><h3>{a["title"]}</h3></a></article>' for a in arts]) + '</div>').replace("{{BREAKING_NEWS_TICKER}}", ticker)
     with open(os.path.join(OUTPUT_DIR, cat, "index.html"), "w", encoding="utf-8") as f: f.write(cat_index_html.replace('href="./', 'href="../'))
