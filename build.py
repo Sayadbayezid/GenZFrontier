@@ -259,7 +259,7 @@ for root, _, files in os.walk(NEWS_DIR):
         
         related_html = '<div class="related-section"><div class="section-header"><h2>Suggested For You</h2></div><div class="grid-4">'
         for r in related_arts[:8]: # Show up to 8 suggested news items
-            related_html += f'<article class="news-card"><img src="{r["img"]}" alt="{r["title"]}" loading="lazy" decoding="async" width="400" height="225"><a href="../{r["cat"]}/{r["file"]}" aria-label="Read article: {r["title"]}"><h3>{r["title"]}</h3></a></article>'
+            related_html += f'<article class="news-card"><img src="{r["img"]}" alt="{r["title"]}" loading="lazy" decoding="async" width="400" height="225"><a href="/{r["cat"]}/{r["file"]}" aria-label="Read article: {r["title"]}"><h3>{r["title"]}</h3></a></article>'
         related_html += '</div></div>'
         
         final_html = template.replace("{{NEWS_CONTENT}}", html_cont).replace("{{ARTICLE_TITLE}}", art['title']) \
@@ -277,23 +277,23 @@ ticker = get_ticker_html(breaking_arts)
 
 # Hero Section
 hero_arts = all_arts[:10]
-hero_html = f'<section class="hero-section"><div class="hero-container"><div class="hero-main"><span class="red-tag" style="background-color: #CC0000; color: #FFFFFF;">LIVE UPDATES</span><a href="./{hero_arts[0]["cat"]}/{hero_arts[0]["file"]}"><h1>{hero_arts[0]["title"]}</h1></a><p>{hero_arts[0]["desc"]}</p><a href="./{hero_arts[0]["cat"]}/{hero_arts[0]["file"]}" aria-label="Read hero article: {hero_arts[0]["title"]}"><img src="{hero_arts[0]["img"]}" alt="{hero_arts[0]["title"]}" fetchpriority="high" decoding="async" width="800" height="450"></a></div><div class="hero-sidebar hero-sidebar-scroll">'
-for a in hero_arts[1:]: hero_html += f'<div class="hero-side-item"><a href="./{a["cat"]}/{a["file"]}" aria-label="Read sidebar article: {a["title"]}"><img src="{a["img"]}" alt="{a["title"]}" loading="lazy" decoding="async" width="120" height="80"></a><div><h2>{a["title"]}</h2></div></div>'
+hero_html = f'<section class="hero-section"><div class="hero-container"><div class="hero-main"><span class="red-tag" style="background-color: #CC0000; color: #FFFFFF;">LIVE UPDATES</span><a href="/{hero_arts[0]["cat"]}/{hero_arts[0]["file"]}"><h1>{hero_arts[0]["title"]}</h1></a><p>{hero_arts[0]["desc"]}</p><a href="/{hero_arts[0]["cat"]}/{hero_arts[0]["file"]}" aria-label="Read hero article: {hero_arts[0]["title"]}"><img src="{hero_arts[0]["img"]}" alt="{hero_arts[0]["title"]}" fetchpriority="high" decoding="async" width="800" height="450"></a></div><div class="hero-sidebar hero-sidebar-scroll">'
+for a in hero_arts[1:]: hero_html += f'<div class="hero-side-item"><a href="/{a["cat"]}/{a["file"]}" aria-label="Read sidebar article: {a["title"]}"><img src="{a["img"]}" alt="{a["title"]}" loading="lazy" decoding="async" width="120" height="80"></a><div><h2>{a["title"]}</h2></div></div>'
 hero_html += '</div></div></section>'
 
 # Dynamic Content
 dyn_html = '<div class="section-header"><h2>Latest Mix</h2></div><div class="grid-4">'
-for a in all_arts[:12]: dyn_html += f'<article class="news-card"><img src="{a["img"]}" alt="{a["title"]}" loading="lazy" decoding="async" width="400" height="225"><a href="./{a["cat"]}/{a["file"]}" aria-label="Read article: {a["title"]}"><h3>{a["title"]}</h3></a></article>'
+for a in all_arts[:12]: dyn_html += f'<article class="news-card"><img src="{a["img"]}" alt="{a["title"]}" loading="lazy" decoding="async" width="400" height="225"><a href="/{a["cat"]}/{a["file"]}" aria-label="Read article: {a["title"]}"><h3>{a["title"]}</h3></a></article>'
 dyn_html += '</div>'
 
 for cat in DEFAULT_CATEGORIES:
     arts = sorted(cat_arts[cat], key=lambda x: x['date'], reverse=True)
-    cat_index_html = index_template.replace("{{HERO_SECTION}}", "").replace("{{DYNAMIC_CONTENT}}", f'<div class="section-header"><h2>{cat.title()}</h2></div><div class="grid-4">' + "".join([f'<article class="news-card"><img src="{a["img"]}" alt="{a["title"]}" loading="lazy" decoding="async" width="400" height="225"><a href="../{a["cat"]}/{a["file"]}" aria-label="Read article: {a["title"]}"><h3>{a["title"]}</h3></a></article>' for a in arts]) + '</div>').replace("{{BREAKING_NEWS_TICKER}}", ticker)
-    with open(os.path.join(OUTPUT_DIR, cat, "index.html"), "w", encoding="utf-8") as f: f.write(cat_index_html.replace('href="./', 'href="../'))
+    cat_index_html = index_template.replace("{{HERO_SECTION}}", "").replace("{{DYNAMIC_CONTENT}}", f'<div class="section-header"><h2>{cat.title()}</h2></div><div class="grid-4">' + "".join([f'<article class="news-card"><img src="{a["img"]}" alt="{a["title"]}" loading="lazy" decoding="async" width="400" height="225"><a href="/{a["cat"]}/{a["file"]}" aria-label="Read article: {a["title"]}"><h3>{a["title"]}</h3></a></article>' for a in arts]) + '</div>').replace("{{BREAKING_NEWS_TICKER}}", ticker)
+    with open(os.path.join(OUTPUT_DIR, cat, "index.html"), "w", encoding="utf-8") as f: f.write(cat_index_html)
     
     limit = 2 if cat == 'ads' else 10
-    dyn_html += f'<div class="section-header"><h2>{cat.title()}</h2><a href="./{cat}/" class="see-all">See All →</a></div><div class="grid-4">'
-    for a in arts[:limit]: dyn_html += f'<article class="news-card"><img src="{a["img"]}" alt="{a["title"]}" loading="lazy" decoding="async" width="400" height="225"><a href="./{cat}/{a["file"]}" aria-label="Read article: {a["title"]}"><h3>{a["title"]}</h3></a></article>'
+    dyn_html += f'<div class="section-header"><h2>{cat.title()}</h2><a href="/{cat}/" class="see-all">See All →</a></div><div class="grid-4">'
+    for a in arts[:limit]: dyn_html += f'<article class="news-card"><img src="{a["img"]}" alt="{a["title"]}" loading="lazy" decoding="async" width="400" height="225"><a href="/{a["cat"]}/{a["file"]}" aria-label="Read article: {a["title"]}"><h3>{a["title"]}</h3></a></article>'
     dyn_html += '</div>'
 
 with open(os.path.join(OUTPUT_DIR, INDEX_FILE), "w", encoding="utf-8") as f:
