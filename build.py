@@ -3,12 +3,25 @@ import sys
 import shutil
 import markdown
 import json
+
 import re
 from datetime import datetime
 import subprocess
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 import urllib.parse
+
+def extract_video_url(html_content):
+    """Extracts the first video URL from iframe or video tags in HTML content."""
+    # Regex for iframe src
+    iframe_match = re.search(r'<iframe[^>]+src=["\"](https?:\/\/[^"\\]+?)["\"]', html_content, re.IGNORECASE)
+    if iframe_match: return iframe_match.group(1)
+
+    # Regex for video src
+    video_match = re.search(r'<video[^>]+src=["\"](https?:\/\/[^"\\]+?)["\"]', html_content, re.IGNORECASE)
+    if video_match: return video_match.group(1)
+
+    return None
 
 def get_git_date(file_path):
     """Fetches the last commit date for a given file from Git history."""
@@ -65,14 +78,14 @@ def clean_and_prepare():
                     title_match = re.search(r"<title>(.*?)</title>", html_content, re.IGNORECASE | re.DOTALL)
                     title = title_match.group(1).split("|")[0].strip() if title_match else file.replace(".html", "").title()
                     
-                    desc_match = re.search(r'\<meta name="description" content="(.*?)"\>', html_content, re.IGNORECASE)
+                    desc_match = re.search(r'<meta name="description" content="(.*?)">', html_content, re.IGNORECASE)
                     desc = desc_match.group(1).strip() if desc_match else "আর্কাইভের বিস্তারিত দেখতে ক্লিক করুন।"
                     
                     img_match = re.search(r'image": "(.*?)"', html_content, re.IGNORECASE)
                     if not img_match:
-                        img_match = re.search(r'background-image: url<LaTex>\(\'(.*?)\'\)</LaTex>', html_content, re.IGNORECASE)
+                        img_match = re.search(r'background-image: url\(\'(.*?)\'\)', html_content, re.IGNORECASE)
                     if not img_match:
-                        img_match = re.search(r'\<img src="(.*?)"', html_content, re.IGNORECASE)
+                        img_match = re.search(r'<img src="(.*?)"', html_content, re.IGNORECASE)
                     
                     img_url = img_match.group(1) if img_match else "https://www.genzfrontir.com/default.jpg"
                     
@@ -140,7 +153,7 @@ def generate_sitemap(articles):
             lastmod = ET.SubElement(url_elem, "lastmod")
             # For static pages, use the git date of the file in the root directory
             lastmod.text = get_git_date(page) or datetime.now().isoformat()
-            priority = ET.SubElement(url_elem, "priority")
+            priority = ET.SubElement(url_elem, "1.0" if page == "" else "0.8")
             priority.text = "1.0" if page == "" else "0.8"
             added_links.add(full_url)
 
@@ -158,7 +171,7 @@ def generate_sitemap(articles):
             added_links.add(full_url)
 
     # Convert to standard XML and pretty print
-    xml_str = ET.tostring(urlset, encoding='utf-8')
+    xml_str = ET.tostring(urlset, encoding=\'utf-8\')
     pretty_xml = minidom.parseString(xml_str).toprettyxml(indent="  ")
     pretty_xml = os.linesep.join([s for s in pretty_xml.splitlines() if s.strip()])
 
@@ -197,7 +210,8 @@ for root, _, files in os.walk(NEWS_DIR):
             "desc": meta.get('description', [""])[0],
             "img": meta.get('image', [f"{BASE_URL}default.jpg"])[0],
             "date": meta.get("date", [get_git_date(os.path.join(root, file)) or datetime.now().isoformat()])[0],
-            "url": f"{BASE_URL}{cat}/{file.replace('.md', '.html')}"
+            "url": f"{BASE_URL}{cat}/{file.replace(".md", ".html")}",
+            "video_url": extract_video_url(html_cont)
         }
         cat_arts[cat].append(art)
         all_arts.append(art)
@@ -219,7 +233,8 @@ for root, _, files in os.walk(NEWS_DIR):
         final_html = template.replace("{{NEWS_CONTENT}}", html_cont).replace("{{ARTICLE_TITLE}}", art['title']) \
                              .replace("{{RELATED_POSTS}}", related_html).replace("{{META_TAGS}}", get_meta(art)) \
                              .replace("{{SCHEMA_DATA}}", get_json_ld(art)).replace("{{BREAKING_NEWS_TICKER}}", get_ticker_html(breaking_arts)) \
-                             .replace("{{CANONICAL_URL}}", art['url'])
+                             .replace("{{CANONICAL_URL}}", art["url"])
+                             .replace("{{VIDEO_URL}}", art["video_url"] if "video_url" in art else "")
         
         os.makedirs(os.path.join(OUTPUT_DIR, cat), exist_ok=True)
         with open(os.path.join(OUTPUT_DIR, cat, art['file']), "w", encoding="utf-8") as f: f.write(final_html)
@@ -252,6 +267,7 @@ for cat in DEFAULT_CATEGORIES:
 with open(os.path.join(OUTPUT_DIR, INDEX_FILE), "w", encoding="utf-8") as f:
     f.write(index_template.replace("{{HERO_SECTION}}", hero_html).replace("{{DYNAMIC_CONTENT}}", dyn_html).replace("{{BREAKING_NEWS_TICKER}}", ticker))
 
+# Run Sitemap Generator
 # Generate Sitemap
 print("Generating Sitemap...")
 generate_sitemap(all_arts)
