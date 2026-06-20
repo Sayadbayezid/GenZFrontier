@@ -3,7 +3,10 @@ name: Deploy GenZ Frontier News
 on:
   push:
     branches:
-      - main 
+      - main
+    paths-ignore:
+      - 'sitemap.xml'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -29,12 +32,16 @@ jobs:
       - name: Run Build Script (Markdown to HTML)
         run: python build.py
 
+      - name: Commit and Push Sitemap
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: automated sitemap update [skip ci]" && git push)
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          # The sitemap.xml is now generated in the public directory by build.py
-          # and should be deployed along with other static assets.
-          # No need for a separate sitemap workflow or commit step.
           cname: www.genzfrontir.com
