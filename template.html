@@ -2,130 +2,138 @@
 <html lang="en">
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0KNQFE6KJW"></script>
-    <script>
+    <script defer>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-0KNQFE6KJW');
+      gtag("js", new Date());
+      gtag("config", "G-0KNQFE6KJW");
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9789336661158068" crossorigin="anonymous"></script>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ARTICLE_TITLE}} | GenZ Frontier</title>
+    <meta name="description" content="{{META_DESCRIPTION}}">
     {{META_TAGS}}
-    {{SCHEMA_DATA}}
     <link rel="canonical" href="{{CANONICAL_URL}}">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="GenZ Frontier">
-    <meta property="og:type" content="article">
-    <meta property="og:site_name" content="GenZ Frontier">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ARTICLE_TITLE}} | GenZ Frontier">
-    <meta name="video_url" content="{{VIDEO_URL}}">
-
-    <style>
-        :root { --primary-red: #CC0000; --dark-bg: #000000; --text-dark: #222222; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
-        body { background-color: #F4F4F4; color: #222; line-height: 1.6; }
-        a { text-decoration: none; color: inherit; transition: color 0.3s; }
-        
-        /* Header Match */
-        header { background-color: #000; color: #FFF; border-bottom: 4px solid #CC0000; position: sticky; top: 0; z-index: 998; width: 100%; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        .header-top { max-width: 1300px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; }
-        .logo { font-size: 28px; font-weight: 900; color: #CC0000; letter-spacing: -1px; }
-        .logo span { color: #FFF; font-weight: 400; }
-        .home-link { font-size: 14px; font-weight: bold; color: #CCC; }
-        
-        /* Navigation Match */
-        nav ul { display: flex; list-style: none; max-width: 1300px; margin: 0 auto; padding: 0 20px; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none; }
-        nav ul::-webkit-scrollbar { display: none; }
-        nav ul li a { display: block; padding: 12px 15px; font-size: 14px; font-weight: 700; color: #CCCCCC; white-space: nowrap; }
-
-        /* Article Content */
-        .article-container { max-width: 900px; margin: 40px auto; background: #FFF; padding: 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .article-content h1 { font-size: 38px; line-height: 1.2; margin-bottom: 20px; font-weight: bold; }
-        .article-content p { font-size: 18px; margin-bottom: 25px; line-height: 1.7; }
-        .article-content img, .article-content iframe { max-width: 100%; height: auto; border-radius: 4px; margin: 25px 0; }
-        .article-content iframe { height: 450px; border: none; }
-
-        /* Related Posts */
-        .related-section { max-width: 900px; margin: 40px auto; padding: 20px; }
-        .section-header { display: flex; justify-content: space-between; align-items: center; border-top: 4px solid #CC0000; padding-top: 15px; margin-bottom: 20px; }
-        .section-header h2 { font-size: 24px; font-weight: bold; }
-        .grid-4 { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
-        .news-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 2px; margin-bottom: 10px; }
-        .news-card .tag { color: #CC0000; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; display: block; }
-        .news-card h3 { font-size: 16px; font-weight: bold; line-height: 1.3; }
-
-        /* Footer */
-        footer { background-color: #000; color: #aaa; margin-top: 60px; padding: 40px 20px; border-top: 4px solid #CC0000; text-align: center; }
-        .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 20px; }
-        
-        @media (max-width: 768px) { .article-container { margin: 20px; padding: 20px; } .grid-4 { grid-template-columns: 1fr; } }
-    </style>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    {{SCHEMA_DATA}}
 </head>
-<body>
-    <header>
-        <div class="header-top">
-            <a href="../" class="logo">GenZ <span>Frontier</span></a>
-            <a href="../" class="home-link">← Back</a>
+<body class="bg-gray-900 text-white font-sans">
+    <div class="min-h-screen flex flex-col">
+        <header class="bg-gray-800 shadow-md py-4 px-6 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="/" class="text-2xl font-bold text-white mr-6">GenZ Frontier</a>
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-4">
+                        <li><a href="/world" class="text-gray-300 hover:text-white">World</a></li>
+                        <li><a href="/politics" class="text-gray-300 hover:text-white">Politics</a></li>
+                        <li><a href="/business" class="text-gray-300 hover:text-white">Business</a></li>
+                        <li><a href="/tech" class="text-gray-300 hover:text-white">Tech</a></li>
+                        <li><a href="/science" class="text-gray-300 hover:text-white">Science</a></li>
+                        <li><a href="/health" class="text-gray-300 hover:text-white">Health</a></li>
+                        <li><a href="/sports" class="text-gray-300 hover:text-white">Sports</a></li>
+                        <li><a href="/entertainment" class="text-gray-300 hover:text-white">Entertainment</a></li>
+                        <li><a href="/careers" class="text-gray-300 hover:text-white">Careers</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="flex items-center">
+                <button id="mobile-menu-button" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </header>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="/world" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">World</a>
+            <a href="/politics" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Politics</a>
+            <a href="/business" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Business</a>
+            <a href="/tech" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Tech</a>
+            <a href="/science" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Science</a>
+            <a href="/health" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Health</a>
+            <a href="/sports" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Sports</a>
+            <a href="/entertainment" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Entertainment</a>
+            <a href="/careers" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Careers</a>
         </div>
-        <nav>
-            <ul>
-                <li><a href="../">Home</a></li>
-                <li><a href="../world/">World</a></li>
-                <li><a href="../politics/">Politics</a></li>
-                <li><a href="../business/">Business</a></li>
-                <li><a href="../tech/">Tech</a></li>
-                <li><a href="../science/">Science</a></li>
-                <li><a href="../health/">Health</a></li>
-                <li><a href="../sports/">Sports</a></li>
-                <li><a href="../entertainment/">Entertainment</a></li>
-                <li><a href="../careers/">Careers</a></li>
-                <li><a href="../ads/">Ads</a></li>
-                <li><a href="../legacy-archives/">Legacy Archives</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    {{BREAKING_NEWS_TICKER}}
-    
-    <main class="article-container">
-        <article class="article-content">
-            {{NEWS_CONTENT}}
-        </article>
-    </main>
+        {{BREAKING_NEWS_TICKER}}
 
-    {{RELATED_POSTS}}
+        <main class="flex-grow container mx-auto p-4">
+            <div class="max-w-4xl mx-auto bg-gray-800 p-8 rounded-lg shadow-lg">
+                <h1 class="text-4xl font-bold mb-4">{{ARTICLE_TITLE}}</h1>
+                <div class="prose prose-invert max-w-none">
+                    {{NEWS_CONTENT}}
+                </div>
+            </div>
+            {{RELATED_POSTS}}
+        </main>
 
-    <footer>
-        <div class="footer-links">
-            <a href="../about.html">About Us</a> | 
-            <a href="../contact.html">Contact</a> | 
-            <a href="../privacy-policy.html">Privacy Policy</a> | 
-            <a href="../terms.html">Terms</a>
+        <footer class="bg-gray-800 text-gray-300 py-8 px-6 mt-8">
+            <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">GenZ Frontier</h3>
+                    <p class="text-sm">Your daily dose of breaking news, in-depth analysis, and trending stories from around the globe.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/about.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="/contact.html" class="hover:text-white">Contact</a></li>
+                        <li><a href="/privacy-policy.html" class="hover:text-white">Privacy Policy</a></li>
+                        <li><a href="/terms.html" class="hover:text-white">Terms of Service</a></li>
+                        <li><a href="/sitemap.xml" class="hover:text-white">Sitemap</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Follow Us</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Facebook</a></li>
+                        <li><a href="#" class="hover:text-white">Twitter</a></li>
+                        <li><a href="#" class="hover:text-white">Instagram</a></li>
+                        <li><a href="#" class="hover:text-white">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center text-sm mt-8">
+                &copy; 2026 GenZ Frontier. All rights reserved.
+            </div>
+        </footer>
+    </div>
+
+    <!-- Video Popup Structure -->
+    <div id="articleVideoPopup" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="relative w-full max-w-3xl mx-auto p-4">
+            <button id="closeArticleVideoBtn" class="absolute -top-8 right-0 text-white text-3xl leading-none focus:outline-none">&times;</button>
+            <div id="articleVideoPopupBody" class="relative" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
+                <!-- Video will be injected here -->
+            </div>
         </div>
-        <p>© 2026 GenZ Frontier. All Rights Reserved.</p>
-    </footer>
-
-    <div class="video-popup" id="articleVideoPopup" style="display: none;">
-        <div class="video-popup-header">
-            <div><span class="live-dot">●</span> Article Video</div>
-            <div class="close-video-btn" id="closeArticleVideoBtn">&times;</div>
-        </div>
-        <div class="video-popup-body" id="articleVideoPopupBody"></div>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const videoMetaTag = document.querySelector("meta[name=\"video_url\"]");
-            const videoUrl = videoMetaTag ? videoMetaTag.getAttribute("content") : null;
-            const articleVideoPopup = document.getElementById("articleVideoPopup");
-            const articleVideoPopupBody = document.getElementById("articleVideoPopupBody");
-            const closeArticleVideoBtn = document.getElementById("closeArticleVideoBtn");
+        document.getElementById("mobile-menu-button").addEventListener("click", function() {
+            var mobileMenu = document.getElementById("mobile-menu");
+            if (mobileMenu.classList.contains("hidden")) {
+                mobileMenu.classList.remove("hidden");
+            } else {
+                mobileMenu.classList.add("hidden");
+            }
+        });
 
-            if (videoUrl && videoUrl !== "None") {
+        // Video Popup Logic
+        document.addEventListener("DOMContentLoaded", function() {
+            const videoUrl = "{{VIDEO_URL}}";
+            if (videoUrl) {
+                const articleVideoPopup = document.getElementById("articleVideoPopup");
+                const articleVideoPopupBody = document.getElementById("articleVideoPopupBody");
+                const closeArticleVideoBtn = document.getElementById("closeArticleVideoBtn");
+
                 articleVideoPopupBody.innerHTML = `<iframe src="${videoUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
                 articleVideoPopup.style.display = "block";
 
