@@ -239,7 +239,7 @@ for root, _, files in os.walk(NEWS_DIR):
                              .replace("{{RELATED_POSTS}}", related_html).replace("{{META_TAGS}}", get_meta(art)) \
                              .replace("{{SCHEMA_DATA}}", get_json_ld(art)).replace("{{BREAKING_NEWS_TICKER}}", get_ticker_html(breaking_arts)) \
                              .replace("{{CANONICAL_URL}}", art["url"]) \
-                             .replace("{{VIDEO_URL}}", art["video_url"] if art.get("video_url") else "")
+                             .replace("{{VIDEO_URL}}", art["video_url"] if "video_url" in art else "")
         
         os.makedirs(os.path.join(OUTPUT_DIR, cat), exist_ok=True)
         with open(os.path.join(OUTPUT_DIR, cat, art['file']), "w", encoding="utf-8") as f: f.write(final_html)
