@@ -171,14 +171,19 @@ def generate_sitemap(articles):
             added_links.add(full_url)
 
     # Convert to standard XML and pretty print
-    xml_str = ET.tostring(urlset, encoding=\'utf-8\')
+    xml_str = ET.tostring(urlset, encoding='utf-8')
     pretty_xml = minidom.parseString(xml_str).toprettyxml(indent="  ")
     pretty_xml = os.linesep.join([s for s in pretty_xml.splitlines() if s.strip()])
 
+    # Save to public directory for deployment
     with open(os.path.join(OUTPUT_DIR, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write(pretty_xml)
+    
+    # Save to root directory to keep it in the main branch
+    with open("sitemap.xml", "w", encoding="utf-8") as f:
+        f.write(pretty_xml)
 
-    print(f"✅ Sitemap.xml successfully generated in {OUTPUT_DIR} with {len(added_links)} links.")
+    print(f"✅ Sitemap.xml successfully generated in root and {OUTPUT_DIR} with {len(added_links)} links.")
 
 # ==========================================================
 # Main Execution
@@ -233,8 +238,8 @@ for root, _, files in os.walk(NEWS_DIR):
         final_html = template.replace("{{NEWS_CONTENT}}", html_cont).replace("{{ARTICLE_TITLE}}", art['title']) \
                              .replace("{{RELATED_POSTS}}", related_html).replace("{{META_TAGS}}", get_meta(art)) \
                              .replace("{{SCHEMA_DATA}}", get_json_ld(art)).replace("{{BREAKING_NEWS_TICKER}}", get_ticker_html(breaking_arts)) \
-                             .replace("{{CANONICAL_URL}}", art["url"])
-                             .replace("{{VIDEO_URL}}", art["video_url"] if "video_url" in art else "")
+                             .replace("{{CANONICAL_URL}}", art["url"]) \
+                             .replace("{{VIDEO_URL}}", art["video_url"] if art.get("video_url") else "")
         
         os.makedirs(os.path.join(OUTPUT_DIR, cat), exist_ok=True)
         with open(os.path.join(OUTPUT_DIR, cat, art['file']), "w", encoding="utf-8") as f: f.write(final_html)
