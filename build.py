@@ -110,7 +110,7 @@ def clean_and_prepare():
                     
                     img_match = re.search(r'image": "(.*?)"', html_content, re.IGNORECASE)
                     if not img_match:
-                        img_match = re.search(r'background-image: url\(\\'(.*?)\\'\)', html_content, re.IGNORECASE)
+                        img_match = re.search(r"background-image: url\('(.*?)'\)", html_content, re.IGNORECASE)
                     if not img_match:
                         img_match = re.search(r'<img src="(.*?)"', html_content, re.IGNORECASE)
                     
