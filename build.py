@@ -3,7 +3,6 @@ import sys
 import shutil
 import markdown
 import json
-import frontmatter
 import re
 from datetime import datetime
 import subprocess
@@ -253,8 +252,8 @@ for cat in DEFAULT_CATEGORIES:
 with open(os.path.join(OUTPUT_DIR, INDEX_FILE), "w", encoding="utf-8") as f:
     f.write(index_template.replace("{{HERO_SECTION}}", hero_html).replace("{{DYNAMIC_CONTENT}}", dyn_html).replace("{{BREAKING_NEWS_TICKER}}", ticker))
 
-    # Generate Sitemap
-    print("Generating Sitemap...")
-    generate_sitemap(all_arts)
+# Generate Sitemap
+print("Generating Sitemap...")
+generate_sitemap(all_arts)
 
 print("✅ Build Complete!")
