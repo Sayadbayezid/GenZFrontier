@@ -22,6 +22,7 @@
     <meta property="og:site_name" content="GenZ Frontier">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="‘আমি জনগণের দোসর’: লতিফ সিদ্দিকীর এই শাশ্বত সত্যকে ইতিবাচকভাবে গ্রহণ করছে খোদ আওয়ামী লীগ | GenZ Frontier">
+    <meta name="video_url" content="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F819913604330111%2F&show_text=false&width=267&t=0">
 
     <style>
         :root { --primary-red: #CC0000; --dark-bg: #000000; --text-dark: #222222; }
@@ -129,5 +130,33 @@
         </div>
         <p>© 2026 GenZ Frontier. All Rights Reserved.</p>
     </footer>
+
+    <div class="video-popup" id="articleVideoPopup" style="display: none;">
+        <div class="video-popup-header">
+            <div><span class="live-dot">●</span> Article Video</div>
+            <div class="close-video-btn" id="closeArticleVideoBtn">&times;</div>
+        </div>
+        <div class="video-popup-body" id="articleVideoPopupBody"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const videoMetaTag = document.querySelector("meta[name=\"video_url\"]");
+            const videoUrl = videoMetaTag ? videoMetaTag.getAttribute("content") : null;
+            const articleVideoPopup = document.getElementById("articleVideoPopup");
+            const articleVideoPopupBody = document.getElementById("articleVideoPopupBody");
+            const closeArticleVideoBtn = document.getElementById("closeArticleVideoBtn");
+
+            if (videoUrl && videoUrl !== "None") {
+                articleVideoPopupBody.innerHTML = `<iframe src="${videoUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+                articleVideoPopup.style.display = "block";
+
+                closeArticleVideoBtn.addEventListener("click", function() {
+                    articleVideoPopup.style.display = "none";
+                    articleVideoPopupBody.innerHTML = ""; // Stop video playback
+                });
+            }
+        });
+    </script>
 </body>
 </html>

@@ -22,6 +22,7 @@
     <meta property="og:site_name" content="GenZ Frontier">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="‘আমার কাছে ওঁরা স্রষ্টার সৃষ্টি মানুষ’: পরিচ্ছন্নতাকর্মীদের ভালোবাসায় সিক্ত হয়ে মানবিকতার অনন্য দৃষ্টান্ত স্থাপন করলেন আনোয়ার হোসেন মোল্লা | GenZ Frontier">
+    <meta name="video_url" content="">
 
     <style>
         :root { --primary-red: #CC0000; --dark-bg: #000000; --text-dark: #222222; }
@@ -134,5 +135,33 @@ Professional, fast, and 100% free web utilities. From QR codes to SEO generators
         </div>
         <p>© 2026 GenZ Frontier. All Rights Reserved.</p>
     </footer>
+
+    <div class="video-popup" id="articleVideoPopup" style="display: none;">
+        <div class="video-popup-header">
+            <div><span class="live-dot">●</span> Article Video</div>
+            <div class="close-video-btn" id="closeArticleVideoBtn">&times;</div>
+        </div>
+        <div class="video-popup-body" id="articleVideoPopupBody"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const videoMetaTag = document.querySelector("meta[name=\"video_url\"]");
+            const videoUrl = videoMetaTag ? videoMetaTag.getAttribute("content") : null;
+            const articleVideoPopup = document.getElementById("articleVideoPopup");
+            const articleVideoPopupBody = document.getElementById("articleVideoPopupBody");
+            const closeArticleVideoBtn = document.getElementById("closeArticleVideoBtn");
+
+            if (videoUrl && videoUrl !== "None") {
+                articleVideoPopupBody.innerHTML = `<iframe src="${videoUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+                articleVideoPopup.style.display = "block";
+
+                closeArticleVideoBtn.addEventListener("click", function() {
+                    articleVideoPopup.style.display = "none";
+                    articleVideoPopupBody.innerHTML = ""; // Stop video playback
+                });
+            }
+        });
+    </script>
 </body>
 </html>
