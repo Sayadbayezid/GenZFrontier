@@ -3,9 +3,28 @@ import sys
 import shutil
 import markdown
 import json
+import frontmatter
 import re
 from datetime import datetime
 import subprocess
+import xml.etree.ElementTree as ET
+from xml.dom import minidom
+import urllib.parse
+
+def get_git_date(file_path):
+    """Fetches the last commit date for a given file from Git history."""
+    try:
+        # Get the last commit date in ISO 8601 format (e.g., 2023-10-27T10:00:00+05:30)
+        git_date = subprocess.check_output(
+            ['git', 'log', '-1', '--format=%cI', file_path],
+            stderr=subprocess.DEVNULL
+        ).decode('utf-8').strip()
+        if git_date:
+            return git_date
+    except Exception:
+        pass
+    return None
+
 
 # ==========================================================
 # GenZ Frontier Build Configuration
@@ -47,14 +66,14 @@ def clean_and_prepare():
                     title_match = re.search(r"<title>(.*?)</title>", html_content, re.IGNORECASE | re.DOTALL)
                     title = title_match.group(1).split("|")[0].strip() if title_match else file.replace(".html", "").title()
                     
-                    desc_match = re.search(r'<meta name="description" content="(.*?)">', html_content, re.IGNORECASE)
+                    desc_match = re.search(r'\<meta name="description" content="(.*?)"\>', html_content, re.IGNORECASE)
                     desc = desc_match.group(1).strip() if desc_match else "আর্কাইভের বিস্তারিত দেখতে ক্লিক করুন।"
                     
                     img_match = re.search(r'image": "(.*?)"', html_content, re.IGNORECASE)
                     if not img_match:
-                        img_match = re.search(r'background-image: url\(\'(.*?)\'\)', html_content, re.IGNORECASE)
+                        img_match = re.search(r'background-image: url<LaTex>\(\'(.*?)\'\)</LaTex>', html_content, re.IGNORECASE)
                     if not img_match:
-                        img_match = re.search(r'<img src="(.*?)"', html_content, re.IGNORECASE)
+                        img_match = re.search(r'\<img src="(.*?)"', html_content, re.IGNORECASE)
                     
                     img_url = img_match.group(1) if img_match else "https://www.genzfrontir.com/default.jpg"
                     
@@ -107,6 +126,48 @@ def get_json_ld(art):
     schema = {"@context": "https://schema.org", "@type": "NewsArticle", "headline": art["title"], "image": [art["img"]], "description": art["desc"]}
     return f'<script type="application/ld+json">{json.dumps(schema)}</script>'
 
+def generate_sitemap(articles):
+    urlset = ET.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
+    added_links = set()
+
+    # Add static pages (assuming they are copied to public/)
+    static_pages = ["", "about.html", "contact.html", "privacy-policy.html", "terms.html", "disclaimer.html", "cookie-policy.html", "submit-guest-post.html"]
+    for page in static_pages:
+        full_url = f"{BASE_URL}{page}"
+        if full_url not in added_links:
+            url_elem = ET.SubElement(urlset, "url")
+            loc = ET.SubElement(url_elem, "loc")
+            loc.text = full_url
+            lastmod = ET.SubElement(url_elem, "lastmod")
+            # For static pages, use the git date of the file in the root directory
+            lastmod.text = get_git_date(page) or datetime.now().isoformat()
+            priority = ET.SubElement(url_elem, "priority")
+            priority.text = "1.0" if page == "" else "0.8"
+            added_links.add(full_url)
+
+    # Add news articles
+    for art in articles:
+        full_url = art["url"]
+        if full_url not in added_links:
+            url_elem = ET.SubElement(urlset, "url")
+            loc = ET.SubElement(url_elem, "loc")
+            loc.text = full_url
+            lastmod = ET.SubElement(url_elem, "lastmod")
+            lastmod.text = art["date"] # Use the date from the article metadata
+            priority = ET.SubElement(url_elem, "priority")
+            priority.text = "0.6"
+            added_links.add(full_url)
+
+    # Convert to standard XML and pretty print
+    xml_str = ET.tostring(urlset, encoding='utf-8')
+    pretty_xml = minidom.parseString(xml_str).toprettyxml(indent="  ")
+    pretty_xml = os.linesep.join([s for s in pretty_xml.splitlines() if s.strip()])
+
+    with open(os.path.join(OUTPUT_DIR, "sitemap.xml"), "w", encoding="utf-8") as f:
+        f.write(pretty_xml)
+
+    print(f"✅ Sitemap.xml successfully generated in {OUTPUT_DIR} with {len(added_links)} links.")
+
 # ==========================================================
 # Main Execution
 # ==========================================================
@@ -136,7 +197,7 @@ for root, _, files in os.walk(NEWS_DIR):
             "cat": cat,
             "desc": meta.get('description', [""])[0],
             "img": meta.get('image', [f"{BASE_URL}default.jpg"])[0],
-            "date": datetime.now().isoformat(),
+            "date": meta.get("date", [get_git_date(os.path.join(root, file)) or datetime.now().isoformat()])[0],
             "url": f"{BASE_URL}{cat}/{file.replace('.md', '.html')}"
         }
         cat_arts[cat].append(art)
@@ -192,11 +253,8 @@ for cat in DEFAULT_CATEGORIES:
 with open(os.path.join(OUTPUT_DIR, INDEX_FILE), "w", encoding="utf-8") as f:
     f.write(index_template.replace("{{HERO_SECTION}}", hero_html).replace("{{DYNAMIC_CONTENT}}", dyn_html).replace("{{BREAKING_NEWS_TICKER}}", ticker))
 
-# Run Sitemap Generator
-print("Generating Sitemap...")
-try:
-    subprocess.run(["python3", "sitemap_generator.py"], check=True)
-except Exception as e:
-    print(f"❌ Sitemap generation failed: {e}")
+    # Generate Sitemap
+    print("Generating Sitemap...")
+    generate_sitemap(all_arts)
 
 print("✅ Build Complete!")
