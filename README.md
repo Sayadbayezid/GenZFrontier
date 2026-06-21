@@ -10,7 +10,20 @@ GenZ Frontier is a modern, automated, and serverless news publishing platform bu
 [![Broken Link Checker](https://github.com/Sayadbayezid/GenZFrontier/actions/workflows/link-checker.yml/badge.svg)](https://github.com/Sayadbayezid/GenZFrontier/actions/workflows/link-checker.yml)
 ---
 <!-- START_LINK_CHECKER -->
+# Summary
 
+| Status         | Count |
+|----------------|-------|
+| 🔍 Total       | 0     |
+| ✅ Successful  | 0     |
+| ⏳ Timeouts    | 0     |
+| 🔀 Redirected  | 0     |
+| 👻 Excluded    | 0     |
+| ❓ Unknown     | 0     |
+| 🚫 Errors      | 0     |
+| ⛔ Unsupported | 0     |
+
+[Full Github Actions output](https://github.com/Sayadbayezid/GenZFrontier/actions/runs/27894930400?check_suite_focus=true)
 <!-- END_LINK_CHECKER -->
 ---
 
