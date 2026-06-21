@@ -159,7 +159,6 @@
                 <li><a href="/sports/">Sports</a></li>
                 <li><a href="/entertainment/">Entertainment</a></li>
                 <li><a href="/careers/">Careers</a></li>
-                <li><a href="/ads/">Ads</a></li>
                 <li><a href="/legacy-archives/">Legacy Archives</a></li>
             </ul>
         </nav>
@@ -300,12 +299,23 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const videoUrl = "";
-            if (videoUrl) {
+            if (videoUrl && videoUrl !== "" && videoUrl !== "") {
                 const articleVideoPopup = document.getElementById("articleVideoPopup");
                 const articleVideoPopupBody = document.getElementById("articleVideoPopupBody");
                 const closeArticleVideoBtn = document.getElementById("closeArticleVideoBtn");
 
-                articleVideoPopupBody.innerHTML = `<iframe src="${videoUrl}" style="width:100%; height:100%; border:none;" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+                if (videoUrl.includes("youtube.com") || videoUrl.includes("youtu.be")) {
+                    let embedUrl = videoUrl;
+                    if (videoUrl.includes("watch?v=")) {
+                        embedUrl = videoUrl.replace("watch?v=", "embed/");
+                    } else if (videoUrl.includes("youtu.be/")) {
+                        embedUrl = videoUrl.replace("youtu.be/", "youtube.com/embed/");
+                    }
+                    articleVideoPopupBody.innerHTML = `<iframe src="${embedUrl}" style="width:100%; height:100%; border:none;" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+                } else {
+                    articleVideoPopupBody.innerHTML = `<video src="${videoUrl}" controls style="width:100%; height:100%;"></video>`;
+                }
+                
                 articleVideoPopup.style.display = "block";
 
                 closeArticleVideoBtn.addEventListener("click", function() {
