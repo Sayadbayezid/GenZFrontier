@@ -5,9 +5,9 @@
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag("js", new Date());
+      gtag('js', new Date());
 
-      gtag("config", "G-0KNQFE6KJW");
+      gtag('config', 'G-0KNQFE6KJW');
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9789336661158068" crossorigin="anonymous"></script>
     
@@ -290,107 +290,319 @@
     <footer>
         <div class="footer-content">
             <div class="logo" style="margin-bottom: 20px;">
-                <a href="/" style="text-decoration: none; color: var(--primary-red); font-weight: 900; font-size: 28px; letter-spacing: -1px;">GenZ <span>Frontier</span></a>
+                <a href="/" style="text-decoration: none; color: var(--primary-red);">GenZ <span style="color: white;">Frontier</span></a>
             </div>
-            <p style="color: #AAA; font-size: 14px; line-height: 1.6; max-width: 600px; margin: 0 auto 20px;">Your daily dose of breaking news, in-depth analysis, and trending stories from around the globe.</p>
-            <div class="footer-links" style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
-                <a href="/about.html" style="color: #CCC; text-decoration: none; font-weight: bold;">About Us</a>
-                <a href="/contact.html" style="color: #CCC; text-decoration: none; font-weight: bold;">Contact</a>
-                <a href="/privacy-policy.html" style="color: #CCC; text-decoration: none; font-weight: bold;">Privacy Policy</a>
-                <a href="/terms.html" style="color: #CCC; text-decoration: none; font-weight: bold;">Terms</a>
-                <a href="./sitemap.xml" style="color: #CCC; text-decoration: none; font-weight: bold;">Sitemap</a>
+            <div class="footer-links" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 20px;">
+                <a href="/about.html" style="color: #ccc;">About Us</a> |
+                <a href="/contact.html" style="color: #ccc;">Contact</a> |
+                <a href="/privacy-policy.html" style="color: #ccc;">Privacy Policy</a> |
+                <a href="/terms.html" style="color: #ccc;">Terms</a> |
+                <a href="/disclaimer.html" style="color: #ccc;">Disclaimer</a> |
+                <a href="/cookie-policy.html" style="color: #ccc;">Cookie Policy</a>
             </div>
-            <div class="social-icons" style="margin-bottom: 20px;">
-                <a href="#" style="color: #CCC; font-size: 24px; margin: 0 10px;"><i class="fab fa-facebook"></i></a>
-                <a href="#" style="color: #CCC; font-size: 24px; margin: 0 10px;"><i class="fab fa-twitter"></i></a>
-                <a href="#" style="color: #CCC; font-size: 24px; margin: 0 10px;"><i class="fab fa-instagram"></i></a>
-                <a href="#" style="color: #CCC; font-size: 24px; margin: 0 10px;"><i class="fab fa-linkedin"></i></a>
-            </div>
-            <p style="color: #888; font-size: 12px;">&copy; 2026 GenZ Frontier. All Rights Reserved.</p>
+            <p>&copy; 2026 GenZ Frontier. All rights reserved. Designed for optimal digital publishing.</p>
         </div>
     </footer>
 
-    <!-- Floating Video Popup -->
-    <div class="video-popup" id="floatingVideoPopup">
+    <div class="video-popup" id="videoPopup">
         <div class="video-popup-header">
-            <span><span class="live-dot">●</span> Live News</span>
-            <span class="close-video-btn" id="closeFloatingVideoBtn">&times;</span>
+            <div><span class="live-dot">●</span> GenZ Live News</div>
+            <div class="close-video-btn" id="closeVideoBtn">&times;</div>
         </div>
-        <div class="video-popup-body">
-            <!-- YouTube iframe will be injected here -->
+        <div class="video-popup-body" id="videoPopupBody"></div>
+    </div>
+
+    <script>
+        // 1. Mobile Hamburger Menu Toggle
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+
+        hamburgerMenu.addEventListener('click', () => {
+            mobileMenuOverlay.style.display = 'block';
+        });
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenuOverlay.style.display = 'none';
+        });
+
+        // 2. Search Toggle and Filter Functionality
+        const searchToggleBtn = document.getElementById('searchToggleBtn');
+        const searchContainer = document.getElementById('searchContainer');
+        const searchInput = document.getElementById('searchInput');
+        const searchSubmitBtn = document.getElementById('searchSubmitBtn');
+        const newsCards = document.querySelectorAll('.news-card, .hero-main, .hero-side-item, .featured-large');
+
+        searchToggleBtn.addEventListener('click', () => {
+            if (searchContainer.style.display === 'block') {
+                searchContainer.style.display = 'none';
+            } else {
+                searchContainer.style.display = 'block';
+                searchInput.focus();
+            }
+        });
+
+        searchSubmitBtn.addEventListener('click', performSearch);
+        searchInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') performSearch();
+        });
+
+        function performSearch() {
+            const filter = searchInput.value.toLowerCase().trim();
+            if (!filter) {
+                alert("Please enter a keyword to search.");
+                return;
+            }
+            
+            let foundCount = 0;
+            newsCards.forEach(card => {
+                const titleText = card.querySelector('h1, h3')?.innerText.toLowerCase() || '';
+                const pText = card.querySelector('p')?.innerText.toLowerCase() || '';
+                
+                if (titleText.includes(filter) || pText.includes(filter)) {
+                    card.style.display = '';
+                    card.style.border = '2px solid var(--primary-red)'; // Highlight search results
+                    foundCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            if(foundCount === 0) {
+                alert("No articles match your search criteria on this landing page.");
+            }
+        }
+
+        // 3. Local Storage Auth System
+        const loginBtn = document.getElementById('loginBtn');
+        const authOverlay = document.getElementById('authOverlay');
+        const closeAuthBtn = document.getElementById('closeAuthBtn');
+        const authForm = document.getElementById('authForm');
+        const authUsernameInput = document.getElementById('authUsername');
+        const authTitle = document.getElementById('authTitle');
+
+        // Check Login State on Page Load
+        function checkLoginStatus() {
+            const loggedInUser = localStorage.getItem('frontierUser');
+            if (loggedInUser) {
+                loginBtn.innerText = `Hi, ${loggedInUser} (Logout)`;
+                loginBtn.classList.add('red');
+            } else {
+                loginBtn.innerText = 'Log In';
+                loginBtn.classList.remove('red');
+            }
+        }
+        checkLoginStatus();
+
+        loginBtn.addEventListener('click', () => {
+            const loggedInUser = localStorage.getItem('frontierUser');
+            if (loggedInUser) {
+                // If logged in, performing a Logout action
+                localStorage.removeItem('frontierUser');
+                alert("Successfully Logged Out.");
+                checkLoginStatus();
+            } else {
+                // Open login modal
+                authOverlay.style.display = 'flex';
+            }
+        });
+
+        closeAuthBtn.addEventListener('click', () => {
+            authOverlay.style.display = 'none';
+        });
+
+        authForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = authUsernameInput.value.trim();
+            if (username) {
+                localStorage.setItem('frontierUser', username);
+                authOverlay.style.display = 'none';
+                alert(`Welcome back, ${username}! Login success.`);
+                checkLoginStatus();
+                authForm.reset();
+            }
+        });
+
+        // 4. Home Page Live TV Logic
+        const liveTvBtnHome = document.getElementById('liveTvBtnHome');
+        const videoPopup = document.getElementById('videoPopup');
+        const closeVideoPopupBtn = document.getElementById('closeVideoBtn');
+        const videoPopupBody = document.getElementById('videoPopupBody');
+
+        liveTvBtnHome.addEventListener('click', () => {
+            // Default 24/7 Live Stream Placeholder (Lofi or News Stream)
+            videoPopupBody.innerHTML = '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1" title="Live TV" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+            videoPopup.style.display = 'block';
+        });
+
+        closeVideoPopupBtn.addEventListener('click', () => {
+            videoPopup.style.display = 'none';
+            videoPopupBody.innerHTML = ''; // Stop Audio
+        });
+    </script>
+
+    <div class="cookie-consent-overlay" id="cookieConsentOverlay">
+        <div class="cookie-consent-popup" id="cookieConsentPopup">
+            <div class="cookie-consent-header">
+                <h3>🍪 Cookie Policy</h3>
+                <button class="cookie-close-btn" id="cookieCloseBtn">&times;</button>
+            </div>
+            <div class="cookie-consent-body">
+                <p>We use cookies to enhance your browsing experience, personalize content, and analyze traffic. By clicking "Accept", you consent to our use of cookies. You can also choose to decline or learn more about our cookie practices.</p>
+            </div>
+            <div class="cookie-consent-actions">
+                <button class="cookie-btn cookie-decline" id="cookieDeclineBtn">Decline</button>
+                <button class="cookie-btn cookie-learn-more" id="cookieLearnMoreBtn">Learn More</button>
+                <button class="cookie-btn cookie-privacy" id="cookiePrivacyBtn">Privacy Policy</button>
+                <button class="cookie-btn cookie-accept" id="cookieAcceptBtn">Accept</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // Mobile Menu Toggle
-        document.getElementById("hamburgerMenu").addEventListener("click", function() {
-            document.getElementById("mobileMenuOverlay").style.display = "flex";
-        });
-        document.getElementById("closeMenuBtn").addEventListener("click", function() {
-            document.getElementById("mobileMenuOverlay").style.display = "none";
-        });
+        (function() {
+            const COOKIE_CONSENT_KEY = 'genzfrontier_cookie_consent';
+            const COOKIE_CONSENT_TIMESTAMP = 'genzfrontier_cookie_consent_timestamp';
+            
+            const overlay = document.getElementById('cookieConsentOverlay');
+            const popup = document.getElementById('cookieConsentPopup');
+            const acceptBtn = document.getElementById('cookieAcceptBtn');
+            const declineBtn = document.getElementById('cookieDeclineBtn');
+            const learnMoreBtn = document.getElementById('cookieLearnMoreBtn');
+            const privacyBtn = document.getElementById('cookiePrivacyBtn');
+            const closeBtn = document.getElementById('cookieCloseBtn');
 
-        // Search Bar Toggle
-        document.getElementById("searchToggleBtn").addEventListener("click", function() {
-            var searchContainer = document.getElementById("searchContainer");
-            if (searchContainer.style.display === "none" || searchContainer.style.display === "") {
-                searchContainer.style.display = "block";
-            } else {
-                searchContainer.style.display = "none";
-            }
-        });
-
-        // Authentication Modal Toggle
-        document.getElementById("loginBtn").addEventListener("click", function() {
-            document.getElementById("authOverlay").style.display = "flex";
-        });
-        document.getElementById("closeAuthBtn").addEventListener("click", function() {
-            document.getElementById("authOverlay").style.display = "none";
-        });
-
-        // Live TV Button (example, replace with actual functionality)
-        document.getElementById("liveTvBtnHome").addEventListener("click", function() {
-            alert("Live TV functionality coming soon!");
-        });
-
-        // Floating Video Popup Logic (example, replace with actual video detection)
-        // This is a placeholder. In a real scenario, you'd detect if a video is on the page
-        // and then populate this popup. For now, it's just a toggle.
-        const floatingVideoPopup = document.getElementById("floatingVideoPopup");
-        const closeFloatingVideoBtn = document.getElementById("closeFloatingVideoBtn");
-        const floatingVideoBody = floatingVideoPopup.querySelector(".video-popup-body");
-
-        // Example: Show popup with a YouTube video after a delay
-        // setTimeout(() => {
-        //     floatingVideoBody.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-        //     floatingVideoPopup.style.display = "block";
-        // }, 5000);
-
-        closeFloatingVideoBtn.addEventListener("click", () => {
-            floatingVideoPopup.style.display = "none";
-            floatingVideoBody.innerHTML = ""; // Stop video playback
-        });
-
-        // Search functionality (example)
-        document.getElementById("searchSubmitBtn").addEventListener("click", function() {
-            const query = document.getElementById("searchInput").value;
-            if (query) {
-                alert("Searching for: " + query);
-                // Implement actual search logic here
-            }
-        });
-
-        // Active navigation link highlighting
-        document.addEventListener("DOMContentLoaded", function() {
-            const currentPath = window.location.pathname;
-            const navLinks = document.querySelectorAll("nav ul li a");
-            navLinks.forEach(link => {
-                if (link.getAttribute("href") === currentPath || (link.getAttribute("href") !== "/" && currentPath.startsWith(link.getAttribute("href")))) {
-                    link.classList.add("active");
+            function hasUserConsented() {
+                const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
+                if (!consent) return false;
+                
+                const timestamp = localStorage.getItem(COOKIE_CONSENT_TIMESTAMP);
+                if (timestamp) {
+                    const daysSinceConsent = (Date.now() - parseInt(timestamp)) / (1000 * 60 * 60 * 24);
+                    if (daysSinceConsent > 30) {
+                        localStorage.removeItem(COOKIE_CONSENT_KEY);
+                        localStorage.removeItem(COOKIE_CONSENT_TIMESTAMP);
+                        return false;
+                    }
                 }
-            });
-        });
+                return true;
+            }
 
+            function showPopupIfNeeded() {
+                if (!hasUserConsented()) {
+                    setTimeout(() => {
+                        overlay.classList.add('show');
+                    }, 500);
+                }
+            }
+
+            function saveConsent(accepted) {
+                localStorage.setItem(COOKIE_CONSENT_KEY, accepted ? 'accepted' : 'declined');
+                localStorage.setItem(COOKIE_CONSENT_TIMESTAMP, Date.now().toString());
+                hidePopup();
+            }
+
+            function hidePopup() {
+                overlay.classList.remove('show');
+            }
+
+            acceptBtn.addEventListener('click', () => saveConsent(true));
+            declineBtn.addEventListener('click', () => saveConsent(false));
+            closeBtn.addEventListener('click', hidePopup);
+
+            learnMoreBtn.addEventListener('click', () => { hidePopup(); });
+            privacyBtn.addEventListener('click', () => { window.location.href = './privacy-policy.html'; });
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', showPopupIfNeeded);
+            } else {
+                showPopupIfNeeded();
+            }
+        })();
     </script>
+
+    <style>
+        /* Cookie Consent Popup Styles */
+        .cookie-consent-overlay {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        .cookie-consent-overlay.show { display: flex; }
+        .cookie-consent-popup {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            margin: 20px;
+            animation: slideUpCookie 0.4s ease-out;
+            position: relative;
+        }
+        @keyframes slideUpCookie { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .cookie-consent-header {
+            background: linear-gradient(135deg, #CC0000 0%, #990000 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cookie-consent-header h3 { margin: 0; font-size: 20px; font-weight: bold; }
+        .cookie-close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.2s;
+        }
+        .cookie-close-btn:hover { opacity: 0.8; }
+        .cookie-consent-body { padding: 20px; font-size: 14px; color: #333; line-height: 1.6; }
+        .cookie-consent-body p { margin: 0; }
+        .cookie-consent-actions {
+            padding: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            border-top: 1px solid #e0e0e0;
+        }
+        .cookie-btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .cookie-decline, .cookie-learn-more, .cookie-privacy { background: #f0f0f0; color: #333; border: 1px solid #ddd; }
+        .cookie-decline:hover, .cookie-learn-more:hover, .cookie-privacy:hover { background: #e0e0e0; border-color: #999; }
+        .cookie-accept { background: #CC0000; color: white; }
+        .cookie-accept:hover { background: #990000; }
+
+        @media (max-width: 600px) {
+            .cookie-consent-popup { width: calc(100% - 40px); margin: 10px 20px; }
+            .cookie-consent-actions { flex-direction: column; gap: 8px; }
+            .cookie-btn { width: 100%; text-align: center; }
+            .cookie-consent-header { padding: 15px; }
+            .cookie-consent-body { padding: 15px; font-size: 13px; }
+            .cookie-consent-actions { padding: 15px; }
+        }
+    </style>
 </body>
 </html>

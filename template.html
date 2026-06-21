@@ -5,8 +5,8 @@
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag("js", new Date());
-      gtag("config", "G-0KNQFE6KJW");
+      gtag('js', new Date());
+      gtag('config', 'G-0KNQFE6KJW');
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9789336661158068" crossorigin="anonymous"></script>
     
@@ -65,7 +65,6 @@
     </style>
 </head>
 <body>
-
     <header>
         <div class="header-top">
             <a href="/" class="logo">GenZ <span>Frontier</span></a>
@@ -98,6 +97,38 @@
     </main>
 
     {{RELATED_POSTS}}
+
+    <!-- Video Popup -->
+    <div id="articleVideoPopup" style="display: none; position: fixed; bottom: 20px; right: 20px; width: 350px; background: #000; border: 2px solid #CC0000; border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000; overflow: hidden;">
+        <div style="background: #111; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; color: white; font-weight: bold; font-size: 13px; border-bottom: 1px solid #333;">
+            <span><span style="color: #CC0000; animation: blink 1.5s infinite;">●</span> VIDEO CONTENT</span>
+            <span id="closeArticleVideoBtn" style="cursor: pointer; font-size: 20px;">&times;</span>
+        </div>
+        <div id="articleVideoPopupBody" style="width: 100%; aspect-ratio: 16/9;"></div>
+    </div>
+
+    <style>
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const videoUrl = "{{VIDEO_URL}}";
+            if (videoUrl) {
+                const articleVideoPopup = document.getElementById("articleVideoPopup");
+                const articleVideoPopupBody = document.getElementById("articleVideoPopupBody");
+                const closeArticleVideoBtn = document.getElementById("closeArticleVideoBtn");
+
+                articleVideoPopupBody.innerHTML = `<iframe src="${videoUrl}" style="width:100%; height:100%; border:none;" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+                articleVideoPopup.style.display = "block";
+
+                closeArticleVideoBtn.addEventListener("click", function() {
+                    articleVideoPopup.style.display = "none";
+                    articleVideoPopupBody.innerHTML = "";
+                });
+            }
+        });
+    </script>
 
     <footer>
         <div class="footer-links">

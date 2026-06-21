@@ -3,7 +3,7 @@ import sys
 import shutil
 import markdown
 import json
-
+# import frontmatter (removed)
 import re
 from datetime import datetime
 import subprocess
@@ -71,7 +71,7 @@ def clean_and_prepare():
                     
                     img_match = re.search(r'image": "(.*?)"', html_content, re.IGNORECASE)
                     if not img_match:
-                        img_match = re.search(r"background-image: url\(\'(.*?)\'\)", html_content, re.IGNORECASE)
+                        img_match = re.search(r'background-image: url<LaTex>\(\'(.*?)\'\)</LaTex>', html_content, re.IGNORECASE)
                     if not img_match:
                         img_match = re.search(r'\<img src="(.*?)"', html_content, re.IGNORECASE)
                     
@@ -126,6 +126,19 @@ def get_json_ld(art):
     schema = {"@context": "https://schema.org", "@type": "NewsArticle", "headline": art["title"], "image": [art["img"]], "description": art["desc"]}
     return f'<script type="application/ld+json">{json.dumps(schema)}</script>'
 
+def sanitize_url(url):
+    return url.replace(' ', '-').replace('#', '').replace('"', '').replace("'", "")
+
+def normalize_date(date_str):
+    if not date_str: return datetime.now().strftime("%Y-%m-%d")
+    try:
+        if "T" in date_str: return date_str.split("T")[0]
+        for fmt in ("%Y-%m-%d", "%d/%m/%Y", "%m/%d/%Y", "%B %d, %Y", "%d %B %Y"):
+            try: return datetime.strptime(date_str, fmt).strftime("%Y-%m-%d")
+            except: continue
+        return date_str
+    except: return datetime.now().strftime("%Y-%m-%d")
+
 def generate_sitemap(articles):
     urlset = ET.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
     added_links = set()
@@ -140,7 +153,7 @@ def generate_sitemap(articles):
             loc.text = full_url
             lastmod = ET.SubElement(url_elem, "lastmod")
             # For static pages, use the git date of the file in the root directory
-            lastmod.text = get_git_date(page) or datetime.now().isoformat()
+            lastmod.text = normalize_date(get_git_date(page))
             priority = ET.SubElement(url_elem, "priority")
             priority.text = "1.0" if page == "" else "0.8"
             added_links.add(full_url)
@@ -153,7 +166,7 @@ def generate_sitemap(articles):
             loc = ET.SubElement(url_elem, "loc")
             loc.text = full_url
             lastmod = ET.SubElement(url_elem, "lastmod")
-            lastmod.text = art["date"] # Use the date from the article metadata
+            lastmod.text = normalize_date(art["date"])
             priority = ET.SubElement(url_elem, "priority")
             priority.text = "0.6"
             added_links.add(full_url)
@@ -198,7 +211,7 @@ for root, _, files in os.walk(NEWS_DIR):
             "desc": meta.get('description', [""])[0],
             "img": meta.get('image', [f"{BASE_URL}default.jpg"])[0],
             "date": meta.get("date", [get_git_date(os.path.join(root, file)) or datetime.now().isoformat()])[0],
-            "url": f"{BASE_URL}{cat}/{file.replace('.md', '.html')}"
+            "url": f"{BASE_URL}{cat}/{sanitize_url(file.replace('.md', '.html'))}"
         }
         cat_arts[cat].append(art)
         all_arts.append(art)
@@ -217,10 +230,16 @@ for root, _, files in os.walk(NEWS_DIR):
             related_html += f'<article class="news-card"><img src="{r["img"]}"><a href="/{r["cat"]}/{r["file"]}"><h3>{r["title"]}</h3></a></article>'
         related_html += '</div></div>'
         
+        # Detect video URL
+        video_url = ""
+        iframe_match = re.search(r'<iframe.*?src=["\'](.*?)["\']', html_cont)
+        if iframe_match:
+            video_url = iframe_match.group(1)
+        
         final_html = template.replace("{{NEWS_CONTENT}}", html_cont).replace("{{ARTICLE_TITLE}}", art['title']) \
                              .replace("{{RELATED_POSTS}}", related_html).replace("{{META_TAGS}}", get_meta(art)) \
                              .replace("{{SCHEMA_DATA}}", get_json_ld(art)).replace("{{BREAKING_NEWS_TICKER}}", get_ticker_html(breaking_arts)) \
-                             .replace("{{CANONICAL_URL}}", art['url'])
+                             .replace("{{CANONICAL_URL}}", art['url']).replace("{{VIDEO_URL}}", video_url)
         
         os.makedirs(os.path.join(OUTPUT_DIR, cat), exist_ok=True)
         with open(os.path.join(OUTPUT_DIR, cat, art['file']), "w", encoding="utf-8") as f: f.write(final_html)
@@ -243,18 +262,27 @@ dyn_html += '</div>'
 for cat in DEFAULT_CATEGORIES:
     arts = sorted(cat_arts[cat], key=lambda x: x['date'], reverse=True)
     cat_index_html = index_template.replace("{{HERO_SECTION}}", "").replace("{{DYNAMIC_CONTENT}}", f'<div class="section-header"><h2>{cat.title()}</h2></div><div class="grid-4">' + "".join([f'<article class="news-card"><img src="{a["img"]}"><a href="/{a["cat"]}/{a["file"]}"><h3>{a["title"]}</h3></a></article>' for a in arts]) + '</div>').replace("{{BREAKING_NEWS_TICKER}}", ticker)
-    with open(os.path.join(OUTPUT_DIR, cat, "index.html"), "w", encoding="utf-8") as f: f.write(cat_index_html.replace('href="./', 'href="/').replace('href="../', 'href="/'))
+    with open(os.path.join(OUTPUT_DIR, cat, "index.html"), "w", encoding="utf-8") as f: f.write(cat_index_html.replace('href="./', 'href="/'))
     
     limit = 2 if cat == 'ads' else 10
     dyn_html += f'<div class="section-header"><h2>{cat.title()}</h2><a href="/{cat}/" class="see-all">See All →</a></div><div class="grid-4">'
-    for a in arts[:limit]: dyn_html += f'<article class="news-card"><img src="{a["img"]}"><a href="/{a["cat"]}/{a["file"]}"><h3>{a["title"]}</h3></a></article>'
+    for a in arts[:limit]: dyn_html += f'<article class="news-card"><img src="{a["img"]}"><a href="/{cat}/{a["file"]}"><h3>{a["title"]}</h3></a></article>'
     dyn_html += '</div>'
 
 with open(os.path.join(OUTPUT_DIR, INDEX_FILE), "w", encoding="utf-8") as f:
     f.write(index_template.replace("{{HERO_SECTION}}", hero_html).replace("{{DYNAMIC_CONTENT}}", dyn_html).replace("{{BREAKING_NEWS_TICKER}}", ticker))
 
-    # Generate Sitemap
-    print("Generating Sitemap...")
-    generate_sitemap(all_arts)
+# Generate Sitemap
+print("Generating Sitemap...")
+generate_sitemap(all_arts)
+
+# Generate llms.txt
+print("Generating llms.txt...")
+llms_content = f"# GenZ Frontier\n\nGenZ Frontier is a modern digital news portal covering World, Tech, Politics, and more.\n\n## Articles\n"
+for art in all_arts[:50]:
+    llms_content += f"- [{art['title']}]({art['url']})\n"
+with open(os.path.join(OUTPUT_DIR, "llms.txt"), "w", encoding="utf-8") as f:
+    f.write(llms_content)
+shutil.copy2(os.path.join(OUTPUT_DIR, "llms.txt"), "llms.txt")
 
 print("✅ Build Complete!")
