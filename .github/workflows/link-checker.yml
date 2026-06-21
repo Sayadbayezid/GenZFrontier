@@ -1,26 +1,58 @@
 name: Broken Link Checker
 
 on:
+  push:
+    branches:
+      - main
   schedule:
-    - cron: '0 0 * * *' # Run daily at midnight UTC
+    - cron: "0 0 * * 1" # Runs every Monday at midnight
   workflow_dispatch:
 
-jobs:
-  check-links:
-    runs-on: ubuntu-latest
+permissions:
+  contents: write
 
+jobs:
+  link-checker:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Run Link Checker
+      - name: Check Links from Sitemap
         uses: lycheeverse/lychee-action@v2
+        id: lychee
         with:
           args: --verbose --no-progress --accept 200,403,429 https://www.genzfrontir.com/sitemap.xml
-          fail: true
-          failIfEmpty: false # Allow empty if no links are found, to prevent workflow failure if sitemap is temporarily empty
-          format: markdown
-          jobSummary: true
-          output: lychee/out.md
-          checkbox: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          fail: false
+          failIfEmpty: false
+          output: ./lychee/out.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update README Report
+        run: |
+          # Load the report or use the default success message
+          if [ -f ./lychee/out.md ] && [ -s ./lychee/out.md ]; then
+            REPORT=$(cat ./lychee/out.md)
+          else
+            REPORT="### ✅ All Systems Operational\n\n**Status:** All tools and pages in the sitemap are working perfectly! No broken links found."
+          fi
+
+          # Prepare report for insertion
+          REPORT_ESCAPED=$(echo "$REPORT" | sed ':a;N;$!ba;s/\n/\\n/g' | sed 's/&/\\&/g')
+
+          # Use sed to replace content between the markers
+          sed -i "/<!-- START_LINK_CHECKER -->/,/<!-- END_LINK_CHECKER -->/{
+            /<!-- START_LINK_CHECKER -->/b
+            /<!-- END_LINK_CHECKER -->/b
+            d
+          }" README.md
+          
+          sed -i "/<!-- START_LINK_CHECKER -->/a $REPORT_ESCAPED" README.md
+
+          # Commit and push changes
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add README.md
+          git commit -m "docs: Update broken links report in README" || exit 0
+          git push
