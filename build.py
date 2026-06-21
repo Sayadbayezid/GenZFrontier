@@ -14,112 +14,14 @@ def get_git_date(file_path):
     """Fetches the last commit date for a given file from Git history."""
     try:
         git_date = subprocess.check_output(
-            ['git', 'log', '-1', '--format=%cI', file_path],
+            ["git", "log", "-1", "--format=%cI", file_path],
             stderr=subprocess.DEVNULL
-        ).decode('utf-8').strip()
+        ).decode("utf-8").strip()
         if git_date:
             return git_date
     except Exception:
         pass
     return None
-
-# ==========================================================
-# GenZ Frontier Build Configuration
-# ==========================================================
-NEWS_DIR = "news"
-BASE_URL = "https://www.genzfrontir.com/"
-OUTPUT_DIR = "public"
-TEMPLATE_FILE = "template.html"
-INDEX_FILE = "index.html"
-ADS_DIR = "ads"
-
-DEFAULT_CATEGORIES = ["world", "politics", "business", "tech", "science", "health", "sports", "entertainment", "careers", "ads", "legacy-archives"]
-
-def clean_and_prepare():
-    if os.path.exists(OUTPUT_DIR): shutil.rmtree(OUTPUT_DIR)
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-    os.makedirs(os.path.join(OUTPUT_DIR, ADS_DIR), exist_ok=True)
-    for f in ["index.html", "404.html", "contact.html", "about.html", "privacy-policy.html", "terms.html", "disclaimer.html", "cookie-policy.html", "submit-guest-post.html", "CNAME", "sitemap.xml", "robots.txt"]:
-        if os.path.exists(f): shutil.copy2(f, os.path.join(OUTPUT_DIR, f))
-    
-    legacy_src = "legacy-archives" if os.path.exists("legacy-archives") else os.path.join(NEWS_DIR, "legacy-archives")
-    if os.path.exists(legacy_src):
-        shutil.copytree(legacy_src, os.path.join(OUTPUT_DIR, "legacy-archives"), dirs_exist_ok=True)
-        
-        legacy_index_path = os.path.join(OUTPUT_DIR, "legacy-archives", "index.html")
-        if os.path.exists(legacy_index_path):
-            with open(legacy_index_path, "r", encoding="utf-8") as f:
-                legacy_index_content = f.read()
-            
-            cards_html = ""
-            for file in sorted(os.listdir(legacy_src)):
-                if file.endswith(".html") and file != "index.html":
-                    with open(os.path.join(legacy_src, file), "r", encoding="utf-8") as f:
-                        html_content = f.read()
-                    
-                    title_match = re.search(r"<title>(.*?)</title>", html_content, re.IGNORECASE | re.DOTALL)
-                    title = title_match.group(1).split("|")[0].strip() if title_match else file.replace(".html", "").title()
-                    
-                    desc_match = re.search(r'\<meta name="description" content="(.*?)"\>', html_content, re.IGNORECASE)
-                    desc = desc_match.group(1).strip() if desc_match else "আর্কাইভের বিস্তারিত দেখতে ক্লিক করুন।"
-                    
-                    img_match = re.search(r'image": "(.*?)"', html_content, re.IGNORECASE)
-                    if not img_match:
-                        img_match = re.search(r'background-image: url\(\'(.*?)\'\)', html_content, re.IGNORECASE)
-                    if not img_match:
-                        img_match = re.search(r'\<img src="(.*?)"', html_content, re.IGNORECASE)
-                    
-                    img_url = img_match.group(1) if img_match else "https://www.genzfrontir.com/default.jpg"
-                    
-                    card_link = file.replace(".html", "")
-                    cards_html += f'''
-                <a href="/legacy-archives/{card_link}" class="archive-card group block bg-[#0f172a] border border-slate-800 rounded-2xl overflow-hidden relative">
-                    <div class="card-img-wrapper h-64 w-full bg-slate-900 relative">
-                        <img src="{img_url}" alt="{title}" class="card-img w-full h-full object-cover object-top opacity-70 group-hover:opacity-100 grayscale group-hover:grayscale-0">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent"></div>
-                        <span class="absolute top-4 left-4 bg-red-600/80 text-white text-xs font-bold px-3 py-1 rounded-full bangla-font backdrop-blur-sm">Legacy</span>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold bangla-font text-white mb-3 group-hover:text-cyan-400 transition-colors">{title}</h3>
-                        <p class="text-slate-400 bangla-font text-sm leading-relaxed mb-6">{desc}</p>
-                        <div class="flex items-center text-cyan-500 font-bold bangla-font text-sm">
-                            আর্কাইভ দেখুন <span class="ml-2 transition-transform group-hover:translate-x-2">→</span>
-                        </div>
-                    </div>
-                </a>'''
-            
-            cards_html += '''
-                <div class="archive-card group block bg-[#0f172a] border border-slate-800 border-dashed rounded-2xl overflow-hidden relative cursor-not-allowed">
-                    <div class="card-img-wrapper h-64 w-full bg-slate-900/50 flex items-center justify-center relative">
-                        <svg class="w-16 h-16 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent"></div>
-                    </div>
-                    <div class="p-8 opacity-60">
-                        <h3 class="text-2xl font-bold bangla-font text-slate-500 mb-3">নতুন আর্কাইভ</h3>
-                        <p class="text-slate-500 bangla-font text-sm leading-relaxed mb-6">আমাদের গবেষণা ও তথ্য সংগ্রহের কাজ চলমান রয়েছে। খুব শীঘ্রই নতুন আর্কাইভ যুক্ত করা হবে।</p>
-                        <div class="flex items-center text-slate-600 font-bold bangla-font text-sm">
-                            শীঘ্রই আসছে...
-                        </div>
-                    </div>
-                </div>'''
-            
-            new_index_content = legacy_index_content.replace("{{LEGACY_CARDS_PLACEHOLDER}}", cards_html)
-            with open(legacy_index_path, "w", encoding="utf-8") as f:
-                f.write(new_index_content)
-
-def get_ticker_html(articles):
-    # Sort all articles by date descending and take top 15
-    latest_15 = sorted(articles, key=lambda x: x['date'], reverse=True)[:15]
-    if not latest_15: return ""
-    items = "".join([f'<span>🔴 <a href="/{a["cat"]}/{a["file"]}" style="color: white; text-decoration: none;">{a["title"]}</a></span>' for a in latest_15])
-    return f'<div class="breaking-news-ticker"><div class="breaking-label">LIVE UPDATES</div><marquee class="breaking-marquee" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">{items}</marquee></div>'
-
-def get_meta(art):
-    return f'<meta name="description" content="{art["desc"]}"><meta property="og:title" content="{art["title"]}"><meta property="og:image" content="{art["img"]}"><meta property="og:url" content="{art["url"]}">'
-
-def get_json_ld(art):
-    schema = {"@context": "https://schema.org", "@type": "NewsArticle", "headline": art["title"], "image": [art["img"]], "description": art["desc"]}
-    return f'<script type="application/ld+json">{json.dumps(schema)}</script>'
 
 def sanitize_url(url):
     return url.replace(' ', '-').replace('#', '').replace('"', '').replace("'", "")
@@ -134,42 +36,52 @@ def normalize_date(date_str):
         return date_str
     except: return datetime.now().strftime("%Y-%m-%d")
 
+# ==========================================================
+# GenZ Frontier Build Configuration
+# ==========================================================
+NEWS_DIR = "news"
+BASE_URL = "https://www.genzfrontir.com/"
+OUTPUT_DIR = "public"
+TEMPLATE_FILE = "template.html"
+INDEX_FILE = "index.html"
+ADS_DIR = "ads"
+
+DEFAULT_CATEGORIES = ["world", "politics", "business", "tech", "science", "health", "sports", "entertainment", "careers", "legacy-archives"]
+
+def clean_and_prepare():
+    if os.path.exists(OUTPUT_DIR): shutil.rmtree(OUTPUT_DIR)
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    os.makedirs(os.path.join(OUTPUT_DIR, ADS_DIR), exist_ok=True)
+    for f in ["index.html", "404.html", "contact.html", "about.html", "privacy-policy.html", "terms.html", "disclaimer.html", "cookie-policy.html", "submit-guest-post.html", "CNAME", "sitemap.xml", "robots.txt", "style.css", "favicon.ico"]:
+        if os.path.exists(f): shutil.copy2(f, os.path.join(OUTPUT_DIR, f))
+    
+    # Handle Legacy Archives
+    legacy_src = "legacy-archives"
+    if os.path.exists(legacy_src):
+        shutil.copytree(legacy_src, os.path.join(OUTPUT_DIR, "legacy-archives"), dirs_exist_ok=True)
+
 def generate_sitemap(articles):
     urlset = ET.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
     added_links = set()
-
     static_pages = ["", "about.html", "contact.html", "privacy-policy.html", "terms.html", "disclaimer.html", "cookie-policy.html", "submit-guest-post.html"]
     for page in static_pages:
         full_url = f"{BASE_URL}{page}"
-        if full_url not in added_links:
-            url_elem = ET.SubElement(urlset, "url")
-            loc = ET.SubElement(url_elem, "loc")
-            loc.text = full_url
-            lastmod = ET.SubElement(url_elem, "lastmod")
-            lastmod.text = normalize_date(get_git_date(page))
-            priority = ET.SubElement(url_elem, "priority")
-            priority.text = "1.0" if page == "" else "0.8"
-            added_links.add(full_url)
-
+        url_elem = ET.SubElement(urlset, "url")
+        ET.SubElement(url_elem, "loc").text = full_url
+        ET.SubElement(url_elem, "lastmod").text = normalize_date(get_git_date(page))
+        ET.SubElement(url_elem, "priority").text = "1.0" if page == "" else "0.8"
+        added_links.add(full_url)
     for art in articles:
-        full_url = art["url"]
-        if full_url not in added_links:
+        if art["url"] not in added_links:
             url_elem = ET.SubElement(urlset, "url")
-            loc = ET.SubElement(url_elem, "loc")
-            loc.text = full_url
-            lastmod = ET.SubElement(url_elem, "lastmod")
-            lastmod.text = normalize_date(art["date"])
-            priority = ET.SubElement(url_elem, "priority")
-            priority.text = "0.6"
-            added_links.add(full_url)
-
+            ET.SubElement(url_elem, "loc").text = art["url"]
+            ET.SubElement(url_elem, "lastmod").text = normalize_date(art["date"])
+            ET.SubElement(url_elem, "priority").text = "0.6"
+            added_links.add(art["url"])
     xml_str = ET.tostring(urlset, encoding='utf-8')
     pretty_xml = minidom.parseString(xml_str).toprettyxml(indent="  ")
-    pretty_xml = os.linesep.join([s for s in pretty_xml.splitlines() if s.strip()])
-
-    with open(os.path.join(OUTPUT_DIR, "sitemap.xml"), "w", encoding="utf-8") as f:
-        f.write(pretty_xml)
-    print(f"✅ Sitemap.xml successfully generated in {OUTPUT_DIR} with {len(added_links)} links.")
+    with open(os.path.join(OUTPUT_DIR, "sitemap.xml"), "w", encoding="utf-8") as f: f.write(pretty_xml)
+    shutil.copy2(os.path.join(OUTPUT_DIR, "sitemap.xml"), "sitemap.xml")
 
 # ==========================================================
 # Main Execution
@@ -187,83 +99,137 @@ for root, _, files in os.walk(NEWS_DIR):
         if not file.endswith(".md"): continue
         cat = os.path.basename(root)
         if cat not in cat_arts: continue
-        
         with open(os.path.join(root, file), "r", encoding="utf-8") as f: txt = f.read()
-        html_cont = md_parser.convert(txt)
+        md_parser.convert(txt)
         meta = md_parser.Meta; md_parser.reset()
-        
         art = {
-            "title": meta.get('title', [file.replace(".md", "").title()])[0],
+            "title": meta.get("title", [file.replace(".md", "").title()])[0],
             "file": file.replace(".md", ".html"),
             "cat": cat,
-            "desc": meta.get('description', [""])[0],
-            "img": meta.get('image', [f"{BASE_URL}default.jpg"])[0],
+            "desc": meta.get("description", [""])[0],
+            "img": meta.get("image", [f"{BASE_URL}default.jpg"])[0],
             "date": meta.get("date", [get_git_date(os.path.join(root, file)) or datetime.now().isoformat()])[0],
             "url": f"{BASE_URL}{cat}/{sanitize_url(file.replace('.md', '.html'))}"
         }
         cat_arts[cat].append(art)
         all_arts.append(art)
 
-# Sort and get ticker HTML using all articles
-ticker = get_ticker_html(all_arts)
+all_arts.sort(key=lambda x: x["date"], reverse=True)
 
-# Generate Individual Posts
-for art in all_arts:
-    related_arts = [a for a in cat_arts[art['cat']] if a['file'] != art['file']]
-    if len(related_arts) < 4:
-        other_arts = [a for a in all_arts if a['cat'] != art['cat'] and a['file'] != art['file']]
-        related_arts += other_arts[:(4 - len(related_arts))]
+# 1. Hero Section & 3. Live Update Section
+hero_post = all_arts[0] if all_arts else None
+live_updates_posts = all_arts[:15]
+hero_html = ""
+if hero_post:
+    hero_html = f'''
+<section class="hero-section">
+    <div class="hero-container">
+        <div class="hero-main">
+            <span class="red-tag">LATEST NEWS</span>
+            <a href="/{hero_post["cat"]}/{hero_post["file"]}">
+                <h1>{hero_post["title"]}</h1>
+            </a>
+            <p>{hero_post["desc"]}</p>
+            <a href="/{hero_post["cat"]}/{hero_post["file"]}">
+                <img src="{hero_post["img"]}" alt="{hero_post["title"]}" loading="eager" fetchpriority="high">
+            </a>
+        </div>
+        <div class="hero-sidebar hero-sidebar-scroll">
+            <div class="section-header"><h2>LIVE UPDATES</h2></div>
+'''
+    for a in live_updates_posts:
+        hero_html += f'''
+            <div class="hero-side-item">
+                <a href="/{a["cat"]}/{a["file"]}">
+                    <img src="{a["img"]}" alt="{a["title"]}" loading="lazy">
+                </a>
+                <div>
+                    <h3><a href="/{a["cat"]}/{a["file"]}">{a["title"]}</a></h3>
+                </div>
+            </div>
+'''
+    hero_html += '</div></div></section>'
+
+# 2. Breaking News Ticker
+ticker_posts = all_arts[:15]
+ticker_items = "".join([f'<span>🔴 <a href="/{a["cat"]}/{a["file"]}" style="color: white; text-decoration: none;">{a["title"]}</a></span>' for a in ticker_posts])
+ticker = f'<div class="breaking-news-ticker"><div class="breaking-label">BREAKING</div><marquee class="breaking-marquee" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">{ticker_items}</marquee></div>'
+
+# 4. Latest Mix Section (BBC Style)
+mix_posts = all_arts[:20]
+dyn_html = ""
+if mix_posts:
+    featured_mix = mix_posts[0]
+    dyn_html += f'''
+<div class="section-header"><h2>Latest Mix</h2></div>
+<div class="grid-featured">
+    <div class="featured-large">
+        <a href="/{featured_mix["cat"]}/{featured_mix["file"]}">
+            <img src="{featured_mix["img"]}" alt="{featured_mix["title"]}" loading="lazy">
+            <div class="overlay">
+                <h3>{featured_mix["title"]}</h3>
+            </div>
+        </a>
+    </div>
+    <div class="hero-sidebar hero-sidebar-scroll">
+'''
+    for a in mix_posts[1:]:
+        dyn_html += f'''
+        <div class="hero-side-item">
+            <div>
+                <h3><a href="/{a["cat"]}/{a["file"]}">{a["title"]}</a></h3>
+            </div>
+        </div>
+'''
+    dyn_html += '</div></div>'
+
+# 5. Category Sections (10 Blocks)
+for cat in DEFAULT_CATEGORIES:
+    if cat in ["ads", "legacy-archives"]: continue
+    c_posts = sorted(cat_arts[cat], key=lambda x: x["date"], reverse=True)[:5]
+    if not c_posts: continue
     
-    related_html = '<div class="related-section"><div class="section-header"><h2>Suggested For You</h2></div><div class="grid-4">'
-    for r in related_arts[:8]:
-        related_html += f'<article class="news-card"><img src="{r["img"]}"><a href="/{r["cat"]}/{r["file"]}"><h3>{r["title"]}</h3></a></article>'
-    related_html += '</div></div>'
+    cat_html = f'<div class="section-header"><h2>{cat.title()}</h2><a href="/{cat}/" class="see-all">See All →</a></div><div class="grid-featured">'
+    featured = c_posts[0]
+    cat_html += f'''
+    <div class="featured-large">
+        <a href="/{featured["cat"]}/{featured["file"]}">
+            <img src="{featured["img"]}" alt="{featured["title"]}" loading="lazy">
+            <div class="overlay">
+                <h3>{featured["title"]}</h3>
+            </div>
+        </a>
+    </div>
+    <div class="hero-sidebar hero-sidebar-scroll">
+'''
+    for a in c_posts[1:]:
+        cat_html += f'''
+        <div class="hero-side-item">
+            <div>
+                <h3><a href="/{a["cat"]}/{a["file"]}">{a["title"]}</a></h3>
+            </div>
+        </div>
+'''
+    cat_html += '</div></div>'
+    dyn_html += cat_html
+
+# Generate Pages
+for art in all_arts:
+    with open(os.path.join(NEWS_DIR, art["cat"], art["file"].replace(".html", ".md")), "r", encoding="utf-8") as f:
+        md_content = f.read()
     
     video_url = ""
-    # Look for video in the original markdown content too
-    with open(os.path.join(NEWS_DIR, art['cat'], art['file'].replace('.html', '.md')), "r", encoding="utf-8") as f:
-        md_content = f.read()
-        iframe_match = re.search(r'<iframe.*?src=["\'](.*?)["\']', md_content)
-        if iframe_match:
-            video_url = iframe_match.group(1)
+    iframe_match = re.search(r'<iframe.*?src=["\"](.*?)["\"]', md_content)
+    if iframe_match: video_url = iframe_match.group(1)
 
-    final_html = template.replace("{{NEWS_CONTENT}}", md_parser.convert(md_content)).replace("{{ARTICLE_TITLE}}", art['title']) \
-                         .replace("{{RELATED_POSTS}}", related_html).replace("{{META_TAGS}}", get_meta(art)) \
-                         .replace("{{SCHEMA_DATA}}", get_json_ld(art)).replace("{{BREAKING_NEWS_TICKER}}", ticker) \
-                         .replace("{{CANONICAL_URL}}", art['url']).replace("{{VIDEO_URL}}", video_url)
+    final_html = template.replace("{{NEWS_CONTENT}}", md_parser.convert(md_content)).replace("{{ARTICLE_TITLE}}", art["title"]) \
+                         .replace("{{BREAKING_NEWS_TICKER}}", ticker).replace("{{VIDEO_URL}}", video_url)
     
-    os.makedirs(os.path.join(OUTPUT_DIR, art['cat']), exist_ok=True)
-    with open(os.path.join(OUTPUT_DIR, art['cat'], art['file']), "w", encoding="utf-8") as f: f.write(final_html)
-
-# Generate Home & Categories
-all_arts.sort(key=lambda x: x['date'], reverse=True)
-
-hero_arts = all_arts[:10]
-hero_html = f'<section class="hero-section"><div class="hero-container"><div class="hero-main"><span class="red-tag">LIVE UPDATES</span><a href="/{hero_arts[0]["cat"]}/{hero_arts[0]["file"]}"><h1>{hero_arts[0]["title"]}</h1></a><p>{hero_arts[0]["desc"]}</p><a href="/{hero_arts[0]["cat"]}/{hero_arts[0]["file"]}"><img src="{hero_arts[0]["img"]}"></a></div><div class="hero-sidebar hero-sidebar-scroll">'
-for a in hero_arts[1:]: hero_html += f'<div class="hero-side-item"><a href="/{a["cat"]}/{a["file"]}"><img src="{a["img"]}"></a><div><h3>{a["title"]}</h3></div></div>'
-hero_html += '</div></div></section>'
-
-dyn_html = '<div class="section-header"><h2>Latest Mix</h2></div><div class="grid-4">'
-for a in all_arts[:12]: dyn_html += f'<article class="news-card"><img src="{a["img"]}"><a href="/{a["cat"]}/{a["file"]}"><h3>{a["title"]}</h3></a></article>'
-dyn_html += '</div>'
-
-for cat in DEFAULT_CATEGORIES:
-    arts = sorted(cat_arts[cat], key=lambda x: x['date'], reverse=True)
-    cat_index_html = index_template.replace("{{HERO_SECTION}}", "").replace("{{DYNAMIC_CONTENT}}", f'<div class="section-header"><h2>{cat.title()}</h2></div><div class="grid-4">' + "".join([f'<article class="news-card"><img src="{a["img"]}"><a href="/{a["cat"]}/{a["file"]}"><h3>{a["title"]}</h3></a></article>' for a in arts]) + '</div>').replace("{{BREAKING_NEWS_TICKER}}", ticker)
-    with open(os.path.join(OUTPUT_DIR, cat, "index.html"), "w", encoding="utf-8") as f: f.write(cat_index_html)
+    os.makedirs(os.path.join(OUTPUT_DIR, art["cat"]), exist_ok=True)
+    with open(os.path.join(OUTPUT_DIR, art["cat"], art["file"]), "w", encoding="utf-8") as f: f.write(final_html)
 
 with open(os.path.join(OUTPUT_DIR, INDEX_FILE), "w", encoding="utf-8") as f:
     f.write(index_template.replace("{{HERO_SECTION}}", hero_html).replace("{{DYNAMIC_CONTENT}}", dyn_html).replace("{{BREAKING_NEWS_TICKER}}", ticker))
 
-print("Generating Sitemap...")
 generate_sitemap(all_arts)
-
-print("Generating llms.txt...")
-llms_content = f"# GenZ Frontier\n\nGenZ Frontier is a modern digital news portal covering World, Tech, Politics, and more.\n\n## Articles\n"
-for art in all_arts[:50]:
-    llms_content += f"- [{art['title']}]({art['url']})\n"
-with open(os.path.join(OUTPUT_DIR, "llms.txt"), "w", encoding="utf-8") as f:
-    f.write(llms_content)
-shutil.copy2(os.path.join(OUTPUT_DIR, "llms.txt"), "llms.txt")
-
 print("✅ Build Complete!")
