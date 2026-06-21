@@ -71,7 +71,8 @@ def generate_sitemap(articles):
         ET.SubElement(url_elem, "lastmod").text = normalize_date(get_git_date(page))
         ET.SubElement(url_elem, "priority").text = "1.0" if page == "" else "0.8"
         added_links.add(full_url)
-    for art in articles:
+    for art in all_arts:
+        if art["cat"] == "ads": continue
         if art["url"] not in added_links:
             url_elem = ET.SubElement(urlset, "url")
             ET.SubElement(url_elem, "loc").text = art["url"]
@@ -248,8 +249,23 @@ for art in all_arts:
     related_html += '</div></div>'
 
     video_url = ""
-    iframe_match = re.search(r'<iframe.*?src=["\"](.*?)["\"]', md_content)
-    if iframe_match: video_url = iframe_match.group(1)
+    # Support YouTube, Vimeo, and direct video links
+    iframe_match = re.search(r'<iframe.*?src=["\'](.*?)["\']', md_content, re.IGNORECASE)
+    video_tag_match = re.search(r'<video.*?src=["\'](.*?)["\']', md_content, re.IGNORECASE)
+    
+    # Check for direct video links in markdown [video](url)
+    direct_video_match = re.search(r'\[.*?\]\((.*?\.(mp4|webm|ogg))\)', md_content, re.IGNORECASE)
+    
+    if iframe_match:
+        video_url = iframe_match.group(1)
+    elif video_tag_match:
+        video_url = video_tag_match.group(1)
+    elif direct_video_match:
+        video_url = direct_video_match.group(1)
+    
+    # Ensure video URL is absolute
+    if video_url and video_url.startswith("//"):
+        video_url = "https:" + video_url
 
     # SEO Metadata & Schema
     meta_tags = f'''
