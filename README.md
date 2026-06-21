@@ -23,7 +23,7 @@ GenZ Frontier is a modern, automated, and serverless news publishing platform bu
 | 🚫 Errors      | 0     |
 | ⛔ Unsupported | 0     |
 
-[Full Github Actions output](https://github.com/Sayadbayezid/GenZFrontier/actions/runs/27895209909?check_suite_focus=true)
+[Full Github Actions output](https://github.com/Sayadbayezid/GenZFrontier/actions/runs/27895448240?check_suite_focus=true)
 <!-- END_LINK_CHECKER -->
 ---
 
