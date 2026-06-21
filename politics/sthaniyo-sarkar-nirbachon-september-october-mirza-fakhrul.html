@@ -231,15 +231,17 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const videoUrl = "";
-            if (videoUrl && videoUrl !== "" && videoUrl !== "") {
+            // Check if videoUrl is present and not the raw placeholder
+            if (videoUrl && videoUrl !== "" && !videoUrl.includes("{{") && !videoUrl.includes("}}")) {
                 const articleVideoPopup = document.getElementById("articleVideoPopup");
                 const articleVideoPopupBody = document.getElementById("articleVideoPopupBody");
                 const closeArticleVideoBtn = document.getElementById("closeArticleVideoBtn");
 
-                if (videoUrl.includes("youtube.com") || videoUrl.includes("youtu.be")) {
+                // Determine if it should be an iframe (YouTube, Facebook, etc.) or a native video
+                if (videoUrl.includes("youtube.com") || videoUrl.includes("youtu.be") || videoUrl.includes("facebook.com") || videoUrl.includes("vimeo.com") || videoUrl.includes("plugins/video.php")) {
                     let embedUrl = videoUrl;
-                    if (videoUrl.includes("watch?v=")) {
-                        embedUrl = videoUrl.replace("watch?v=", "embed/");
+                    if (videoUrl.includes("youtube.com/watch?v=")) {
+                        embedUrl = videoUrl.replace("youtube.com/watch?v=", "youtube.com/embed/");
                     } else if (videoUrl.includes("youtu.be/")) {
                         embedUrl = videoUrl.replace("youtu.be/", "youtube.com/embed/");
                     }
