@@ -63,7 +63,7 @@ Stay updated with the latest announcements, voter education campaigns, and elect
 
 For official statements, election observation forms, or legal inquiries regarding election acts and rules, please contact the **Information Officer** at the Secretariat.
 
-> **Note:** For media inquiries, technical consultancy, or digital asset management related to GenZ Frontier, please visit our [Contact Page](www.genzfrontir.com/contact.html).
+> **Note:** For media inquiries, technical consultancy, or digital asset management related to GenZ Frontier, please visit our [Contact Page](https://www.genzfrontir.com/contact.html)
 
 ---
 *This directory is maintained as part of the GenZ Frontier Legacy Archives to preserve essential public service information for the citizens of Bangladesh.*
