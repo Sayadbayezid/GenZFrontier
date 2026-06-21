@@ -37,19 +37,23 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Synchronize with remote to prevent non-fast-forward errors
-          git pull --rebase origin main
+          # Force sync with remote to avoid non-fast-forward errors
+          git fetch origin main
+          git reset --hard origin/main
           
+          # Add sitemap.xml after build script regeneration
           git add sitemap.xml
+          
+          # Commit only if there are actual changes
           if [ -n "$(git status --porcelain sitemap.xml)" ]; then
             git commit -m "chore: automated sitemap update [skip ci]"
-            git push
+            git push origin main
           else
             echo "No changes to sitemap.xml"
           fi
 
       - name: Deploy to GitHub Pages
-        if: always() # Ensures deployment runs even if sitemap step fails
+        if: always()
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
