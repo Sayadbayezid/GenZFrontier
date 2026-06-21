@@ -218,12 +218,28 @@ for art in all_arts:
     with open(os.path.join(NEWS_DIR, art["cat"], art["file"].replace(".html", ".md")), "r", encoding="utf-8") as f:
         md_content = f.read()
     
+    # 1. Related Posts Fetching (4 posts, same category preferred)
+    related_candidates = [a for a in cat_arts[art["cat"]] if a["file"] != art["file"]]
+    if len(related_candidates) < 4:
+        global_recent = [a for a in all_arts if a["file"] != art["file"] and a not in related_candidates]
+        related_candidates += global_recent[:(4 - len(related_candidates))]
+    
+    related_html = '<div class="related-section"><div class="section-header"><h2>Suggested For You</h2></div><div class="grid-4">'
+    for r in related_candidates[:4]:
+        related_html += f'''
+        <article class="news-card">
+            <img src="{r["img"]}" alt="{r["title"]}" loading="lazy">
+            <a href="/{r["cat"]}/{r["file"]}"><h3>{r["title"]}</h3></a>
+        </article>'''
+    related_html += '</div></div>'
+
     video_url = ""
     iframe_match = re.search(r'<iframe.*?src=["\"](.*?)["\"]', md_content)
     if iframe_match: video_url = iframe_match.group(1)
 
     final_html = template.replace("{{NEWS_CONTENT}}", md_parser.convert(md_content)).replace("{{ARTICLE_TITLE}}", art["title"]) \
-                         .replace("{{BREAKING_NEWS_TICKER}}", ticker).replace("{{VIDEO_URL}}", video_url)
+                         .replace("{{BREAKING_NEWS_TICKER}}", ticker).replace("{{VIDEO_URL}}", video_url) \
+                         .replace("{{RELATED_POSTS}}", related_html)
     
     os.makedirs(os.path.join(OUTPUT_DIR, art["cat"]), exist_ok=True)
     with open(os.path.join(OUTPUT_DIR, art["cat"], art["file"]), "w", encoding="utf-8") as f: f.write(final_html)
