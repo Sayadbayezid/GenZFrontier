@@ -141,6 +141,85 @@ Aesthetic engagement also encourages readers to reflect on broader questions abo
 The novel illustrates that reading is not merely an academic activity but also a deeply human experience. By engaging with fictional characters and their struggles, readers develop greater emotional awareness, stronger moral reasoning, and a deeper appreciation for the complexity of human behavior.
 
 Although the novel may present challenges for contemporary audiences, its exploration of innocence, responsibility, and personal growth remains highly relevant. Through careful reading and reflection, young readers can gain valuable insights into themselves and others, making literature an essential part of emotional and moral development.
+that we have the sensation of reading alongside him. As these readings are part
+of his becoming a writer himself, we can identify in them a semi-autobiographical
+trait. Anyway, “the most beautiful thing” (Móricz 1990, 17.) Misi had ever read is
+Heart by Edmondo De Amicis, which is a juvenile best-seller from the end of the
+19th Century. De Amicis’s book is similarly a coming-of-age novel, with an eleven-
+year-old protagonist reading about other boys performing great deeds during the
+Italian unification. In this way, actual readers of Be Faithful unto Death find
+themselves at the end point of cultural transactions that takes form of a reading
+chain: we read about a character who is reading a book about a boy reading stories
+that revolve around other boys and diﬀerent moral values. What attracts Misi
+most is the altruistic behaviour of a poor child from Turin helping his father every
+night without the father being aware of it. He is experiencing moral beauty while
+reading about the child’s anonymous self-sacrifice, as his appraisal of the moral
+behaviour provides aesthetic pleasure. This episode provides a good example for
+moral aesthetic judgments, which rely more on emotions than morality judgments
+do (cf. Cheng et al. 2021). The “beautiful” story about the boy from Turin, who
+continues to help his father despite his anger at his tiredness, is a sort of prelude to
+what is going to happen to Misi as he will be wrongly accused of a non-committed
+crime. Readers (fictional or not) experience strong emotions while reading about
+morally relevant actions. They feel pleasure and beauty about altruistic behaviour
+and disgust about morally repugnant acts. However, Móricz’s novel does not
+seem to fit properly into the general moral scheme of stories proposed by Flesch
+(2007), which consists of three basic figures: the innocent victim, the exploiter and
+someone who seeks to punish the exploiter. We have the first two elements, but
+the traditional poetic justice of the villain being punished fails to happen, despite
+how much readers may long for it due to their inborn preference of justice. In fact,
+in terms of poetic justice, there is a significant diﬀerence between popular genres
+and artistic literature. The former is usually organised around unquestionable
+moral values by presenting a clear contrast between good and evil, following the
+readers’ common needs. By contrast, artistic fiction, like Móricz’s novel, diverges
+from this basic setting and focuses readers’ attention on moral dilemmas, social
+injustices, and inhumane situations that cannot be resolved within the confines of
+the fictional world (cf. Kaul 2008, Horváth and Szabó 2021).
+Therefore, since most children’s literature texts adopt the conventions of popu-
+lar genres, it is unusual for moral conflict to remain unresolved and for pessimistic
+moods to persist for so long, even beyond the end of the story. The ethical sym-
+metry is broken since the cheater will not be punished and the protagonist fails to
+integrate into the world. Although Misi’s innocence in the lottery crime is even-
+tually proven, he does not experience any happiness as he is overwhelmed by the
+pressure and injustice. Unlike heroes in most boarding school stories, he doesn’t
+
+become part of the community; in fact, he is more isolated than before, having
+seemingly lost his illusions and hopes. The novel’s most suspenseful moment—and
+the culmination of his suﬀering—occurs when he must appear before the teachers.
+As cognitive poetics suggests, suspense eﬃciently helps to focus the reader’s atten-
+tion on structurally relevant elements by increasing their cognitive and emotional
+activity. The persistence of sadness as a meta-emotion (readers feeling sad about
+the character’s emotions) can also provoke a profound emotional response and be-
+come similarly functional for comprehension (Koopman 2015). Importantly, this
+emotionally charged and ethically ambiguous ending of the story evokes righteous
+anger in the reader, providing an additional motivation to reflect on the depicted
+social conditions and the possibility of transforming injustice into justice.
+In summary, Móricz’s novel oﬀers highly relevant moral content and represents
+a wide range of moral emotions in their various dimensions and dynamics, requir-
+ing an increased level of cognitive and emotional understanding from the reader.
+Notably, children’s and young adult literary texts not only reflect the target au-
+dience’s developmental stages, but also confront readers with cognitive challenges,
+such as “testing” their mindreading abilities and illustrating diﬀerent scenarios in-
+volving moral dilemmas or poetic justice. Young adult fiction, in particular, tends
+to enhance moral emotions and moral judgement (Oziewicz 2015). However, the
+greater the challenge, the less typical the text appears to belong to the corpus of
+children’s or young adult literature. Accordingly, Be Faithful unto Death has some
+rather atypical traits as young adult novel: the protagonist is not a real hero, the
+plot is more about his emotional changes than about his actions and in contrast to
+the evil legitimised by social practice, good remains an endangered, marginalised
+quality.
+At the same time, the story encourages readers to form moral judgements and
+take a stance by depicting the protagonist’s conflicts with his environment. Thanks
+to the variety of situations and emotions, this process is not confined to the limits
+of a child’s black-and-white thinking, nor does it become clichéd; information from
+several directions has to be taken into account and moral conclusions have to be
+concidered in more detail. In this way, readers are given numerous opportunities
+to study emotions and motivations, since they can delve into the protagonist’s
+psyche, which would be impossible in real life. Overall, due to its complex nature,
+the text is better suited to experienced young or adult readers than to fourteen-
+year-old children and the aforementioned challenges can be considered a guideline
+for the literary and psychological transition from childhood to adulthood in terms
+of reading experience.
+
 
 ***
 **#YouthLiterature #MoralDevelopment #ZsigmondMóricz #EmotionalIntelligence #Education #GenZFrontierCulture**
