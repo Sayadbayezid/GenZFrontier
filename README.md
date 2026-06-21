@@ -8,7 +8,10 @@
 GenZ Frontier is a modern, automated, and serverless news publishing platform built entirely with **Markdown**, **Python**, and **GitHub Actions**. This guide provides a complete overview of the system architecture, build logic, and critical guardrails to maintain the platform.
 ---
 [![Broken Link Checker](https://github.com/Sayadbayezid/GenZFrontier/actions/workflows/link-checker.yml/badge.svg)](https://github.com/Sayadbayezid/GenZFrontier/actions/workflows/link-checker.yml)
+---
+<!-- START_LINK_CHECKER -->
 
+<!-- END_LINK_CHECKER -->
 ---
 
 ## 🏗️ System Architecture & Build Logic
