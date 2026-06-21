@@ -186,12 +186,12 @@ if mix_posts:
 # 5. Category Sections (10 Blocks)
 for cat in DEFAULT_CATEGORIES:
     if cat in ["ads", "legacy-archives"]: continue
-    c_posts = sorted(cat_arts[cat], key=lambda x: x["date"], reverse=True)[:5]
+    c_posts = sorted(cat_arts[cat], key=lambda x: x["date"], reverse=True)
     if not c_posts: continue
     
-    cat_html = f'<div class="section-header"><h2>{cat.title()}</h2><a href="/{cat}/" class="see-all">See All →</a></div><div class="grid-featured">'
+    cat_block_html = f'<div class="section-header"><h2>{cat.title()}</h2><a href="/{cat}/" class="see-all">See All →</a></div><div class="grid-featured">'
     featured = c_posts[0]
-    cat_html += f'''
+    cat_block_html += f'''
     <div class="featured-large">
         <a href="/{featured["cat"]}/{featured["file"]}">
             <img src="{featured["img"]}" alt="{featured["title"]}" loading="lazy">
@@ -202,23 +202,35 @@ for cat in DEFAULT_CATEGORIES:
     </div>
     <div class="hero-sidebar hero-sidebar-scroll">
 '''
-    for a in c_posts[1:]:
-        cat_html += f'''
+    for a in c_posts[1:5]:
+        cat_block_html += f'''
         <div class="hero-side-item">
             <div>
                 <h3><a href="/{a["cat"]}/{a["file"]}">{a["title"]}</a></h3>
             </div>
         </div>
 '''
-    cat_html += '</div></div>'
-    dyn_html += cat_html
+    cat_block_html += '</div></div>'
+    dyn_html += cat_block_html
 
-# Generate Pages
+    # Generate Category Index Page
+    os.makedirs(os.path.join(OUTPUT_DIR, cat), exist_ok=True)
+    cat_grid_html = f'<div class="section-header"><h2>{cat.title()}</h2></div><div class="grid-4">'
+    for a in c_posts:
+        cat_grid_html += f'''
+        <article class="news-card">
+            <img src="{a["img"]}" alt="{a["title"]}" loading="lazy">
+            <a href="/{a["cat"]}/{a["file"]}"><h3>{a["title"]}</h3></a>
+        </article>'''
+    cat_grid_html += '</div>'
+    cat_index_content = index_template.replace("{{HERO_SECTION}}", "").replace("{{DYNAMIC_CONTENT}}", cat_grid_html).replace("{{BREAKING_NEWS_TICKER}}", ticker)
+    with open(os.path.join(OUTPUT_DIR, cat, "index.html"), "w", encoding="utf-8") as f: f.write(cat_index_content)
+
+# Generate Article Pages
 for art in all_arts:
     with open(os.path.join(NEWS_DIR, art["cat"], art["file"].replace(".html", ".md")), "r", encoding="utf-8") as f:
         md_content = f.read()
     
-    # 1. Related Posts Fetching (4 posts, same category preferred)
     related_candidates = [a for a in cat_arts[art["cat"]] if a["file"] != art["file"]]
     if len(related_candidates) < 4:
         global_recent = [a for a in all_arts if a["file"] != art["file"] and a not in related_candidates]
