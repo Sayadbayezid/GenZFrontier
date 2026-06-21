@@ -3,7 +3,6 @@ import sys
 import shutil
 import markdown
 import json
-# import frontmatter (removed)
 import re
 from datetime import datetime
 import subprocess
@@ -14,7 +13,6 @@ import urllib.parse
 def get_git_date(file_path):
     """Fetches the last commit date for a given file from Git history."""
     try:
-        # Get the last commit date in ISO 8601 format (e.g., 2023-10-27T10:00:00+05:30)
         git_date = subprocess.check_output(
             ['git', 'log', '-1', '--format=%cI', file_path],
             stderr=subprocess.DEVNULL
@@ -24,7 +22,6 @@ def get_git_date(file_path):
     except Exception:
         pass
     return None
-
 
 # ==========================================================
 # GenZ Frontier Build Configuration
@@ -45,12 +42,10 @@ def clean_and_prepare():
     for f in ["index.html", "404.html", "contact.html", "about.html", "privacy-policy.html", "terms.html", "disclaimer.html", "cookie-policy.html", "submit-guest-post.html", "CNAME", "sitemap.xml", "robots.txt"]:
         if os.path.exists(f): shutil.copy2(f, os.path.join(OUTPUT_DIR, f))
     
-    # Copy legacy-archives folder (prioritize root legacy-archives, then news/legacy-archives)
     legacy_src = "legacy-archives" if os.path.exists("legacy-archives") else os.path.join(NEWS_DIR, "legacy-archives")
     if os.path.exists(legacy_src):
         shutil.copytree(legacy_src, os.path.join(OUTPUT_DIR, "legacy-archives"), dirs_exist_ok=True)
         
-        # Auto-generate cards for legacy-archives/index.html
         legacy_index_path = os.path.join(OUTPUT_DIR, "legacy-archives", "index.html")
         if os.path.exists(legacy_index_path):
             with open(legacy_index_path, "r", encoding="utf-8") as f:
@@ -62,7 +57,6 @@ def clean_and_prepare():
                     with open(os.path.join(legacy_src, file), "r", encoding="utf-8") as f:
                         html_content = f.read()
                     
-                    # Extract title, image, and description using regex
                     title_match = re.search(r"<title>(.*?)</title>", html_content, re.IGNORECASE | re.DOTALL)
                     title = title_match.group(1).split("|")[0].strip() if title_match else file.replace(".html", "").title()
                     
@@ -71,7 +65,7 @@ def clean_and_prepare():
                     
                     img_match = re.search(r'image": "(.*?)"', html_content, re.IGNORECASE)
                     if not img_match:
-                        img_match = re.search(r'background-image: url<LaTex>\(\'(.*?)\'\)</LaTex>', html_content, re.IGNORECASE)
+                        img_match = re.search(r'background-image: url\(\'(.*?)\'\)', html_content, re.IGNORECASE)
                     if not img_match:
                         img_match = re.search(r'\<img src="(.*?)"', html_content, re.IGNORECASE)
                     
@@ -94,7 +88,6 @@ def clean_and_prepare():
                     </div>
                 </a>'''
             
-            # Add a "Coming Soon" card at the end
             cards_html += '''
                 <div class="archive-card group block bg-[#0f172a] border border-slate-800 border-dashed rounded-2xl overflow-hidden relative cursor-not-allowed">
                     <div class="card-img-wrapper h-64 w-full bg-slate-900/50 flex items-center justify-center relative">
@@ -114,10 +107,12 @@ def clean_and_prepare():
             with open(legacy_index_path, "w", encoding="utf-8") as f:
                 f.write(new_index_content)
 
-def get_ticker_html(breaking_arts):
-    if not breaking_arts: return ""
-    items = "".join([f'<span>🔴 <a href="/{a["cat"]}/{a["file"]}" style="color: white; text-decoration: none;">{a["title"]}</a></span>' for a in breaking_arts])
-    return f'<div class="breaking-news-ticker"><div class="breaking-label">BREAKING</div><marquee class="breaking-marquee" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">{items}</marquee></div>'
+def get_ticker_html(articles):
+    # Sort all articles by date descending and take top 15
+    latest_15 = sorted(articles, key=lambda x: x['date'], reverse=True)[:15]
+    if not latest_15: return ""
+    items = "".join([f'<span>🔴 <a href="/{a["cat"]}/{a["file"]}" style="color: white; text-decoration: none;">{a["title"]}</a></span>' for a in latest_15])
+    return f'<div class="breaking-news-ticker"><div class="breaking-label">LIVE UPDATES</div><marquee class="breaking-marquee" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">{items}</marquee></div>'
 
 def get_meta(art):
     return f'<meta name="description" content="{art["desc"]}"><meta property="og:title" content="{art["title"]}"><meta property="og:image" content="{art["img"]}"><meta property="og:url" content="{art["url"]}">'
@@ -143,7 +138,6 @@ def generate_sitemap(articles):
     urlset = ET.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
     added_links = set()
 
-    # Add static pages (assuming they are copied to public/)
     static_pages = ["", "about.html", "contact.html", "privacy-policy.html", "terms.html", "disclaimer.html", "cookie-policy.html", "submit-guest-post.html"]
     for page in static_pages:
         full_url = f"{BASE_URL}{page}"
@@ -152,13 +146,11 @@ def generate_sitemap(articles):
             loc = ET.SubElement(url_elem, "loc")
             loc.text = full_url
             lastmod = ET.SubElement(url_elem, "lastmod")
-            # For static pages, use the git date of the file in the root directory
             lastmod.text = normalize_date(get_git_date(page))
             priority = ET.SubElement(url_elem, "priority")
             priority.text = "1.0" if page == "" else "0.8"
             added_links.add(full_url)
 
-    # Add news articles
     for art in articles:
         full_url = art["url"]
         if full_url not in added_links:
@@ -171,14 +163,12 @@ def generate_sitemap(articles):
             priority.text = "0.6"
             added_links.add(full_url)
 
-    # Convert to standard XML and pretty print
     xml_str = ET.tostring(urlset, encoding='utf-8')
     pretty_xml = minidom.parseString(xml_str).toprettyxml(indent="  ")
     pretty_xml = os.linesep.join([s for s in pretty_xml.splitlines() if s.strip()])
 
     with open(os.path.join(OUTPUT_DIR, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write(pretty_xml)
-
     print(f"✅ Sitemap.xml successfully generated in {OUTPUT_DIR} with {len(added_links)} links.")
 
 # ==========================================================
@@ -191,9 +181,7 @@ index_template = open(INDEX_FILE, "r", encoding="utf-8").read()
 
 cat_arts = {cat: [] for cat in DEFAULT_CATEGORIES}
 all_arts = []
-breaking_arts = []
 
-# Processing Files
 for root, _, files in os.walk(NEWS_DIR):
     for file in files:
         if not file.endswith(".md"): continue
@@ -215,46 +203,46 @@ for root, _, files in os.walk(NEWS_DIR):
         }
         cat_arts[cat].append(art)
         all_arts.append(art)
-        if meta.get('breaking', [''])[0].lower() == 'true': breaking_arts.append(art)
 
-        # Generate Individual Post
-        # Enhanced Related/Suggested News System
-        related_arts = [a for a in cat_arts[cat] if a['file'] != art['file']]
-        # If not enough in same category, pull from others
-        if len(related_arts) < 4:
-            other_arts = [a for a in all_arts if a['cat'] != cat and a['file'] != art['file']]
-            related_arts += other_arts[:(4 - len(related_arts))]
-        
-        related_html = '<div class="related-section"><div class="section-header"><h2>Suggested For You</h2></div><div class="grid-4">'
-        for r in related_arts[:8]: # Show up to 8 suggested news items
-            related_html += f'<article class="news-card"><img src="{r["img"]}"><a href="/{r["cat"]}/{r["file"]}"><h3>{r["title"]}</h3></a></article>'
-        related_html += '</div></div>'
-        
-        # Detect video URL
-        video_url = ""
-        iframe_match = re.search(r'<iframe.*?src=["\'](.*?)["\']', html_cont)
+# Sort and get ticker HTML using all articles
+ticker = get_ticker_html(all_arts)
+
+# Generate Individual Posts
+for art in all_arts:
+    related_arts = [a for a in cat_arts[art['cat']] if a['file'] != art['file']]
+    if len(related_arts) < 4:
+        other_arts = [a for a in all_arts if a['cat'] != art['cat'] and a['file'] != art['file']]
+        related_arts += other_arts[:(4 - len(related_arts))]
+    
+    related_html = '<div class="related-section"><div class="section-header"><h2>Suggested For You</h2></div><div class="grid-4">'
+    for r in related_arts[:8]:
+        related_html += f'<article class="news-card"><img src="{r["img"]}"><a href="/{r["cat"]}/{r["file"]}"><h3>{r["title"]}</h3></a></article>'
+    related_html += '</div></div>'
+    
+    video_url = ""
+    # Look for video in the original markdown content too
+    with open(os.path.join(NEWS_DIR, art['cat'], art['file'].replace('.html', '.md')), "r", encoding="utf-8") as f:
+        md_content = f.read()
+        iframe_match = re.search(r'<iframe.*?src=["\'](.*?)["\']', md_content)
         if iframe_match:
             video_url = iframe_match.group(1)
-        
-        final_html = template.replace("{{NEWS_CONTENT}}", html_cont).replace("{{ARTICLE_TITLE}}", art['title']) \
-                             .replace("{{RELATED_POSTS}}", related_html).replace("{{META_TAGS}}", get_meta(art)) \
-                             .replace("{{SCHEMA_DATA}}", get_json_ld(art)).replace("{{BREAKING_NEWS_TICKER}}", get_ticker_html(breaking_arts)) \
-                             .replace("{{CANONICAL_URL}}", art['url']).replace("{{VIDEO_URL}}", video_url)
-        
-        os.makedirs(os.path.join(OUTPUT_DIR, cat), exist_ok=True)
-        with open(os.path.join(OUTPUT_DIR, cat, art['file']), "w", encoding="utf-8") as f: f.write(final_html)
+
+    final_html = template.replace("{{NEWS_CONTENT}}", md_parser.convert(md_content)).replace("{{ARTICLE_TITLE}}", art['title']) \
+                         .replace("{{RELATED_POSTS}}", related_html).replace("{{META_TAGS}}", get_meta(art)) \
+                         .replace("{{SCHEMA_DATA}}", get_json_ld(art)).replace("{{BREAKING_NEWS_TICKER}}", ticker) \
+                         .replace("{{CANONICAL_URL}}", art['url']).replace("{{VIDEO_URL}}", video_url)
+    
+    os.makedirs(os.path.join(OUTPUT_DIR, art['cat']), exist_ok=True)
+    with open(os.path.join(OUTPUT_DIR, art['cat'], art['file']), "w", encoding="utf-8") as f: f.write(final_html)
 
 # Generate Home & Categories
 all_arts.sort(key=lambda x: x['date'], reverse=True)
-ticker = get_ticker_html(breaking_arts)
 
-# Hero Section
 hero_arts = all_arts[:10]
 hero_html = f'<section class="hero-section"><div class="hero-container"><div class="hero-main"><span class="red-tag">LIVE UPDATES</span><a href="/{hero_arts[0]["cat"]}/{hero_arts[0]["file"]}"><h1>{hero_arts[0]["title"]}</h1></a><p>{hero_arts[0]["desc"]}</p><a href="/{hero_arts[0]["cat"]}/{hero_arts[0]["file"]}"><img src="{hero_arts[0]["img"]}"></a></div><div class="hero-sidebar hero-sidebar-scroll">'
 for a in hero_arts[1:]: hero_html += f'<div class="hero-side-item"><a href="/{a["cat"]}/{a["file"]}"><img src="{a["img"]}"></a><div><h3>{a["title"]}</h3></div></div>'
 hero_html += '</div></div></section>'
 
-# Dynamic Content
 dyn_html = '<div class="section-header"><h2>Latest Mix</h2></div><div class="grid-4">'
 for a in all_arts[:12]: dyn_html += f'<article class="news-card"><img src="{a["img"]}"><a href="/{a["cat"]}/{a["file"]}"><h3>{a["title"]}</h3></a></article>'
 dyn_html += '</div>'
@@ -262,21 +250,14 @@ dyn_html += '</div>'
 for cat in DEFAULT_CATEGORIES:
     arts = sorted(cat_arts[cat], key=lambda x: x['date'], reverse=True)
     cat_index_html = index_template.replace("{{HERO_SECTION}}", "").replace("{{DYNAMIC_CONTENT}}", f'<div class="section-header"><h2>{cat.title()}</h2></div><div class="grid-4">' + "".join([f'<article class="news-card"><img src="{a["img"]}"><a href="/{a["cat"]}/{a["file"]}"><h3>{a["title"]}</h3></a></article>' for a in arts]) + '</div>').replace("{{BREAKING_NEWS_TICKER}}", ticker)
-    with open(os.path.join(OUTPUT_DIR, cat, "index.html"), "w", encoding="utf-8") as f: f.write(cat_index_html.replace('href="./', 'href="/'))
-    
-    limit = 2 if cat == 'ads' else 10
-    dyn_html += f'<div class="section-header"><h2>{cat.title()}</h2><a href="/{cat}/" class="see-all">See All →</a></div><div class="grid-4">'
-    for a in arts[:limit]: dyn_html += f'<article class="news-card"><img src="{a["img"]}"><a href="/{cat}/{a["file"]}"><h3>{a["title"]}</h3></a></article>'
-    dyn_html += '</div>'
+    with open(os.path.join(OUTPUT_DIR, cat, "index.html"), "w", encoding="utf-8") as f: f.write(cat_index_html)
 
 with open(os.path.join(OUTPUT_DIR, INDEX_FILE), "w", encoding="utf-8") as f:
     f.write(index_template.replace("{{HERO_SECTION}}", hero_html).replace("{{DYNAMIC_CONTENT}}", dyn_html).replace("{{BREAKING_NEWS_TICKER}}", ticker))
 
-# Generate Sitemap
 print("Generating Sitemap...")
 generate_sitemap(all_arts)
 
-# Generate llms.txt
 print("Generating llms.txt...")
 llms_content = f"# GenZ Frontier\n\nGenZ Frontier is a modern digital news portal covering World, Tech, Politics, and more.\n\n## Articles\n"
 for art in all_arts[:50]:
