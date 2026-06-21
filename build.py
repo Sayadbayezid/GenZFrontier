@@ -132,7 +132,7 @@ if hero_post:
             </a>
             <p>{hero_post["desc"]}</p>
             <a href="/{hero_post["cat"]}/{hero_post["file"]}">
-                <img src="{hero_post["img"]}" alt="{hero_post["title"]}" loading="eager" fetchpriority="high">
+                <img src="{hero_post["img"]}" alt="{hero_post["title"]}" loading="eager" fetchpriority="high" width="1069" height="713" decoding="async">
             </a>
         </div>
         <div class="hero-sidebar hero-sidebar-scroll">
@@ -142,7 +142,7 @@ if hero_post:
         hero_html += f'''
             <div class="hero-side-item">
                 <a href="/{a["cat"]}/{a["file"]}">
-                    <img src="{a["img"]}" alt="{a["title"]}" loading="lazy">
+                    <img src="{a["img"]}" alt="{a["title"]}" loading="lazy" width="80" height="80" decoding="async">
                 </a>
                 <div>
                     <h3><a href="/{a["cat"]}/{a["file"]}">{a["title"]}</a></h3>
@@ -166,7 +166,7 @@ if mix_posts:
 <div class="grid-featured">
     <div class="featured-large">
         <a href="/{featured_mix["cat"]}/{featured_mix["file"]}">
-            <img src="{featured_mix["img"]}" alt="{featured_mix["title"]}" loading="lazy">
+            <img src="{featured_mix["img"]}" alt="{featured_mix["title"]}" loading="lazy" width="800" height="450" decoding="async">
             <div class="overlay">
                 <h3>{featured_mix["title"]}</h3>
             </div>
@@ -195,7 +195,7 @@ for cat in DEFAULT_CATEGORIES:
     cat_block_html += f'''
     <div class="featured-large">
         <a href="/{featured["cat"]}/{featured["file"]}">
-            <img src="{featured["img"]}" alt="{featured["title"]}" loading="lazy">
+            <img src="{featured["img"]}" alt="{featured["title"]}" loading="lazy" width="800" height="450" decoding="async">
             <div class="overlay">
                 <h3>{featured["title"]}</h3>
             </div>
@@ -220,12 +220,11 @@ for cat in DEFAULT_CATEGORIES:
     for a in c_posts:
         cat_grid_html += f'''
         <article class="news-card">
-            <img src="{a["img"]}" alt="{a["title"]}" loading="lazy">
+            <img src="{a["img"]}" alt="{a["title"]}" loading="lazy" width="400" height="225" decoding="async">
             <a href="/{a["cat"]}/{a["file"]}"><h3>{a["title"]}</h3></a>
         </article>'''
     cat_grid_html += '</div>'
     cat_index_content = index_template.replace("{{HERO_SECTION}}", "").replace("{{DYNAMIC_CONTENT}}", cat_grid_html).replace("{{BREAKING_NEWS_TICKER}}", ticker)
-    # Clean placeholders from category index
     cat_index_content = cat_index_content.replace("{{META_TAGS}}", "").replace("{{SCHEMA_DATA}}", "")
     with open(os.path.join(OUTPUT_DIR, cat, "index.html"), "w", encoding="utf-8") as f: f.write(cat_index_content)
 
@@ -243,31 +242,22 @@ for art in all_arts:
     for r in related_candidates[:4]:
         related_html += f'''
         <article class="news-card">
-            <img src="{r["img"]}" alt="{r["title"]}" loading="lazy">
+            <img src="{r["img"]}" alt="{r["title"]}" loading="lazy" width="400" height="225" decoding="async">
             <a href="/{r["cat"]}/{r["file"]}"><h3>{r["title"]}</h3></a>
         </article>'''
     related_html += '</div></div>'
 
     video_url = ""
-    # Support YouTube, Vimeo, and direct video links
     iframe_match = re.search(r'<iframe.*?src=["\'](.*?)["\']', md_content, re.IGNORECASE)
     video_tag_match = re.search(r'<video.*?src=["\'](.*?)["\']', md_content, re.IGNORECASE)
-    
-    # Check for direct video links in markdown [video](url)
     direct_video_match = re.search(r'\[.*?\]\((.*?\.(mp4|webm|ogg))\)', md_content, re.IGNORECASE)
     
-    if iframe_match:
-        video_url = iframe_match.group(1)
-    elif video_tag_match:
-        video_url = video_tag_match.group(1)
-    elif direct_video_match:
-        video_url = direct_video_match.group(1)
+    if iframe_match: video_url = iframe_match.group(1)
+    elif video_tag_match: video_url = video_tag_match.group(1)
+    elif direct_video_match: video_url = direct_video_match.group(1)
     
-    # Ensure video URL is absolute
-    if video_url and video_url.startswith("//"):
-        video_url = "https:" + video_url
+    if video_url and video_url.startswith("//"): video_url = "https:" + video_url
 
-    # SEO Metadata & Schema
     meta_tags = f'''
     <meta name="description" content="{art["desc"]}">
     <meta property="og:title" content="{art["title"]} - GenZ Frontier">
@@ -298,7 +288,6 @@ for art in all_arts:
 
 with open(os.path.join(OUTPUT_DIR, INDEX_FILE), "w", encoding="utf-8") as f:
     home_html = index_template.replace("{{HERO_SECTION}}", hero_html).replace("{{DYNAMIC_CONTENT}}", dyn_html).replace("{{BREAKING_NEWS_TICKER}}", ticker)
-    # Clean placeholders from homepage
     home_html = home_html.replace("{{META_TAGS}}", "").replace("{{SCHEMA_DATA}}", "")
     f.write(home_html)
 
