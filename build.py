@@ -185,7 +185,7 @@ if mix_posts:
 
 # 5. Category Sections (10 Blocks)
 for cat in DEFAULT_CATEGORIES:
-    if cat in ["ads", "legacy-archives"]: continue
+    if cat in ["ads"]: continue
     c_posts = sorted(cat_arts[cat], key=lambda x: x["date"], reverse=True)
     if not c_posts: continue
     
@@ -224,6 +224,8 @@ for cat in DEFAULT_CATEGORIES:
         </article>'''
     cat_grid_html += '</div>'
     cat_index_content = index_template.replace("{{HERO_SECTION}}", "").replace("{{DYNAMIC_CONTENT}}", cat_grid_html).replace("{{BREAKING_NEWS_TICKER}}", ticker)
+    # Clean placeholders from category index
+    cat_index_content = cat_index_content.replace("{{META_TAGS}}", "").replace("{{SCHEMA_DATA}}", "")
     with open(os.path.join(OUTPUT_DIR, cat, "index.html"), "w", encoding="utf-8") as f: f.write(cat_index_content)
 
 # Generate Article Pages
@@ -249,15 +251,40 @@ for art in all_arts:
     iframe_match = re.search(r'<iframe.*?src=["\"](.*?)["\"]', md_content)
     if iframe_match: video_url = iframe_match.group(1)
 
+    # SEO Metadata & Schema
+    meta_tags = f'''
+    <meta name="description" content="{art["desc"]}">
+    <meta property="og:title" content="{art["title"]} - GenZ Frontier">
+    <meta property="og:description" content="{art["desc"]}">
+    <meta property="og:image" content="{art["img"]}">
+    <meta property="og:url" content="{art["url"]}">
+    <meta name="twitter:card" content="summary_large_image">
+    '''
+    schema_data = f'''
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "{art["title"]}",
+      "image": ["{art["img"]}"],
+      "datePublished": "{art["date"]}",
+      "author": {{ "@type": "Organization", "name": "GenZ Frontier" }}
+    }}
+    </script>
+    '''
+
     final_html = template.replace("{{NEWS_CONTENT}}", md_parser.convert(md_content)).replace("{{ARTICLE_TITLE}}", art["title"]) \
                          .replace("{{BREAKING_NEWS_TICKER}}", ticker).replace("{{VIDEO_URL}}", video_url) \
-                         .replace("{{RELATED_POSTS}}", related_html)
+                         .replace("{{RELATED_POSTS}}", related_html).replace("{{META_TAGS}}", meta_tags).replace("{{SCHEMA_DATA}}", schema_data)
     
     os.makedirs(os.path.join(OUTPUT_DIR, art["cat"]), exist_ok=True)
     with open(os.path.join(OUTPUT_DIR, art["cat"], art["file"]), "w", encoding="utf-8") as f: f.write(final_html)
 
 with open(os.path.join(OUTPUT_DIR, INDEX_FILE), "w", encoding="utf-8") as f:
-    f.write(index_template.replace("{{HERO_SECTION}}", hero_html).replace("{{DYNAMIC_CONTENT}}", dyn_html).replace("{{BREAKING_NEWS_TICKER}}", ticker))
+    home_html = index_template.replace("{{HERO_SECTION}}", hero_html).replace("{{DYNAMIC_CONTENT}}", dyn_html).replace("{{BREAKING_NEWS_TICKER}}", ticker)
+    # Clean placeholders from homepage
+    home_html = home_html.replace("{{META_TAGS}}", "").replace("{{SCHEMA_DATA}}", "")
+    f.write(home_html)
 
 generate_sitemap(all_arts)
 print("✅ Build Complete!")
