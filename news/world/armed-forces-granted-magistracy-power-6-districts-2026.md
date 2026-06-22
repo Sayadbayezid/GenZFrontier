@@ -40,7 +40,7 @@ breaking: true
 
 এই আদেশের ফলে ফৌজদারি কার্যবিধির বিভিন্ন ধারায় উল্লেখিত অপরাধের ক্ষেত্রে সেনা কর্মকর্তারা সরাসরি অপরাধ আমলে নেওয়া, মোবাইল কোর্ট (Mobile Court) পরিচালনা করা, এবং আইন অমান্যকারীদের তাৎক্ষণিক আটক বা শাস্তির আওতায় আনার মতো প্রয়োজনীয় আইনগত ক্ষমতা প্রয়োগ করার একচ্ছত্র অধিকার পাবেন। বিশেষ করে জুডিশিয়াল বা এক্সিকিউটিভ প্রসেসের গতি বাড়াতে এবং মাঠপর্যায়ে দ্রুত সিদ্ধান্ত বাস্তবায়নে এই ক্ষমতা অত্যন্ত কার্যকর ভূমিকা রাখবে।
 
-> **আরও পড়ুন (বিবিসি স্টাইলে):** [Jamaat-Led 11-Party Alliance Calls Massive Dhaka Rally on Awami League Anniversary to Demand Justice](https://www.genzfrontir.com/politics/jamaat-led-alliance-dhaka-rally-awami-league-anniversary.html)
+> **আরও পড়ুন :** [Jamaat-Led 11-Party Alliance Calls Massive Dhaka Rally on Awami League Anniversary to Demand Justice](https://www.genzfrontir.com/politics/jamaat-led-alliance-dhaka-rally-awami-league-anniversary.html)
 
 ---
 
