@@ -41,7 +41,7 @@ In the late 1950s, his ambition pushed him to leave Dhaka, East Pakistan, to par
 
 ---
 
-> **Read More:** [104th Birth Anniversary of Journalism Legend Zahur Hossain Chowdhury](https://www.genzfrontir.com/legacy-archive/legendary-journalist-zahur-hossain-chowdhury-104th-birth-anniversary.html)
+> **Read More:** [104th Birth Anniversary of Journalism Legend Zahur Hossain Chowdhury](https://www.genzfrontir.com/legacy-archives/legendary-journalist-zahur-hossain-chowdhury-104th-birth-anniversary.html)
 
 ---
 
