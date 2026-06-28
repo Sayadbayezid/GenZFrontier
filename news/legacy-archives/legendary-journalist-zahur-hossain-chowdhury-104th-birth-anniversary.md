@@ -44,7 +44,7 @@ The sharpest and most popular aspect of Zahur Hossain Chowdhury's pen was reflec
 
 Through this column, he mobilized public opinion against the political conspiracies, economic exploitation, communalism, and anti-humanitarian activities of the West Pakistani ruling elites, using fluent yet piercing language. A selected compilation of these columns was published as a book titled 'Darbar-e-Zahur' in 1985, which remains an invaluable document of Bangladesh's political history.
 
-> **Read More:** [Indigenous Freedom Fighter UK Ching: The Only 'Bir Bikrom' Titleholder from the Hill Tracts](https://www.genzfrontir.com/legacy-archive/indigenous-freedom-fighter-uk-ching-bir-bikrom.html)
+> **Read More:** [sheikh Russell legacy arcrive ](https://www.genzfrontir.com/legacy-archives/sheikh-russel-legacy.html)
 
 ---
 
