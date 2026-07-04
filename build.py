@@ -46,7 +46,7 @@ TEMPLATE_FILE = "template.html"
 INDEX_FILE = "index.html"
 ADS_DIR = "ads"
 
-DEFAULT_CATEGORIES = ["world", "politics", "business", "tech", "science", "health", "sports", "entertainment", "careers", "legacy-archives"]
+DEFAULT_CATEGORIES = ["world", "politics", "business", "tech", "science", "health", "sports", "entertainment", "careers", "legacy-archives","mind-manipulation"]
 
 def clean_and_prepare():
     if os.path.exists(OUTPUT_DIR): shutil.rmtree(OUTPUT_DIR)
