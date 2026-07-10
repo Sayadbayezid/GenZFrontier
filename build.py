@@ -279,7 +279,23 @@ for art in all_arts:
     </script>
     '''
 
-    final_html = template.replace("{{NEWS_CONTENT}}", md_parser.convert(md_content)).replace("{{ARTICLE_TITLE}}", art["title"]) \
+    # Convert markdown to HTML
+    article_html = md_parser.convert(md_content)
+    
+    # Inject Native Banner after the first paragraph for better UX/SEO
+    native_banner_html = '''
+            <!-- Adsterra Native Banner -->
+            <div style="margin-top: 30px; margin-bottom: 20px; text-align: center;">
+                <script async="async" data-cfasync="false" src="https://pl30308054.effectivecpmnetwork.com/ec56a821de60d9845e8059349f970dbf/invoke.js"></script>
+                <div id="container-ec56a821de60d9845e8059349f970dbf"></div>
+            </div>
+    '''
+    if "</p>" in article_html:
+        article_html = article_html.replace("</p>", "</p>" + native_banner_html, 1)
+    else:
+        article_html = native_banner_html + article_html
+
+    final_html = template.replace("{{NEWS_CONTENT}}", article_html).replace("{{ARTICLE_TITLE}}", art["title"]) \
                          .replace("{{BREAKING_NEWS_TICKER}}", ticker).replace("{{VIDEO_URL}}", video_url) \
                          .replace("{{RELATED_POSTS}}", related_html).replace("{{META_TAGS}}", meta_tags).replace("{{SCHEMA_DATA}}", schema_data)
     
