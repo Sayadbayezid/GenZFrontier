@@ -45,7 +45,8 @@ breaking: false
 - [Exiled Ex-PM Sheikh Hasina Vows December Return to Bangladesh, Prepared to Face Death Sentence](https://www.genzfrontir.com/politics/sheikh-hasina-vows-december-return-bangladesh-face-death-sentence.html)
 <a href="https://www.effectivecpmnetwork.com/pfhvdf9uj?key=ccb389a10f8bd6b3a488cbcf60f38e05" target="_blank" rel="nofollow noopener noreferrer" style="display:block; border:1px solid #cce0ff; border-radius:8px; overflow:hidden; text-decoration:none; margin:25px 0; background-color:#f0f8ff; box-shadow:0 4px 8px rgba(0,123,255,0.1);"><img src="https://i.ibb.co/G4JbfVSW/1.png" alt="হাসনাত আবদুল্লাহ সংবাদ" style="width:100%; height:auto; display:block; border:none; margin:0; padding:0; border-radius:0;"><span style="display:block; padding:15px; text-align:center;"><span style="display:inline-block; background-color:#0056b3; color:#ffffff; padding:5px 12px; border-radius:4px; font-size:13px; font-weight:bold; margin-bottom:12px;">আরও পড়ুন</span><strong style="display:block; margin:0 0 15px 0; font-size:18px; color:#1a1a1a; line-height:1.4;">বন্যায় এবারের কালেকশন কতো, এবং কে কে পাবেন জানালেন হাসনাত আবদুল্লাহ</strong><span style="display:block; background-color:#007bff; color:#ffffff; padding:12px; font-size:16px; font-weight:bold; border-radius:5px; width:90%; margin:0 auto;">🔗 বিস্তারিত জানতে ক্লিক করুন</span></span></a>
 # Entertainment Desk 
-[Maldives Water Villa Escape: A Peaceful Sunrise That Changed Everything](https://www.genzfrontir.com/entertainment/jafrin-jasifa-keya-maldives-travel-story.html)
+![image](https://i.ibb.co/B2jrVhfz/IMG-6453.jpg)
+- # [Maldives Water Villa Escape: A Peaceful Sunrise That Changed Everything](https://www.genzfrontir.com/entertainment/jafrin-jasifa-keya-maldives-travel-story.html)
 
 ***
 **#ChattogramFlood #BangladeshPolitics #SohelHazari #Tangail4 #AwamiLeague #GenZFrontierNews**
