@@ -25,18 +25,8 @@ breaking: true
 অন্যদিকে বাঁশখালীর কাথারিয়া, বড়ইতলী, গণ্ডামারা, ডোমরা, কদমরসূল, খানখানাবাদ, বাহারছড়া, চাম্বল, ছনুয়া, শেখেরখীল, সরল, রায়ছাটা ও পুঁইছড়িসহ উপকূলীয় বিস্তীর্ণ এলাকায় ভয়াবহ জলাবদ্ধতা সৃষ্টি হয়েছে। অনেক একতলা বাড়ি পুরোপুরি পানির নিচে তলিয়ে গেছে। অসংখ্য কাঁচা ঘর ধসে পড়েছে এবং আধাপাকা বাড়ির নিচতলা বসবাসের অনুপযোগী হয়ে পড়েছে।
 
 ---
-<a href="https://www.effectivecpmnetwork.com/pfhvdf9uj?key=ccb389a10f8bd6b3a488cbcf60f38e05" target="_blank" rel="nofollow noopener noreferrer" style="display: block; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; text-decoration: none; color: #333; margin: 25px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: box-shadow 0.3s ease;">
-    <!-- Image Section -->
-    <img src="https://i.ibb.co/G4JbfVSW/1.png" alt="হাসনাত আবদুল্লাহ সংবাদ" style="width: 100%; height: auto; border-bottom: 1px solid #e0e0e0; display: block;">
-    
-    <!-- Text Section -->
-    <div style="padding: 15px; background-color: #fcfcfc;">
-        <span style="display: inline-block; background-color: #dc3545; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; margin-bottom: 8px;">আরও পড়ুন</span>
-        <h3 style="margin: 0; font-size: 17px; font-weight: bold; color: #222; line-height: 1.4;">
-            আরও জানুন বন্যায় এবারের কালেকশন কতো, এবং কে কে পাবেন জানালেন হাসনাত আবদুল্লাহ
-        </h3>
-    </div>
-</a>## টিনের ছাদে আশ্রয়, নেই রান্নার সুযোগ
+<a href="https://www.effectivecpmnetwork.com/pfhvdf9uj?key=ccb389a10f8bd6b3a488cbcf60f38e05" target="_blank" rel="nofollow noopener noreferrer" style="display: block; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; text-decoration: none; color: #333; margin: 25px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.05);"><img src="https://i.ibb.co/G4JbfVSW/1.png" alt="হাসনাত আবদুল্লাহ সংবাদ" style="width: 100%; height: auto; border-bottom: 1px solid #e0e0e0; display: block;"><div style="padding: 15px; background-color: #fcfcfc;"><span style="display: inline-block; background-color: #dc3545; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; margin-bottom: 8px;">আরও পড়ুন</span><h3 style="margin: 0; font-size: 17px; font-weight: bold; color: #222; line-height: 1.4;">বন্যায় এবারের কালেকশন কতো, এবং কে কে পাবেন জানালেন হাসনাত আবদুল্লাহ</h3></div></a>
+## টিনের ছাদে আশ্রয়, নেই রান্নার সুযোগ
 
 বন্যাকবলিত বহু এলাকায় মানুষ বাধ্য হয়ে নিজেদের বাড়ির টিনের ছাদে কিংবা উঁচু বারান্দায় আশ্রয় নিয়েছেন। অনেক পরিবার ছোট শিশু ও বৃদ্ধ সদস্যদের নিয়ে দিনের পর দিন মানবেতর জীবন কাটাচ্ছেন।
 
