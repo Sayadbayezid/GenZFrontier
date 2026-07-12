@@ -37,6 +37,8 @@ According to his supporters, this was not a random act of violence but rather a 
 News of the attack spread rapidly, igniting fierce reactions across various parts of the Tangail district. Former members of the now-banned Chhatra League, along with a significant section of the general public, have voiced intense outrage and strongly condemned the incident. They are demanding an immediate, impartial investigation to track down the culprits and bring them to justice.
 
 The incident has enveloped the local political arena in a thick layer of tension and unease. As of now, law enforcement agencies have not issued any official statement regarding the attack or potential suspects. However, to prevent any retaliatory violence and keep the situation under control, police surveillance has reportedly been significantly increased across key areas of the town.
+
+---
 related 
 - [ Ousted PM Sheikh Hasina Vows to Return to Bangladesh This Year, Dismisses Death Sentence](https://www.genzfrontir.com/politics/ousted-pm-sheikh-hasina-vows-to-return-to-bangladesh-2026.html)
 - [ফেসবুকে ‘জয় বাংলা, জয় বঙ্গবন্ধু’ পোস্ট: ৭ ঘণ্টার মধ্যে গ্রেফতার টাঙ্গাইলের রেদোয়ান মাসুদ](https://www.genzfrontir.com/politics/tangail-facebook-post-arrest-redowan-masud.html)
