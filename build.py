@@ -10,6 +10,11 @@ import xml.etree.ElementTree as ET
 from xml.dom import minidom
 import urllib.parse
 
+# === GA4 Imports (New) ===
+from google.analytics.data_v1beta import BetaAnalyticsDataClient
+from google.analytics.data_v1beta.types import DateRange, Dimension, Metric, RunReportRequest
+# =========================
+
 def get_git_date(file_path):
     """Fetches the last commit date for a given file from Git history."""
     try:
@@ -37,6 +42,38 @@ def normalize_date(date_str):
     except: return datetime.now().strftime("%Y-%m-%d")
 
 # ==========================================================
+# GA4 Data Fetch Function (New)
+# ==========================================================
+def get_ga4_pageviews(property_id):
+    creds_json = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+    if not creds_json:
+        print("⚠️ GA4 Credentials not found! Skipping analytics data.")
+        return {}
+
+    with open("temp_ga_key.json", "w", encoding="utf-8") as f:
+        f.write(creds_json)
+    
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "temp_ga_key.json"
+    
+    try:
+        client = BetaAnalyticsDataClient()
+        request = RunReportRequest(
+            property=f"properties/{property_id}",
+            dimensions=[Dimension(name="pagePath")],
+            metrics=[Metric(name="screenPageViews")],
+            date_ranges=[DateRange(start_date="2026-01-01", end_date="today")],
+        )
+        response = client.run_report(request)
+        views_data = {row.dimension_values[0].value: row.metric_values[0].value for row in response.rows}
+        return views_data
+    except Exception as e:
+        print(f"Error fetching GA4 data: {e}")
+        return {}
+    finally:
+        if os.path.exists("temp_ga_key.json"):
+            os.remove("temp_ga_key.json")
+
+# ==========================================================
 # GenZ Frontier Build Configuration
 # ==========================================================
 NEWS_DIR = "news"
@@ -45,6 +82,9 @@ OUTPUT_DIR = "public"
 TEMPLATE_FILE = "template.html"
 INDEX_FILE = "index.html"
 ADS_DIR = "ads"
+
+# ⚠️ GA4 Property ID (Updated) ⚠️
+GA4_PROPERTY_ID = "524639425"
 
 DEFAULT_CATEGORIES = ["world", "politics", "business", "tech", "science", "health", "sports", "entertainment", "careers", "legacy-archives","mind-manipulation"]
 
@@ -88,6 +128,12 @@ def generate_sitemap(articles):
 # Main Execution
 # ==========================================================
 clean_and_prepare()
+
+# === Fetch GA4 Data Before Building HTML (New) ===
+print("Fetching GA4 Page Views...")
+all_page_views = get_ga4_pageviews(GA4_PROPERTY_ID)
+# =================================================
+
 md_parser = markdown.Markdown(extensions=["meta"])
 template = open(TEMPLATE_FILE, "r", encoding="utf-8").read()
 index_template = open(INDEX_FILE, "r", encoding="utf-8").read()
@@ -295,9 +341,15 @@ for art in all_arts:
     else:
         article_html = native_banner_html + article_html
 
+    # === Map Views to Article (New) ===
+    article_path = f"/{art['cat']}/{art['file']}"
+    total_views = all_page_views.get(article_path, "0")
+    # ==================================
+
     final_html = template.replace("{{NEWS_CONTENT}}", article_html).replace("{{ARTICLE_TITLE}}", art["title"]) \
                          .replace("{{BREAKING_NEWS_TICKER}}", ticker).replace("{{VIDEO_URL}}", video_url) \
-                         .replace("{{RELATED_POSTS}}", related_html).replace("{{META_TAGS}}", meta_tags).replace("{{SCHEMA_DATA}}", schema_data)
+                         .replace("{{RELATED_POSTS}}", related_html).replace("{{META_TAGS}}", meta_tags).replace("{{SCHEMA_DATA}}", schema_data) \
+                         .replace('id="total-views">--', f'id="total-views">{total_views}') # === Inject Views ===
     
     os.makedirs(os.path.join(OUTPUT_DIR, art["cat"]), exist_ok=True)
     with open(os.path.join(OUTPUT_DIR, art["cat"], art["file"]), "w", encoding="utf-8") as f: f.write(final_html)
@@ -308,4 +360,4 @@ with open(os.path.join(OUTPUT_DIR, INDEX_FILE), "w", encoding="utf-8") as f:
     f.write(home_html)
 
 generate_sitemap(all_arts)
-print("✅ Build Complete!")
+print("✅ Build Complete with GA4 Data!")
