@@ -27,9 +27,11 @@ jobs:
           python-version: '3.10'
 
       - name: Install Dependencies
-        run: pip install markdown python-frontmatter
+        run: pip install markdown python-frontmatter google-analytics-data
 
       - name: Run Build Script (Markdown to HTML)
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         run: python build.py
 
       - name: Commit and Push Sitemap
