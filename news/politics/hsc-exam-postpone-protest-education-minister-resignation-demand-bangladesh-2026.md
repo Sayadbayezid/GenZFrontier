@@ -27,20 +27,8 @@ breaking: true
 শিক্ষার্থীদের মতে, শিক্ষা ব্যবস্থায় সমান সুযোগ নিশ্চিত করতে হলে দুর্যোগপূর্ণ সময়ের জন্য বিশেষ সিদ্ধান্ত গ্রহণ জরুরি।
 
 ---
-<a href="https://www.effectivecpmnetwork.com/pfhvdf9uj?key=ccb389a10f8bd6b3a488cbcf60f38e05" target="_blank" rel="nofollow noopener noreferrer" style="display:block; max-width: 100%; border:1px solid #ddd; border-radius:8px; overflow:hidden; text-decoration:none; margin:25px 0; background-color:#fff; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
-    
-    <!-- ইমেজ -->
-    <img src="https://i.ibb.co/hFWdtcmt/IMG-6621.webp" alt="শিক্ষামন্ত্রীর পদত্যাগ" style="width:100%; height:auto; display:block;">
-    
-    <!-- টেক্সট ও বাটন -->
-    <div style="padding:15px; text-align:center;">
-        <div style="background-color:#ff4757; color:#fff; display:inline-block; padding:4px 10px; border-radius:4px; font-size:12px; font-weight:bold; margin-bottom:10px;">ব্রেকিং নিউজ 🚨</div>
-        
-        <h3 style="margin:0 0 15px 0; font-size:18px; color:#333;">ব্রেকিং নিউজ: শিক্ষামন্ত্রী পদত্যাগ! যা জানালেন তিনি!</h3>
-        
-        <div style="background-color:#007bff; color:#fff; padding:12px; font-size:16px; font-weight:bold; border-radius:5px; width:90%; margin:0 auto;">বিস্তারিত জানতে এখানে ক্লিক করুন</div>
-    </div>
-</a>
+
+<a href="https://www.effectivecpmnetwork.com/pfhvdf9uj?key=ccb389a10f8bd6b3a488cbcf60f38e05" target="_blank" rel="nofollow noopener noreferrer" style="display:block; border:1px solid #cce0ff; border-radius:8px; overflow:hidden; text-decoration:none; margin:25px 0; background-color:#f0f8ff; box-shadow:0 4px 8px rgba(0,123,255,0.1);"><img src="https://i.ibb.co/hFWdtcmt/IMG-6621.webp" alt="শিক্ষামন্ত্রীকে পদত্যাগ এর আল্টিমেটাম" style="width:100%; height:auto; display:block; border:none; margin:0; padding:0; border-radius:0;"><span style="display:block; padding:15px; text-align:center;"><span style="display:inline-block; background-color:#0056b3; color:#ffffff; padding:5px 12px; border-radius:4px; font-size:13px; font-weight:bold; margin-bottom:12px;">শিক্ষামন্ত্রী</span><strong style="display:block; margin:0 0 15px 0; font-size:18px; color:#1a1a1a; line-height:1.4;">পদত্যাগের দাবি ড. এ এন এম এহছানুল হক মিলন </strong><span style="display:block; background-color:#007bff; color:#ffffff; padding:12px; font-size:16px; font-weight:bold; border-radius:5px; width:90%; margin:0 auto;">🔗 বিস্তারিত জানতে ক্লিক করুন</span></span></a>
 
 
 ## শিক্ষার্থীদের তিন দফা দাবিতে কী রয়েছে?
