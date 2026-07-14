@@ -33,7 +33,7 @@ The procession then marched toward the Dhaka University campus, where police int
 Tensions reached a boiling point when police stopped the procession at the entrance around 3:00 pm. Frustrated by the barricades, some students began hurling brick chips at the board building, prompting an intense security standoff that lasted late into the night.
 
 ---
-<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fshare%2Fv%2F1DKPTtS5Jd%2F&show_text=0" width="500" height="500" style="border:none;overflow:hidden; max-width: 100%;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+<iframe src="https://www.youtube.com/embed/62wLonMHmo0" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 ---
 ## Anger Over "Farm Chickens" Remark and Question Paper Flaws
 
