@@ -19,14 +19,8 @@ breaking: true
 ---
 
 ## রাজপথ থেকে সংসদ ভবন: দিনভর উত্তেজনা
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; pointer-events: none; border-radius: 4px; margin: 25px 0;">
-  <iframe 
-    style="position: absolute; top: -15%; left: -5%; width: 110%; height: 130%; border: 0;"
-    src="https://www.youtube.com/embed/62wLonMHmo0?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-    allowfullscreen>
-  </iframe>
-</div>
+![জাতীয় সংসদ ভবনের সামনে শিক্ষার্থীদের অবস্থান এবং সার্বিক পরিস্থিতির সরাসরি চিত্র](https://youtu.be/62wLonMHmo0)
+
 *ভিডিও: জাতীয় সংসদ ভবনের সামনে শিক্ষার্থীদের অবস্থান এবং সার্বিক পরিস্থিতির সরাসরি চিত্র
 
 ## সায়েন্সল্যাব মোড়ে সংবাদ সম্মেলন ও শিক্ষার্থীদের বক্তব্য
