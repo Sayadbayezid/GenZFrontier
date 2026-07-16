@@ -19,11 +19,14 @@ breaking: true
 ---
 
 ## রাজপথ থেকে সংসদ ভবন: দিনভর উত্তেজনা
-
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/62wLonMHmo0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-*ভিডিও: জাতীয় সংসদ ভবনের সামনে শিক্ষার্থীদের অবস্থান এবং সার্বিক পরিস্থিতির সরাসরি চিত্র[span_0](start_span)[span_0](end_span)।*
-
-আজ সারাদিন রাজধানীর বিভিন্ন পয়েন্টে শিক্ষার্থীদের আন্দোলন ছিল চোখে পড়ার মতো[span_1](start_span)[span_1](end_span)। সকালে সায়েন্সল্যাব মোড় থেকে শুরু করে ঢাকা বিশ্ববিদ্যালয়ের উপাচার্য ভবনের সামনে পর্যন্ত তারা অবস্থান নেন[span_2](start_span)[span_2](end_span)। পরবর্তীতে শিক্ষা ভবন ঘেরাও এবং সন্ধ্যা ৬টার দিকে জাতীয় সংসদ ভবনের সামনেও শিক্ষার্থীরা জড়ো হন[span_3](start_span)[span_3](end_span)। পুলিশি বাধা উপেক্ষা করে তারা সেখানে অবস্থান নিলে একপর্যায়ে পুলিশ তাদের ছত্রভঙ্গ করতে লাঠিচার্জ করে[span_4](start_span)[span_4](end_span)। 
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/62wLonMHmo0"
+  frameborder="0"
+  allowfullscreen>
+</iframe>
+*ভিডিও: জাতীয় সংসদ ভবনের সামনে শিক্ষার্থীদের অবস্থান এবং সার্বিক পরিস্থিতির সরাসরি চিত্র
 
 ## সায়েন্সল্যাব মোড়ে সংবাদ সম্মেলন ও শিক্ষার্থীদের বক্তব্য
 
@@ -31,6 +34,9 @@ breaking: true
 
 শিক্ষার্থীরা অত্যন্ত জোরালোভাবে জানান যে, তারা সরকারের বিরুদ্ধে কোনো আন্দোলন করছেন না, বরং তারা বর্তমান সরকারের কাছে যৌক্তিক সহযোগিতা চাচ্ছেন। তাদের অভিযোগ, শিক্ষামন্ত্রী পরিস্থিতি সম্পর্কে পুরোপুরি অবগত থাকা সত্ত্বেও একটি পুরো ব্যাচের ভবিষ্যৎ নিয়ে চরম অনিশ্চয়তা তৈরি করছেন। 
 <a href="https://www.effectivecpmnetwork.com/pfhvdf9uj?key=ccb389a10f8bd6b3a488cbcf60f38e05" target="_blank" rel="nofollow noopener noreferrer" style="display:block; border:1px solid #cce0ff; border-radius:8px; overflow:hidden; text-decoration:none; margin:25px 0; background-color:#f0f8ff; box-shadow:0 4px 8px rgba(0,123,255,0.1);"><img src="https://i.ibb.co/hFWdtcmt/IMG-6621.webp" alt="শিক্ষামন্ত্রীকে পদত্যাগ" style="width:100%; height:auto; display:block; border:none; margin:0; padding:0; border-radius:0;"><span style="display:block; padding:15px; text-align:center;"><span style="display:inline-block; background-color:#0056b3; color:#ffffff; padding:5px 12px; border-radius:4px; font-size:13px; font-weight:bold; margin-bottom:12px;">শিক্ষামন্ত্রী</span><strong style="display:block; margin:0 0 15px 0; font-size:18px; color:#1a1a1a; line-height:1.4;">তবে কি সত্যি ড. এ এন এম এহছানুল হক মিলন পদত্যাগ করছেন </strong><span style="display:block; background-color:#007bff; color:#ffffff; padding:12px; font-size:16px; font-weight:bold; border-radius:5px; width:90%; margin:0 auto;">🔗 বিস্তারিত জানতে ক্লিক করুন</span></span></a>
+দুপুরে সায়েন্সল্যাব মোড়ে আন্দোলনরত শিক্ষার্থীদের পক্ষ থেকে একটি আনুষ্ঠানিক সংবাদ সম্মেলনের আয়োজন করা হয়। সেখানে ধানমন্ডি আইডিয়াল কলেজের এইচএসসি পরীক্ষার্থী মো. রায়ান বলেন, "আজকের টানা বৃষ্টি এবং সাধারণ মানুষের চরম জনদুর্ভোগের কথা চিন্তা করে আমরা সাময়িকভাবে রাস্তা থেকে অবরোধ প্রত্যাহার করেছি। তবে আমাদের আন্দোলন শেষ হয়নি।"
+
+শিক্ষার্থীরা অত্যন্ত জোরালোভাবে জানান যে, তারা সরকারের বিরুদ্ধে কোনো রাজনৈতিক আন্দোলন করছেন না, বরং তারা বর্তমান সরকারের কাছে যৌক্তিক সহযোগিতা চাচ্ছেন। তাদের অভিযোগ, শিক্ষামন্ত্রী শিক্ষার্থীদের দুর্ভোগ ও দেশের বন্যা পরিস্থিতি সম্পর্কে পুরোপুরি অবগত থাকা সত্ত্বেও একটি পুরো ব্যাচের ভবিষ্যৎ নিয়ে চরম অনিশ্চয়তা তৈরি করছেন। 
 
 ### বহিরাগতদের প্রবেশ ঠেকাতে কড়াকড়ি
 
