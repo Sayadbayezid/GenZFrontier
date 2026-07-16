@@ -19,48 +19,14 @@ breaking: true
 ---
 
 ## রাজপথ থেকে সংসদ ভবন: দিনভর উত্তেজনা
-<!-- Auto Pop-up Overlay & Container -->
-<div id="videoAutoPopup" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center;">
-
-  <!-- Popup Content Box -->
-  <div style="position: relative; width: 90%; max-width: 800px; background: #000; padding: 5px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-    
-    <!-- Close Button -->
-    <button onclick="closeVideoPopup()" style="position: absolute; top: -15px; right: -15px; background: red; color: white; border: 2px solid white; border-radius: 50%; width: 35px; height: 35px; cursor: pointer; font-weight: bold; font-size: 16px; z-index: 10000; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">X</button>
-
-    <!-- Cropped Video iframe (No Title, No Border, Auto-play) -->
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; pointer-events: none; border-radius: 4px;">
-      <iframe 
-        id="popupIframe"
-        style="position: absolute; top: -10%; left: 0; width: 100%; height: 120%; border: 0;"
-        src="https://www.youtube.com/embed/62wLonMHmo0?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
-      </iframe>
-    </div>
-
-  </div>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; pointer-events: none; border-radius: 4px; margin: 25px 0;">
+  <iframe 
+    style="position: absolute; top: -15%; left: -5%; width: 110%; height: 130%; border: 0;"
+    src="https://www.youtube.com/embed/62wLonMHmo0?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+  </iframe>
 </div>
-
-<!-- JavaScript for Auto Pop-up Logic -->
-<script>
-  // পেজ লোড হওয়ার সাথে সাথে পপ-আপ চালু করার লজিক
-  window.onload = function() {
-    document.getElementById('videoAutoPopup').style.display = 'flex';
-  };
-
-  // পপ-আপ ক্লোজ করার লজিক এবং ব্যাকগ্রাউন্ডে ভিডিও চলা বন্ধ করা
-  function closeVideoPopup() {
-    var popup = document.getElementById('videoAutoPopup');
-    popup.style.display = 'none';
-    
-    // ভিডিওটি স্টপ করার জন্য iframe এর src রিলোড করা
-    var iframe = document.getElementById('popupIframe');
-    var iframeSrc = iframe.src;
-    iframe.src = iframeSrc; 
-  }
-</script>
-
 *ভিডিও: জাতীয় সংসদ ভবনের সামনে শিক্ষার্থীদের অবস্থান এবং সার্বিক পরিস্থিতির সরাসরি চিত্র
 
 ## সায়েন্সল্যাব মোড়ে সংবাদ সম্মেলন ও শিক্ষার্থীদের বক্তব্য
