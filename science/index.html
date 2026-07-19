@@ -15,6 +15,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GenZ Frontier | Breaking News, Latest News and Videos</title>
     
+    <!-- === Injected Live TV Status (From build.py) === -->
+    
+<script>
+    window.LIVE_STATUS = false;
+    window.LIVE_URL = 'https://www.youtube.com/embed/YOUR_VIDEO_ID';
+</script>
+
+
     <style>
         /* Base Reset & Variables */
         :root {
@@ -57,6 +65,13 @@
         .header-right { display: flex; align-items: center; gap: 15px; font-size: 14px; font-weight: bold; }
         .header-btn { border: 1px solid #555; padding: 8px 15px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 5px; background: none; color: white;}
         .header-btn.red { background-color: var(--primary-red); border: none; color: white;}
+
+        /* Live TV Button Animation (New) */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(204, 0, 0, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(204, 0, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(204, 0, 0, 0); }
+        }
 
         /* Search Bar Toggle Overlay */
         .search-container { background: #111; padding: 15px 20px; display: none; border-bottom: 2px solid var(--primary-red); }
@@ -343,6 +358,7 @@
         </div>
     </footer>
 
+    <!-- Video Popup Modal for Home Page -->
     <div class="video-popup" id="videoPopup">
         <div class="video-popup-header">
             <div><span class="live-dot">●</span> GenZ Live News</div>
@@ -460,22 +476,47 @@
             }
         });
 
-        // 4. Home Page Live TV Logic
+        // 4. Home Page Live TV Logic (Updated with Dynamic Python Logic)
         const liveTvBtnHome = document.getElementById('liveTvBtnHome');
         const videoPopup = document.getElementById('videoPopup');
         const closeVideoPopupBtn = document.getElementById('closeVideoBtn');
         const videoPopupBody = document.getElementById('videoPopupBody');
 
-        liveTvBtnHome.addEventListener('click', () => {
-            // Default 24/7 Live Stream Placeholder (Lofi or News Stream)
-            videoPopupBody.innerHTML = '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1" title="Live TV" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
-            videoPopup.style.display = 'block';
-        });
+        function openLiveTvHome() {
+            if (window.LIVE_URL && window.LIVE_URL !== "" && window.LIVE_URL !== "https://www.youtube.com/embed/YOUR_VIDEO_ID") {
+                let iframeUrl = window.LIVE_URL;
+                if(iframeUrl.includes("youtube.com") && !iframeUrl.includes("autoplay=1")) {
+                    iframeUrl += iframeUrl.includes("?") ? "&autoplay=1" : "?autoplay=1";
+                }
+                videoPopupBody.innerHTML = `<iframe width="100%" height="100%" src="${iframeUrl}" title="Live TV" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+                videoPopup.style.display = 'block';
+            } else {
+                alert("No live broadcast is currently running. Please check back later!");
+            }
+        }
 
-        closeVideoPopupBtn.addEventListener('click', () => {
+        function closeLiveTvHome() {
             videoPopup.style.display = 'none';
             videoPopupBody.innerHTML = ''; // Stop Audio
-        });
+        }
+
+        liveTvBtnHome.addEventListener('click', openLiveTvHome);
+        closeVideoPopupBtn.addEventListener('click', closeLiveTvHome);
+
+        // Home Page Auto Popup Logic for Active Live Streams
+        if (window.LIVE_STATUS === true && window.LIVE_URL && window.LIVE_URL !== "https://www.youtube.com/embed/YOUR_VIDEO_ID") {
+            // Add a blinking indicator to the button
+            liveTvBtnHome.innerHTML = '<span style="width: 8px; height: 8px; background: white; border-radius: 50%; display: inline-block; animation: blink 1.5s infinite; margin-right: 5px;"></span> Live TV';
+            liveTvBtnHome.style.animation = 'pulse 2s infinite'; 
+
+            // sessionStorage ensures it only pops up ONCE per user session
+            if (!sessionStorage.getItem("liveTvAutoShown")) {
+                setTimeout(() => {
+                    openLiveTvHome();
+                    sessionStorage.setItem("liveTvAutoShown", "true");
+                }, 2500); // 2.5 seconds wait time for popup
+            }
+        }
     </script>
 
     <div class="cookie-consent-overlay" id="cookieConsentOverlay">
