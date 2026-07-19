@@ -86,6 +86,20 @@ ADS_DIR = "ads"
 # ⚠️ GA4 Property ID (Updated) ⚠️
 GA4_PROPERTY_ID = "524639425"
 
+# ==========================================================
+# 🔴 LIVE TV CONFIGURATION (NEW)
+# ==========================================================
+IS_LIVE = False
+LIVE_VIDEO_URL = "https://www.youtube.com/embed/YOUR_VIDEO_ID"
+
+LIVE_SCRIPT_HTML = f"""
+<script>
+    window.LIVE_STATUS = {'true' if IS_LIVE else 'false'};
+    window.LIVE_URL = '{LIVE_VIDEO_URL}';
+</script>
+"""
+# ==========================================================
+
 DEFAULT_CATEGORIES = ["world", "politics", "business", "tech", "science", "health", "sports", "entertainment", "careers", "legacy-archives","mind-manipulation"]
 
 def clean_and_prepare():
@@ -283,7 +297,7 @@ for cat in DEFAULT_CATEGORIES:
         </article>'''
     cat_grid_html += '</div>'
     cat_index_content = index_template.replace("{{HERO_SECTION}}", "").replace("{{DYNAMIC_CONTENT}}", cat_grid_html).replace("{{BREAKING_NEWS_TICKER}}", ticker)
-    cat_index_content = cat_index_content.replace("{{META_TAGS}}", "").replace("{{SCHEMA_DATA}}", "")
+    cat_index_content = cat_index_content.replace("{{META_TAGS}}", "").replace("{{SCHEMA_DATA}}", "").replace("{{LIVE_STATUS_SCRIPT}}", LIVE_SCRIPT_HTML)
     with open(os.path.join(OUTPUT_DIR, cat, "index.html"), "w", encoding="utf-8") as f: f.write(cat_index_content)
 
 # Generate Article Pages
@@ -361,14 +375,15 @@ for art in all_arts:
     final_html = template.replace("{{NEWS_CONTENT}}", article_html).replace("{{ARTICLE_TITLE}}", art["title"]) \
                          .replace("{{BREAKING_NEWS_TICKER}}", ticker).replace("{{VIDEO_URL}}", video_url) \
                          .replace("{{RELATED_POSTS}}", related_html).replace("{{META_TAGS}}", meta_tags).replace("{{SCHEMA_DATA}}", schema_data) \
-                         .replace('id="total-views">--', f'id="total-views">{total_views}') # === Inject Views ===
+                         .replace('id="total-views">--', f'id="total-views">{total_views}') \
+                         .replace("{{LIVE_STATUS_SCRIPT}}", LIVE_SCRIPT_HTML) # === Inject Live Script ===
     
     os.makedirs(os.path.join(OUTPUT_DIR, art["cat"]), exist_ok=True)
     with open(os.path.join(OUTPUT_DIR, art["cat"], art["file"]), "w", encoding="utf-8") as f: f.write(final_html)
 
 with open(os.path.join(OUTPUT_DIR, INDEX_FILE), "w", encoding="utf-8") as f:
     home_html = index_template.replace("{{HERO_SECTION}}", hero_html).replace("{{DYNAMIC_CONTENT}}", dyn_html).replace("{{BREAKING_NEWS_TICKER}}", ticker)
-    home_html = home_html.replace("{{META_TAGS}}", "").replace("{{SCHEMA_DATA}}", "")
+    home_html = home_html.replace("{{META_TAGS}}", "").replace("{{SCHEMA_DATA}}", "").replace("{{LIVE_STATUS_SCRIPT}}", LIVE_SCRIPT_HTML)
     f.write(home_html)
 
 generate_sitemap(all_arts)
