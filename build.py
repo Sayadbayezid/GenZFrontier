@@ -92,9 +92,21 @@ def clean_and_prepare():
     if os.path.exists(OUTPUT_DIR): shutil.rmtree(OUTPUT_DIR)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     os.makedirs(os.path.join(OUTPUT_DIR, ADS_DIR), exist_ok=True)
+    
+    # Copy basic files
     for f in ["index.html", "404.html", "contact.html", "about.html", "privacy-policy.html", "terms.html", "disclaimer.html", "cookie-policy.html", "submit-guest-post.html", "CNAME", "sitemap.xml", "robots.txt", "style.css", "favicon.ico"]:
         if os.path.exists(f): shutil.copy2(f, os.path.join(OUTPUT_DIR, f))
     
+    # 🚀 FIX: Copy all image files from 'news' directory to 'public/news'
+    for root, _, files in os.walk(NEWS_DIR):
+        for file in files:
+            # Check if the file is an image (handling both lowercase and uppercase extensions)
+            if file.lower().endswith(('.webp', '.jpg', '.jpeg', '.png', '.gif')):
+                src_file = os.path.join(root, file)
+                dest_dir = os.path.join(OUTPUT_DIR, root) 
+                os.makedirs(dest_dir, exist_ok=True)
+                shutil.copy2(src_file, os.path.join(dest_dir, file))
+                
     # Handle Legacy Archives
     legacy_src = "legacy-archives"
     if os.path.exists(legacy_src):
