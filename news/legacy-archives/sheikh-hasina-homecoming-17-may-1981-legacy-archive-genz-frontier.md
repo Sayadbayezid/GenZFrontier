@@ -1,6 +1,6 @@
 title: "শেখ হাসিনার স্বদেশ প্রত্যাবর্তনের ঐতিহাসিক তাৎপর্য: ১৭ মে, বাংলাদেশের রাজনীতির এক সন্ধিক্ষণ | GenZ Frontier Legacy Archive"
 description: "১৭ মে শেখ হাসিনার স্বদেশ প্রত্যাবর্তন বাংলাদেশের রাজনৈতিক ইতিহাসের একটি গুরুত্বপূর্ণ অধ্যায়। নির্বাসন শেষে দেশে ফিরে আওয়ামী লীগের নেতৃত্ব গ্রহণ, গণতন্ত্র পুনরুদ্ধারের আন্দোলন এবং বাংলাদেশের রাজনৈতিক ধারাবাহিকতায় এই ঘটনার ঐতিহাসিক তাৎপর্য নিয়ে GenZ Frontier Legacy Archive-এর বিশেষ বিশ্লেষণ।"
-image: sheikh-hasina-homecoming-17-may-1981-legacy-archive-genz-frontier.webp
+image: /news/legacy-archives/images/sheikh-hasina-homecoming-17-may-1981-legacy-archive-genz-frontier.webp
 date: July 19, 2026
 author: Sayad Md Bayezid Hosan
 category: Legacy Archive
