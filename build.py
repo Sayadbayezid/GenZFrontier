@@ -90,9 +90,9 @@ GA4_PROPERTY_ID = "524639425"
 # 🔴 LIVE TV CONFIGURATION (NEW)
 # ==========================================================
 IS_LIVE = False
-LIVE_VIDEO_URL = "https://www.youtube.com/embed/YOUR_VIDEO_ID"
+LIVE_VIDEO_URL = "https://www.youtube.com/embed/rjrO3k_MmJI"
 
-LIVE_SCRIPT_HTML = f"""
+LIVE_SCRIPT_HTML = t"""
 <script>
     window.LIVE_STATUS = {'true' if IS_LIVE else 'false'};
     window.LIVE_URL = '{LIVE_VIDEO_URL}';
