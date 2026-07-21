@@ -92,7 +92,7 @@ GA4_PROPERTY_ID = "524639425"
 IS_LIVE = False
 LIVE_VIDEO_URL = "https://www.youtube.com/embed/rjrO3k_MmJI"
 
-LIVE_SCRIPT_HTML = t"""
+LIVE_SCRIPT_HTML = f"""
 <script>
     window.LIVE_STATUS = {'true' if IS_LIVE else 'false'};
     window.LIVE_URL = '{LIVE_VIDEO_URL}';
