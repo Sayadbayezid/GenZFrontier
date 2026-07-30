@@ -1,77 +1,90 @@
-Title: লতিফ সিদ্দিকী গ্রেপ্তার: শাপলা চত্বর মামলায় টাঙ্গাইলের সাবেক এমপির গ্রেপ্তার থেকে ট্রাইব্যুনাল পর্যন্ত সম্পূর্ণ ঘটনা
-Description: সাবেক মন্ত্রী ও টাঙ্গাইল-৪ আসনের সাবেক এমপি আবদুল লতিফ সিদ্দিকীকে গুলশানের বাসা থেকে গ্রেপ্তার করেছে ডিবি। শাপলা চত্বর হত্যাকাণ্ডের মানবতাবিরোধী অপরাধ মামলায় গ্রেপ্তার, পটভূমি ও সর্বশেষ অবস্থাসহ সম্পূর্ণ প্রতিবেদন।
-Images: 
-Keyword: লতিফ সিদ্দিকী গ্রেপ্তার, Tangail 
+Title: Latif Siddique's Arrest: The Complete Story Behind Bangladesh's Most Explosive Political Case of 2026
+Description: Former minister and five-time Tangail-4 lawmaker Abdul Latif Siddique was arrested from his Gulshan home and produced before the International Crimes Tribunal over the 2013 Shapla Chattar killings. A full investigation into his arrest, his decades-long political career, and every legal battle that led to this moment.
+Images: https://genzfrontir.com/news/images/latif-siddique.PNG
+Keyword: Latif Siddiqui arrested, Shapla Chattar case, Tangail-4, International Crimes Tribunal Bangladesh
+
+# Latif Siddique's Arrest: The Complete Story Behind Bangladesh's Most Explosive Political Case of 2026
+
+*By [Sayad Md Bayezid Hosan](https://facebook.com/sayadbayezid.com) | [GenZ Frontier](https://genzfrontir.com) Politics Desk | July 30, 2026*
+
+![Abdul Latif Siddique escorted by police](https://genzfrontir.com/news/images/latif-siddique.PNG)
+
+**DHAKA —** Abdul Latif Siddique, an 87-year-old freedom fighter, five-time member of parliament from Tangail-4, and former Textiles and Jute Minister, is once again behind bars. On Wednesday evening, the Detective Branch (DB) of Dhaka Metropolitan Police arrested him from his residence in Gulshan under a warrant issued by the International Crimes Tribunal (ICT), in connection with the 2013 Shapla Chattar killings. On Thursday, he was produced before the tribunal.
+
+This is not his first brush with the law, and it will likely not be his last. Over the past twelve years, Latif Siddique has been sacked from the cabinet, expelled from the Awami League, jailed for religious-sentiment charges, prosecuted for corruption, detained after a scuffle at a public discussion, and now charged alongside former prime minister Sheikh Hasina in a genocide and crimes-against-humanity case. This is the complete, verified account of how he got here — from his decades in parliament to Thursday's tribunal hearing.
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/h7tqrdSOkog"
+  frameborder="0"
+  allowfullscreen>
+</iframe>
+
+## How Wednesday's Arrest Unfolded
+
+The day began, ironically, with Latif Siddique trying to get ahead of the very warrant that would put him back in jail. On Wednesday morning, he appeared before Dhaka's Chief Metropolitan Magistrate Jewel Rana in an unrelated Anti-Terrorism Act case tied to Shahbagh Police Station. Speaking to reporters after that hearing, he said he had learned that morning that the International Crimes Tribunal had issued a warrant against him in the Shapla Chattar case, and that he intended to surrender voluntarily — either that day, or before the tribunal the following Sunday or Monday if police did not act first.
+
+He also used the moment to deny any culpability. "I was a minister at the time," he told reporters, "but I knew nothing about the Shapla Chattar incident or the events of that period."
+
+Police did not wait. At around 6:00 pm that evening, DB officers arrived at his Gulshan residence and took him into custody. DB Additional Commissioner Md Shafiqul Islam confirmed the arrest to media, stating plainly that a warrant existed against him in the ICT case and that he was detained accordingly. ICT Chief Prosecutor Md Aminul Islam confirmed that, as part of standard legal procedure, Siddique would be produced before the tribunal on Thursday morning. As of this report, the outcome of that hearing — whether he was remanded, sent directly to jail, or whether a bail application was heard — had not yet been confirmed by Bangladeshi media. This remains a developing story.
+
+## The Case: What Happened at Shapla Chattar in 2013
+
+To understand why an 87-year-old former minister is being tried for genocide, it helps to go back to May 2013. Hefazat-e-Islam, an Islamist coalition, had gathered in the thousands at Motijheel's Shapla Chattar on May 5, pressing a 13-point charter of demands. What followed overnight — a security operation that dispersed the rally — has remained one of the most politically contested episodes in modern Bangladeshi history, its casualty figures and circumstances disputed for over a decade.
+
+That changed on July 27, 2026, when International Crimes Tribunal-2 — a three-judge panel chaired by Justice Nazrul Islam Chowdhury, alongside judges Md Manjurul Bashid and Nur Mohammad Shahriar Kabir — formally accepted charges of genocide and crimes against humanity against 41 people over the crackdown. The accused include ousted prime minister Sheikh Hasina, two journalists, Latif Siddique, and 37 others. According to ICT Chief Prosecutor Md Aminul Islam, investigators have linked 58 deaths across Dhaka and four other districts to the operation. In the same order, the tribunal issued arrest warrants for 31 accused who remain at large — Latif Siddique among them — while directing that ten others, already jailed in separate cases, be produced before the tribunal for this case as well.
+
+It is worth stating plainly what this case is and is not, at this stage: these are formally accepted charges, not a verdict. Latif Siddique has publicly and repeatedly denied any involvement.
+
+## Who Is Abdul Latif Siddique?
+
+Latif Siddique is not a peripheral figure in Bangladeshi politics — he is, by most accounts, one of its most durable and most controversial characters. Born on December 18, 1937, in Kalihati, Tangail, he is a decorated Muktijoddha (freedom fighter) from the 1971 Liberation War and the eldest of the influential Siddique brothers of Tangail — a trio that has dominated the district's politics for half a century, alongside Bangabir Kader Siddique and Murad Siddique.
+
+He won his Tangail-4 (Kalihati) seat five times as an Awami League candidate, first securing office in the 1970s and returning repeatedly through the decades. In 2009, under Sheikh Hasina's government, he was appointed to the cabinet, eventually holding the Textiles and Jute portfolio.
+
+## The 2014 Hajj Remarks That Changed Everything
+
+None of what followed in 2025 and 2026 can be understood without the controversy that first derailed Siddique's career. On September 28, 2014, while in New York as part of the prime minister's delegation to the UN General Assembly, Siddique told an audience of expatriate Bangladeshis that he was "dead against" the Hajj, calling it a waste of manpower, and made further disparaging remarks about Tablighi Jamaat, the Prophet Muhammad, and the prime minister's son, Sajeeb Wazed Joy. Footage of the remarks spread rapidly and triggered nationwide outrage.
+
+![Abdul Latif Siddique arrested without a warrant in 2014](https://genzfrontir.com/news/images/abdul-latif-siddique-without-warrant-arrest.JPG)
+
+The fallout was swift and severe. He was sacked from the cabinet within days, then removed from the Awami League presidium, and shortly after stripped of his primary party membership altogether. Roughly 22 cases were eventually filed against him nationwide, with courts issuing arrest warrants in 17 of them. Rather than face the storm at home, Siddique remained in India for about a month and a half. He flew back into Dhaka's Hazrat Shahjalal International Airport on November 23, 2014, but was not arrested on arrival — he disappeared for nearly two days before surrendering himself at Dhanmondi Model Police Station on November 25. Notably, the police station did not even hold a warrant for his arrest at that point; he was produced before the Dhaka Chief Metropolitan Magistrate's court regardless, on a case alleging he had hurt religious sentiments, and was ordered to jail. He would not be released on bail until roughly seven months later. In September 2015, he formally resigned his parliamentary seat, telling the House in an emotional speech that he stood by his position.
+
+Legal trouble continued to follow him. In 2017, the Anti-Corruption Commission filed a case accusing him of illegally selling over two acres of Bangladesh Jute Mill Corporation land in Bogura without a public tender. In June 2019, a Bogura court denied him bail and sent him to jail in that case; the Supreme Court stayed the trial proceedings the following year.
+
+## 2025: Detained Again at a Liberation War Discussion
+
+Latif Siddique largely stayed out of the political arena in the years that followed — until Bangladesh's political landscape was upended entirely. Following the student-led mass uprising of 2024 that toppled Sheikh Hasina's government, Siddique, running as an independent, had in fact won back his old Tangail-4 seat in the disputed January 2024 election, becoming a five-time MP. That tenure ended when the uprising forced the dissolution of parliament altogether.
+
+The next chapter began on August 28, 2025, when Siddique attended a roundtable discussion titled "Our Great Liberation War and the Constitution of Bangladesh," organised by a freedom fighters' platform called Mancha 71 at the Dhaka Reporters' Unity (DRU). Partway through the event, a group of roughly 20-25 people identifying themselves as "July Fighters" stormed the venue, surrounded attendees including Siddique and Dhaka University law professor Sheikh Hafizur Rahman Karzon, and accused them of being loyalists of the ousted Awami League. Police ultimately took 16 people into custody, including Siddique, Karzon, and journalist Manzurul Alam Panna.
+
+![Freedom fighter who doesn't trust Bangladesh's courts: Latif Siddique's bail rejected](https://genzfrontir.com/news/images/freedom-fighter-Dosent-trust-bangladesh-law.PNG)
+
+The following day, August 29, a case was filed under the Anti-Terrorism Act at Shahbagh Police Station, alleging a conspiracy to push the country toward armed struggle and to destabilise the interim government. Dhaka Metropolitan Magistrate Sarah Farzana Haque ordered all 16 sent to jail. Siddique, notably, initially refused to even sign the power of attorney needed to seek bail, telling his lawyer, "Why seek bail from a court that has no authority to grant it?"
+
+A bail petition was eventually filed on his behalf. On September 3, it was withdrawn hours after filing when his family failed to produce required medical documents in time. Refiled the next day, it was rejected outright — Dhaka Metropolitan Magistrate Hasib Ullah Pias denied bail to both Siddique and journalist Panna on September 4, 2025, after defence lawyer Farzana Yeasmin Rakhi's arguments were opposed by the state. It would take over two more months before Siddique saw any legal relief: the High Court granted him bail on November 6, 2025, and when the state appealed, the Appellate Division of the Supreme Court upheld that bail on November 10, removing any remaining legal bar to his release.
+
+## 2026: An Election Loss and a Court's Growing Impatience
+
+Siddique's legal troubles did not translate into political retirement. He contested Tangail-4 again as an independent — running under the truck symbol — in the general election held in February 2026. This time, he lost to BNP candidate Lutfor Rahman Khan Matin, ending his parliamentary career for good, at least for now.
+
+The Anti-Terrorism Act case, meanwhile, continued to grind on. At a hearing on May 13, 2026, the investigating officer once again failed to submit the case's investigation report. Standing in the dock, an evidently frustrated Siddique told the court he no longer wanted justice from a court where there was no fair trial to be had.
+
+Two months later, the Shapla Chattar case would eclipse everything else.
+
+## Where Things Stand Right Now
+
+As things stand, Latif Siddique is facing two active prosecutions simultaneously: the years-old Anti-Terrorism Act case stemming from the 2025 Mancha 71 incident, and the newly charged genocide and crimes-against-humanity case tied to the 2013 Shapla Chattar killings — a case that also names Bangladesh's former prime minister. He was produced before the International Crimes Tribunal on Thursday morning, July 30, as legally required following his arrest. What the tribunal decided at that hearing — remand, imprisonment pending trial, or a bail hearing — was not yet confirmed in available reporting at the time of writing. GenZ Frontier will update this report as soon as verified information becomes available.
+
+## The Bigger Picture
+
+It is worth noting, in the interest of giving readers the full picture, that Siddique's arrest has not gone unchallenged in the court of public opinion. Following his 2025 detention, Awami League — whose activities remain banned in Bangladesh — issued a statement describing him as an "eminent freedom fighter" and accusing what it called "anti-liberation forces" of orchestrating mob action against him at the DRU event. Senior journalist Kamal Ahmed, chief of the Media Reform Commission, separately questioned publicly whether the manner of Siddique's 2025 arrest reflected practices reminiscent of the "old order." Neither of those reactions changes the fact that formal charges — genocide and crimes against humanity — have now been accepted by a tribunal in the Shapla Chattar case, and that this matter is still very much before the courts, not settled by them.
+
+Given his age, his decades in Bangladeshi politics, and the scale of the case now attached to his name, Abdul Latif Siddique's arrest is likely to remain one of the defining political and legal stories of 2026.
+
 ---
 
-# লতিফ সিদ্দিকী গ্রেপ্তার: শাপলা চত্বর মামলায় টাঙ্গাইলের সাবেক এমপির গ্রেপ্তার থেকে ট্রাইব্যুনাল পর্যন্ত সম্পূর্ণ ঘটনা
+**Reporting sources:** The Daily Star, Dhaka Tribune, Prothom Alo, The Business Standard, bdnews24, New Age, BSS, Bangladesh Sangbad Sangstha, and official Bangladesh Parliament records, cross-verified for this report.
 
-*লিখেছেন সায়াদ মোঃ বায়েজিদ হোসান | GenZ Frontier | ৩০ জুলাই, ২০২৬*
-
-**ঢাকা।।** সাবেক বস্ত্র ও পাট মন্ত্রী এবং টাঙ্গাইল-৪ (কালিহাতী) আসনের সাবেক সংসদ সদস্য আবদুল লতিফ সিদ্দিকীকে গ্রেপ্তার করেছে ঢাকা মহানগর গোয়েন্দা পুলিশ (ডিবি)। মতিঝিলের শাপলা চত্বরে ২০১৩ সালের হেফাজতে ইসলামের সমাবেশ ঘিরে সংঘটিত হত্যাযজ্ঞের ঘটনায় দায়ের হওয়া মানবতাবিরোধী অপরাধের মামলায় আন্তর্জাতিক অপরাধ ট্রাইব্যুনালের (আইসিটি) জারি করা পরোয়ানার ভিত্তিতে বুধবার (২৯ জুলাই) সন্ধ্যায় রাজধানীর গুলশানের নিজ বাসভবন থেকে তাঁকে গ্রেপ্তার করা হয়। একাধিক শীর্ষস্থানীয় সংবাদমাধ্যম যাচাই করে ঘটনার শুরু থেকে বর্তমান পরিস্থিতি পর্যন্ত সম্পূর্ণ চিত্র তুলে ধরা হলো এই প্রতিবেদনে।
-
-## যেভাবে গ্রেপ্তার হলেন লতিফ সিদ্দিকী
-
-বুধবার সকালে ঢাকার চিফ মেট্রোপলিটন ম্যাজিস্ট্রেট জুয়েল রানার আদালতে শাহবাগ থানার একটি সন্ত্রাসবিরোধী আইনের মামলায় হাজিরা দিতে যান লতিফ সিদ্দিকী। হাজিরা শেষে সাংবাদিকদের তিনি জানান, শাপলা চত্বরের মামলায় তিনি আত্মসমর্পণের সিদ্ধান্ত নিয়েছেন এবং সেদিন সকালেই তাকে জানানো হয়েছে যে আন্তর্জাতিক অপরাধ ট্রাইব্যুনালে দায়ের হওয়া মামলায় তার বিরুদ্ধে গ্রেপ্তারি পরোয়ানা জারি হয়েছে। আগেভাগে গ্রেপ্তার না হলে আগামী সপ্তাহের রোববার বা সোমবার নিজে থেকেই ট্রাইব্যুনালে আত্মসমর্পণ করে জামিনের আবেদন করার পরিকল্পনার কথাও জানান তিনি। শাপলা চত্বরের ঘটনায় নিজের সম্পৃক্ততা অস্বীকার করে তিনি দাবি করেন, ওই সময় মন্ত্রী থাকলেও শাপলা চত্বরের ঘটনা সম্পর্কে তার কোনো ধারণা ছিল না।
-
-তবে তাকে আত্মসমর্পণের সুযোগ দেওয়া হয়নি। একই দিন সন্ধ্যা ৬টার দিকে গুলশানের বাসা থেকে তাকে গ্রেপ্তার করে ডিবি। ডিবির অতিরিক্ত কমিশনার মো. শফিকুল ইসলাম গণমাধ্যমকে নিশ্চিত করেন যে আন্তর্জাতিক অপরাধ ট্রাইব্যুনালের মামলায় জারি হওয়া পরোয়ানার ভিত্তিতেই এই গ্রেপ্তার। গ্রেপ্তারের পর ট্রাইব্যুনালের চিফ প্রসিকিউটর মো. আমিনুল ইসলাম জানান, আইনি প্রক্রিয়ার অংশ হিসেবে বৃহস্পতিবার (৩০ জুলাই) সকালে তাকে ট্রাইব্যুনালে হাজির করা হবে।
-
-## কোন মামলায় গ্রেপ্তার: শাপলা চত্বরের হত্যাযজ্ঞ
-
-হেফাজতে ইসলাম ১৩ দফা দাবিতে ২০১৩ সালের ৫ মে রাজধানীর মতিঝিলের শাপলা চত্বরে জড়ো হয়ে অবস্থান কর্মসূচি পালন করছিল। ওই কর্মসূচি ঘিরে রাতভর চালানো অভিযানের জেরে হতাহতের ঘটনা নিয়ে গত এক দশকেরও বেশি সময় ধরে রাজনৈতিক বিতর্ক চলছে। তদন্তকারীদের তথ্যমতে, ঢাকাসহ দেশের পাঁচটি জেলায় ওই ঘটনায় ৫৮ জন নিহত হওয়ার প্রমাণ পাওয়া গেছে।
-
-এই ঘটনায় মানবতাবিরোধী অপরাধ ও গণহত্যার অভিযোগে করা মামলায় গত সোমবার (২৭ জুলাই) আন্তর্জাতিক অপরাধ ট্রাইব্যুনাল-২-এর তিন সদস্যের বিচারিক প্যানেল—চেয়ারম্যান বিচারপতি নজরুল ইসলাম চৌধুরী, বিচারক মো. মঞ্জুরুল বাছিদ ও বিচারক নূর মোহাম্মদ শাহরিয়ার কবীরের সমন্বয়ে গঠিত—সাবেক প্রধানমন্ত্রী শেখ হাসিনা, লতিফ সিদ্দিকী, দুই সাংবাদিকসহ মোট ৪১ জনের বিরুদ্ধে আনুষ্ঠানিক অভিযোগ গ্রহণ করেন। একই আদেশে পলাতক ৩১ আসামির বিরুদ্ধে গ্রেপ্তারি পরোয়ানা জারি করা হয়, যাদের মধ্যে ছিলেন লতিফ সিদ্দিকীও। পাশাপাশি ভিন্ন ভিন্ন মামলায় ইতিমধ্যে কারাগারে থাকা বাকি ১০ আসামিকে এই মামলার শুনানির জন্য ট্রাইব্যুনালে হাজির করারও নির্দেশ দেওয়া হয়।
-
-## কে এই আবদুল লতিফ সিদ্দিকী?
-
-টাঙ্গাইলের প্রভাবশালী সিদ্দিকী পরিবারের জ্যেষ্ঠ সদস্য আবদুল লতিফ সিদ্দিকী একজন মুক্তিযোদ্ধা এবং দীর্ঘদিনের আওয়ামী লীগ নেতা। বাংলাদেশ জাতীয় সংসদের তথ্য অনুযায়ী তার জন্ম ১৯৩৭ সালের ১৮ ডিসেম্বর, টাঙ্গাইলের কালিহাতীতে। তিনি টাঙ্গাইল-৪ (কালিহাতী) আসন থেকে পাঁচবার সংসদ সদস্য নির্বাচিত হয়েছেন এবং ২০০৯ সালে শেখ হাসিনার নেতৃত্বাধীন সরকারে বস্ত্র ও পাট মন্ত্রীর দায়িত্ব পান।
-
-২০১৪ সালের সেপ্টেম্বরে হজ, তাবলিগ জামাত ও তৎকালীন প্রধানমন্ত্রীর ছেলে সজীব ওয়াজেদ জয়কে নিয়ে বিতর্কিত মন্তব্য করার পর দেশজুড়ে তীব্র প্রতিক্রিয়ার মুখে পড়েন তিনি। এর জেরে মন্ত্রিসভা থেকে অব্যাহতি ও আওয়ামী লীগের প্রেসিডিয়াম সদস্য পদ থেকে বহিষ্কৃত হন, পরে দলীয় প্রাথমিক সদস্যপদও হারান। তার বিরুদ্ধে তখন প্রায় ২২টি মামলা দায়ের হয়েছিল, যার ১৭টিতে গ্রেপ্তারি পরোয়ানা জারি হয়। ২০১৫ সালের সেপ্টেম্বরে সংসদ সদস্য পদ থেকে পদত্যাগ করেন তিনি। পরে ২০১৭ সালে বগুড়ায় দুর্নীতি দমন কমিশনের করা একটি মামলায় (সরকারি জমি বিনা টেন্ডারে বিক্রির অভিযোগ) অভিযুক্ত হন, যার জেরে ২০১৯ সালে সংক্ষিপ্ত সময়ের জন্য কারাগারেও যেতে হয় তাকে।
-
-## ২০২৪ থেকে ২০২৬: রাজনৈতিক উত্থান-পতন ও একের পর এক মামলা
-
-২০২৪ সালের বিতর্কিত জাতীয় নির্বাচনে স্বতন্ত্র প্রার্থী হিসেবে টাঙ্গাইল-৪ আসনে জয়ী হয়ে পঞ্চমবারের মতো সংসদ সদস্য নির্বাচিত হন লতিফ সিদ্দিকী। তবে ওই বছরই ছাত্র-জনতার গণঅভ্যুত্থানে আওয়ামী লীগ সরকারের পতন ও সংসদ ভেঙে যাওয়ার পর তিনি সংসদ সদস্য থাকেননি। গণঅভ্যুত্থান-পরবর্তী সময়ে ঢাকা রিপোর্টার্স ইউনিটির একটি অনুষ্ঠান থেকে ২০২৪ সালের আগস্টে তাকে প্রথমবার আটক করা হয়, পরে সন্ত্রাসবিরোধী আইনের একটি মামলায় অভিযুক্ত করা হয় তাকে। কয়েক মাস পর জামিনে মুক্তি পেলেও মামলাটি এখনও চলমান।
-
-২০২৫ সালের ২৮ আগস্ট ‘মঞ্চ ৭১’ নামের একটি প্ল্যাটফর্মের আয়োজনে ঢাকা রিপোর্টার্স ইউনিটিতে মুক্তিযুদ্ধ ও সংবিধান নিয়ে এক আলোচনা সভায় অংশ নেন লতিফ সিদ্দিকী। সভা চলাকালে একদল ব্যক্তি সেখানে প্রবেশ করে উপস্থিতদের আওয়ামী লীগের সমর্থক আখ্যা দিয়ে ঘেরাও করে, পরে পুলিশ ১৬ জনকে আটক করে—যাদের মধ্যে ছিলেন লতিফ সিদ্দিকী, ঢাকা বিশ্ববিদ্যালয়ের আইন বিভাগের অধ্যাপক শেখ হাফিজুর রহমান (কার্জন) এবং একজন সাংবাদিক। শাহবাগ থানায় সন্ত্রাসবিরোধী আইনে সরকার উৎখাতের ষড়যন্ত্রের অভিযোগে মামলা হলে পরদিন আদালত তাদের জামিন নাকচ করে কারাগারে পাঠানোর নির্দেশ দেন। পরে গত বছরের ৬ নভেম্বর হাইকোর্ট তাকে জামিন দিলে রাষ্ট্রপক্ষ আপিল বিভাগে আপিল করে, তবে ১০ নভেম্বর আপিল বিভাগ হাইকোর্টের জামিন আদেশ বহাল রাখে।
-
-চলতি বছরের ফেব্রুয়ারিতে অনুষ্ঠিত জাতীয় নির্বাচনে ট্রাক প্রতীক নিয়ে আবারও টাঙ্গাইল-৪ আসনে স্বতন্ত্র প্রার্থী হিসেবে লড়েন লতিফ সিদ্দিকী, তবে এবার বিএনপির প্রার্থী লুৎফর রহমান খান মতিনের কাছে পরাজিত হন। এরপর মে মাসে শাহবাগ থানার সন্ত্রাসবিরোধী আইনের মামলার একটি শুনানিতে তদন্ত প্রতিবেদন জমা না পড়ায় আদালতের প্রতি অনাস্থা প্রকাশ করে লতিফ সিদ্দিকী বলেছিলেন, ন্যায্য বিচার না থাকা আদালতে তিনি আর সুবিচার চান না।
-
-## বর্তমান অবস্থা: আজ ট্রাইব্যুনালে হাজির
-
-গ্রেপ্তারের পর ডিবিপ্রধান শফিকুল ইসলাম ও ট্রাইব্যুনালের চিফ প্রসিকিউটর আমিনুল ইসলাম উভয়েই নিশ্চিত করেছেন, নির্ধারিত আইনি প্রক্রিয়া অনুযায়ী বৃহস্পতিবার (৩০ জুলাই) সকালে লতিফ সিদ্দিকীকে আন্তর্জাতিক অপরাধ ট্রাইব্যুনালে হাজির করা হবে। এই প্রতিবেদন তৈরির সময় পর্যন্ত ট্রাইব্যুনালে হাজিরের পর তাকে রিমান্ডে নেওয়া হবে, নাকি সরাসরি কারাগারে পাঠানো হবে, নাকি জামিনের আবেদন করা হবে—এ বিষয়ে নিশ্চিত তথ্য গণমাধ্যমে প্রকাশিত হয়নি। তাই এই অংশটি একটি চলমান (developing) ঘটনা হিসেবেই বিবেচনা করা প্রয়োজন; নিশ্চিত তথ্য পাওয়ামাত্র প্রতিবেদন হালনাগাদ করা যেতে পারে।
-
-## এরপর কী
-
-শাপলা চত্বর মামলাটি বাংলাদেশের সাম্প্রতিক ইতিহাসের অন্যতম আলোচিত মামলা, যেখানে সাবেক প্রধানমন্ত্রী শেখ হাসিনাসহ ৪১ জন অভিযুক্ত। লতিফ সিদ্দিকীর ক্ষেত্রে এই মামলার পাশাপাশি শাহবাগ থানার সন্ত্রাসবিরোধী আইনের পুরনো মামলাটিও চলমান রয়েছে। ফলে আগামী দিনগুলোতে দুটি মামলাতেই তাকে একাধিকবার আদালত ও ট্রাইব্যুনালে হাজির হতে হতে পারে।
-
----
-
-**তথ্যসূত্র:** প্রথম আলো, দ্য ডেইলি স্টার, ঢাকা ট্রিবিউন, ইত্তেফাক, সমকাল, কালের কণ্ঠ, আরটিভি অনলাইন, বাংলা ট্রিবিউন, যুগান্তর ও মানবজমিন-সহ একাধিক সংবাদমাধ্যমের প্রতিবেদন যাচাই করে প্রস্তুত।
-
-## সবচেয়ে বেশি সার্চ হওয়া কীওয়ার্ড/ট্যাগ
-
-বিভিন্ন সংবাদমাধ্যমের শিরোনাম ও কভারেজ পর্যালোচনা করে যেসব কীওয়ার্ড/ফ্রেজ সবচেয়ে বেশি ব্যবহৃত ও সম্ভাব্য সবচেয়ে বেশি সার্চ হচ্ছে বলে দেখা গেছে:
-
-**সবচেয়ে বেশি ব্যবহৃত (হাই-প্রায়োরিটি):**
-- লতিফ সিদ্দিকী গ্রেপ্তার
-- আজ ট্রাইব্যুনালে হাজির লতিফ সিদ্দিকী
-- শাপলা চত্বর হত্যা মামলা
-
-**দ্বিতীয় স্তর:**
-- আন্তর্জাতিক অপরাধ ট্রাইব্যুনাল লতিফ সিদ্দিকী
-- সাবেক মন্ত্রী গ্রেপ্তার
-- গুলশান থেকে গ্রেপ্তার
-
-**লং-টেইল/প্রাসঙ্গিক:**
-- লতিফ সিদ্দিকী টাঙ্গাইল-৪
-- শেখ হাসিনা লতিফ সিদ্দিকী মামলা
-- হেফাজতে ইসলাম শাপলা চত্বর ২০১৩
-
-**ইংরেজি কীওয়ার্ড (দ্বিভাষিক পাঠকদের জন্য):**
-- Latif Siddiqui arrested
-- Latif Siddiqui ICT tribunal
-- Latif Siddiqui Shapla Chattar case
-- Abdul Latif Siddiqui Tangail
-- Sheikh Hasina Latif Siddiqui case
-
-*(এই কীওয়ার্ড তালিকা কোনো নির্দিষ্ট কিওয়ার্ড-ভলিউম টুলের সরাসরি ডেটা নয়, বরং একাধিক শীর্ষস্থানীয় সংবাদমাধ্যমের শিরোনাম-প্যাটার্ন বিশ্লেষণ করে তৈরি একটি বাস্তবসম্মত অনুমান। চূড়ান্ত পাবলিশের আগে Google Search Console বা কোনো কিওয়ার্ড টুলে যাচাই করে নেওয়া ভালো।)*
+*Sayad Md Bayezid Hosan is a political correspondent for GenZ Frontier's Politics Desk.*
