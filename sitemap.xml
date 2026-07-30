@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.genzfrontir.com/</loc>
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-07-30</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
@@ -598,6 +598,11 @@
   <url>
     <loc>https://www.genzfrontir.com/world/dhaka-wasington.html</loc>
     <lastmod>2026-02-20</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.genzfrontir.com/politics/latif-siddiqui-arrest-shapla-chattar-case.html</loc>
+    <lastmod>2026-07-30</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
