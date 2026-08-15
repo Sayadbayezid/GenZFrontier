@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">A clear record beyond a shifting story</title>
+  <desc id="desc">An editorial illustration of layered speech shapes separating around a clear evidence card, representing blame shifting, credibility, and independent evaluation.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e5eef0"/><stop offset="0.5" stop-color="#fbfaf8"/><stop offset="1" stop-color="#bfd5d7"/></linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#c4e1df"/></linearGradient>
+    <linearGradient id="speech1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dca2a2"/><stop offset="1" stop-color="#9d5c69"/></linearGradient>
+    <linearGradient id="speech2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8dbbb8"/><stop offset="1" stop-color="#477c81"/></linearGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="shadow"><feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#263f48" flood-opacity="0.20"/></filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1320" cy="150" r="240" fill="#fff" opacity="0.42" filter="url(#soft)"/>
+  <circle cx="170" cy="770" r="250" fill="#88b7b8" opacity="0.18" filter="url(#soft)"/>
+  <g filter="url(#shadow)">
+    <path d="M100 178 C100 125 144 91 204 91H570C630 91 674 125 674 178V300C674 353 630 387 570 387H342L257 459L275 387H204C144 387 100 353 100 300Z" fill="url(#speech1)"/>
+    <path d="M920 550 C920 497 964 463 1024 463H1390C1450 463 1494 497 1494 550V672C1494 725 1450 759 1390 759H1160L1076 831L1094 759H1024C964 759 920 725 920 672Z" fill="url(#speech2)"/>
+  </g>
+  <g fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" opacity="0.68">
+    <path d="M205 183H545"/><path d="M205 232H490"/><path d="M205 281H520"/>
+    <path d="M1025 554H1390"/><path d="M1025 603H1320"/><path d="M1025 652H1360"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="574" y="240" width="452" height="452" rx="18" fill="url(#card)" stroke="#4f8589" stroke-width="8"/>
+    <path d="M663 345H938M663 405H890M663 465H930M663 525H835" stroke="#588b8f" stroke-width="14" stroke-linecap="round" opacity="0.72"/>
+    <circle cx="664" cy="605" r="27" fill="#fff" stroke="#4f8589" stroke-width="8"/>
+    <path d="M647 605L659 617L683 589" fill="none" stroke="#4f8589" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <path d="M650 206L780 240M950 692L1100 735" stroke="#557f84" stroke-width="8" stroke-dasharray="14 18" opacity="0.62"/>
+  <circle cx="800" cy="116" r="25" fill="#f9ffff" stroke="#4f8589" stroke-width="8"/>
+  <path d="M768 116H832" stroke="#4f8589" stroke-width="6" stroke-linecap="round"/>
+  <path d="M800 84V148" stroke="#4f8589" stroke-width="6" stroke-linecap="round"/>
+</svg>
