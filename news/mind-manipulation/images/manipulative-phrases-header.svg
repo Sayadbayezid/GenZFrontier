@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Speech bubbles and a calm boundary</title>
+  <desc id="desc">An editorial illustration of conversation bubbles crossing a clear boundary, representing language, context, and personal choice.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8eff1"/><stop offset="0.5" stop-color="#fbfbf9"/><stop offset="1" stop-color="#c1d6da"/></linearGradient>
+    <linearGradient id="bubble" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#c9e0e1"/></linearGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+    <filter id="shadow"><feDropShadow dx="0" dy="18" stdDeviation="15" flood-color="#28434b" flood-opacity="0.18"/></filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1380" cy="160" r="220" fill="#fff" opacity="0.38" filter="url(#soft)"/>
+  <circle cx="190" cy="790" r="260" fill="#8eb9bc" opacity="0.18" filter="url(#soft)"/>
+  <path d="M805 82V815" stroke="#5d8189" stroke-width="7" opacity="0.25"/>
+  <path d="M825 82V815" stroke="#ffffff" stroke-width="5" opacity="0.58"/>
+  <g filter="url(#shadow)">
+    <path d="M98 745 C146 626 241 561 346 561 C455 561 545 632 598 758 L622 900H44Z" fill="#d9d9d2"/>
+    <circle cx="338" cy="465" r="91" fill="#d29a80"/>
+    <path d="M246 470 C242 374 300 317 373 327 C441 338 474 396 454 465 C405 422 335 410 277 443Z" fill="#2e3439"/>
+    <path d="M180 690 C241 619 308 600 373 611 C431 621 482 656 522 712" fill="none" stroke="#55848a" stroke-width="54" stroke-linecap="round"/>
+    <circle cx="305" cy="470" r="6" fill="#28363c"/>
+    <circle cx="374" cy="470" r="6" fill="#28363c"/>
+    <path d="M313 506 C334 518 356 518 376 505" fill="none" stroke="#875a55" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <g fill="url(#bubble)" stroke="#5c8c92" stroke-width="7" filter="url(#shadow)">
+    <path d="M895 190 C895 135 940 98 1000 98H1345C1405 98 1450 135 1450 190V300C1450 355 1405 392 1345 392H1130L1040 458L1058 392H1000C940 392 895 355 895 300Z"/>
+    <path d="M960 520 C960 466 1002 430 1060 430H1350C1408 430 1450 466 1450 520V610C1450 664 1408 700 1350 700H1190L1130 758L1142 700H1060C1002 700 960 664 960 610Z" fill="#dce9e8" opacity="0.82"/>
+  </g>
+  <g fill="none" stroke="#52838a" stroke-width="12" stroke-linecap="round" opacity="0.72">
+    <path d="M1015 205H1315"/><path d="M1015 250H1265"/><path d="M1015 295H1350"/>
+    <path d="M1050 530H1360"/><path d="M1050 575H1275"/><path d="M1050 620H1325"/>
+  </g>
+  <circle cx="842" cy="452" r="23" fill="#f9ffff" stroke="#4f8288" stroke-width="8"/>
+  <path d="M812 452H872" stroke="#4f8288" stroke-width="6" stroke-linecap="round"/>
+  <path d="M842 422V482" stroke="#4f8288" stroke-width="6" stroke-linecap="round"/>
+</svg>
