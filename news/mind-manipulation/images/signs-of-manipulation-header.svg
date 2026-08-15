@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">A person noticing communication patterns</title>
+  <desc id="desc">A calm editorial illustration of a person looking through a window at connected signals and boundaries.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8eff0"/><stop offset="0.5" stop-color="#fbfbf8"/><stop offset="1" stop-color="#bed2d6"/></linearGradient>
+    <linearGradient id="coat" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dce4e1"/><stop offset="1" stop-color="#6d8c91"/></linearGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+    <filter id="shadow"><feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#29434d" flood-opacity="0.18"/></filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1360" cy="150" r="230" fill="#fff" opacity="0.40" filter="url(#soft)"/>
+  <circle cx="220" cy="820" r="260" fill="#89b5b8" opacity="0.20" filter="url(#soft)"/>
+  <path d="M680 0V820M935 0V820M1190 0V820" stroke="#738e95" stroke-width="9" opacity="0.22"/>
+  <path d="M640 720H1520" stroke="#fff" stroke-width="9" opacity="0.44"/>
+  <g filter="url(#shadow)">
+    <path d="M72 770 C130 628 223 560 334 560 C440 560 538 641 598 780 L630 900H28Z" fill="url(#coat)"/>
+    <path d="M237 535 C245 450 299 396 374 403 C447 410 482 470 459 545 C422 512 360 497 297 519Z" fill="#30363a"/>
+    <circle cx="358" cy="535" r="93" fill="#d39a7e"/>
+    <path d="M277 510 C308 469 375 455 434 491" fill="none" stroke="#e5b195" stroke-width="10" opacity="0.45"/>
+    <circle cx="326" cy="536" r="6" fill="#26353b"/>
+    <circle cx="391" cy="536" r="6" fill="#26353b"/>
+    <path d="M334 570 C353 579 376 579 393 568" fill="none" stroke="#8c5d58" stroke-width="5" stroke-linecap="round"/>
+    <path d="M160 720 C232 659 293 644 358 650 C420 656 476 681 531 739" fill="none" stroke="#f4f5ef" stroke-width="24" opacity="0.55"/>
+  </g>
+  <!-- Pattern nodes -->
+  <g fill="#f8ffff" stroke="#4c8088" stroke-width="7">
+    <circle cx="800" cy="180" r="22"/><circle cx="1050" cy="290" r="22"/><circle cx="1320" cy="190" r="22"/><circle cx="1250" cy="510" r="22"/><circle cx="970" cy="650" r="22"/>
+  </g>
+  <g fill="none" stroke="#56838a" stroke-width="9" opacity="0.68">
+    <path d="M800 180L1050 290L1320 190"/>
+    <path d="M1050 290L1250 510L970 650L800 180"/>
+  </g>
+  <g fill="#56838a" opacity="0.62">
+    <circle cx="800" cy="180" r="7"/><circle cx="1050" cy="290" r="7"/><circle cx="1320" cy="190" r="7"/><circle cx="1250" cy="510" r="7"/><circle cx="970" cy="650" r="7"/>
+  </g>
+  <rect x="647" y="92" width="8" height="700" fill="#fff" opacity="0.48"/>
+  <path d="M730 780H1500" stroke="#617e84" stroke-width="4" opacity="0.22"/>
+</svg>
