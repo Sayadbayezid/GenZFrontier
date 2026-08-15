@@ -1,11 +1,11 @@
 Title: Recovering From Manipulation: Rebuilding Self-Trust and Getting Support
 description: Recovering from manipulation can involve safety planning, rebuilding self-trust, reducing self-blame, reconnecting with support, and finding therapy at your own pace.
-image: /news/mind-manipulation/images/recovering-from-manipulation-header.svg
+image: /news/mind-manipulation/images/recovering-from-manipulation-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/recovering-from-manipulation-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/recovering-from-manipulation-header.webp)
 
 # Recovering From Manipulation: Rebuilding Self-Trust and Getting Support
 

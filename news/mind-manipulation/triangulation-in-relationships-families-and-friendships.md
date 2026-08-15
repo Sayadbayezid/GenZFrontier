@@ -1,11 +1,11 @@
 Title: Triangulation in Relationships, Families, and Friendships
 description: Learn what triangulation means, how third-party pressure can create division, how family triangulation affects children, and how to step out safely.
-image: /news/mind-manipulation/images/triangulation-in-relationships-families-and-friendships-header.svg
+image: /news/mind-manipulation/images/triangulation-in-relationships-families-and-friendships-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/triangulation-in-relationships-families-and-friendships-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/triangulation-in-relationships-families-and-friendships-header.webp)
 
 # Triangulation in Relationships, Families, and Friendships
 

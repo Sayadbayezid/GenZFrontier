@@ -1,11 +1,11 @@
 Title: DARVO, Blame-Shifting, and Playing the Victim: A Clear Explanation
 description: Learn what DARVO means, how deny-attack-reverse victim and offender can shift attention, how it differs from ordinary defense, and how to respond safely.
-image: /news/mind-manipulation/images/darvo-blame-shifting-playing-the-victim-header.svg
+image: /news/mind-manipulation/images/darvo-blame-shifting-playing-the-victim-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/darvo-blame-shifting-playing-the-victim-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/darvo-blame-shifting-playing-the-victim-header.webp)
 
 # DARVO, Blame-Shifting, and Playing the Victim: A Clear Explanation
 

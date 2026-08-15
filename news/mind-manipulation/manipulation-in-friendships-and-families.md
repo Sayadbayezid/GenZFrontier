@@ -1,11 +1,11 @@
 Title: Manipulation in Friendships and Families: Signs, Examples, and Boundaries
 description: Learn how manipulation can appear in friendships and families through guilt, isolation, triangulation, scapegoating, and boundary pressure—and how to respond safely.
-image: /news/mind-manipulation/images/manipulation-in-friendships-and-families-header.svg
+image: /news/mind-manipulation/images/manipulation-in-friendships-and-families-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/manipulation-in-friendships-and-families-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/manipulation-in-friendships-and-families-header.webp)
 
 # Manipulation in Friendships and Families: Signs, Examples, and Boundaries
 

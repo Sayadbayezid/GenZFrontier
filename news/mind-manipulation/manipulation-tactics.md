@@ -1,11 +1,11 @@
 Title: Common Manipulation Tactics: A Research-Based Guide With Examples
 description: Learn how common manipulation tactics may appear in relationships, families, friendships, and workplaces, with research-based examples and safer ways to respond.
-image: /news/mind-manipulation/images/manipulation-tactics-header.svg
+image: /news/mind-manipulation/images/manipulation-tactics-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/manipulation-tactics-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/manipulation-tactics-header.webp)
 
 # Common Manipulation Tactics: A Research-Based Guide With Examples
 

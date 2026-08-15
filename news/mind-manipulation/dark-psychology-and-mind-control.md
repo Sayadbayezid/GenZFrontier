@@ -1,11 +1,11 @@
 Title: Dark Psychology and Mind Control: What Is Real, What Is Not, and Why It Matters
 description: Learn what “dark psychology” means in popular culture, how it differs from evidence-based influence and coercive control, and why mind-control claims require caution.
-image: /news/mind-manipulation/images/dark-psychology-and-mind-control-header.svg
+image: /news/mind-manipulation/images/dark-psychology-and-mind-control-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/dark-psychology-and-mind-control-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/dark-psychology-and-mind-control-header.webp)
 
 # Dark Psychology and Mind Control: What Is Real, What Is Not, and Why It Matters
 

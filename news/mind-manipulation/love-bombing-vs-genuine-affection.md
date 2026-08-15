@@ -1,11 +1,11 @@
 Title: Love Bombing vs. Genuine Affection: How to Recognize the Pattern
 description: Learn how to distinguish love bombing from genuine affection by looking at pace, boundaries, reciprocity, digital privacy, outside support, and what happens when you say no.
-image: /news/mind-manipulation/images/love-bombing-vs-genuine-affection-header.svg
+image: /news/mind-manipulation/images/love-bombing-vs-genuine-affection-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/love-bombing-vs-genuine-affection-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/love-bombing-vs-genuine-affection-header.webp)
 
 # Love Bombing vs. Genuine Affection: How to Recognize the Pattern
 

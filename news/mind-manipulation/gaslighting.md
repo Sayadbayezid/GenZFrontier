@@ -1,11 +1,11 @@
 Title: Gaslighting: Meaning, Signs, Examples, and How It Differs From Lying
 description: Learn what gaslighting means, how it differs from lying and disagreement, common patterns and examples, and safer ways to respond if you feel confused or undermined.
-image: /news/mind-manipulation/images/gaslighting-header.svg
+image: /news/mind-manipulation/images/gaslighting-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/gaslighting-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/gaslighting-header.webp)
 
 # Gaslighting: Meaning, Signs, Examples, and How It Differs From Lying
 

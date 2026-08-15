@@ -1,11 +1,11 @@
 Title: Psychological Manipulation: Definition, Types, Signs, Examples, and What to Do
 description: Learn what psychological manipulation means, how to recognize repeated patterns, how it differs from persuasion and gaslighting, and what you can do safely.
-image: /news/mind-manipulation/images/psychological-manipulation-header.svg
+image: /news/mind-manipulation/images/psychological-manipulation-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/psychological-manipulation-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/psychological-manipulation-header.webp)
 
 # Psychological Manipulation: Definition, Types, Signs, Examples, and What to Do
 
@@ -280,7 +280,7 @@ These are not magic phrases. They may be useful in an ordinary difficult convers
 
 You may also consider maintaining trusted relationships, keeping important information accessible, and documenting significant events **only when it is safe to do so**. Documentation can create risk if someone monitors your devices, accounts, location, or communications. The National Domestic Violence Hotline recommends safety-conscious documentation practices for people experiencing abuse.[5]
 
-For more practical guidance, read [how to respond safely to emotional manipulation](https://www.genzfrontir.com/mind-manipulation/how-to-respond-to-emotional-manipulation/), [coercive control and emotional abuse](https://www.genzfrontir.com/mind-manipulation/coercive-control-emotional-abuse/), and how to [document abuse safely](https://www.genzfrontir.com/mind-manipulation/document-gaslighting-safely/).
+For more practical guidance, read [how to respond safely to emotional manipulation](https://www.genzfrontir.com/mind-manipulation/how-to-respond-to-emotional-manipulation/), [coercive control and emotional abuse](https://www.genzfrontir.com/mind-manipulation/coercive-control-and-emotional-abuse/), and how to [document abuse safely](https://www.genzfrontir.com/mind-manipulation/document-gaslighting-or-emotional-abuse-safely/).
 
 ## When to Seek Help
 

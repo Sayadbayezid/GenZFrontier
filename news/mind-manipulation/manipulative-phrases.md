@@ -1,11 +1,11 @@
 Title: What Do Manipulators Say? Common Phrases and What They May Signal
 description: Explore common manipulative phrases, what they may signal in context, how guilt and pressure work, and safer ways to respond without jumping to conclusions.
-image: /news/mind-manipulation/images/manipulative-phrases-header.svg
+image: /news/mind-manipulation/images/manipulative-phrases-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/manipulative-phrases-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/manipulative-phrases-header.webp)
 
 # What Do Manipulators Say? Common Phrases and What They May Signal
 

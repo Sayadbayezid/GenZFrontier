@@ -1,11 +1,11 @@
 Title: Emotional Manipulation in Relationships: Signs, Examples, and Boundaries
 description: Learn how emotional manipulation can appear in relationships through guilt, isolation, monitoring, conditional affection, and coercive control—and how to protect your boundaries safely.
-image: /news/mind-manipulation/images/emotional-manipulation-in-relationships-header.svg
+image: /news/mind-manipulation/images/emotional-manipulation-in-relationships-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/emotional-manipulation-in-relationships-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/emotional-manipulation-in-relationships-header.webp)
 
 # Emotional Manipulation in Relationships: Signs, Examples, and Boundaries
 

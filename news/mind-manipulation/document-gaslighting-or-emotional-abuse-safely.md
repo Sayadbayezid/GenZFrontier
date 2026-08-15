@@ -1,11 +1,11 @@
 Title: How to Document Gaslighting or Emotional Abuse Safely
 description: Learn how to document gaslighting or emotional abuse with a safety-first incident log, digital-evidence cautions, secure storage ideas, and guidance on sharing records with advocates.
-image: /news/mind-manipulation/images/document-gaslighting-or-emotional-abuse-safely-header.svg
+image: /news/mind-manipulation/images/document-gaslighting-or-emotional-abuse-safely-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/document-gaslighting-or-emotional-abuse-safely-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/document-gaslighting-or-emotional-abuse-safely-header.webp)
 
 # How to Document Gaslighting or Emotional Abuse Safely
 

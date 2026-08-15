@@ -1,11 +1,11 @@
 Title: Silent Treatment vs. Taking Space: When Does It Become Manipulation?
 description: Learn the difference between healthy space, a relationship timeout, stonewalling, and punitive silent treatment, including examples, boundaries, and safer response options.
-image: /news/mind-manipulation/images/silent-treatment-vs-taking-space-header.svg
+image: /news/mind-manipulation/images/silent-treatment-vs-taking-space-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/silent-treatment-vs-taking-space-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/silent-treatment-vs-taking-space-header.webp)
 
 # Silent Treatment vs. Taking Space: When Does It Become Manipulation?
 

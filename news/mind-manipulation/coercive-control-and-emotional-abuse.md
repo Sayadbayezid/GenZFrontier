@@ -1,11 +1,11 @@
 Title: Coercive Control and Emotional Abuse: How They Relate to Manipulation
 description: Learn how coercive control differs from ordinary conflict and emotional abuse, including signs across digital, financial, social, reproductive, and everyday life.
-image: /news/mind-manipulation/images/coercive-control-and-emotional-abuse-header.svg
+image: /news/mind-manipulation/images/coercive-control-and-emotional-abuse-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/coercive-control-and-emotional-abuse-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/coercive-control-and-emotional-abuse-header.webp)
 
 # Coercive Control and Emotional Abuse: How They Relate to Manipulation
 

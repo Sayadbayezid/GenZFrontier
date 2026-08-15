@@ -1,11 +1,11 @@
 Title: How to Respond to Emotional Manipulation Without Escalating Risk
 description: Learn how to respond to emotional manipulation with calm boundaries, safer communication, support planning, and risk-aware steps for situations that may escalate.
-image: /news/mind-manipulation/images/how-to-respond-to-emotional-manipulation-header.svg
+image: /news/mind-manipulation/images/how-to-respond-to-emotional-manipulation-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/how-to-respond-to-emotional-manipulation-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/how-to-respond-to-emotional-manipulation-header.webp)
 
 # How to Respond to Emotional Manipulation Without Escalating Risk
 

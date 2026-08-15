@@ -9,11 +9,16 @@ import subprocess
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 import urllib.parse
+import html
 
-# === GA4 Imports (New) ===
-from google.analytics.data_v1beta import BetaAnalyticsDataClient
-from google.analytics.data_v1beta.types import DateRange, Dimension, Metric, RunReportRequest
-# =========================
+# === GA4 Imports (Optional) ===
+try:
+    from google.analytics.data_v1beta import BetaAnalyticsDataClient
+    from google.analytics.data_v1beta.types import DateRange, Dimension, Metric, RunReportRequest
+except ImportError:
+    BetaAnalyticsDataClient = None
+    DateRange = Dimension = Metric = RunReportRequest = None
+# =================================
 
 def get_git_date(file_path):
     """Fetches the last commit date for a given file from Git history."""
@@ -31,6 +36,44 @@ def get_git_date(file_path):
 def sanitize_url(url):
     return url.replace(' ', '-').replace('#', '').replace('"', '').replace("'", "")
 
+def absolute_url(path):
+    """Convert a site-relative asset path into a stable absolute URL."""
+    if not path:
+        return f"{BASE_URL}default.webp"
+    if path.startswith(("http://", "https://")):
+        return path
+    return urllib.parse.urljoin(BASE_URL, path.lstrip("/"))
+
+def published_image_url(path):
+    """Use WebP for local SVG article art when the optimized asset exists."""
+    if path and not path.startswith(("http://", "https://")) and path.lower().endswith(".svg"):
+        path = path[:-4] + ".webp"
+    return absolute_url(path)
+
+def slug_from_filename(filename):
+    return sanitize_url(os.path.splitext(filename)[0]).lower()
+
+def article_href(category, filename):
+    """Return the canonical clean URL path for a generated article."""
+    return f"/{category}/{slug_from_filename(filename)}/"
+
+def add_avif_picture(html_content):
+    """Wrap the first local WebP article image with an AVIF source and WebP fallback."""
+    pattern = r'<p><img alt="([^"]*)" src="([^" ]+\.webp)" /></p>'
+
+    def replacement(match):
+        alt_text = html.escape(match.group(1), quote=True)
+        webp_url = html.escape(match.group(2), quote=True)
+        avif_url = html.escape(match.group(2)[:-5] + ".avif", quote=True)
+        return (
+            '<p><picture>'
+            f'<source type="image/avif" srcset="{avif_url}">'
+            f'<img alt="{alt_text}" src="{webp_url}" loading="eager" fetchpriority="high" decoding="async">'
+            '</picture></p>'
+        )
+
+    return re.sub(pattern, replacement, html_content, count=1, flags=re.IGNORECASE)
+
 def normalize_date(date_str):
     if not date_str: return datetime.now().strftime("%Y-%m-%d")
     try:
@@ -46,6 +89,9 @@ def normalize_date(date_str):
 # ==========================================================
 def get_ga4_pageviews(property_id):
     creds_json = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+    if BetaAnalyticsDataClient is None:
+        print("⚠️ google-analytics-data package not found! Skipping analytics data.")
+        return {}
     if not creds_json:
         print("⚠️ GA4 Credentials not found! Skipping analytics data.")
         return {}
@@ -115,7 +161,7 @@ def clean_and_prepare():
     for root, _, files in os.walk(NEWS_DIR):
         for file in files:
             # Check if the file is an image (handling both lowercase and uppercase extensions)
-            if file.lower().endswith(('.webp', '.jpg', '.jpeg', '.png', '.gif')):
+            if file.lower().endswith(('.svg', '.webp', '.avif', '.jpg', '.jpeg', '.png', '.gif')):
                 src_file = os.path.join(root, file)
                 dest_dir = os.path.join(OUTPUT_DIR, root) 
                 os.makedirs(dest_dir, exist_ok=True)
@@ -175,14 +221,18 @@ for root, _, files in os.walk(NEWS_DIR):
         with open(os.path.join(root, file), "r", encoding="utf-8") as f: txt = f.read()
         md_parser.convert(txt)
         meta = md_parser.Meta; md_parser.reset()
+        output_file = file.replace(".md", ".html")
+        clean_path = article_href(cat, output_file)
         art = {
             "title": meta.get("title", [file.replace(".md", "").title()])[0],
-            "file": file.replace(".md", ".html"),
+            "file": output_file,
+            "slug": slug_from_filename(output_file),
+            "href": clean_path,
             "cat": cat,
             "desc": meta.get("description", [""])[0],
-            "img": meta.get("image", [f"{BASE_URL}default.jpg"])[0],
+            "img": published_image_url(meta.get("image", ["/default.webp"])[0]),
             "date": meta.get("date", [get_git_date(os.path.join(root, file)) or datetime.now().isoformat()])[0],
-            "url": f"{BASE_URL}{cat}/{sanitize_url(file.replace('.md', '.html'))}"
+            "url": urllib.parse.urljoin(BASE_URL, clean_path.lstrip("/"))
         }
         cat_arts[cat].append(art)
         all_arts.append(art)
@@ -199,11 +249,11 @@ if hero_post:
     <div class="hero-container">
         <div class="hero-main">
             <span class="red-tag">LATEST NEWS</span>
-            <a href="/{hero_post["cat"]}/{hero_post["file"]}">
+            <a href="{hero_post["href"]}">
                 <h1>{hero_post["title"]}</h1>
             </a>
             <p>{hero_post["desc"]}</p>
-            <a href="/{hero_post["cat"]}/{hero_post["file"]}">
+            <a href="{hero_post["href"]}">
                 <img src="{hero_post["img"]}" alt="{hero_post["title"]}" loading="eager" fetchpriority="high" width="1069" height="713" decoding="async">
             </a>
         </div>
@@ -213,11 +263,11 @@ if hero_post:
     for a in live_updates_posts:
         hero_html += f'''
             <div class="hero-side-item">
-                <a href="/{a["cat"]}/{a["file"]}">
+                <a href="{a["href"]}">
                     <img src="{a["img"]}" alt="{a["title"]}" loading="lazy" width="80" height="80" decoding="async">
                 </a>
                 <div>
-                    <h3><a href="/{a["cat"]}/{a["file"]}">{a["title"]}</a></h3>
+                    <h3><a href="{a["href"]}">{a["title"]}</a></h3>
                 </div>
             </div>
 '''
@@ -225,7 +275,7 @@ if hero_post:
 
 # 2. Breaking News Ticker
 ticker_posts = all_arts[:15]
-ticker_items = "".join([f'<span>🔴 <a href="/{a["cat"]}/{a["file"]}" style="color: white; text-decoration: none;">{a["title"]}</a></span>' for a in ticker_posts])
+ticker_items = "".join([f'<span>🔴 <a href="{a["href"]}" class="ticker-link">{a["title"]}</a></span>' for a in ticker_posts])
 ticker = f'<div class="breaking-news-ticker"><div class="breaking-label">BREAKING</div><marquee class="breaking-marquee" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">{ticker_items}</marquee></div>'
 
 # 4. Latest Mix Section (BBC Style)
@@ -237,7 +287,7 @@ if mix_posts:
 <div class="section-header"><h2>Latest Mix</h2></div>
 <div class="grid-featured">
     <div class="featured-large">
-        <a href="/{featured_mix["cat"]}/{featured_mix["file"]}">
+        <a href="{featured_mix["href"]}">
             <img src="{featured_mix["img"]}" alt="{featured_mix["title"]}" loading="lazy" width="800" height="450" decoding="async">
             <div class="overlay">
                 <h3>{featured_mix["title"]}</h3>
@@ -250,7 +300,7 @@ if mix_posts:
         dyn_html += f'''
         <div class="hero-side-item">
             <div>
-                <h3><a href="/{a["cat"]}/{a["file"]}">{a["title"]}</a></h3>
+                <h3><a href="{a["href"]}">{a["title"]}</a></h3>
             </div>
         </div>
 '''
@@ -266,7 +316,7 @@ for cat in DEFAULT_CATEGORIES:
     featured = c_posts[0]
     cat_block_html += f'''
     <div class="featured-large">
-        <a href="/{featured["cat"]}/{featured["file"]}">
+        <a href="{featured["href"]}">
             <img src="{featured["img"]}" alt="{featured["title"]}" loading="lazy" width="800" height="450" decoding="async">
             <div class="overlay">
                 <h3>{featured["title"]}</h3>
@@ -279,7 +329,7 @@ for cat in DEFAULT_CATEGORIES:
         cat_block_html += f'''
         <div class="hero-side-item">
             <div>
-                <h3><a href="/{a["cat"]}/{a["file"]}">{a["title"]}</a></h3>
+                <h3><a href="{a["href"]}">{a["title"]}</a></h3>
             </div>
         </div>
 '''
@@ -293,7 +343,7 @@ for cat in DEFAULT_CATEGORIES:
         cat_grid_html += f'''
         <article class="news-card">
             <img src="{a["img"]}" alt="{a["title"]}" loading="lazy" width="400" height="225" decoding="async">
-            <a href="/{a["cat"]}/{a["file"]}"><h3>{a["title"]}</h3></a>
+            <a href="{a["href"]}"><h3>{a["title"]}</h3></a>
         </article>'''
     cat_grid_html += '</div>'
     cat_index_content = index_template.replace("{{HERO_SECTION}}", "").replace("{{DYNAMIC_CONTENT}}", cat_grid_html).replace("{{BREAKING_NEWS_TICKER}}", ticker)
@@ -315,7 +365,7 @@ for art in all_arts:
         related_html += f'''
         <article class="news-card">
             <img src="{r["img"]}" alt="{r["title"]}" loading="lazy" width="400" height="225" decoding="async">
-            <a href="/{r["cat"]}/{r["file"]}"><h3>{r["title"]}</h3></a>
+            <a href="{r["href"]}"><h3>{r["title"]}</h3></a>
         </article>'''
     related_html += '</div></div>'
 
@@ -330,12 +380,16 @@ for art in all_arts:
     
     if video_url and video_url.startswith("//"): video_url = "https:" + video_url
 
+    safe_title = html.escape(art["title"], quote=True)
+    safe_desc = html.escape(art["desc"], quote=True)
+    safe_img = html.escape(art["img"], quote=True)
+    safe_url = html.escape(art["url"], quote=True)
     meta_tags = f'''
-    <meta name="description" content="{art["desc"]}">
-    <meta property="og:title" content="{art["title"]} - GenZ Frontier">
-    <meta property="og:description" content="{art["desc"]}">
-    <meta property="og:image" content="{art["img"]}">
-    <meta property="og:url" content="{art["url"]}">
+    <meta name="description" content="{safe_desc}">
+    <meta property="og:title" content="{safe_title} - GenZ Frontier">
+    <meta property="og:description" content="{safe_desc}">
+    <meta property="og:image" content="{safe_img}">
+    <meta property="og:url" content="{safe_url}">
     <meta name="twitter:card" content="summary_large_image">
     '''
     schema_data = f'''
@@ -343,9 +397,9 @@ for art in all_arts:
     {{
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "{art["title"]}",
-      "image": ["{art["img"]}"],
-      "datePublished": "{art["date"]}",
+      "headline": {json.dumps(art["title"])},
+      "image": [{json.dumps(art["img"])}],
+      "datePublished": {json.dumps(art["date"])},
       "author": {{ "@type": "Organization", "name": "GenZ Frontier" }}
     }}
     </script>
@@ -353,33 +407,64 @@ for art in all_arts:
 
     # Convert markdown to HTML
     article_html = md_parser.convert(md_content)
+    # Source Markdown may retain historical SVG references; render optimized WebP instead.
+    article_html = re.sub(r'(?P<prefix>/news/mind-manipulation/images/[^"\']+)\.svg(?P<suffix>["\'])', r'\g<prefix>.webp\g<suffix>', article_html, flags=re.IGNORECASE)
+    article_html = add_avif_picture(article_html)
     
-    # Inject Native Banner after the first paragraph for better UX/SEO
+    # Third-party ad scripts can redirect readers through popunder/affiliate flows.
+    # Keep the existing ads for other categories, but disable them in this safety-focused cluster.
+    ads_enabled = art["cat"] != "mind-manipulation"
     native_banner_html = '''
             <!-- Adsterra Native Banner -->
             <div style="margin-top: 30px; margin-bottom: 20px; text-align: center;">
                 <script async="async" data-cfasync="false" src="https://pl30308054.effectivecpmnetwork.com/ec56a821de60d9845e8059349f970dbf/invoke.js"></script>
                 <div id="container-ec56a821de60d9845e8059349f970dbf"></div>
             </div>
-    '''
+    ''' if ads_enabled else ""
+    article_desktop_ad_html = '''
+        <div class="desktop-only-ad" style="margin-top: 20px; text-align: center;">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : 'b9782458d33b2a813bcaf2fe42023033',
+                    'format' : 'iframe',
+                    'height' : 600,
+                    'width' : 160,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="https://www.highperformanceformat.com/b9782458d33b2a813bcaf2fe42023033/invoke.js"></script>
+        </div>
+    ''' if ads_enabled else ""
+    social_bar_html = '<script src="https://pl30308055.effectivecpmnetwork.com/59/2a/2f/592a2f2aee609d98fa5fc89b35dfe700.js"></script>' if ads_enabled else ""
     if "</p>" in article_html:
         article_html = article_html.replace("</p>", "</p>" + native_banner_html, 1)
     else:
         article_html = native_banner_html + article_html
 
     # === Map Views to Article (New) ===
-    article_path = f"/{art['cat']}/{art['file']}"
+    article_path = art["href"]
     total_views = all_page_views.get(article_path, "0")
     # ==================================
 
     final_html = template.replace("{{NEWS_CONTENT}}", article_html).replace("{{ARTICLE_TITLE}}", art["title"]) \
                          .replace("{{BREAKING_NEWS_TICKER}}", ticker).replace("{{VIDEO_URL}}", video_url) \
                          .replace("{{RELATED_POSTS}}", related_html).replace("{{META_TAGS}}", meta_tags).replace("{{SCHEMA_DATA}}", schema_data) \
+                         .replace("{{CANONICAL_URL}}", art["url"]) \
+                         .replace("{{ARTICLE_DESKTOP_AD}}", article_desktop_ad_html) \
+                         .replace("{{SOCIAL_BAR_SCRIPT}}", social_bar_html) \
                          .replace('id="total-views">--', f'id="total-views">{total_views}') \
                          .replace("{{LIVE_STATUS_SCRIPT}}", LIVE_SCRIPT_HTML) # === Inject Live Script ===
     
-    os.makedirs(os.path.join(OUTPUT_DIR, art["cat"]), exist_ok=True)
-    with open(os.path.join(OUTPUT_DIR, art["cat"], art["file"]), "w", encoding="utf-8") as f: f.write(final_html)
+    article_output_dir = os.path.join(OUTPUT_DIR, art["cat"], art["slug"])
+    os.makedirs(article_output_dir, exist_ok=True)
+    with open(os.path.join(article_output_dir, "index.html"), "w", encoding="utf-8") as f:
+        f.write(final_html)
+
+    # Preserve old .html URLs while consolidating SEO signals on the clean URL.
+    legacy_path = os.path.join(OUTPUT_DIR, art["cat"], art["file"])
+    legacy_redirect = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="canonical" href="{art["url"]}"><meta http-equiv="refresh" content="0; url={art["href"]}"><title>Redirecting…</title></head><body><p>This article moved to <a href="{art["href"]}">{art["url"]}</a>.</p></body></html>'''
+    with open(legacy_path, "w", encoding="utf-8") as f:
+        f.write(legacy_redirect)
 
 with open(os.path.join(OUTPUT_DIR, INDEX_FILE), "w", encoding="utf-8") as f:
     home_html = index_template.replace("{{HERO_SECTION}}", hero_html).replace("{{DYNAMIC_CONTENT}}", dyn_html).replace("{{BREAKING_NEWS_TICKER}}", ticker)

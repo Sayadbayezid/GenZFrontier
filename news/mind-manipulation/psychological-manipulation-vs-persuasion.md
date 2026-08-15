@@ -1,11 +1,11 @@
 Title: Psychological Manipulation vs. Persuasion, Influence, and Coercion
 description: Understand the difference between psychological manipulation, persuasion, influence, and coercion through autonomy, transparency, pressure, deception, and choice.
-image: /news/mind-manipulation/images/psychological-manipulation-vs-persuasion-header.svg
+image: /news/mind-manipulation/images/psychological-manipulation-vs-persuasion-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/psychological-manipulation-vs-persuasion-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/psychological-manipulation-vs-persuasion-header.webp)
 
 # Psychological Manipulation vs. Persuasion, Influence, and Coercion
 

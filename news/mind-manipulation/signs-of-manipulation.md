@@ -1,11 +1,11 @@
 Title: How to Tell If Someone Is Manipulating You: Signs and Patterns
 description: Learn how to recognize possible manipulation patterns through pressure, guilt, self-doubt, isolation, and boundary violations without relying on labels or online diagnoses.
-image: /news/mind-manipulation/images/signs-of-manipulation-header.svg
+image: /news/mind-manipulation/images/signs-of-manipulation-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/signs-of-manipulation-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/signs-of-manipulation-header.webp)
 
 # How to Tell If Someone Is Manipulating You: Signs and Patterns
 

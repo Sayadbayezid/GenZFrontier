@@ -1,11 +1,11 @@
 Title: Workplace Manipulation and Gaslighting: Signs, Documentation, and Options
 description: Learn how workplace manipulation and gaslighting may appear through trivialization, contradictory instructions, credibility attacks, and power imbalance, plus safer documentation and reporting options.
-image: /news/mind-manipulation/images/workplace-manipulation-and-gaslighting-header.svg
+image: /news/mind-manipulation/images/workplace-manipulation-and-gaslighting-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/workplace-manipulation-and-gaslighting-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/workplace-manipulation-and-gaslighting-header.webp)
 
 # Workplace Manipulation and Gaslighting: Signs, Documentation, and Options
 

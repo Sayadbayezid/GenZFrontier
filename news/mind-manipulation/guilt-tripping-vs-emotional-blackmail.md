@@ -1,11 +1,11 @@
 Title: Guilt-Tripping vs. Emotional Blackmail: What Is the Difference?
 description: Learn the difference between guilt-tripping and emotional blackmail, including fear, obligation, guilt, examples, boundaries, and safer ways to respond.
-image: /news/mind-manipulation/images/guilt-tripping-vs-emotional-blackmail-header.svg
+image: /news/mind-manipulation/images/guilt-tripping-vs-emotional-blackmail-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/guilt-tripping-vs-emotional-blackmail-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/guilt-tripping-vs-emotional-blackmail-header.webp)
 
 # Guilt-Tripping vs. Emotional Blackmail: What Is the Difference?
 

@@ -133,10 +133,16 @@
         @media (max-width: 768px) { .desktop-only-ad { display: none !important; } }
         .article-content h1 { font-size: 42px; line-height: 1.1; margin-bottom: 25px; font-weight: bold; color: #000; }
         .article-content p { font-size: 19px; margin-bottom: 25px; line-height: 1.6; color: #333; }
+        .article-content a { color: #B42332; font-weight: 600; text-decoration-line: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; text-decoration-color: rgba(180, 35, 50, 0.45); transition: color 0.2s ease, text-decoration-color 0.2s ease; }
+        .article-content a:hover { color: #7F1725; text-decoration-color: #7F1725; }
+        .article-content a:focus-visible { outline: 3px solid rgba(180, 35, 50, 0.35); outline-offset: 3px; border-radius: 3px; }
         .article-content img, .article-content iframe { max-width: 100%; height: auto; border-radius: 4px; margin: 25px 0; }
+        .article-content > p:first-child img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
         .article-content iframe { width: 100%; height: 450px; border: none; }
         .article-content hr { border: 0; border-top: 1px solid #eee; margin: 40px 0; }
         .article-content h2 { font-size: 28px; margin: 35px 0 20px; color: #000; }
+        .ticker-link { color: #FFFFFF !important; text-decoration: none !important; font-weight: 700; }
+        .ticker-link:hover { color: #FFD9D9 !important; }
         .article-content ul { margin-bottom: 25px; padding-left: 20px; }
         .article-content ul li { font-size: 18px; margin-bottom: 10px; color: #333; }
 
@@ -249,19 +255,7 @@
             {{NEWS_CONTENT}}
         </article>
 
-        <!-- Adsterra 160x600 Sidebar Ad (Desktop Only) -->
-        <div class="desktop-only-ad" style="margin-top: 20px; text-align: center;">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : 'b9782458d33b2a813bcaf2fe42023033',
-                    'format' : 'iframe',
-                    'height' : 600,
-                    'width' : 160,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="https://www.highperformanceformat.com/b9782458d33b2a813bcaf2fe42023033/invoke.js"></script>
-        </div>
+        {{ARTICLE_DESKTOP_AD}}
     </main>
 
     <section class="related-section">
@@ -317,7 +311,7 @@
 
             // --- Video Popup Logic (Existing) ---
             const videoUrl = "{{VIDEO_URL}}";
-            if (videoUrl && videoUrl !== "" && !videoUrl.includes("{{") && !videoUrl.includes("}}")) {
+            if (videoUrl) {
                 const articleVideoPopup = document.getElementById("articleVideoPopup");
                 const articleVideoPopupBody = document.getElementById("articleVideoPopupBody");
                 const closeArticleVideoBtn = document.getElementById("closeArticleVideoBtn");
@@ -394,7 +388,6 @@
         <p>© 2026 GenZ Frontier. All Rights Reserved.</p>
     </footer>
 
-    <!-- Adsterra Social Bar -->
-    <script src="https://pl30308055.effectivecpmnetwork.com/59/2a/2f/592a2f2aee609d98fa5fc89b35dfe700.js"></script>
+    {{SOCIAL_BAR_SCRIPT}}
 </body>
 </html>

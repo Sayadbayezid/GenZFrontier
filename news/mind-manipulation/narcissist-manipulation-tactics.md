@@ -1,11 +1,11 @@
 Title: Narcissist Manipulation Tactics: Patterns Without Diagnosing Anyone
 description: Learn how manipulation patterns are often described in “narcissist” content, how to distinguish behavior from NPD, and how to protect boundaries without amateur diagnosis.
-image: /news/mind-manipulation/images/narcissist-manipulation-tactics-header.svg
+image: /news/mind-manipulation/images/narcissist-manipulation-tactics-header.webp
 date: August 15, 2026
 author: Sayad Md Bayezid Hosan
 breaking: false
 
-![GenZ Frontier News Header](/news/mind-manipulation/images/narcissist-manipulation-tactics-header.svg)
+![GenZ Frontier News Header](/news/mind-manipulation/images/narcissist-manipulation-tactics-header.webp)
 
 # Narcissist Manipulation Tactics: Patterns Without Diagnosing Anyone
 
