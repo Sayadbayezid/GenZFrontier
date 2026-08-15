@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Two paths representing persuasion and manipulation</title>
+  <desc id="desc">A calm conceptual editorial illustration showing two contrasting communication paths, one open and one obscured.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e9eef1"/>
+      <stop offset="0.48" stop-color="#f9faf9"/>
+      <stop offset="1" stop-color="#c7d7dc"/>
+    </linearGradient>
+    <linearGradient id="openPath" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7daab0"/>
+      <stop offset="1" stop-color="#356c76"/>
+    </linearGradient>
+    <linearGradient id="shadowPath" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a7a1aa"/>
+      <stop offset="1" stop-color="#535866"/>
+    </linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="18"/></filter>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#263c46" flood-opacity="0.20"/></filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="140" cy="110" r="180" fill="#ffffff" opacity="0.38" filter="url(#soft)"/>
+  <circle cx="1470" cy="780" r="260" fill="#94b7bd" opacity="0.20" filter="url(#soft)"/>
+  <path d="M70 730 C360 620 560 610 810 700 S1260 820 1550 640" fill="none" stroke="#ffffff" stroke-width="190" opacity="0.44"/>
+  <path d="M70 730 C360 620 560 610 810 700 S1260 820 1550 640" fill="none" stroke="url(#openPath)" stroke-width="32" opacity="0.84"/>
+  <path d="M50 690 C330 790 520 760 720 630 S1160 350 1540 460" fill="none" stroke="url(#shadowPath)" stroke-width="33" stroke-dasharray="20 22" opacity="0.74"/>
+  <g filter="url(#shadow)">
+    <circle cx="320" cy="364" r="92" fill="#d09a7f"/>
+    <path d="M225 360 C232 255 315 218 394 265 C433 288 449 341 422 384 C400 343 356 321 300 325 C277 336 254 351 225 360Z" fill="#30373a"/>
+    <path d="M205 518 C250 446 380 446 438 518 L510 790H130Z" fill="#e3ddd4"/>
+    <path d="M200 545 C249 497 313 478 376 499 L428 680H170Z" fill="#5b7f86" opacity="0.82"/>
+    <path d="M480 532 C530 506 582 508 621 536" fill="none" stroke="#3b5962" stroke-width="12" stroke-linecap="round"/>
+  </g>
+  <g opacity="0.45" filter="url(#soft)">
+    <circle cx="1250" cy="300" r="78" fill="#677078"/>
+    <path d="M1168 410 C1220 344 1300 345 1355 410 L1420 700H1110Z" fill="#677078"/>
+  </g>
+  <circle cx="810" cy="700" r="22" fill="#ffffff" stroke="#4e8087" stroke-width="8"/>
+  <path d="M780 700H840" stroke="#4e8087" stroke-width="6" stroke-linecap="round"/>
+  <path d="M808 668V732" stroke="#4e8087" stroke-width="6" stroke-linecap="round"/>
+  <path d="M1000 150V770" stroke="#ffffff" stroke-width="5" opacity="0.46"/>
+  <path d="M1020 150V770" stroke="#6e8c95" stroke-width="2" opacity="0.24"/>
+</svg>
