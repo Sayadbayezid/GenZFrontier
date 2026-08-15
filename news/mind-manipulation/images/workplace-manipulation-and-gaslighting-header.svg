@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Clarity and psychological safety at work</title>
+  <desc id="desc">An editorial illustration of a desk, a written record, and a clear path through a workplace setting, representing documentation, clarity, and safe options.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e4eef0"/><stop offset="0.5" stop-color="#fcfbf9"/><stop offset="1" stop-color="#c0d7d8"/></linearGradient>
+    <linearGradient id="desk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8db7b7"/><stop offset="1" stop-color="#477b81"/></linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d3e7e4"/></linearGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="shadow"><feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#253f49" flood-opacity="0.20"/></filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1330" cy="160" r="235" fill="#fff" opacity="0.45" filter="url(#soft)"/>
+  <circle cx="180" cy="760" r="250" fill="#8bbabb" opacity="0.17" filter="url(#soft)"/>
+  <path d="M0 650H1600V900H0Z" fill="url(#desk)" opacity="0.74"/>
+  <g filter="url(#shadow)">
+    <rect x="360" y="190" width="860" height="470" rx="22" fill="#6f9ca0"/>
+    <rect x="420" y="250" width="740" height="410" rx="12" fill="#d6e7e5"/>
+    <path d="M420 560H1160V660H420Z" fill="#9fc3c1" opacity="0.55"/>
+    <rect x="570" y="325" width="440" height="290" rx="12" fill="url(#paper)" stroke="#51858a" stroke-width="8" transform="rotate(-5 790 470)"/>
+    <path d="M650 405L890 384M650 457L950 430M650 509L855 494" stroke="#5a8d91" stroke-width="15" stroke-linecap="round" opacity="0.70" transform="rotate(-5 790 470)"/>
+    <circle cx="650" cy="566" r="26" fill="#fff" stroke="#4f8589" stroke-width="8"/>
+    <path d="M634 566L647 579L671 549" fill="none" stroke="#4f8589" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g filter="url(#shadow)">
+    <circle cx="1280" cy="515" r="76" fill="#d19a80"/>
+    <path d="M1202 517 C1206 427 1259 383 1330 396 C1391 407 1420 463 1402 524 C1362 486 1298 474 1239 502Z" fill="#313a3e"/>
+    <path d="M1207 705 C1250 628 1355 612 1428 684 L1470 900H1085Z" fill="#5e858a"/>
+  </g>
+  <path d="M180 210H340M1260 170H1420" stroke="#fff" stroke-width="8" opacity="0.52"/>
+  <circle cx="250" cy="210" r="24" fill="#fff" stroke="#4e8288" stroke-width="8"/>
+  <path d="M218 210H282M250 178V242" stroke="#4e8288" stroke-width="6" stroke-linecap="round"/>
+</svg>
