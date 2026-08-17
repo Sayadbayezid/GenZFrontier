@@ -142,6 +142,45 @@ def validate_local_video_references(markdown_text):
             print(f"VIDEO WARNING: missing local media reference: {normalized}")
 
 
+def ensure_image_alt_attributes(article_html, fallback_alt):
+    """Add meaningful fallback alt text to article images that omit it."""
+    fallback = html.escape(re.sub(r"\s+", " ", str(fallback_alt or "Article image")).strip(), quote=True)
+    def add_alt(match):
+        tag = match.group(0)
+        if re.search(r"\balt\s*=", tag, flags=re.IGNORECASE):
+            return tag
+        return tag[:-1] + f' alt="{fallback}">'
+    return re.sub(r"<img\b[^>]*>", add_alt, article_html, flags=re.IGNORECASE)
+
+
+def normalize_article_headings(article_html, title):
+    """Ensure a mind-manipulation article has exactly one H1."""
+    h1_count = len(re.findall(r"<h1\b", article_html, flags=re.IGNORECASE))
+    if h1_count == 0:
+        article_html = f'<h1>{html.escape(title)}</h1>\n' + article_html
+    elif h1_count > 1:
+        seen = 0
+        def demote(match):
+            nonlocal seen
+            seen += 1
+            return match.group(0) if seen == 1 else match.group(0).replace("h1", "h2").replace("H1", "H2")
+        article_html = re.sub(r"<h1\b[^>]*>.*?</h1>", demote, article_html, flags=re.IGNORECASE | re.DOTALL)
+    return article_html
+
+
+def shorten_seo_title(title, max_prefix=42):
+    """Keep the rendered title tag under common search-display limits."""
+    value = re.sub(r"\s+", " ", str(title or "")).strip()
+    if len(value) <= max_prefix:
+        return value
+    if ":" in value:
+        prefix = value.split(":", 1)[0].strip()
+        if len(prefix) <= max_prefix:
+            return prefix
+    shortened = value[:max_prefix].rsplit(" ", 1)[0].rstrip(" ,;:-")
+    return shortened + "…"
+
+
 def enhance_video_markup(article_html):
     """Make inline article videos responsive and keyboard/mobile friendly."""
     def enhance_opening(match):
@@ -642,7 +681,10 @@ for cat in DEFAULT_CATEGORIES:
 
     # Generate Category Index Page
     os.makedirs(os.path.join(OUTPUT_DIR, cat), exist_ok=True)
-    cat_grid_html = f'<div class="section-header"><h2>{cat.title()}</h2></div><div class="grid-4">'
+    category_title = "Mind Manipulation" if cat == "mind-manipulation" else cat.title()
+    category_description = "Evidence-based guides to psychological manipulation, warning signs, relationship dynamics, consent, boundaries, and safer responses."
+    heading_html = f'<div class="section-header"><h1>{html.escape(category_title)}</h1></div>' if cat == "mind-manipulation" else f'<div class="section-header"><h2>{html.escape(category_title)}</h2></div>'
+    cat_grid_html = heading_html + '<div class="grid-4">'
     for a in c_posts:
         cat_grid_html += f'''
         <article class="news-card">
@@ -652,6 +694,9 @@ for cat in DEFAULT_CATEGORIES:
     cat_grid_html += '</div>'
     cat_index_content = index_template.replace("{{HERO_SECTION}}", "").replace("{{DYNAMIC_CONTENT}}", cat_grid_html).replace("{{BREAKING_NEWS_TICKER}}", ticker)
     cat_index_content = cat_index_content.replace("{{META_TAGS}}", "").replace("{{SCHEMA_DATA}}", "").replace("{{LIVE_STATUS_SCRIPT}}", LIVE_SCRIPT_HTML).replace("{{INDEX_AD_SLOT}}", category_ad_slot_html(cat))
+    if cat == "mind-manipulation":
+        category_meta = f'<meta name="description" content="{html.escape(category_description, quote=True)}"><meta property="og:title" content="Mind Manipulation | GenZ Frontier"><meta property="og:description" content="{html.escape(category_description, quote=True)}">'
+        cat_index_content = cat_index_content.replace('<title>GenZ Frontier | Breaking News, Latest News and Videos</title>', '<title>Mind Manipulation | GenZ Frontier</title>' + category_meta)
     with open(os.path.join(OUTPUT_DIR, cat, "index.html"), "w", encoding="utf-8") as f: f.write(cat_index_content)
 
 # Generate Article Pages
@@ -713,8 +758,9 @@ for art in all_arts:
     elif video_url and not video_url.startswith(("http://", "https://", "/")):
         video_url = "/" + video_url
 
-    safe_title = html.escape(art["title"], quote=True)
-    safe_desc = html.escape(art["desc"], quote=True)
+    seo_title = shorten_seo_title(art["title"])
+    safe_title = html.escape(seo_title, quote=True)
+    safe_desc = html.escape(art["desc"] or f"{art['title']}. Evidence-based guidance from GenZ Frontier.", quote=True)
     safe_img = html.escape(art["img"], quote=True)
     safe_url = html.escape(art["url"], quote=True)
     meta_tags = f'''
@@ -753,6 +799,9 @@ for art in all_arts:
     validate_local_video_references(md_content)
     article_html = md_parser.convert(md_content)
     article_html = clean_canonical_reference(article_html, art["url"])
+    if art["cat"] == "mind-manipulation":
+        article_html = normalize_article_headings(article_html, art["title"])
+        article_html = ensure_image_alt_attributes(article_html, art["title"])
     article_html = enhance_video_markup(article_html)
     # Source Markdown may retain historical SVG references; render optimized WebP instead.
     article_html = re.sub(r'(?P<prefix>/news/mind-manipulation/images/[^"\']+)\.svg(?P<suffix>["\'])', r'\g<prefix>.webp\g<suffix>', article_html, flags=re.IGNORECASE)
@@ -791,7 +840,7 @@ for art in all_arts:
     total_views = all_page_views.get(article_path, "0")
     # ==================================
 
-    final_html = template.replace("{{NEWS_CONTENT}}", article_html).replace("{{ARTICLE_TITLE}}", art["title"]) \
+    final_html = template.replace("{{NEWS_CONTENT}}", article_html).replace("{{ARTICLE_TITLE}}", seo_title) \
                          .replace("{{BREAKING_NEWS_TICKER}}", ticker).replace("{{VIDEO_URL}}", video_url) \
                          .replace("{{RELATED_POSTS}}", related_html).replace("{{META_TAGS}}", meta_tags).replace("{{SCHEMA_DATA}}", schema_data) \
                          .replace("{{CANONICAL_URL}}", art["url"]) \
@@ -807,7 +856,10 @@ for art in all_arts:
 
     # Preserve old .html URLs while consolidating SEO signals on the clean URL.
     legacy_path = os.path.join(OUTPUT_DIR, art["cat"], art["file"])
-    legacy_redirect = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="canonical" href="{art["url"]}"><meta http-equiv="refresh" content="0; url={art["href"]}"><title>Redirecting…</title></head><body><p>This article moved to <a href="{art["href"]}">{art["url"]}</a>.</p></body></html>'''
+    if art["cat"] == "mind-manipulation":
+        legacy_redirect = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="canonical" href="{art["url"]}"><meta name="robots" content="noindex,follow"><title>{html.escape(seo_title)} | GenZ Frontier</title></head><body><p>This article moved to <a rel="canonical" href="{art["href"]}">{html.escape(art["url"])}</a>.</p></body></html>'''
+    else:
+        legacy_redirect = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="canonical" href="{art["url"]}"><meta http-equiv="refresh" content="0; url={art["href"]}"><title>Redirecting…</title></head><body><p>This article moved to <a href="{art["href"]}">{art["url"]}</a>.</p></body></html>'''
     with open(legacy_path, "w", encoding="utf-8") as f:
         f.write(legacy_redirect)
 
