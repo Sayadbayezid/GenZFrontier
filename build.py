@@ -392,18 +392,29 @@ for art in all_arts:
     <meta property="og:url" content="{safe_url}">
     <meta name="twitter:card" content="summary_large_image">
     '''
-    schema_data = f'''
-    <script type="application/ld+json">
-    {{
-      "@context": "https://schema.org",
-      "@type": "NewsArticle",
-      "headline": {json.dumps(art["title"])},
-      "image": [{json.dumps(art["img"])}],
-      "datePublished": {json.dumps(art["date"])},
-      "author": {{ "@type": "Organization", "name": "GenZ Frontier" }}
-    }}
-    </script>
-    '''
+    # Build JSON-LD as a Python object instead of interpolating fragments into a
+    # hand-written JSON string. This prevents malformed commas/braces and safely
+    # escapes characters that could terminate the script element.
+    schema_object = {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "headline": art["title"],
+        "image": [art["img"]],
+        "datePublished": normalize_date(art["date"]),
+        "dateModified": normalize_date(art["date"]),
+        "author": {"@type": "Organization", "name": "GenZ Frontier"},
+        "publisher": {
+            "@type": "Organization",
+            "name": "GenZ Frontier",
+            "url": BASE_URL
+        },
+        "mainEntityOfPage": {"@type": "WebPage", "@id": art["url"]}
+    }
+    schema_json = json.dumps(schema_object, ensure_ascii=False, separators=(",", ":"))
+    schema_json = (schema_json.replace("<", "\\u003c")
+                             .replace(">", "\\u003e")
+                             .replace("&", "\\u0026"))
+    schema_data = f'<script type="application/ld+json">{schema_json}</script>'
 
     # Convert markdown to HTML
     article_html = md_parser.convert(md_content)
