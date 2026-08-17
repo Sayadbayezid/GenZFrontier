@@ -586,29 +586,17 @@ for art in all_arts:
                 </div>
             </aside>
     ''' if ads_enabled else ""
-    article_desktop_ad_html = '''
-        <div class="desktop-only-ad" style="margin-top: 20px; text-align: center;">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : 'b9782458d33b2a813bcaf2fe42023033',
-                    'format' : 'iframe',
-                    'height' : 600,
-                    'width' : 160,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="https://www.highperformanceformat.com/b9782458d33b2a813bcaf2fe42023033/invoke.js"></script>
-        </div>
-    ''' if ads_enabled else ""
+    # Strict article policy: never stack a second desktop ad after the article.
+    # New and existing articles receive at most one native unit in the body.
+    article_desktop_ad_html = ""
     # Remove the global social-bar injection: it creates an intrusive overlay near navigation.
-    # Advertising remains in the article body through the dedicated midpoint slot above.
     social_bar_html = ""
     paragraph_ends = list(re.finditer(r"</p>", article_html, flags=re.IGNORECASE))
-    if native_banner_html and paragraph_ends:
-        midpoint = paragraph_ends[max(0, (len(paragraph_ends) // 2) - 1)].end()
+    # Only place the ad inside a substantive article. Short posts receive no ad,
+    # which prevents an ad from appearing directly under the header or title.
+    if native_banner_html and len(paragraph_ends) >= 4:
+        midpoint = paragraph_ends[max(1, (len(paragraph_ends) // 2) - 1)].end()
         article_html = article_html[:midpoint] + native_banner_html + article_html[midpoint:]
-    elif native_banner_html:
-        article_html = native_banner_html + article_html
 
     # === Map Views to Article (New) ===
     article_path = art["href"]
