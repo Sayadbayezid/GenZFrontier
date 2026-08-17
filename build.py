@@ -166,6 +166,52 @@ def render_related_cards(items):
         </article>'''
     return cards
 
+AD_PROFILES = (
+    {"name": "native", "class_name": "ad-slot-native", "min_words": 0},
+    {"name": "tall-160x600", "class_name": "ad-slot-tall desktop-only-ad", "min_words": 900},
+    {"name": "medium-160x300", "class_name": "ad-slot-medium desktop-only-ad", "min_words": 650},
+    {"name": "banner-320x50", "class_name": "ad-slot-banner-small", "min_words": 0},
+    {"name": "banner-728x90", "class_name": "ad-slot-banner-wide desktop-only-ad", "min_words": 700},
+    {"name": "rectangle-300x250", "class_name": "ad-slot-rectangle", "min_words": 0},
+    {"name": "banner-468x60", "class_name": "ad-slot-banner-medium desktop-only-ad", "min_words": 500},
+)
+
+def ad_slot_html(profile_name, placement="article"):
+    """Return exactly one user-provided ad unit in a labeled, scoped slot."""
+    wrappers = {
+        "native": '''<aside class="article-ad-slot article-middle-ad ad-slot-native" aria-label="Advertisement"><span class="article-ad-label">ADVERTISEMENT</span><div class="ad-slot-content"><script async="async" data-cfasync="false" src="https://pl30308054.effectivecpmnetwork.com/ec56a821de60d9845e8059349f970dbf/invoke.js"></script><div id="container-ec56a821de60d9845e8059349f970dbf"></div></div></aside>''',
+        "tall-160x600": '''<aside class="article-ad-slot article-middle-ad ad-slot-tall desktop-only-ad" aria-label="Advertisement"><span class="article-ad-label">ADVERTISEMENT</span><div class="ad-slot-content"><script>atOptions = {'key' : 'b9782458d33b2a813bcaf2fe42023033','format' : 'iframe','height' : 600,'width' : 160,'params' : {}};</script><script src="https://www.highperformanceformat.com/b9782458d33b2a813bcaf2fe42023033/invoke.js"></script></div></aside>''',
+        "medium-160x300": '''<aside class="article-ad-slot article-middle-ad ad-slot-medium desktop-only-ad" aria-label="Advertisement"><span class="article-ad-label">ADVERTISEMENT</span><div class="ad-slot-content"><script>atOptions = {'key' : '67ca660e991495fefe1690d338feda7c','format' : 'iframe','height' : 300,'width' : 160,'params' : {}};</script><script src="https://www.highperformanceformat.com/67ca660e991495fefe1690d338feda7c/invoke.js"></script></div></aside>''',
+        "banner-320x50": '''<aside class="article-ad-slot article-middle-ad ad-slot-banner-small" aria-label="Advertisement"><span class="article-ad-label">ADVERTISEMENT</span><div class="ad-slot-content"><script>atOptions = {'key' : '63306a6b6bacb1c08864039cf7a2415e','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};</script><script src="https://www.highperformanceformat.com/63306a6b6bacb1c08864039cf7a2415e/invoke.js"></script></div></aside>''',
+        "banner-728x90": '''<aside class="article-ad-slot article-middle-ad ad-slot-banner-wide desktop-only-ad" aria-label="Advertisement"><span class="article-ad-label">ADVERTISEMENT</span><div class="ad-slot-content"><script>atOptions = {'key' : '408a580368a45b8ea139e174fa740252','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};</script><script src="https://www.highperformanceformat.com/408a580368a45b8ea139e174fa740252/invoke.js"></script></div></aside>''',
+        "rectangle-300x250": '''<aside class="article-ad-slot article-middle-ad ad-slot-rectangle" aria-label="Advertisement"><span class="article-ad-label">ADVERTISEMENT</span><div class="ad-slot-content"><script>atOptions = {'key' : 'f6e57b56ca931a8024e4741fa8b443ea','format' : 'iframe','height' : 250,'width' : 300,'params' : {}};</script><script src="https://www.highperformanceformat.com/f6e57b56ca931a8024e4741fa8b443ea/invoke.js"></script></div></aside>''',
+        "banner-468x60": '''<aside class="article-ad-slot article-middle-ad ad-slot-banner-medium desktop-only-ad" aria-label="Advertisement"><span class="article-ad-label">ADVERTISEMENT</span><div class="ad-slot-content"><script>atOptions = {'key' : 'f6678c6f84bf003f94564ce757f58307','format' : 'iframe','height' : 60,'width' : 468,'params' : {}};</script><script src="https://www.highperformanceformat.com/f6678c6f84bf003f94564ce757f58307/invoke.js"></script></div></aside>''',
+    }
+    return wrappers.get(profile_name, wrappers["native"])
+
+def choose_article_ad_profile(article, word_count):
+    """Choose one format per article; long articles can receive desktop-only formats."""
+    digest = int(hashlib.sha1(article["slug"].encode("utf-8")).hexdigest()[:8], 16)
+    eligible = [profile for profile in AD_PROFILES if word_count >= profile["min_words"]]
+    return eligible[digest % len(eligible)]["name"]
+
+CATEGORY_AD_PROFILES = {
+    "world": "rectangle-300x250",
+    "politics": "banner-728x90",
+    "business": "banner-320x50",
+    "tech": "banner-468x60",
+    "science": "medium-160x300",
+    "health": "banner-320x50",
+    "sports": "rectangle-300x250",
+    "entertainment": "banner-468x60",
+    "careers": "medium-160x300",
+    "legacy-archives": "banner-728x90",
+    "mind-manipulation": "native",
+}
+
+def category_ad_slot_html(category):
+    return ad_slot_html(CATEGORY_AD_PROFILES.get(category, "native"), placement="category")
+
 def add_avif_picture(html_content):
     """Wrap the first local WebP article image with an AVIF source and WebP fallback."""
     pattern = r'<p><img alt="([^"]*)" src="([^" ]+\.webp)" /></p>'
@@ -477,7 +523,7 @@ for cat in DEFAULT_CATEGORIES:
         </article>'''
     cat_grid_html += '</div>'
     cat_index_content = index_template.replace("{{HERO_SECTION}}", "").replace("{{DYNAMIC_CONTENT}}", cat_grid_html).replace("{{BREAKING_NEWS_TICKER}}", ticker)
-    cat_index_content = cat_index_content.replace("{{META_TAGS}}", "").replace("{{SCHEMA_DATA}}", "").replace("{{LIVE_STATUS_SCRIPT}}", LIVE_SCRIPT_HTML)
+    cat_index_content = cat_index_content.replace("{{META_TAGS}}", "").replace("{{SCHEMA_DATA}}", "").replace("{{LIVE_STATUS_SCRIPT}}", LIVE_SCRIPT_HTML).replace("{{INDEX_AD_SLOT}}", category_ad_slot_html(cat))
     with open(os.path.join(OUTPUT_DIR, cat, "index.html"), "w", encoding="utf-8") as f: f.write(cat_index_content)
 
 # Generate Article Pages
@@ -573,30 +619,20 @@ for art in all_arts:
         article_html
     )
     
-    # Third-party ad scripts can redirect readers through popunder/affiliate flows.
-    # Keep the existing ads for other categories, but disable them in this safety-focused cluster.
+    # User-approved ad policy: exclude Social Bar and choose exactly one banner
+    # profile per substantive article. No header, footer, or stacked ad injection.
     ads_enabled = art["cat"] != "mind-manipulation"
-    native_banner_html = '''
-            <!-- Adsterra Native Banner: article-middle placement -->
-            <aside class="article-middle-ad" aria-label="Advertisement">
-                <span class="article-ad-label">ADVERTISEMENT</span>
-                <div class="article-middle-ad__content">
-                    <script async="async" data-cfasync="false" src="https://pl30308054.effectivecpmnetwork.com/ec56a821de60d9845e8059349f970dbf/invoke.js"></script>
-                    <div id="container-ec56a821de60d9845e8059349f970dbf"></div>
-                </div>
-            </aside>
-    ''' if ads_enabled else ""
-    # Strict article policy: never stack a second desktop ad after the article.
-    # New and existing articles receive at most one native unit in the body.
+    word_count = len(re.findall(r"\b\w+\b", md_content, flags=re.UNICODE))
+    selected_profile = choose_article_ad_profile(art, word_count) if ads_enabled else ""
+    article_ad_html = ad_slot_html(selected_profile) if selected_profile else ""
     article_desktop_ad_html = ""
-    # Remove the global social-bar injection: it creates an intrusive overlay near navigation.
     social_bar_html = ""
     paragraph_ends = list(re.finditer(r"</p>", article_html, flags=re.IGNORECASE))
-    # Only place the ad inside a substantive article. Short posts receive no ad,
-    # which prevents an ad from appearing directly under the header or title.
-    if native_banner_html and len(paragraph_ends) >= 4:
+    # Short articles receive no ad. Substantive articles receive one selected
+    # unit only after the opening content, never directly beneath the header.
+    if article_ad_html and len(paragraph_ends) >= 4:
         midpoint = paragraph_ends[max(1, (len(paragraph_ends) // 2) - 1)].end()
-        article_html = article_html[:midpoint] + native_banner_html + article_html[midpoint:]
+        article_html = article_html[:midpoint] + article_ad_html + article_html[midpoint:]
 
     # === Map Views to Article (New) ===
     article_path = art["href"]
@@ -625,7 +661,7 @@ for art in all_arts:
 
 with open(os.path.join(OUTPUT_DIR, INDEX_FILE), "w", encoding="utf-8") as f:
     home_html = index_template.replace("{{HERO_SECTION}}", hero_html).replace("{{DYNAMIC_CONTENT}}", dyn_html).replace("{{BREAKING_NEWS_TICKER}}", ticker)
-    home_html = home_html.replace("{{META_TAGS}}", "").replace("{{SCHEMA_DATA}}", "").replace("{{LIVE_STATUS_SCRIPT}}", LIVE_SCRIPT_HTML)
+    home_html = home_html.replace("{{META_TAGS}}", "").replace("{{SCHEMA_DATA}}", "").replace("{{LIVE_STATUS_SCRIPT}}", LIVE_SCRIPT_HTML).replace("{{INDEX_AD_SLOT}}", ad_slot_html("native", placement="home"))
     f.write(home_html)
 
 generate_sitemap(all_arts)
