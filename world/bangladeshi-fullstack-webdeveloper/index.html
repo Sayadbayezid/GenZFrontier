@@ -234,6 +234,14 @@
         .related-card-open { display: inline-flex; align-items: center; gap: 7px; margin-top: auto; padding-top: 6px; color: var(--primary-red) !important; font-size: 14px; font-weight: 750; text-decoration: none !important; }
         .related-card-open:hover { color: #7F1725 !important; text-decoration: underline !important; text-underline-offset: 3px; }
         .related-card-open:focus-visible { outline: 3px solid rgba(180, 35, 50, 0.3); outline-offset: 3px; border-radius: 3px; }
+        /* Accessible article-video theme: one concise explainer by default; optional parts use the same card system. */
+        .article-video { max-width: 900px; margin: 2.25rem auto; padding: 14px; border: 1px solid #e5d7d9; border-radius: 14px; background: linear-gradient(145deg, #fffafa, #f7f9fb); box-shadow: 0 10px 28px rgba(31, 41, 55, 0.09); }
+        .article-video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 1px solid #d7dde2; border-radius: 10px; background: #0f172a; object-fit: contain; }
+        .article-video video:focus-visible { outline: 3px solid rgba(180, 35, 50, 0.42); outline-offset: 4px; }
+        .article-video figcaption { margin: 0.85rem 0.25rem 0.2rem; color: #5f6368; font-size: 0.94rem; line-height: 1.55; }
+        .article-video-part { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid #eadfe1; }
+        .article-video-part:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+        .article-video-part-label { display: inline-block; margin-bottom: 0.55rem; color: var(--primary-red); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
 
         /* Footer Match index.html */
         footer { background-color: var(--dark-bg); color: var(--text-light); padding: 40px 20px; border-top: 5px solid #333; margin-top: 60px; text-align: center; }
@@ -252,6 +260,9 @@
             .grid-4 { grid-template-columns: 1fr; }
             .grid-3 { grid-template-columns: 1fr; }
             .next-related-button { align-items: flex-start; flex-direction: column; gap: 10px; }
+            .article-video { margin: 1.75rem 0; padding: 9px; border-radius: 11px; }
+            .article-video video { border-radius: 8px; }
+            .article-video figcaption { font-size: 0.9rem; }
         }
     </style>
 </head>
