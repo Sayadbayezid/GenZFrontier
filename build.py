@@ -11,6 +11,7 @@ from xml.dom import minidom
 import urllib.parse
 import hashlib
 import html
+from pathlib import Path
 
 # === GA4 Imports (Optional) ===
 try:
@@ -147,6 +148,8 @@ def ensure_image_alt_attributes(article_html, fallback_alt):
     fallback = html.escape(re.sub(r"\s+", " ", str(fallback_alt or "Article image")).strip(), quote=True)
     def add_alt(match):
         tag = match.group(0)
+        if re.search(r"\balt\s*=\s*[\"\']\s*[\"\']", tag, flags=re.IGNORECASE):
+            return re.sub(r"\balt\s*=\s*[\"\']\s*[\"\']", f'alt="{fallback}"', tag, count=1, flags=re.IGNORECASE)
         if re.search(r"\balt\s*=", tag, flags=re.IGNORECASE):
             return tag
         return tag[:-1] + f' alt="{fallback}">'
@@ -195,6 +198,45 @@ def enhance_video_markup(article_html):
 
     article_html = re.sub(r"<video\b[^>]*>", enhance_opening, article_html, flags=re.IGNORECASE)
     return article_html
+
+STATIC_PAGE_DESCRIPTIONS = {
+    "index.html": "GenZ Frontier delivers breaking news, explainers, analysis, and practical guides across global categories.",
+    "404.html": "The requested GenZ Frontier page could not be found. Return to the homepage or browse the latest categories.",
+    "about.html": "Learn about GenZ Frontier, our editorial purpose, and the news, explainers, and practical guides we publish.",
+    "contact.html": "Contact GenZ Frontier for editorial questions, corrections, guest-post inquiries, and general communication.",
+    "cookie-policy.html": "Read how GenZ Frontier uses cookies and related technologies to support site functionality and measurement.",
+    "privacy-policy.html": "Read the GenZ Frontier privacy policy and learn how information is handled on this website.",
+    "terms.html": "Read the GenZ Frontier terms of use, publishing expectations, and website policies.",
+    "disclaimer.html": "Read the GenZ Frontier disclaimer covering editorial information, links, and general educational content.",
+}
+
+
+def normalize_html_links(content):
+    """Normalize malformed external URLs and remove unsupported placeholder links."""
+    content = re.sub(r'(?P<prefix>\b(?:href|src)=["\'])Https://', r'\g<prefix>https://', content, flags=re.IGNORECASE)
+    content = re.sub(r'(?P<prefix>\b(?:href|src)=["\'])www\.', r'\g<prefix>https://www.', content, flags=re.IGNORECASE)
+    content = re.sub(r'<a\s+href=["\']chatgpt://[^"\']+["\']>(?P<label>.*?)</a>', r'\g<label>', content, flags=re.IGNORECASE | re.DOTALL)
+    return content
+
+
+def normalize_static_page(path):
+    """Add baseline SEO metadata and heading structure to copied static pages."""
+    filename = os.path.basename(path)
+    if not os.path.exists(path):
+        return
+    content = open(path, "r", encoding="utf-8").read()
+    default_description = f"Read this GenZ Frontier page for site information, editorial context, or archived content."
+    description = html.escape(STATIC_PAGE_DESCRIPTIONS.get(filename, default_description), quote=True)
+    if not re.search(r'<meta\s+[^>]*name=["\']description["\']', content, flags=re.IGNORECASE):
+        content = re.sub(r'(<meta\s+charset=["\'][^>]+>)', r'\1\n    <meta name="description" content="' + description + '">', content, count=1, flags=re.IGNORECASE)
+    content = re.sub(r'<title>(.*?)</title>', lambda m: f'<title>{html.escape(shorten_seo_title(re.sub(r"\s+", " ", m.group(1)).strip()), quote=False)}</title>', content, count=1, flags=re.IGNORECASE | re.DOTALL)
+    if not re.search(r'<h1\b', content, flags=re.IGNORECASE):
+        heading = html.escape(Path(filename).stem.replace("-", " ").title())
+        content = content.replace("<body>", f'<body>\n<main><h1>{heading}</h1></main>', 1)
+    content = ensure_image_alt_attributes(content, Path(filename).stem.replace("-", " ").title())
+    content = normalize_html_links(content)
+    open(path, "w", encoding="utf-8").write(content)
+
 
 ENTITY_ALIASES = {
     "Sheikh Hasina": ["sheikh hasina", "hasina", "শেখ হাসিনা"],
@@ -484,7 +526,11 @@ def clean_and_prepare():
     
     # Copy basic files
     for f in ["index.html", "404.html", "contact.html", "about.html", "privacy-policy.html", "terms.html", "disclaimer.html", "cookie-policy.html", "submit-guest-post.html", "CNAME", "sitemap.xml", "robots.txt", "style.css", "favicon.ico", "2f91fd414fbc449ba9072df8cca9804a.txt"]:
-        if os.path.exists(f): shutil.copy2(f, os.path.join(OUTPUT_DIR, f))
+        if os.path.exists(f):
+            destination = os.path.join(OUTPUT_DIR, f)
+            shutil.copy2(f, destination)
+            if f.endswith(".html"):
+                normalize_static_page(destination)
     
     # Copy optimized images and article video media through one scoped path.
     copy_news_media()
@@ -493,6 +539,8 @@ def clean_and_prepare():
     legacy_src = "legacy-archives"
     if os.path.exists(legacy_src):
         shutil.copytree(legacy_src, os.path.join(OUTPUT_DIR, "legacy-archives"), dirs_exist_ok=True)
+        for legacy_html in Path(os.path.join(OUTPUT_DIR, "legacy-archives")).rglob("*.html"):
+            normalize_static_page(str(legacy_html))
 
 def generate_sitemap(articles):
     urlset = ET.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
@@ -682,8 +730,8 @@ for cat in DEFAULT_CATEGORIES:
     # Generate Category Index Page
     os.makedirs(os.path.join(OUTPUT_DIR, cat), exist_ok=True)
     category_title = "Mind Manipulation" if cat == "mind-manipulation" else cat.title()
-    category_description = "Evidence-based guides to psychological manipulation, warning signs, relationship dynamics, consent, boundaries, and safer responses."
-    heading_html = f'<div class="section-header"><h1>{html.escape(category_title)}</h1></div>' if cat == "mind-manipulation" else f'<div class="section-header"><h2>{html.escape(category_title)}</h2></div>'
+    category_description = f"Latest {category_title} articles, explainers, analysis, and practical guidance from GenZ Frontier."
+    heading_html = f'<div class="section-header"><h1>{html.escape(category_title)}</h1></div>'
     cat_grid_html = heading_html + '<div class="grid-4">'
     for a in c_posts:
         cat_grid_html += f'''
@@ -694,9 +742,9 @@ for cat in DEFAULT_CATEGORIES:
     cat_grid_html += '</div>'
     cat_index_content = index_template.replace("{{HERO_SECTION}}", "").replace("{{DYNAMIC_CONTENT}}", cat_grid_html).replace("{{BREAKING_NEWS_TICKER}}", ticker)
     cat_index_content = cat_index_content.replace("{{META_TAGS}}", "").replace("{{SCHEMA_DATA}}", "").replace("{{LIVE_STATUS_SCRIPT}}", LIVE_SCRIPT_HTML).replace("{{INDEX_AD_SLOT}}", category_ad_slot_html(cat))
-    if cat == "mind-manipulation":
-        category_meta = f'<meta name="description" content="{html.escape(category_description, quote=True)}"><meta property="og:title" content="Mind Manipulation | GenZ Frontier"><meta property="og:description" content="{html.escape(category_description, quote=True)}">'
-        cat_index_content = cat_index_content.replace('<title>GenZ Frontier | Breaking News, Latest News and Videos</title>', '<title>Mind Manipulation | GenZ Frontier</title>' + category_meta)
+    category_meta = f'<meta name="description" content="{html.escape(category_description, quote=True)}"><meta property="og:title" content="{html.escape(category_title, quote=True)} | GenZ Frontier"><meta property="og:description" content="{html.escape(category_description, quote=True)}">'
+    cat_index_content = cat_index_content.replace('<title>GenZ Frontier | Breaking News, Latest News and Videos</title>', f'<title>{html.escape(category_title)} | GenZ Frontier</title>' + category_meta)
+    cat_index_content = ensure_image_alt_attributes(normalize_html_links(cat_index_content), category_title)
     with open(os.path.join(OUTPUT_DIR, cat, "index.html"), "w", encoding="utf-8") as f: f.write(cat_index_content)
 
 # Generate Article Pages
@@ -799,9 +847,9 @@ for art in all_arts:
     validate_local_video_references(md_content)
     article_html = md_parser.convert(md_content)
     article_html = clean_canonical_reference(article_html, art["url"])
-    if art["cat"] == "mind-manipulation":
-        article_html = normalize_article_headings(article_html, art["title"])
-        article_html = ensure_image_alt_attributes(article_html, art["title"])
+    article_html = normalize_article_headings(article_html, art["title"])
+    article_html = ensure_image_alt_attributes(article_html, art["title"])
+    article_html = normalize_html_links(article_html)
     article_html = enhance_video_markup(article_html)
     # Source Markdown may retain historical SVG references; render optimized WebP instead.
     article_html = re.sub(r'(?P<prefix>/news/mind-manipulation/images/[^"\']+)\.svg(?P<suffix>["\'])', r'\g<prefix>.webp\g<suffix>', article_html, flags=re.IGNORECASE)
@@ -856,16 +904,16 @@ for art in all_arts:
 
     # Preserve old .html URLs while consolidating SEO signals on the clean URL.
     legacy_path = os.path.join(OUTPUT_DIR, art["cat"], art["file"])
-    if art["cat"] == "mind-manipulation":
-        moved_description = html.escape(f"{seo_title} has moved to its clean GenZ Frontier URL.", quote=True)
-        legacy_redirect = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="canonical" href="{art["url"]}"><meta name="robots" content="noindex,follow"><meta name="description" content="{moved_description}"><title>{html.escape(seo_title)} | GenZ Frontier</title></head><body><main><h1>Article moved</h1><p>This article moved to <a rel="canonical" href="{art["href"]}">{html.escape(art["url"])}</a>.</p></main></body></html>'''
-    else:
-        legacy_redirect = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="canonical" href="{art["url"]}"><meta http-equiv="refresh" content="0; url={art["href"]}"><title>Redirecting…</title></head><body><p>This article moved to <a href="{art["href"]}">{art["url"]}</a>.</p></body></html>'''
+    moved_description = html.escape(f"{seo_title} has moved to its clean GenZ Frontier URL.", quote=True)
+    legacy_redirect = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="canonical" href="{art["url"]}"><meta name="robots" content="noindex,follow"><meta name="description" content="{moved_description}"><title>{html.escape(seo_title)} | GenZ Frontier</title></head><body><main><h1>Article moved</h1><p>This article moved to <a rel="canonical" href="{art["href"]}">{html.escape(art["url"])}</a>.</p></main></body></html>'''
     with open(legacy_path, "w", encoding="utf-8") as f:
         f.write(legacy_redirect)
 
 with open(os.path.join(OUTPUT_DIR, INDEX_FILE), "w", encoding="utf-8") as f:
     home_html = index_template.replace("{{HERO_SECTION}}", hero_html).replace("{{DYNAMIC_CONTENT}}", dyn_html).replace("{{BREAKING_NEWS_TICKER}}", ticker)
+    home_html = ensure_image_alt_attributes(normalize_html_links(home_html), "GenZ Frontier")
+    home_description = html.escape(STATIC_PAGE_DESCRIPTIONS["index.html"], quote=True)
+    home_html = home_html.replace('<title>GenZ Frontier | Breaking News, Latest News and Videos</title>', '<title>GenZ Frontier | Breaking News, Latest News and Videos</title><meta name="description" content="' + home_description + '">')
     home_html = home_html.replace("{{META_TAGS}}", "").replace("{{SCHEMA_DATA}}", "").replace("{{LIVE_STATUS_SCRIPT}}", LIVE_SCRIPT_HTML).replace("{{INDEX_AD_SLOT}}", ad_slot_html("native", placement="home"))
     f.write(home_html)
 
