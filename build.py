@@ -9,6 +9,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 import urllib.parse
+import hashlib
 import html
 
 # === GA4 Imports (Optional) ===
@@ -50,12 +51,120 @@ def published_image_url(path):
         path = path[:-4] + ".webp"
     return absolute_url(path)
 
-def slug_from_filename(filename):
-    return sanitize_url(os.path.splitext(filename)[0]).lower()
+ENTITY_ALIASES = {
+    "Sheikh Hasina": ["sheikh hasina", "hasina", "শেখ হাসিনা"],
+    "Tarique Rahman": ["tarique rahman", "tarique", "তারেক রহমান"],
+    "Sayad Md Bayezid Hosan": ["sayad md bayezid hosan", "sayad bayezid", "bayezid hosan"],
+    "Abdul Latif Siddiqui": ["abdul latif siddiqui", "latif siddiqui", "লতিফ সিদ্দিকী"],
+    "Murad Siddiqui": ["murad siddiqui", "মুরাদ সিদ্দিকী"],
+    "Mirza Fakhrul Islam Alamgir": ["mirza fakhrul", "mirza fakhrul islam alamgir", "মির্জা ফখরুল"],
+    "Obaidul Quader": ["obaidul quader", "obaidul kader", "ওবায়দুল কাদের"],
+}
+ENTITY_STOPWORDS = {"the", "and", "for", "with", "from", "after", "before", "news", "today", "update", "bangladesh", "article", "guide", "latest", "breaking"}
 
-def article_href(category, filename):
+def normalize_text(value):
+    return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9\s]", " ", str(value or "").lower())).strip()
+
+def legacy_slug_from_filename(filename):
+    """Return the previous filename-derived slug for backward-compatible redirects."""
+    return sanitize_url(os.path.splitext(os.path.basename(filename))[0]).lower()
+
+def slug_from_filename(filename, fallback_text=""):
+    """Create a deterministic ASCII English slug from a filename or English metadata."""
+    raw = os.path.splitext(os.path.basename(filename))[0]
+    slug = re.sub(r"[^a-zA-Z0-9]+", "-", raw).strip("-").lower()
+    if slug:
+        return slug
+    words = re.findall(r"[a-zA-Z0-9]+", str(fallback_text or ""))
+    slug = "-".join(words[:10]).lower()
+    if slug:
+        return slug
+    digest = hashlib.sha1(str(filename).encode("utf-8")).hexdigest()[:8]
+    return f"article-{digest}"
+
+def article_href(category, slug):
     """Return the canonical clean URL path for a generated article."""
-    return f"/{category}/{slug_from_filename(filename)}/"
+    return f"/{category}/{slug}/"
+
+def entity_keys_for_article(meta, title, description, body_text=""):
+    """Infer stable entity keys from explicit metadata, aliases, and repeated title phrases."""
+    raw_explicit = []
+    for key in ("entity", "person", "people", "tags", "topic"):
+        for value in meta.get(key, []):
+            raw_explicit.extend(re.split(r"[,|]", str(value)))
+    haystack = normalize_text(" ".join([title, description, body_text, " ".join(raw_explicit)]))
+    found = []
+    for canonical, aliases in ENTITY_ALIASES.items():
+        if any(normalize_text(alias) in haystack for alias in aliases):
+            found.append(canonical)
+    for value in raw_explicit:
+        candidate = normalize_text(value)
+        if candidate and len(candidate.split()) >= 2 and not set(candidate.split()).issubset(ENTITY_STOPWORDS):
+            found.append(value.strip())
+    unique = {}
+    for value in found:
+        key = normalize_text(value)
+        if key:
+            unique[key] = value.strip()
+    return sorted(unique.keys())
+
+def entity_display_name(entity_key):
+    for canonical, aliases in ENTITY_ALIASES.items():
+        if normalize_text(canonical) == entity_key or entity_key in {normalize_text(alias) for alias in aliases}:
+            return canonical
+    return entity_key.title()
+
+def article_fingerprint(article):
+    """Return a normalized title/description fingerprint used only for duplicate suppression."""
+    return normalize_text(f"{article.get('title', '')} {article.get('desc', '')}")
+
+def dedupe_articles(articles, exclude_url=""):
+    seen_urls, seen_fingerprints, result = set(), set(), []
+    for article in articles:
+        if article.get("url") == exclude_url:
+            continue
+        url = article.get("url", "")
+        fingerprint = article_fingerprint(article)
+        if url in seen_urls or (fingerprint and fingerprint in seen_fingerprints):
+            continue
+        seen_urls.add(url)
+        if fingerprint:
+            seen_fingerprints.add(fingerprint)
+        result.append(article)
+    return result
+
+def primary_entity_key(article):
+    """Prefer the entity named in the title or description; otherwise use the first stable key."""
+    haystack = normalize_text(f"{article.get('title', '')} {article.get('desc', '')}")
+    keys = article.get("entity_keys", [])
+    ranked = sorted(keys, key=lambda key: (key not in haystack, -haystack.count(key), key))
+    return ranked[0] if ranked else ""
+
+def related_entity_score(current, candidate):
+    """Score only when both articles share the same primary title-level entity."""
+    current_primary = primary_entity_key(current)
+    candidate_primary = primary_entity_key(candidate)
+    if not current_primary or current_primary != candidate_primary:
+        return 0
+    score = 100
+    if current.get("cat") == candidate.get("cat"):
+        score += 8
+    current_words = set(normalize_text(current.get("title", "")).split()) - ENTITY_STOPWORDS
+    candidate_words = set(normalize_text(candidate.get("title", "")).split()) - ENTITY_STOPWORDS
+    score += min(12, len(current_words.intersection(candidate_words)) * 2)
+    return score
+
+def render_related_cards(items):
+    cards = ""
+    for item in items:
+        cards += f'''
+        <article class="news-card related-card">
+            <img src="{html.escape(item["img"], quote=True)}" alt="{html.escape(item["title"], quote=True)}" loading="lazy" width="400" height="225" decoding="async">
+            <span class="related-card-category">{html.escape(item["cat"].replace("-", " ").title())}</span>
+            <a href="{html.escape(item["href"], quote=True)}"><h3>{html.escape(item["title"])}</h3></a>
+            <a class="related-card-open" href="{html.escape(item["href"], quote=True)}">Open article <span aria-hidden="true">→</span></a>
+        </article>'''
+    return cards
 
 def add_avif_picture(html_content):
     """Wrap the first local WebP article image with an AVIF source and WebP fallback."""
@@ -206,7 +315,7 @@ print("Fetching GA4 Page Views...")
 all_page_views = get_ga4_pageviews(GA4_PROPERTY_ID)
 # =================================================
 
-md_parser = markdown.Markdown(extensions=["meta"])
+md_parser = markdown.Markdown(extensions=["meta", "tables"])
 template = open(TEMPLATE_FILE, "r", encoding="utf-8").read()
 index_template = open(INDEX_FILE, "r", encoding="utf-8").read()
 
@@ -222,22 +331,43 @@ for root, _, files in os.walk(NEWS_DIR):
         md_parser.convert(txt)
         meta = md_parser.Meta; md_parser.reset()
         output_file = file.replace(".md", ".html")
-        clean_path = article_href(cat, output_file)
+        title = meta.get("title", [file.replace(".md", "").title()])[0]
+        description = meta.get("description", [""])[0]
+        canonical_slug = slug_from_filename(output_file, f"{title} {description}")
         art = {
-            "title": meta.get("title", [file.replace(".md", "").title()])[0],
+            "title": title,
             "file": output_file,
-            "slug": slug_from_filename(output_file),
-            "href": clean_path,
+            "slug": canonical_slug,
+            "legacy_slug": legacy_slug_from_filename(output_file),
+            "href": article_href(cat, canonical_slug),
             "cat": cat,
-            "desc": meta.get("description", [""])[0],
+            "desc": description,
             "img": published_image_url(meta.get("image", ["/default.webp"])[0]),
             "date": meta.get("date", [get_git_date(os.path.join(root, file)) or datetime.now().isoformat()])[0],
-            "url": urllib.parse.urljoin(BASE_URL, clean_path.lstrip("/"))
+            "entity_keys": entity_keys_for_article(meta, title, description, txt[:10000]),
+            "url": urllib.parse.urljoin(BASE_URL, article_href(cat, canonical_slug).lstrip("/"))
         }
         cat_arts[cat].append(art)
         all_arts.append(art)
 
 all_arts.sort(key=lambda x: x["date"], reverse=True)
+
+# Finalize unique canonical slugs per category. Collisions receive a deterministic
+# short suffix so two articles can never silently overwrite one another.
+used_slugs = {}
+for art in all_arts:
+    base_slug = art["slug"]
+    key = (art["cat"], base_slug)
+    if key in used_slugs:
+        suffix = hashlib.sha1(f"{art['cat']}/{art['file']}".encode("utf-8")).hexdigest()[:8]
+        candidate = f"{base_slug}-{suffix}"
+        while (art["cat"], candidate) in used_slugs:
+            suffix = hashlib.sha1(f"{art['cat']}/{art['file']}/{candidate}".encode("utf-8")).hexdigest()[:8]
+            candidate = f"{base_slug}-{suffix}"
+        art["slug"] = candidate
+    used_slugs[(art["cat"], art["slug"])] = art["file"]
+    art["href"] = article_href(art["cat"], art["slug"])
+    art["url"] = urllib.parse.urljoin(BASE_URL, art["href"].lstrip("/"))
 
 # 1. Hero Section & 3. Live Update Section
 hero_post = all_arts[0] if all_arts else None
@@ -355,18 +485,33 @@ for art in all_arts:
     with open(os.path.join(NEWS_DIR, art["cat"], art["file"].replace(".html", ".md")), "r", encoding="utf-8") as f:
         md_content = f.read()
     
-    related_candidates = [a for a in cat_arts[art["cat"]] if a["file"] != art["file"]]
-    if len(related_candidates) < 4:
-        global_recent = [a for a in all_arts if a["file"] != art["file"] and a not in related_candidates]
-        related_candidates += global_recent[:(4 - len(related_candidates))]
-    
-    related_html = '<div class="related-section"><div class="section-header"><h2>Suggested For You</h2></div><div class="grid-4">'
-    for r in related_candidates[:4]:
-        related_html += f'''
-        <article class="news-card">
-            <img src="{r["img"]}" alt="{r["title"]}" loading="lazy" width="400" height="225" decoding="async">
-            <a href="{r["href"]}"><h3>{r["title"]}</h3></a>
-        </article>'''
+    entity_related = sorted(
+        [candidate for candidate in all_arts if candidate["url"] != art["url"]],
+        key=lambda candidate: (related_entity_score(art, candidate), candidate.get("date", "")),
+        reverse=True
+    )
+    entity_related = dedupe_articles(
+        [candidate for candidate in entity_related if related_entity_score(art, candidate) > 0],
+        exclude_url=art["url"]
+    )[:4]
+    fallback_candidates = dedupe_articles(
+        sorted(
+            [candidate for candidate in cat_arts[art["cat"]] if candidate["url"] != art["url"]],
+            key=lambda candidate: candidate.get("date", ""),
+            reverse=True
+        ) + [candidate for candidate in all_arts if candidate["url"] != art["url"]],
+        exclude_url=art["url"]
+    )
+    related_candidates = entity_related or fallback_candidates[:4]
+    if entity_related:
+        matched_entity = entity_display_name(primary_entity_key(art)) if art.get("entity_keys") else "this topic"
+        related_heading = f"More from {matched_entity}"
+        related_intro = f"Explore other GenZ Frontier articles connected to {matched_entity}."
+    else:
+        related_heading = "Suggested For You"
+        related_intro = "More reporting and explainers selected from the same section and recent coverage."
+    related_html = f'<div class="related-section"><div class="section-header"><h2>{html.escape(related_heading)}</h2></div><p class="related-intro">{html.escape(related_intro)}</p><div class="grid-4">'
+    related_html += render_related_cards(related_candidates[:4])
     related_html += '</div></div>'
 
     video_url = ""
@@ -421,16 +566,25 @@ for art in all_arts:
     # Source Markdown may retain historical SVG references; render optimized WebP instead.
     article_html = re.sub(r'(?P<prefix>/news/mind-manipulation/images/[^"\']+)\.svg(?P<suffix>["\'])', r'\g<prefix>.webp\g<suffix>', article_html, flags=re.IGNORECASE)
     article_html = add_avif_picture(article_html)
+    # Keep wide tables readable on phones without changing their semantic HTML.
+    article_html = re.sub(
+        r'(?s)<table(?:\s[^>]*)?>.*?</table>',
+        lambda match: '<div class="article-table-wrap" role="region" aria-label="Scrollable data table" tabindex="0">' + match.group(0) + '</div>',
+        article_html
+    )
     
     # Third-party ad scripts can redirect readers through popunder/affiliate flows.
     # Keep the existing ads for other categories, but disable them in this safety-focused cluster.
     ads_enabled = art["cat"] != "mind-manipulation"
     native_banner_html = '''
-            <!-- Adsterra Native Banner -->
-            <div style="margin-top: 30px; margin-bottom: 20px; text-align: center;">
-                <script async="async" data-cfasync="false" src="https://pl30308054.effectivecpmnetwork.com/ec56a821de60d9845e8059349f970dbf/invoke.js"></script>
-                <div id="container-ec56a821de60d9845e8059349f970dbf"></div>
-            </div>
+            <!-- Adsterra Native Banner: article-middle placement -->
+            <aside class="article-middle-ad" aria-label="Advertisement">
+                <span class="article-ad-label">ADVERTISEMENT</span>
+                <div class="article-middle-ad__content">
+                    <script async="async" data-cfasync="false" src="https://pl30308054.effectivecpmnetwork.com/ec56a821de60d9845e8059349f970dbf/invoke.js"></script>
+                    <div id="container-ec56a821de60d9845e8059349f970dbf"></div>
+                </div>
+            </aside>
     ''' if ads_enabled else ""
     article_desktop_ad_html = '''
         <div class="desktop-only-ad" style="margin-top: 20px; text-align: center;">
@@ -446,10 +600,14 @@ for art in all_arts:
             <script type="text/javascript" src="https://www.highperformanceformat.com/b9782458d33b2a813bcaf2fe42023033/invoke.js"></script>
         </div>
     ''' if ads_enabled else ""
-    social_bar_html = '<script src="https://pl30308055.effectivecpmnetwork.com/59/2a/2f/592a2f2aee609d98fa5fc89b35dfe700.js"></script>' if ads_enabled else ""
-    if "</p>" in article_html:
-        article_html = article_html.replace("</p>", "</p>" + native_banner_html, 1)
-    else:
+    # Remove the global social-bar injection: it creates an intrusive overlay near navigation.
+    # Advertising remains in the article body through the dedicated midpoint slot above.
+    social_bar_html = ""
+    paragraph_ends = list(re.finditer(r"</p>", article_html, flags=re.IGNORECASE))
+    if native_banner_html and paragraph_ends:
+        midpoint = paragraph_ends[max(0, (len(paragraph_ends) // 2) - 1)].end()
+        article_html = article_html[:midpoint] + native_banner_html + article_html[midpoint:]
+    elif native_banner_html:
         article_html = native_banner_html + article_html
 
     # === Map Views to Article (New) ===
