@@ -308,7 +308,7 @@ The following links are embedded above where the surrounding topic makes them us
 
 | Context | Internal link |
 |---|---|
-| Foundation | [Mind Manipulation: Complete Guide](https://www.genzfrontir.com/mind-manipulation/mind-manipulation-complete-guide-bangla/) |
+| Foundation | [Mind Manipulation: Complete Guide](https://www.genzfrontir.com/mind-manipulation/set-boundaries-after-emotional-manipulation/) |
 | Reward and withdrawal cycles | [Intermittent Reinforcement Manipulation](https://www.genzfrontir.com/mind-manipulation/intermittent-reinforcement-manipulation/) |
 | Broad tactics | [Common Psychological Manipulation Tactics](https://www.genzfrontir.com/mind-manipulation/manipulation-tactics/) |
 | Confidence-undermining humor | [Negging vs. Teasing](https://www.genzfrontir.com/mind-manipulation/negging-vs-teasing/) |

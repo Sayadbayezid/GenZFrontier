@@ -932,6 +932,17 @@ for old_href, new_href in legacy_clean_redirects.items():
     redirect_html = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="canonical" href="{new_url}"><meta http-equiv="refresh" content="0; url={new_href}"><title>Article moved</title></head><body><p>This article moved to <a href="{new_href}">{new_url}</a>.</p></body></html>'''
     with open(redirect_path, "w", encoding="utf-8") as f:
         f.write(redirect_html)
+# Preserve the old source-derived HTML URL after the markdown filename is renamed.
+legacy_file_redirects = {
+    "/mind-manipulation/mind-manipulation-complete-guide-bangla.html": "/mind-manipulation/set-boundaries-after-emotional-manipulation/",
+}
+for old_href, new_href in legacy_file_redirects.items():
+    redirect_path = os.path.join(OUTPUT_DIR, old_href.lstrip("/"))
+    os.makedirs(os.path.dirname(redirect_path), exist_ok=True)
+    new_url = urllib.parse.urljoin(BASE_URL, new_href.lstrip("/"))
+    redirect_html = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="canonical" href="{new_url}"><meta http-equiv="refresh" content="0; url={new_href}"><title>Article moved</title></head><body><p>This article moved to <a href="{new_href}">{new_url}</a>.</p></body></html>'''
+    with open(redirect_path, "w", encoding="utf-8") as f:
+        f.write(redirect_html)
 with open(os.path.join(OUTPUT_DIR, INDEX_FILE), "w", encoding="utf-8") as f:
     home_html = index_template.replace("{{HERO_SECTION}}", hero_html).replace("{{DYNAMIC_CONTENT}}", dyn_html).replace("{{BREAKING_NEWS_TICKER}}", ticker)
     home_html = ensure_image_alt_attributes(normalize_html_links(home_html), "GenZ Frontier")
