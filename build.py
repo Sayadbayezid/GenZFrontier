@@ -857,7 +857,8 @@ for art in all_arts:
     # Preserve old .html URLs while consolidating SEO signals on the clean URL.
     legacy_path = os.path.join(OUTPUT_DIR, art["cat"], art["file"])
     if art["cat"] == "mind-manipulation":
-        legacy_redirect = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="canonical" href="{art["url"]}"><meta name="robots" content="noindex,follow"><title>{html.escape(seo_title)} | GenZ Frontier</title></head><body><p>This article moved to <a rel="canonical" href="{art["href"]}">{html.escape(art["url"])}</a>.</p></body></html>'''
+        moved_description = html.escape(f"{seo_title} has moved to its clean GenZ Frontier URL.", quote=True)
+        legacy_redirect = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="canonical" href="{art["url"]}"><meta name="robots" content="noindex,follow"><meta name="description" content="{moved_description}"><title>{html.escape(seo_title)} | GenZ Frontier</title></head><body><main><h1>Article moved</h1><p>This article moved to <a rel="canonical" href="{art["href"]}">{html.escape(art["url"])}</a>.</p></main></body></html>'''
     else:
         legacy_redirect = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="canonical" href="{art["url"]}"><meta http-equiv="refresh" content="0; url={art["href"]}"><title>Redirecting…</title></head><body><p>This article moved to <a href="{art["href"]}">{art["url"]}</a>.</p></body></html>'''
     with open(legacy_path, "w", encoding="utf-8") as f:
