@@ -338,7 +338,7 @@ def clean_and_prepare():
     os.makedirs(os.path.join(OUTPUT_DIR, ADS_DIR), exist_ok=True)
     
     # Copy basic files
-    for f in ["index.html", "404.html", "contact.html", "about.html", "privacy-policy.html", "terms.html", "disclaimer.html", "cookie-policy.html", "submit-guest-post.html", "CNAME", "sitemap.xml", "robots.txt", "style.css", "favicon.ico"]:
+    for f in ["index.html", "404.html", "contact.html", "about.html", "privacy-policy.html", "terms.html", "disclaimer.html", "cookie-policy.html", "submit-guest-post.html", "CNAME", "sitemap.xml", "robots.txt", "style.css", "favicon.ico", "41cd595e2f934b20a3b2bd8f445d628b.txt"]:
         if os.path.exists(f): shutil.copy2(f, os.path.join(OUTPUT_DIR, f))
     
     # 🚀 FIX: Copy all image files from 'news' directory to 'public/news'
