@@ -140,9 +140,19 @@
         nav ul li a:hover { color: var(--text-light); border-bottom: 3px solid var(--primary-red); padding-bottom: 9px; }
 
         /* Article Content Container */
-        .article-container { max-width: 900px; margin: 40px auto; background: #FFF; padding: 40px; box-shadow: 0 2px 15px rgba(0,0,0,0.08); border-radius: 4px; }
+        .article-container { max-width: 980px; width: min(100% - 32px, 980px); margin: 40px auto; background: #FFF; padding: clamp(22px, 4vw, 48px); box-shadow: 0 2px 15px rgba(0,0,0,0.08); border-radius: 8px; }
         .desktop-only-ad { display: block; }
-        @media (max-width: 768px) { .desktop-only-ad { display: none !important; } }
+        .article-middle-ad { margin: 34px 0; padding: 14px 16px 18px; border: 1px solid #E7E7E7; border-radius: 8px; background: #FAFAFA; text-align: center; clear: both; }
+        .article-ad-label { display: block; margin-bottom: 10px; color: #777; font-size: 10px; letter-spacing: 0.14em; font-weight: 700; }
+        .article-middle-ad__content { min-height: 90px; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .article-table-wrap { width: 100%; margin: 28px 0 34px; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; border: 1px solid #E4E4E4; border-radius: 8px; background: #FFF; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+        .article-table-wrap:focus-visible { outline: 3px solid rgba(180, 35, 50, 0.35); outline-offset: 3px; }
+        .article-content table { width: 100%; min-width: 680px; border-collapse: collapse; table-layout: auto; font-size: 16px; line-height: 1.45; }
+        .article-content th, .article-content td { padding: 13px 15px; border: 1px solid #E5E5E5; text-align: left; vertical-align: top; }
+        .article-content th { background: #F7F7F7; color: #171717; font-weight: 750; white-space: nowrap; }
+        .article-content tbody tr:nth-child(even) { background: #FCFCFC; }
+        .article-content tbody tr:hover { background: #FFF5F5; }
+        @media (max-width: 768px) { .desktop-only-ad { display: none !important; } .article-middle-ad { margin: 28px -4px; } }
         .article-content h1 { font-size: 42px; line-height: 1.1; margin-bottom: 25px; font-weight: bold; color: #000; }
         .article-content p { font-size: 19px; margin-bottom: 25px; line-height: 1.6; color: #333; }
         .article-content a { color: #B42332; font-weight: 600; text-decoration-line: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; text-decoration-color: rgba(180, 35, 50, 0.45); transition: color 0.2s ease, text-decoration-color 0.2s ease; }
@@ -153,6 +163,9 @@
         .article-content iframe { width: 100%; height: 450px; border: none; }
         .article-content hr { border: 0; border-top: 1px solid #eee; margin: 40px 0; }
         .article-content h2 { font-size: 28px; margin: 35px 0 20px; color: #000; }
+        .article-content h3 { font-size: 23px; line-height: 1.25; margin: 30px 0 16px; color: #111; }
+        .article-content blockquote { margin: 28px 0; padding: 18px 20px; border-left: 4px solid var(--primary-red); background: #FFF7F7; color: #333; border-radius: 0 6px 6px 0; }
+        .article-content code { padding: 2px 5px; border-radius: 4px; background: #F2F2F2; font-size: 0.9em; }
         .ticker-link { color: #FFFFFF !important; text-decoration: none !important; font-weight: 700; }
         .ticker-link:hover { color: #FFD9D9 !important; }
         .article-content ul { margin-bottom: 25px; padding-left: 20px; }
@@ -191,11 +204,16 @@
         .related-section { max-width: 1300px; margin: 60px auto; padding: 0 20px; }
         .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; border-top: 4px solid var(--primary-red); padding-top: 15px; }
         .section-header h2 { font-size: 28px; font-weight: bold; color: var(--text-dark); }
+        .related-intro { max-width: 760px; margin: -10px 0 24px; color: #666; font-size: 16px; line-height: 1.55; }
         .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 50px; }
-        .news-card { display: flex; flex-direction: column; }
-        .news-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 12px; border-radius: 2px; }
-        .news-card .tag { color: var(--primary-red); font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; }
-        .news-card h3 { font-size: 18px; font-weight: bold; margin-bottom: 8px; line-height: 1.25; }
+        .news-card { display: flex; flex-direction: column; min-width: 0; }
+        .news-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 12px; border-radius: 6px; }
+        .news-card .tag, .related-card-category { color: var(--primary-red); font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 7px; }
+        .news-card h3 { font-size: 18px; font-weight: bold; margin-bottom: 10px; line-height: 1.3; }
+        .related-card > a:not(.related-card-open) { color: inherit; text-decoration: none; }
+        .related-card-open { display: inline-flex; align-items: center; gap: 7px; margin-top: auto; padding-top: 6px; color: var(--primary-red) !important; font-size: 14px; font-weight: 750; text-decoration: none !important; }
+        .related-card-open:hover { color: #7F1725 !important; text-decoration: underline !important; text-underline-offset: 3px; }
+        .related-card-open:focus-visible { outline: 3px solid rgba(180, 35, 50, 0.3); outline-offset: 3px; border-radius: 3px; }
 
         /* Footer Match index.html */
         footer { background-color: var(--dark-bg); color: var(--text-light); padding: 40px 20px; border-top: 5px solid #333; margin-top: 60px; text-align: center; }
@@ -204,8 +222,13 @@
         
         @media (max-width: 1024px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { 
-            .article-container { margin: 20px; padding: 20px; } 
-            .article-content h1 { font-size: 32px; }
+            .article-container { margin: 20px auto; padding: 20px 16px; width: calc(100% - 24px); }
+            .article-content h1 { font-size: clamp(29px, 8vw, 34px); line-height: 1.12; }
+            .article-content h2 { font-size: 25px; }
+            .article-content h3 { font-size: 21px; }
+            .article-content p { font-size: 17px; line-height: 1.65; }
+            .article-content table { min-width: 620px; font-size: 15px; }
+            .article-content th, .article-content td { padding: 11px 12px; }
             .grid-4 { grid-template-columns: 1fr; }
         }
     </style>
@@ -265,12 +288,6 @@
 
         <article class="article-content">
             <p><img alt="GenZ Frontier News Header" src="https://i.ibb.co/5h6cNwxy/IMG-4612.jpg" /></p>
-            <!-- Adsterra Native Banner -->
-            <div style="margin-top: 30px; margin-bottom: 20px; text-align: center;">
-                <script async="async" data-cfasync="false" src="https://pl30308054.effectivecpmnetwork.com/ec56a821de60d9845e8059349f970dbf/invoke.js"></script>
-                <div id="container-ec56a821de60d9845e8059349f970dbf"></div>
-            </div>
-    
 <h1>ঢাকা-ওয়াশিংটন পারস্পরিক বাণিজ্য চুক্তি (ART): জাতীয় সার্বভৌমত্ব, অর্থনৈতিক স্থিতিশীলতা এবং ভূ-রাজনৈতিক ভারসাম্যের ওপর প্রভাব বিশ্লেষণ</h1>
 <p><strong>বিশেষ প্রতিবেদন | ২০ ফেব্রুয়ারী ২০২৬, টাংগাইল</strong></p>
 <p>২০২৬ সালের ৯ ফেব্রুয়ারি ঢাকা ও ওয়াশিংটনের মধ্যে স্বাক্ষরিত 'অ্যাগ্রিমেন্ট অন রেসিপ্রোকাল ট্রেড' (ART) বা পারস্পরিক বাণিজ্য চুক্তি বাংলাদেশের সাম্প্রতিক ইতিহাসের সবচেয়ে আলোচিত এবং বিতর্কিত দলিলে পরিণত হয়েছে<a href="start_span">span_0</a><a href="end_span">span_0</a>। নির্বাচন অনুষ্ঠানের মাত্র তিন দিন আগে একটি অন্তর্বর্তীকালীন সরকারের মাধ্যমে অত্যন্ত গোপনীয়তার সাথে এই চুক্তি স্বাক্ষরের ঘটনাটি দেশের নীতি-নির্ধারণী মহল, অর্থনীতিবিদ এবং ভূ-রাজনৈতিক বিশ্লেষকদের মধ্যে গভীর উদ্বেগের সৃষ্টি করেছে<a href="start_span">span_1</a><a href="end_span">span_1</a>। </p>
@@ -281,13 +298,42 @@
 <p>চুক্তির মূল সূত্রপাত ঘটে ২০২৫ সালের এপ্রিলে মার্কিন প্রেসিডেন্ট ডোনাল্ড ট্রাম্পের নির্বাহী আদেশ ১৪২৫৭-এর মাধ্যমে, যেখানে মার্কিন বাণিজ্য ঘাটতি কমাতে বিভিন্ন দেশের ওপর 'রেসিপ্রোকাল ট্যারিফ' বা পাল্টা শুল্ক আরোপের ঘোষণা দেওয়া হয়<a href="start_span">span_6</a><a href="end_span">span_6</a>। শুরুতে বাংলাদেশের জন্য এই শুল্কের হার ৩৭ শতাংশ প্রস্তাব করা হয়েছিল, যা দেশের প্রধান রপ্তানি খাত তৈরি পোশাকের জন্য ছিল ধ্বংসাত্মক<a href="start_span">span_7</a><a href="end_span">span_7</a>। ৯ মাসের রুদ্ধদ্বার দরকষাকষির পর ২০২৬ সালের ফেব্রুয়ারিতে এই হার ১৯ শতাংশে নামিয়ে আনা হয়<a href="start_span">span_8</a><a href="end_span">span_8</a>। তবে এই ১৯ শতাংশ শুল্ক হ্রাসের বিনিময়ে বাংলাদেশ এমন সব শর্ত মেনে নিয়েছে, যা দেশের ভবিষ্যৎ নীতিনির্ধারণী ক্ষমতাকে মারাত্মকভাবে সংকুচিত করেছে<a href="start_span">span_9</a><a href="end_span">span_9</a>।</p>
 <h3>শুল্ক হারের বিবর্তন ও বর্তমান কাঠামো</h3>
 <p>মার্কিন বাজারে বাংলাদেশি পণ্যের প্রবেশের ক্ষেত্রে শুল্কের যে পরিবর্তন ঘটেছে, তা নিচের সারণিতে তুলে ধরা হলো:</p>
-<p>| পর্যায় | শুল্ক হার (শতাংশ) | প্রেক্ষাপট ও সংশ্লিষ্ট নির্বাহী আদেশ |
-| :--- | :--- | :--- |
-| ঐতিহাসিক সাধারণ হার (MFN) | ~১৫.৫% | ডব্লিউটিও (WTO) নির্ধারিত সাধারণ শুল্ক<a href="start_span">span_10</a><a href="end_span">span_10</a> |
-| ২০২৫ সালের এপ্রিলের প্রস্তাব | ৩৭% (রেসিপ্রোকাল) | নির্বাহী আদেশ ১৪২৫৭-এর অধীনে প্রাথমিক প্রস্তাব<a href="start_span">span_11</a><a href="end_span">span_11</a> |
-| ২০২৫ সালের আগস্টের হার | ২০% (রেসিপ্রোকাল) | আলোচনার মাধ্যমে প্রাথমিক সংশোধন<a href="start_span">span_12</a><a href="end_span">span_12</a> |
-| ২০২৬ সালের চূড়ান্ত হার | ১৯% (রেসিপ্রোকাল) | চূড়ান্ত 'এগ্রিমেন্ট অন রেসিপ্রোকাল ট্রেড' (ART)<a href="start_span">span_13</a><a href="end_span">span_13</a> |
-| বিশেষ সুবিধা (RMG) | ০% (শর্তসাপেক্ষ) | মার্কিন তুলা ও ফাইবার ব্যবহারের শর্তে<a href="start_span">span_14</a><a href="end_span">span_14</a> |</p>
+<div class="article-table-wrap" role="region" aria-label="Scrollable data table" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">পর্যায়</th>
+<th style="text-align: left;">শুল্ক হার (শতাংশ)</th>
+<th style="text-align: left;">প্রেক্ষাপট ও সংশ্লিষ্ট নির্বাহী আদেশ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">ঐতিহাসিক সাধারণ হার (MFN)</td>
+<td style="text-align: left;">~১৫.৫%</td>
+<td style="text-align: left;">ডব্লিউটিও (WTO) নির্ধারিত সাধারণ শুল্ক<a href="start_span">span_10</a><a href="end_span">span_10</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">২০২৫ সালের এপ্রিলের প্রস্তাব</td>
+<td style="text-align: left;">৩৭% (রেসিপ্রোকাল)</td>
+<td style="text-align: left;">নির্বাহী আদেশ ১৪২৫৭-এর অধীনে প্রাথমিক প্রস্তাব<a href="start_span">span_11</a><a href="end_span">span_11</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">২০২৫ সালের আগস্টের হার</td>
+<td style="text-align: left;">২০% (রেসিপ্রোকাল)</td>
+<td style="text-align: left;">আলোচনার মাধ্যমে প্রাথমিক সংশোধন<a href="start_span">span_12</a><a href="end_span">span_12</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">২০২৬ সালের চূড়ান্ত হার</td>
+<td style="text-align: left;">১৯% (রেসিপ্রোকাল)</td>
+<td style="text-align: left;">চূড়ান্ত 'এগ্রিমেন্ট অন রেসিপ্রোকাল ট্রেড' (ART)<a href="start_span">span_13</a><a href="end_span">span_13</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">বিশেষ সুবিধা (RMG)</td>
+<td style="text-align: left;">০% (শর্তসাপেক্ষ)</td>
+<td style="text-align: left;">মার্কিন তুলা ও ফাইবার ব্যবহারের শর্তে<a href="start_span">span_14</a><a href="end_span">span_14</a></td>
+</tr>
+</tbody>
+</table></div>
 <p>এই শুল্ক কাঠামোর গাণিতিক বিশ্লেষণ করলে দেখা যায় যে, সাধারণ বাংলাদেশি পণ্যের জন্য মোট শুল্কের বোঝা দাঁড়াবে ১৫.৫% (সাধারণ) + ১৯% (পাল্টা) = ৩৪.৫%<a href="start_span">span_15</a><a href="end_span">span_15</a>। এই উচ্চ শুল্ক হারের কারণে বাংলাদেশি পণ্য মার্কিন বাজারে টিকে থাকা কঠিন হয়ে পড়বে, যদি না তারা মার্কিন তুলা ব্যবহারের শর্ত মেনে 'জিরো ট্যারিফ' সুবিধা গ্রহণ করে<a href="start_span">span_16</a><a href="end_span">span_16</a>।</p>
 <hr />
 <h3>আইনি ও প্রশাসনিক সার্বভৌমত্ব: অনুচ্ছেদ ১.১৭ এবং ১.৯-এর বিশ্লেষণ</h3>
@@ -300,16 +346,50 @@
 <p><strong>ডেটা লোকালাইজেশন এবং সোর্স কোড (অনুচ্ছেদ ৪.১ ও ৩.৪):</strong> 
 চুক্তির ৪.১ অনুচ্ছেদে স্পষ্টভাবে বলা হয়েছে যে, বাংলাদেশ কোনো অবস্থাতেই 'ডেটা লোকালাইজেশন' বা দেশের ভেতরে সার্ভার রেখে ডেটা সংরক্ষণের বাধ্যবাধকতা আরোপ করতে পারবে না<a href="start_span">span_26</a><a href="end_span">span_26</a>। এর ফলে ফেসবুক, গুগল বা আমাজনের মতো কোম্পানিগুলো এ দেশের মানুষের ব্যক্তিগত, আর্থিক এবং রাষ্ট্রীয় সংবেদনশীল তথ্য অবাধে দেশের বাইরে নিয়ে যেতে পারবে<a href="start_span">span_27</a><a href="end_span">span_27</a>। জাতীয় নিরাপত্তার স্বার্থে সরকার চাইলেও এই তথ্যের ওপর নিয়ন্ত্রণ প্রতিষ্ঠা করতে পারবে না<a href="start_span">span_28</a><a href="end_span">span_28</a>।</p>
 <p>এছাড়া ৩.৪ অনুচ্ছেদে বলা হয়েছে, মার্কিন আইসিটি পণ্যের সোর্স কোড বা অ্যালগরিদম প্রকাশের শর্ত দেওয়া যাবে না<a href="start_span">span_29</a><a href="end_span">span_29</a>। এর ফলে সরকার কোনো বিদেশি সফটওয়্যার বা প্রযুক্তির ভেতরে কোনো ক্ষতিকর উপাদান বা নজরদারির ব্যবস্থা আছে কি না, তা পরীক্ষা করার ক্ষমতা হারাবে<a href="start_span">span_30</a><a href="end_span">span_30</a>। পাশাপাশি, ডিজিটাল পণ্যের ওপর কোনো ধরনের শুল্ক বা কর বসানো যাবে না, যা দেশের অভ্যন্তরীণ আইসিটি শিল্পের বিকাশে প্রতিবন্ধকতা সৃষ্টি করবে এবং বিপুল রাজস্ব ক্ষতির কারণ হবে<a href="start_span">span_31</a><a href="end_span">span_31</a>।</p>
-<p>| ডিজিটাল বাণিজ্যের শর্ত | সংশ্লিষ্ট অনুচ্ছেদ | দেশের ওপর প্রভাব |
-| :--- | :--- | :--- |
-| ডেটা লোকালাইজেশন নিষিদ্ধ | ৪.১ (সেকশন ৩) | তথ্যের ওপর নিয়ন্ত্রণ হারানো এবং নিরাপত্তা ঝুঁকি<a href="start_span">span_32</a><a href="end_span">span_32</a> |
-| সোর্স কোড সুরক্ষা | ৩.৪ | প্রযুক্তির স্বচ্ছতা যাচাইয়ে বাধা এবং নজরদারি ঝুঁকি<a href="start_span">span_33</a><a href="end_span">span_33</a> |
-| ইলেকট্রনিক ট্রান্সমিশনে শুল্কহীনতা | ৩.১ | বিশাল রাজস্ব ক্ষতি এবং দেশীয় স্টার্টআপের ক্ষতি<a href="start_span">span_34</a><a href="end_span">span_34</a> |
-| ডিজিটাল সার্ভিস ট্যাক্স প্রত্যাহার | চুক্তির মূল অংশ | মার্কিন টেক জায়ান্টদের একচেটিয়া সুবিধা<a href="start_span">span_35</a><a href="end_span">span_35</a> |</p>
+<div class="article-table-wrap" role="region" aria-label="Scrollable data table" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">ডিজিটাল বাণিজ্যের শর্ত</th>
+<th style="text-align: left;">সংশ্লিষ্ট অনুচ্ছেদ</th>
+<th style="text-align: left;">দেশের ওপর প্রভাব</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">ডেটা লোকালাইজেশন নিষিদ্ধ</td>
+<td style="text-align: left;">৪.১ (সেকশন ৩)</td>
+<td style="text-align: left;">তথ্যের ওপর নিয়ন্ত্রণ হারানো এবং নিরাপত্তা ঝুঁকি<a href="start_span">span_32</a><a href="end_span">span_32</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">সোর্স কোড সুরক্ষা</td>
+<td style="text-align: left;">৩.৪</td>
+<td style="text-align: left;">প্রযুক্তির স্বচ্ছতা যাচাইয়ে বাধা এবং নজরদারি ঝুঁকি<a href="start_span">span_33</a><a href="end_span">span_33</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">ইলেকট্রনিক ট্রান্সমিশনে শুল্কহীনতা</td>
+<td style="text-align: left;">৩.১</td>
+<td style="text-align: left;">বিশাল রাজস্ব ক্ষতি এবং দেশীয় স্টার্টআপের ক্ষতি<a href="start_span">span_34</a><a href="end_span">span_34</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">ডিজিটাল সার্ভিস ট্যাক্স প্রত্যাহার</td>
+<td style="text-align: left;">চুক্তির মূল অংশ</td>
+<td style="text-align: left;">মার্কিন টেক জায়ান্টদের একচেটিয়া সুবিধা<a href="start_span">span_35</a><a href="end_span">span_35</a></td>
+</tr>
+</tbody>
+</table></div>
 <hr />
 <h3>মান নিয়ন্ত্রণ সংস্থার ক্ষমতা খর্ব: বিএসটিআই ও ঔষধ প্রশাসনের ভবিষ্যৎ</h3>
 <p>বাংলাদেশের বাজারে প্রবেশ করা যেকোনো পণ্যের মান নিয়ন্ত্রণ করার অধিকার জাতীয় প্রতিষ্ঠানগুলোর রয়েছে<a href="start_span">span_36</a><a href="end_span">span_36</a>। তবে চুক্তির ১.১ অনুচ্ছেদ এবং অ্যানেক্স ৩-এর শর্তানুসারে, বাংলাদেশের মান নিয়ন্ত্রণকারী সংস্থাগুলোর (যেমন BSTI, DGDA) ক্ষমতা নাটকীয়ভাবে সংকুচিত করা হয়েছে<a href="start_span">span_37</a><a href="end_span">span_37</a>।</p>
 <p>মার্কিন এফডিএ (FDA) কর্তৃক অনুমোদিত কোনো ওষুধ বা চিকিৎসা সরঞ্জামের ক্ষেত্রে বাংলাদেশ পুনরায় কোনো পরীক্ষা বা স্থানীয় সার্টিফিকেশন দাবি করতে পারবে না<a href="start_span">span_38</a><a href="end_span">span_38</a>। একইভাবে, মার্কিন ফেডারেল মোটর ভেহিকেল সেফটি স্ট্যান্ডার্ড (FMVSS) মেনে তৈরি যানবাহনকে কোনো অতিরিক্ত পরীক্ষা ছাড়াই বাংলাদেশের রাস্তায় চলাচলের অনুমতি দিতে হবে<a href="start_span">span_39</a><a href="end_span">span_39</a>। এর ফলে দেশের নিজস্ব গবেষণাগার ও মান নিয়ন্ত্রণ পদ্ধতি গুরুত্বহীন হয়ে পড়বে<a href="start_span">span_40</a><a href="end_span">span_40</a>। জনস্বাস্থ্যের জন্য ক্ষতিকর কোনো বিষয় ধরা পড়লেও মার্কিন সার্টিফিকেশন থাকার অজুহাতে সেই পণ্য আমদানিতে বাধা দেওয়া সরকারের জন্য কঠিন হয়ে পড়বে, যা দেশীয় ঔষধ শিল্প এবং অন্যান্য উৎপাদনশীল খাতের জন্য এক অসম প্রতিযোগিতা তৈরি করবে<a href="start_span">span_41</a><a href="end_span">span_41</a>।</p>
+            <!-- Adsterra Native Banner: article-middle placement -->
+            <aside class="article-middle-ad" aria-label="Advertisement">
+                <span class="article-ad-label">ADVERTISEMENT</span>
+                <div class="article-middle-ad__content">
+                    <script async="async" data-cfasync="false" src="https://pl30308054.effectivecpmnetwork.com/ec56a821de60d9845e8059349f970dbf/invoke.js"></script>
+                    <div id="container-ec56a821de60d9845e8059349f970dbf"></div>
+                </div>
+            </aside>
+    
 <hr />
 <h3>সেবা ও নির্মাণ খাতে অসম প্রতিযোগিতা: অনুচ্ছেদ ২-এর প্রভাব</h3>
 <p>চুক্তির ধারা ২ অনুযায়ী, বাংলাদেশের সেবা খাতের একটি বিশাল অংশ মার্কিন কোম্পানিগুলোর জন্য উন্মুক্ত করে দেওয়া হয়েছে<a href="start_span">span_42</a><a href="end_span">span_42</a>। এর মধ্যে রয়েছে পরিবহন, পাইকারি ও খুচরা বিতরণ (ফ্র্যাঞ্চাইজি), নির্মাণ ও প্রকৌশল, শিক্ষা প্রতিষ্ঠান এবং স্বাস্থ্যসেবা খাত<a href="start_span">span_43</a><a href="end_span">span_43</a>। মার্কিন বহুজাতিক কোম্পানিগুলো যখন তাদের বিপুল পুঁজি এবং উন্নত প্রযুক্তি নিয়ে এই খাতগুলোতে প্রবেশ করবে, তখন দেশীয় ক্ষুদ্র ও মাঝারি উদ্যোক্তারা অসম প্রতিযোগিতার মুখে পড়বে<a href="start_span">span_44</a><a href="end_span">span_44</a>। সরকারি বা বেসরকারি কোনো খাতেই মার্কিন কোম্পানিগুলোর প্রতি কোনো ধরনের বৈষম্যমূলক ব্যবস্থা (যেমন স্থানীয় উদ্যোক্তাদের অগ্রাধিকার দেওয়া) গ্রহণ করা যাবে না<a href="start_span">span_45</a><a href="end_span">span_45</a>। এর ফলে দীর্ঘমেয়াদে সেবা খাতের নিয়ন্ত্রণ বিদেশি কোম্পানিগুলোর হাতে চলে যাওয়ার আশঙ্কা রয়েছে, যা কর্মসংস্থান ও জাতীয় অর্থনীতির জন্য দীর্ঘমেয়াদী ঝুঁকির কারণ হতে পারে<a href="start_span">span_46</a><a href="end_span">span_46</a>।</p>
@@ -318,12 +398,37 @@
 <p>ART চুক্তির অন্যতম উদ্বেগজনক দিক হলো বাংলাদেশের স্বাধীন পররাষ্ট্রনীতির ওপর সরাসরি হস্তক্ষেপের প্রচেষ্টা<a href="start_span">span_47</a><a href="end_span">span_47</a>। চুক্তির ৪.৩ অনুচ্ছেদে এমন সব শর্ত দেওয়া হয়েছে যা বাংলাদেশের ভূ-রাজনৈতিক মিত্র নির্বাচনের স্বাধীনতাকে খর্ব করে<a href="start_span">span_48</a><a href="end_span">span_48</a>।</p>
 <p>চুক্তিতে বলা হয়েছে, বাংলাদেশ যদি কোনো 'অ-বাজার ভিত্তিক' (Non-market) দেশের সাথে কোনো মুক্ত বাণিজ্য চুক্তি (FTA) বা অগ্রাধিকারমূলক বাণিজ্য চুক্তি করে যা মার্কিন স্বার্থকে ক্ষতিগ্রস্ত করে, তবে যুক্তরাষ্ট্র এই চুক্তি বাতিল করতে পারবে এবং পুনরায় ৩৭ শতাংশ শুল্ক আরোপ করতে পারবে<a href="start_span">span_49</a><a href="end_span">span_49</a>। এখানে 'নন-মার্কেট' দেশ বলতে পরোক্ষভাবে চীন ও রাশিয়াকে বোঝানো হয়েছে, যারা বাংলাদেশের বড় উন্নয়ন সহযোগী<a href="start_span">span_50</a><a href="end_span">span_50</a>।</p>
 <p>সবচেয়ে বিস্ময়কর শর্তটি হলো ৪.৩.৫ অনুচ্ছেদ, যেখানে বলা হয়েছে যে বাংলাদেশ যুক্তরাষ্ট্রের 'মৌলিক স্বার্থ ক্ষুণ্ণ করে' এমন কোনো দেশের কাছ থেকে পারমাণবিক রিঅ্যাক্টর, ফুয়েল রড বা সমৃদ্ধ ইউরেনিয়াম কিনতে পারবে না<a href="start_span">span_51</a><a href="end_span">span_51</a>। এটি সরাসরি বাংলাদেশের রূপপুর পারমাণবিক বিদ্যুৎ কেন্দ্রের জন্য একটি বড় হুমকি<a href="start_span">span_52</a><a href="end_span">span_52</a>। চুক্তিবদ্ধ থাকা প্রকল্পের ক্ষেত্রে কিছু ছাড়ের কথা বলা হলেও, ভবিষ্যতে রাশিয়ার সাথে জ্বালানি বা প্রযুক্তিগত কোনো নতুন চুক্তি করার ক্ষেত্রে যুক্তরাষ্ট্রের 'ভেটো' পাওয়ার তৈরি করা হয়েছে<a href="start_span">span_53</a><a href="end_span">span_53</a>। এটি মূলত একটি দেশের জ্বালানি নিরাপত্তাকে অন্য একটি দেশের রাজনৈতিক ইচ্ছার ওপর নির্ভরশীল করে তোলা<a href="start_span">span_54</a><a href="end_span">span_54</a>।</p>
-<p>| ভূ-রাজনৈতিক নিয়ন্ত্রক শর্ত | সংশ্লিষ্ট অনুচ্ছেদ | সম্ভাব্য প্রভাব |
-| :--- | :--- | :--- |
-| নন-মার্কেট দেশের সাথে FTA নিষিদ্ধ | ৪.৩.৪ | চীন বা রাশিয়ার সাথে স্বাধীন বাণিজ্য সম্পর্কের বাধা<a href="start_span">span_55</a><a href="end_span">span_55</a> |
-| নিউক্লিয়ার রিঅ্যাক্টর ও জ্বালানি নিয়ন্ত্রণ | ৪.৩.৫ | রূপপুর প্রকল্পের ভবিষ্যৎ এবং জ্বালানি নিরাপত্তা ঝুঁকি<a href="start_span">span_56</a><a href="end_span">span_56</a> |
-| মার্কিন স্যাংশন কার্যকর করার বাধ্যবাধকতা | ৪.১ ও ৪.২ | তৃতীয় কোনো দেশের ওপর মার্কিন নিষেধাজ্ঞা পালনে বাধ্য হওয়া<a href="start_span">span_57</a><a href="end_span">span_57</a> |
-| এক্সপোর্ট কন্ট্রোল হারমোনাইজেশন | অ্যানেক্স ৩ | বাংলাদেশের রপ্তানি নীতি ওয়াশিংটনের নিয়ন্ত্রণে আসা<a href="start_span">span_58</a><a href="end_span">span_58</a> |</p>
+<div class="article-table-wrap" role="region" aria-label="Scrollable data table" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">ভূ-রাজনৈতিক নিয়ন্ত্রক শর্ত</th>
+<th style="text-align: left;">সংশ্লিষ্ট অনুচ্ছেদ</th>
+<th style="text-align: left;">সম্ভাব্য প্রভাব</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">নন-মার্কেট দেশের সাথে FTA নিষিদ্ধ</td>
+<td style="text-align: left;">৪.৩.৪</td>
+<td style="text-align: left;">চীন বা রাশিয়ার সাথে স্বাধীন বাণিজ্য সম্পর্কের বাধা<a href="start_span">span_55</a><a href="end_span">span_55</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">নিউক্লিয়ার রিঅ্যাক্টর ও জ্বালানি নিয়ন্ত্রণ</td>
+<td style="text-align: left;">৪.৩.৫</td>
+<td style="text-align: left;">রূপপুর প্রকল্পের ভবিষ্যৎ এবং জ্বালানি নিরাপত্তা ঝুঁকি<a href="start_span">span_56</a><a href="end_span">span_56</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">মার্কিন স্যাংশন কার্যকর করার বাধ্যবাধকতা</td>
+<td style="text-align: left;">৪.১ ও ৪.২</td>
+<td style="text-align: left;">তৃতীয় কোনো দেশের ওপর মার্কিন নিষেধাজ্ঞা পালনে বাধ্য হওয়া<a href="start_span">span_57</a><a href="end_span">span_57</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">এক্সপোর্ট কন্ট্রোল হারমোনাইজেশন</td>
+<td style="text-align: left;">অ্যানেক্স ৩</td>
+<td style="text-align: left;">বাংলাদেশের রপ্তানি নীতি ওয়াশিংটনের নিয়ন্ত্রণে আসা<a href="start_span">span_58</a><a href="end_span">span_58</a></td>
+</tr>
+</tbody>
+</table></div>
 <hr />
 <h3>তৈরি পোশাক খাতের 'শূন্য শুল্ক' সুবিধার আড়ালে কঠিন শর্ত</h3>
 <p>সরকারের পক্ষ থেকে এই চুক্তির সবচেয়ে বড় সফলতা হিসেবে তৈরি পোশাক খাতের জন্য 'শূন্য শুল্ক' সুবিধার কথা বলা হচ্ছে<a href="start_span">span_59</a><a href="end_span">span_59</a>। তবে চুক্তির ৫.৩ অনুচ্ছেদ বিশ্লেষণ করলে দেখা যায় যে, এই সুবিধা পাওয়ার জন্য যে শর্ত জুড়ে দেওয়া হয়েছে তা অত্যন্ত কঠিন এবং অনেক ক্ষেত্রে অলাভজনক<a href="start_span">span_60</a><a href="end_span">span_60</a>।</p>
@@ -378,22 +483,30 @@
     </main>
 
     <section class="related-section">
-        <div class="related-section"><div class="section-header"><h2>Suggested For You</h2></div><div class="grid-4">
-        <article class="news-card">
+        <div class="related-section"><div class="section-header"><h2>More from Abdul Latif Siddiqui</h2></div><p class="related-intro">Explore other GenZ Frontier articles connected to Abdul Latif Siddiqui.</p><div class="grid-4">
+        <article class="news-card related-card">
+            <img src="https://i.ibb.co/WNfnxsM5/IMG-4720.jpg" alt="‘দ্য ফাইন্যান্সিয়াল পোস্ট’-এর কালিহাতী উপজেলা প্রতিনিধি মনোনীত হলেন সাংবাদিক আব্দুল লতিফ তালুকদার" loading="lazy" width="400" height="225" decoding="async">
+            <span class="related-card-category">World</span>
+            <a href="/world/abdul-latif-talukdar-appointed-kalihati-representative-the-financial-post/"><h3>‘দ্য ফাইন্যান্সিয়াল পোস্ট’-এর কালিহাতী উপজেলা প্রতিনিধি মনোনীত হলেন সাংবাদিক আব্দুল লতিফ তালুকদার</h3></a>
+            <a class="related-card-open" href="/world/abdul-latif-talukdar-appointed-kalihati-representative-the-financial-post/">Open article <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="news-card related-card">
             <img src="https://i.ibb.co/rNCH2qz/IMG-5627.webp" alt="Navana Group Vice Chairman Sazedul Islam Arrested in Dhaka Over Labour Law Case" loading="lazy" width="400" height="225" decoding="async">
+            <span class="related-card-category">World</span>
             <a href="/world/navana-group-vice-chairman-sazedul-islam-arrested-dhaka/"><h3>Navana Group Vice Chairman Sazedul Islam Arrested in Dhaka Over Labour Law Case</h3></a>
+            <a class="related-card-open" href="/world/navana-group-vice-chairman-sazedul-islam-arrested-dhaka/">Open article <span aria-hidden="true">→</span></a>
         </article>
-        <article class="news-card">
-            <img src="https://i.ibb.co/Xf4hq3XP/IMG-5473.jpg" alt="৬ জেলায় ম্যাজিস্ট্রেসি ক্ষমতা পেল সশস্ত্র বাহিনী: আওয়ামী লীগের প্রতিষ্ঠাবার্ষিকীকে কেন্দ্র করে কঠোর অবস্থানে সরকার" loading="lazy" width="400" height="225" decoding="async">
-            <a href="/world/armed-forces-granted-magistracy-power-6-districts-2026/"><h3>৬ জেলায় ম্যাজিস্ট্রেসি ক্ষমতা পেল সশস্ত্র বাহিনী: আওয়ামী লীগের প্রতিষ্ঠাবার্ষিকীকে কেন্দ্র করে কঠোর অবস্থানে সরকার</h3></a>
+        <article class="news-card related-card">
+            <img src="https://www.genzfrontir.com/default.webp" alt="সীমান্ত হত্যা বন্ধে বিজিবির সঙ্গে কাঁধে কাঁধ মিলিয়ে রুখে দাঁড়াতে হবে: সারজিস আলম" loading="lazy" width="400" height="225" decoding="async">
+            <span class="related-card-category">World</span>
+            <a href="/world/sarjis-alam-calls-to-stand-with-bgb-against-border-killings/"><h3>সীমান্ত হত্যা বন্ধে বিজিবির সঙ্গে কাঁধে কাঁধ মিলিয়ে রুখে দাঁড়াতে হবে: সারজিস আলম</h3></a>
+            <a class="related-card-open" href="/world/sarjis-alam-calls-to-stand-with-bgb-against-border-killings/">Open article <span aria-hidden="true">→</span></a>
         </article>
-        <article class="news-card">
-            <img src="https://i.ibb.co/QFV985Fk/IMG-5307.jpg" alt="একুশে পদকপ্রাপ্ত প্রখ্যাত কবি ও সাংবাদিক আল মুজাহিদী আর নেই" loading="lazy" width="400" height="225" decoding="async">
-            <a href="/world/ekushey-padak-winning-poet-al-mujahidi-passes-away/"><h3>একুশে পদকপ্রাপ্ত প্রখ্যাত কবি ও সাংবাদিক আল মুজাহিদী আর নেই</h3></a>
-        </article>
-        <article class="news-card">
-            <img src="https://i.ibb.co/84B94FSn/IMG-5132.webp" alt="বেনজীরকে ফেরানোর প্রক্রিয়া শুরু করেছে দুদক: ৩০ দিনের মধ্যে আনুষ্ঠানিক প্রত্যর্পণ আবেদনের তাগিদ দুবাইয়ের" loading="lazy" width="400" height="225" decoding="async">
-            <a href="/world/acc-initiates-benazir-ahmed-extradition-process-dubai/"><h3>বেনজীরকে ফেরানোর প্রক্রিয়া শুরু করেছে দুদক: ৩০ দিনের মধ্যে আনুষ্ঠানিক প্রত্যর্পণ আবেদনের তাগিদ দুবাইয়ের</h3></a>
+        <article class="news-card related-card">
+            <img src="https://i.ibb.co/sBQWwyg/IMG-5561.jpg" alt="সুপ্রিম কোর্টে একযোগে পদত্যাগ করলেন ৭ ডেপুটি ও ১১ সহকারী অ্যাটর্নি জেনারেল" loading="lazy" width="400" height="225" decoding="async">
+            <span class="related-card-category">World</span>
+            <a href="/world/supreme-court-7-dag-11-aag-resign-simultaneously/"><h3>সুপ্রিম কোর্টে একযোগে পদত্যাগ করলেন ৭ ডেপুটি ও ১১ সহকারী অ্যাটর্নি জেনারেল</h3></a>
+            <a class="related-card-open" href="/world/supreme-court-7-dag-11-aag-resign-simultaneously/">Open article <span aria-hidden="true">→</span></a>
         </article></div></div>
     </section>
 
@@ -523,6 +636,6 @@
         <p>© 2026 GenZ Frontier. All Rights Reserved.</p>
     </footer>
 
-    <script src="https://pl30308055.effectivecpmnetwork.com/59/2a/2f/592a2f2aee609d98fa5fc89b35dfe700.js"></script>
+    
 </body>
 </html>

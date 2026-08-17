@@ -140,9 +140,19 @@
         nav ul li a:hover { color: var(--text-light); border-bottom: 3px solid var(--primary-red); padding-bottom: 9px; }
 
         /* Article Content Container */
-        .article-container { max-width: 900px; margin: 40px auto; background: #FFF; padding: 40px; box-shadow: 0 2px 15px rgba(0,0,0,0.08); border-radius: 4px; }
+        .article-container { max-width: 980px; width: min(100% - 32px, 980px); margin: 40px auto; background: #FFF; padding: clamp(22px, 4vw, 48px); box-shadow: 0 2px 15px rgba(0,0,0,0.08); border-radius: 8px; }
         .desktop-only-ad { display: block; }
-        @media (max-width: 768px) { .desktop-only-ad { display: none !important; } }
+        .article-middle-ad { margin: 34px 0; padding: 14px 16px 18px; border: 1px solid #E7E7E7; border-radius: 8px; background: #FAFAFA; text-align: center; clear: both; }
+        .article-ad-label { display: block; margin-bottom: 10px; color: #777; font-size: 10px; letter-spacing: 0.14em; font-weight: 700; }
+        .article-middle-ad__content { min-height: 90px; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .article-table-wrap { width: 100%; margin: 28px 0 34px; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; border: 1px solid #E4E4E4; border-radius: 8px; background: #FFF; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+        .article-table-wrap:focus-visible { outline: 3px solid rgba(180, 35, 50, 0.35); outline-offset: 3px; }
+        .article-content table { width: 100%; min-width: 680px; border-collapse: collapse; table-layout: auto; font-size: 16px; line-height: 1.45; }
+        .article-content th, .article-content td { padding: 13px 15px; border: 1px solid #E5E5E5; text-align: left; vertical-align: top; }
+        .article-content th { background: #F7F7F7; color: #171717; font-weight: 750; white-space: nowrap; }
+        .article-content tbody tr:nth-child(even) { background: #FCFCFC; }
+        .article-content tbody tr:hover { background: #FFF5F5; }
+        @media (max-width: 768px) { .desktop-only-ad { display: none !important; } .article-middle-ad { margin: 28px -4px; } }
         .article-content h1 { font-size: 42px; line-height: 1.1; margin-bottom: 25px; font-weight: bold; color: #000; }
         .article-content p { font-size: 19px; margin-bottom: 25px; line-height: 1.6; color: #333; }
         .article-content a { color: #B42332; font-weight: 600; text-decoration-line: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; text-decoration-color: rgba(180, 35, 50, 0.45); transition: color 0.2s ease, text-decoration-color 0.2s ease; }
@@ -153,6 +163,9 @@
         .article-content iframe { width: 100%; height: 450px; border: none; }
         .article-content hr { border: 0; border-top: 1px solid #eee; margin: 40px 0; }
         .article-content h2 { font-size: 28px; margin: 35px 0 20px; color: #000; }
+        .article-content h3 { font-size: 23px; line-height: 1.25; margin: 30px 0 16px; color: #111; }
+        .article-content blockquote { margin: 28px 0; padding: 18px 20px; border-left: 4px solid var(--primary-red); background: #FFF7F7; color: #333; border-radius: 0 6px 6px 0; }
+        .article-content code { padding: 2px 5px; border-radius: 4px; background: #F2F2F2; font-size: 0.9em; }
         .ticker-link { color: #FFFFFF !important; text-decoration: none !important; font-weight: 700; }
         .ticker-link:hover { color: #FFD9D9 !important; }
         .article-content ul { margin-bottom: 25px; padding-left: 20px; }
@@ -191,11 +204,16 @@
         .related-section { max-width: 1300px; margin: 60px auto; padding: 0 20px; }
         .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; border-top: 4px solid var(--primary-red); padding-top: 15px; }
         .section-header h2 { font-size: 28px; font-weight: bold; color: var(--text-dark); }
+        .related-intro { max-width: 760px; margin: -10px 0 24px; color: #666; font-size: 16px; line-height: 1.55; }
         .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 50px; }
-        .news-card { display: flex; flex-direction: column; }
-        .news-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 12px; border-radius: 2px; }
-        .news-card .tag { color: var(--primary-red); font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; }
-        .news-card h3 { font-size: 18px; font-weight: bold; margin-bottom: 8px; line-height: 1.25; }
+        .news-card { display: flex; flex-direction: column; min-width: 0; }
+        .news-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 12px; border-radius: 6px; }
+        .news-card .tag, .related-card-category { color: var(--primary-red); font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 7px; }
+        .news-card h3 { font-size: 18px; font-weight: bold; margin-bottom: 10px; line-height: 1.3; }
+        .related-card > a:not(.related-card-open) { color: inherit; text-decoration: none; }
+        .related-card-open { display: inline-flex; align-items: center; gap: 7px; margin-top: auto; padding-top: 6px; color: var(--primary-red) !important; font-size: 14px; font-weight: 750; text-decoration: none !important; }
+        .related-card-open:hover { color: #7F1725 !important; text-decoration: underline !important; text-underline-offset: 3px; }
+        .related-card-open:focus-visible { outline: 3px solid rgba(180, 35, 50, 0.3); outline-offset: 3px; border-radius: 3px; }
 
         /* Footer Match index.html */
         footer { background-color: var(--dark-bg); color: var(--text-light); padding: 40px 20px; border-top: 5px solid #333; margin-top: 60px; text-align: center; }
@@ -204,8 +222,13 @@
         
         @media (max-width: 1024px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { 
-            .article-container { margin: 20px; padding: 20px; } 
-            .article-content h1 { font-size: 32px; }
+            .article-container { margin: 20px auto; padding: 20px 16px; width: calc(100% - 24px); }
+            .article-content h1 { font-size: clamp(29px, 8vw, 34px); line-height: 1.12; }
+            .article-content h2 { font-size: 25px; }
+            .article-content h3 { font-size: 21px; }
+            .article-content p { font-size: 17px; line-height: 1.65; }
+            .article-content table { min-width: 620px; font-size: 15px; }
+            .article-content th, .article-content td { padding: 11px 12px; }
             .grid-4 { grid-template-columns: 1fr; }
         }
     </style>
@@ -295,14 +318,40 @@
 <p>Popular articles often promise that certain words can reveal a “secret manipulator.” That framing is too certain. People say awkward, defensive, emotional, or hurtful things for many reasons. A phrase can be manipulative in one context and ordinary in another.</p>
 <p>For example, “You never listen to me” might be an exaggerated complaint during a stressful argument. It might also be part of a repeated campaign to make you defend yourself instead of discussing the other person’s behavior. “I need space” can be a healthy request, or it can describe silent treatment when it is used to punish you until you comply.</p>
 <p>The most useful evidence is usually the pattern:</p>
-<p>| Question | Why it matters |
-|---|---|
-| <strong>Repetition</strong> | A repeated phrase or tactic can reveal a stable pressure pattern more clearly than one event |
-| <strong>Timing</strong> | The phrase may appear immediately after you set a boundary or ask a question |
-| <strong>Power</strong> | Money, housing, employment, caregiving, status, or dependency can change the risk |
-| <strong>Transparency</strong> | Important facts may be hidden, distorted, or selectively presented |
-| <strong>Refusal</strong> | The response to “no” often shows whether the person respects autonomy |
-| <strong>Repair</strong> | A sincere apology and sustained change differ from denial and repetition |</p>
+<div class="article-table-wrap" role="region" aria-label="Scrollable data table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Why it matters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repetition</strong></td>
+<td>A repeated phrase or tactic can reveal a stable pressure pattern more clearly than one event</td>
+</tr>
+<tr>
+<td><strong>Timing</strong></td>
+<td>The phrase may appear immediately after you set a boundary or ask a question</td>
+</tr>
+<tr>
+<td><strong>Power</strong></td>
+<td>Money, housing, employment, caregiving, status, or dependency can change the risk</td>
+</tr>
+<tr>
+<td><strong>Transparency</strong></td>
+<td>Important facts may be hidden, distorted, or selectively presented</td>
+</tr>
+<tr>
+<td><strong>Refusal</strong></td>
+<td>The response to “no” often shows whether the person respects autonomy</td>
+</tr>
+<tr>
+<td><strong>Repair</strong></td>
+<td>A sincere apology and sustained change differ from denial and repetition</td>
+</tr>
+</tbody>
+</table></div>
 <h2>The Fear–Obligation–Guilt Framework</h2>
 <p>Emotional blackmail is commonly explained through three pressures: <strong>fear, obligation, and guilt</strong>. A person may fear retaliation or abandonment, feel obligated because of a debt or relationship role, or feel guilty for prioritizing their own needs.<a href="https://positivepsychology.com/emotional-blackmail/" title="PositivePsychology.com, What Is Emotional Blackmail? Examples &amp; How to Deal With It">1</a></p>
 <p>The framework can help readers identify emotional pressure, but it is not a diagnostic test. Feeling guilty does not automatically mean someone is blackmailing you. People can feel obligation in healthy relationships, and fear may be reasonable when a real safety issue exists.</p>
@@ -408,22 +457,30 @@
     </main>
 
     <section class="related-section">
-        <div class="related-section"><div class="section-header"><h2>Suggested For You</h2></div><div class="grid-4">
-        <article class="news-card">
-            <img src="https://www.genzfrontir.com/news/mind-manipulation/images/love-bombing-vs-genuine-affection-header.webp" alt="Love Bombing vs. Genuine Affection: How to Recognize the Pattern" loading="lazy" width="400" height="225" decoding="async">
-            <a href="/mind-manipulation/love-bombing-vs-genuine-affection/"><h3>Love Bombing vs. Genuine Affection: How to Recognize the Pattern</h3></a>
+        <div class="related-section"><div class="section-header"><h2>More from Abdul Latif Siddiqui</h2></div><p class="related-intro">Explore other GenZ Frontier articles connected to Abdul Latif Siddiqui.</p><div class="grid-4">
+        <article class="news-card related-card">
+            <img src="https://www.genzfrontir.com/news/mind-manipulation/images/psychological-manipulation-header.webp" alt="Psychological Manipulation: Definition, Types, Signs, Examples, and What to Do" loading="lazy" width="400" height="225" decoding="async">
+            <span class="related-card-category">Mind Manipulation</span>
+            <a href="/mind-manipulation/psychological-manipulation/"><h3>Psychological Manipulation: Definition, Types, Signs, Examples, and What to Do</h3></a>
+            <a class="related-card-open" href="/mind-manipulation/psychological-manipulation/">Open article <span aria-hidden="true">→</span></a>
         </article>
-        <article class="news-card">
+        <article class="news-card related-card">
             <img src="https://www.genzfrontir.com/news/mind-manipulation/images/manipulation-tactics-header.webp" alt="Common Manipulation Tactics: A Research-Based Guide With Examples" loading="lazy" width="400" height="225" decoding="async">
+            <span class="related-card-category">Mind Manipulation</span>
             <a href="/mind-manipulation/manipulation-tactics/"><h3>Common Manipulation Tactics: A Research-Based Guide With Examples</h3></a>
+            <a class="related-card-open" href="/mind-manipulation/manipulation-tactics/">Open article <span aria-hidden="true">→</span></a>
         </article>
-        <article class="news-card">
+        <article class="news-card related-card">
             <img src="https://www.genzfrontir.com/news/mind-manipulation/images/dark-psychology-and-mind-control-header.webp" alt="Dark Psychology and Mind Control: What Is Real, What Is Not, and Why It Matters" loading="lazy" width="400" height="225" decoding="async">
+            <span class="related-card-category">Mind Manipulation</span>
             <a href="/mind-manipulation/dark-psychology-and-mind-control/"><h3>Dark Psychology and Mind Control: What Is Real, What Is Not, and Why It Matters</h3></a>
+            <a class="related-card-open" href="/mind-manipulation/dark-psychology-and-mind-control/">Open article <span aria-hidden="true">→</span></a>
         </article>
-        <article class="news-card">
-            <img src="https://www.genzfrontir.com/news/mind-manipulation/images/psychological-manipulation-vs-persuasion-header.webp" alt="Psychological Manipulation vs. Persuasion, Influence, and Coercion" loading="lazy" width="400" height="225" decoding="async">
-            <a href="/mind-manipulation/psychological-manipulation-vs-persuasion/"><h3>Psychological Manipulation vs. Persuasion, Influence, and Coercion</h3></a>
+        <article class="news-card related-card">
+            <img src="https://www.genzfrontir.com/news/mind-manipulation/images/guilt-tripping-vs-emotional-blackmail-header.webp" alt="Guilt-Tripping vs. Emotional Blackmail: What Is the Difference?" loading="lazy" width="400" height="225" decoding="async">
+            <span class="related-card-category">Mind Manipulation</span>
+            <a href="/mind-manipulation/guilt-tripping-vs-emotional-blackmail/"><h3>Guilt-Tripping vs. Emotional Blackmail: What Is the Difference?</h3></a>
+            <a class="related-card-open" href="/mind-manipulation/guilt-tripping-vs-emotional-blackmail/">Open article <span aria-hidden="true">→</span></a>
         </article></div></div>
     </section>
 
