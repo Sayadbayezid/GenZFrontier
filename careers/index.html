@@ -196,6 +196,9 @@
         .article-ad-label { display: block; margin-bottom: 10px; color: #777; font-size: 10px; letter-spacing: 0.14em; font-weight: 700; }
         .article-ad-slot .ad-slot-content { min-height: 50px; display: flex; justify-content: center; align-items: center; overflow: hidden; max-width: 100%; }
         .article-ad-slot .ad-slot-content iframe { max-width: 100%; border: 0; }
+        .category-ad-slot, .home-ad-slot { margin-top: 24px; margin-bottom: 28px; }
+        .category-ad-slot .ad-slot-content, .home-ad-slot .ad-slot-content { min-height: 50px; }
+        .category-ad-slot .article-ad-label, .home-ad-slot .article-ad-label { display: block; margin-bottom: 8px; }
         .ad-slot-native .ad-slot-content { min-height: 90px; }
         .ad-slot-tall .ad-slot-content { min-height: 600px; }
         .ad-slot-medium .ad-slot-content { min-height: 300px; }
@@ -203,7 +206,7 @@
         .ad-slot-banner-wide .ad-slot-content { min-height: 90px; }
         .ad-slot-rectangle .ad-slot-content { min-height: 250px; }
         .ad-slot-banner-medium .ad-slot-content { min-height: 60px; }
-        @media (max-width: 768px) { .desktop-only-ad { display: none !important; } .article-ad-slot { margin: 28px auto; padding-left: 8px; padding-right: 8px; } }
+        @media (max-width: 768px) { .desktop-only-ad { display: none !important; } .article-ad-slot { margin: 28px auto; padding-left: 8px; padding-right: 8px; } .category-ad-slot, .home-ad-slot { margin: 22px auto; } }
         .news-card { display: flex; flex-direction: column; }
         .news-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 12px; border-radius: 2px; }
         .news-card .tag { color: var(--primary-red); font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; }
@@ -343,7 +346,7 @@
         </article></div>
 
         <!-- Build-controlled single ad slot; Social Bar is intentionally excluded. -->
-        <aside class="article-ad-slot article-middle-ad ad-slot-medium desktop-only-ad" aria-label="Advertisement"><span class="article-ad-label">ADVERTISEMENT</span><div class="ad-slot-content"><script>atOptions = {'key' : '67ca660e991495fefe1690d338feda7c','format' : 'iframe','height' : 300,'width' : 160,'params' : {}};</script><script src="https://www.highperformanceformat.com/67ca660e991495fefe1690d338feda7c/invoke.js"></script></div></aside>
+        <aside data-ad-network="adsterra" data-ad-profile="medium-160x300" class="article-ad-slot category-ad-slot ad-slot-medium desktop-only-ad" aria-label="Advertisement"><span class="article-ad-label">ADVERTISEMENT</span><div class="ad-slot-content"><script>atOptions = {'key' : '67ca660e991495fefe1690d338feda7c','format' : 'iframe','height' : 300,'width' : 160,'params' : {}};</script><script src="https://www.highperformanceformat.com/67ca660e991495fefe1690d338feda7c/invoke.js"></script></div></aside>
 
     </section>
 
