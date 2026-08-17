@@ -134,11 +134,33 @@ def dedupe_articles(articles, exclude_url=""):
     return result
 
 def primary_entity_key(article):
-    """Prefer the entity named in the title or description; otherwise use the first stable key."""
+    """Return an entity only when it is explicitly named in title-level metadata."""
     haystack = normalize_text(f"{article.get('title', '')} {article.get('desc', '')}")
     keys = article.get("entity_keys", [])
-    ranked = sorted(keys, key=lambda key: (key not in haystack, -haystack.count(key), key))
+    ranked = sorted(
+        [key for key in keys if key in haystack],
+        key=lambda key: (-haystack.count(key), key)
+    )
     return ranked[0] if ranked else ""
+
+def topic_tokens(article):
+    words = set(normalize_text(f"{article.get('title', '')} {article.get('desc', '')}").split())
+    return words - ENTITY_STOPWORDS - {"vs", "what", "how", "when", "does", "become", "becomes"}
+
+def topic_label_for_article(article):
+    title = article.get("title", "").strip()
+    if len(title) > 62:
+        title = title[:59].rstrip() + "…"
+    return title or article.get("slug", "this topic").replace("-", " ").title()
+
+def related_topic_score(current, candidate):
+    overlap = topic_tokens(current).intersection(topic_tokens(candidate))
+    if not overlap:
+        return 0
+    score = len(overlap) * 12
+    if current.get("cat") == candidate.get("cat"):
+        score += 8
+    return score
 
 def related_entity_score(current, candidate):
     """Score only when both articles share the same primary title-level entity."""
@@ -154,13 +176,14 @@ def related_entity_score(current, candidate):
     score += min(12, len(current_words.intersection(candidate_words)) * 2)
     return score
 
-def render_related_cards(items):
+def render_related_cards(items, relation_label="Related article"):
     cards = ""
     for item in items:
         cards += f'''
         <article class="news-card related-card">
             <img src="{html.escape(item["img"], quote=True)}" alt="{html.escape(item["title"], quote=True)}" loading="lazy" width="400" height="225" decoding="async">
             <span class="related-card-category">{html.escape(item["cat"].replace("-", " ").title())}</span>
+            <span class="related-card-label">{html.escape(relation_label)}</span>
             <a href="{html.escape(item["href"], quote=True)}"><h3>{html.escape(item["title"])}</h3></a>
             <a class="related-card-open" href="{html.escape(item["href"], quote=True)}">Open article <span aria-hidden="true">→</span></a>
         </article>'''
@@ -211,6 +234,12 @@ CATEGORY_AD_PROFILES = {
 
 def category_ad_slot_html(category):
     return ad_slot_html(CATEGORY_AD_PROFILES.get(category, "native"), placement="category")
+
+def clean_canonical_reference(html_content, canonical_url):
+    """Render the publication canonical as a readable action link, not a raw URL."""
+    pattern = r'(<p><strong>Canonical URL:</strong>\s*)(https?://[^<\s]+)(\s*</p>)'
+    replacement = r'\1<a class="canonical-reference-link" href="' + html.escape(canonical_url, quote=True) + r'" rel="canonical">Open the canonical article page</a>\3'
+    return re.sub(pattern, replacement, html_content, flags=re.IGNORECASE)
 
 def add_avif_picture(html_content):
     """Wrap the first local WebP article image with an AVIF source and WebP fallback."""
@@ -531,34 +560,44 @@ for art in all_arts:
     with open(os.path.join(NEWS_DIR, art["cat"], art["file"].replace(".html", ".md")), "r", encoding="utf-8") as f:
         md_content = f.read()
     
-    entity_related = sorted(
-        [candidate for candidate in all_arts if candidate["url"] != art["url"]],
+    all_candidates = [candidate for candidate in all_arts if candidate["url"] != art["url"]]
+    entity_pool = sorted(
+        [candidate for candidate in all_candidates if related_entity_score(art, candidate) > 0],
         key=lambda candidate: (related_entity_score(art, candidate), candidate.get("date", "")),
         reverse=True
     )
-    entity_related = dedupe_articles(
-        [candidate for candidate in entity_related if related_entity_score(art, candidate) > 0],
-        exclude_url=art["url"]
-    )[:4]
-    fallback_candidates = dedupe_articles(
-        sorted(
-            [candidate for candidate in cat_arts[art["cat"]] if candidate["url"] != art["url"]],
-            key=lambda candidate: candidate.get("date", ""),
-            reverse=True
-        ) + [candidate for candidate in all_arts if candidate["url"] != art["url"]],
-        exclude_url=art["url"]
+    topic_pool = sorted(
+        [candidate for candidate in all_candidates if related_topic_score(art, candidate) > 0],
+        key=lambda candidate: (related_topic_score(art, candidate), candidate.get("date", "")),
+        reverse=True
     )
-    related_candidates = entity_related or fallback_candidates[:4]
-    if entity_related:
-        matched_entity = entity_display_name(primary_entity_key(art)) if art.get("entity_keys") else "this topic"
-        related_heading = f"More from {matched_entity}"
-        related_intro = f"Explore other GenZ Frontier articles connected to {matched_entity}."
+    fallback_candidates = sorted(
+        [candidate for candidate in cat_arts[art["cat"]] if candidate["url"] != art["url"]],
+        key=lambda candidate: candidate.get("date", ""),
+        reverse=True
+    ) + all_candidates
+    related_pool = dedupe_articles(entity_pool or topic_pool or fallback_candidates, exclude_url=art["url"])
+    related_cards = related_pool[:3]
+    next_related = related_pool[3] if len(related_pool) > 3 else (related_pool[0] if related_pool else None)
+    matched_entity = primary_entity_key(art)
+    if matched_entity:
+        related_heading = f"More from {entity_display_name(matched_entity)}"
+        related_intro = f"Explore other GenZ Frontier articles connected to {entity_display_name(matched_entity)}."
+        relation_label = "Same person or entity"
+    elif topic_pool:
+        related_heading = "More on This Topic"
+        related_intro = "Continue with closely related explainers and reporting from this topic cluster."
+        relation_label = "Related topic"
     else:
         related_heading = "Suggested For You"
-        related_intro = "More reporting and explainers selected from the same section and recent coverage."
-    related_html = f'<div class="related-section"><div class="section-header"><h2>{html.escape(related_heading)}</h2></div><p class="related-intro">{html.escape(related_intro)}</p><div class="grid-4">'
-    related_html += render_related_cards(related_candidates[:4])
-    related_html += '</div></div>'
+        related_intro = "Continue reading with carefully selected coverage from the same section."
+        relation_label = "From this section"
+    related_html = f'<div class="related-section"><div class="section-header"><h2>{html.escape(related_heading)}</h2></div><p class="related-intro">{html.escape(related_intro)}</p><div class="grid-3">'
+    related_html += render_related_cards(related_cards, relation_label)
+    related_html += '</div>'
+    if next_related:
+        related_html += f'''<div class="next-related-wrap"><span class="next-related-label">Next related article</span><a class="next-related-button" href="{html.escape(next_related["href"], quote=True)}"><span>{html.escape(topic_label_for_article(next_related))}</span><strong>Read next <span aria-hidden="true">→</span></strong></a></div>'''
+    related_html += '</div>'
 
     video_url = ""
     iframe_match = re.search(r'<iframe.*?src=["\'](.*?)["\']', md_content, re.IGNORECASE)
@@ -609,6 +648,7 @@ for art in all_arts:
 
     # Convert markdown to HTML
     article_html = md_parser.convert(md_content)
+    article_html = clean_canonical_reference(article_html, art["url"])
     # Source Markdown may retain historical SVG references; render optimized WebP instead.
     article_html = re.sub(r'(?P<prefix>/news/mind-manipulation/images/[^"\']+)\.svg(?P<suffix>["\'])', r'\g<prefix>.webp\g<suffix>', article_html, flags=re.IGNORECASE)
     article_html = add_avif_picture(article_html)
