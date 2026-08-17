@@ -51,6 +51,85 @@ def published_image_url(path):
         path = path[:-4] + ".webp"
     return absolute_url(path)
 
+# Article video media is intentionally scoped to the news tree. The builder
+# copies these files verbatim, validates that local references exist, and keeps
+# the browser-friendly source order WebM -> MP4 with an optional VTT track.
+VIDEO_MEDIA_EXTENSIONS = (".webm", ".mp4", ".m4v", ".vtt", ".ogv", ".ogg")
+VIDEO_MIME_TYPES = {
+    ".webm": "video/webm",
+    ".mp4": "video/mp4",
+    ".m4v": "video/mp4",
+    ".ogv": "video/ogg",
+    ".ogg": "video/ogg",
+}
+
+
+def copy_news_media():
+    """Copy supported news media to public/news and report invalid video assets."""
+    copied = 0
+    warnings = []
+    for root, _, files in os.walk(NEWS_DIR):
+        for file in files:
+            suffix = os.path.splitext(file)[1].lower()
+            if not (suffix in VIDEO_MEDIA_EXTENSIONS or suffix in (".svg", ".webp", ".avif", ".jpg", ".jpeg", ".png", ".gif")):
+                continue
+            src_file = os.path.join(root, file)
+            if suffix in VIDEO_MEDIA_EXTENSIONS and os.path.getsize(src_file) == 0:
+                warnings.append(f"empty video media skipped: {src_file}")
+                continue
+            dest_dir = os.path.join(OUTPUT_DIR, root)
+            os.makedirs(dest_dir, exist_ok=True)
+            shutil.copy2(src_file, os.path.join(dest_dir, file))
+            copied += 1
+    for warning in warnings:
+        print(f"VIDEO WARNING: {warning}")
+    print(f"Copied {copied} supported news media assets, including local video files.")
+
+
+def local_video_reference(path):
+    """Return a normalized site-relative media path for local video references."""
+    value = str(path or "").strip()
+    if not value or value.startswith(("http://", "https://", "//", "data:")):
+        return value
+    value = value.split("#", 1)[0].split("?", 1)[0]
+    if value.startswith("public/"):
+        value = "/" + value[len("public/"):]
+    elif not value.startswith("/"):
+        value = "/" + value
+    return value
+
+
+def validate_local_video_references(markdown_text):
+    """Warn about missing local video, poster, and caption files referenced by an article."""
+    references = re.findall(r'(?:src|poster)=["\']([^"\']+)["\']', markdown_text, flags=re.IGNORECASE)
+    references += re.findall(r'\[[^\]]*\]\(([^)]+)\)', markdown_text, flags=re.IGNORECASE)
+    for reference in references:
+        normalized = local_video_reference(reference)
+        if not normalized or normalized.startswith(("http://", "https://", "//", "data:")):
+            continue
+        suffix = os.path.splitext(normalized.split("?", 1)[0])[1].lower()
+        if suffix not in VIDEO_MEDIA_EXTENSIONS:
+            continue
+        source_path = os.path.join(os.getcwd(), normalized.lstrip("/"))
+        if not os.path.exists(source_path):
+            print(f"VIDEO WARNING: missing local media reference: {normalized}")
+
+
+def enhance_video_markup(article_html):
+    """Make inline article videos responsive and keyboard/mobile friendly."""
+    def enhance_opening(match):
+        tag = match.group(0)
+        if "playsinline" not in tag.lower():
+            tag = tag[:-1] + " playsinline>"
+        if "preload=" not in tag.lower():
+            tag = tag[:-1] + ' preload="metadata">'
+        if "aria-label=" not in tag.lower():
+            tag = tag[:-1] + ' aria-label="Article explainer video">'
+        return tag
+
+    article_html = re.sub(r"<video\b[^>]*>", enhance_opening, article_html, flags=re.IGNORECASE)
+    return article_html
+
 ENTITY_ALIASES = {
     "Sheikh Hasina": ["sheikh hasina", "hasina", "শেখ হাসিনা"],
     "Tarique Rahman": ["tarique rahman", "tarique", "তারেক রহমান"],
@@ -341,16 +420,9 @@ def clean_and_prepare():
     for f in ["index.html", "404.html", "contact.html", "about.html", "privacy-policy.html", "terms.html", "disclaimer.html", "cookie-policy.html", "submit-guest-post.html", "CNAME", "sitemap.xml", "robots.txt", "style.css", "favicon.ico", "2f91fd414fbc449ba9072df8cca9804a.txt"]:
         if os.path.exists(f): shutil.copy2(f, os.path.join(OUTPUT_DIR, f))
     
-    # 🚀 FIX: Copy all image files from 'news' directory to 'public/news'
-    for root, _, files in os.walk(NEWS_DIR):
-        for file in files:
-            # Check if the file is an image (handling both lowercase and uppercase extensions)
-            if file.lower().endswith(('.svg', '.webp', '.avif', '.jpg', '.jpeg', '.png', '.gif', '.mp4', '.webm', '.vtt')):
-                src_file = os.path.join(root, file)
-                dest_dir = os.path.join(OUTPUT_DIR, root) 
-                os.makedirs(dest_dir, exist_ok=True)
-                shutil.copy2(src_file, os.path.join(dest_dir, file))
-                
+    # Copy optimized images and article video media through one scoped path.
+    copy_news_media()
+
     # Handle Legacy Archives
     legacy_src = "legacy-archives"
     if os.path.exists(legacy_src):
@@ -602,13 +674,17 @@ for art in all_arts:
     video_url = ""
     iframe_match = re.search(r'<iframe.*?src=["\'](.*?)["\']', md_content, re.IGNORECASE)
     video_tag_match = re.search(r'<video.*?src=["\'](.*?)["\']', md_content, re.IGNORECASE)
-    direct_video_match = re.search(r'\[.*?\]\((.*?\.(mp4|webm|ogg))\)', md_content, re.IGNORECASE)
-    
+    source_video_match = re.search(r'<source.*?src=["\'](.*?\.(?:mp4|webm|m4v|ogv|ogg))["\']', md_content, re.IGNORECASE)
+    direct_video_match = re.search(r'\[.*?\]\((.*?\.(mp4|webm|m4v|ogv|ogg))\)', md_content, re.IGNORECASE)
+
     if iframe_match: video_url = iframe_match.group(1)
     elif video_tag_match: video_url = video_tag_match.group(1)
+    elif source_video_match: video_url = source_video_match.group(1)
     elif direct_video_match: video_url = direct_video_match.group(1)
-    
+
     if video_url and video_url.startswith("//"): video_url = "https:" + video_url
+    elif video_url and not video_url.startswith(("http://", "https://", "/")):
+        video_url = "/" + video_url
 
     safe_title = html.escape(art["title"], quote=True)
     safe_desc = html.escape(art["desc"], quote=True)
@@ -647,8 +723,10 @@ for art in all_arts:
     schema_data = f'<script type="application/ld+json">{schema_json}</script>'
 
     # Convert markdown to HTML
+    validate_local_video_references(md_content)
     article_html = md_parser.convert(md_content)
     article_html = clean_canonical_reference(article_html, art["url"])
+    article_html = enhance_video_markup(article_html)
     # Source Markdown may retain historical SVG references; render optimized WebP instead.
     article_html = re.sub(r'(?P<prefix>/news/mind-manipulation/images/[^"\']+)\.svg(?P<suffix>["\'])', r'\g<prefix>.webp\g<suffix>', article_html, flags=re.IGNORECASE)
     article_html = add_avif_picture(article_html)
