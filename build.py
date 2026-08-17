@@ -621,18 +621,25 @@ for art in all_arts:
     
     # User-approved ad policy: exclude Social Bar and choose exactly one banner
     # profile per substantive article. No header, footer, or stacked ad injection.
-    ads_enabled = art["cat"] != "mind-manipulation"
+    ads_enabled = True
     word_count = len(re.findall(r"\b\w+\b", md_content, flags=re.UNICODE))
     selected_profile = choose_article_ad_profile(art, word_count) if ads_enabled else ""
     article_ad_html = ad_slot_html(selected_profile) if selected_profile else ""
     article_desktop_ad_html = ""
     social_bar_html = ""
     paragraph_ends = list(re.finditer(r"</p>", article_html, flags=re.IGNORECASE))
-    # Short articles receive no ad. Substantive articles receive one selected
-    # unit only after the opening content, never directly beneath the header.
-    if article_ad_html and len(paragraph_ends) >= 4:
-        midpoint = paragraph_ends[max(1, (len(paragraph_ends) // 2) - 1)].end()
-        article_html = article_html[:midpoint] + article_ad_html + article_html[midpoint:]
+    # Every non-empty article receives one selected unit, but never before the
+    # title. Longer articles get a midpoint slot; short articles get the slot
+    # after their body so the header and opening remain uncluttered.
+    if article_ad_html:
+        if len(paragraph_ends) >= 4:
+            midpoint = paragraph_ends[max(1, (len(paragraph_ends) // 2) - 1)].end()
+            article_html = article_html[:midpoint] + article_ad_html + article_html[midpoint:]
+        elif len(paragraph_ends) >= 2:
+            insertion = paragraph_ends[0].end()
+            article_html = article_html[:insertion] + article_ad_html + article_html[insertion:]
+        elif article_html.strip():
+            article_html += article_ad_html
 
     # === Map Views to Article (New) ===
     article_path = art["href"]
