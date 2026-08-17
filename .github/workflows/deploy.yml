@@ -29,10 +29,16 @@ jobs:
       - name: Install Dependencies
         run: pip install markdown python-frontmatter google-analytics-data
 
+      - name: Snapshot Sitemap Before Build
+        run: cp sitemap.xml /tmp/sitemap-before-build.xml
+
       - name: Run Build Script (Markdown to HTML)
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         run: python build.py
+
+      - name: Submit Changed URLs to IndexNow
+        run: python scripts/indexnow_submit.py --sitemap sitemap.xml --previous-sitemap /tmp/sitemap-before-build.xml
 
       - name: Commit and Push Sitemap
         run: |
