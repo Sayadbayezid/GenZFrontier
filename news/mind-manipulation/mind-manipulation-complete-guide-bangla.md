@@ -1,5 +1,6 @@
 Title: How to Set Boundaries With an Emotional Manipulator: Positive and Negative Response Signs
 description: Learn how to set a safe boundary after emotional manipulation, recognize constructive and concerning responses, and choose support without escalating risk.
+slug: set-boundaries-after-emotional-manipulation
 image: /news/mind-manipulation/images/mind-manipulation-boundary-hero.webp
 date: July 5, 2026
 author: Sayad Md Bayezid Hosan

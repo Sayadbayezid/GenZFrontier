@@ -605,7 +605,8 @@ for root, _, files in os.walk(NEWS_DIR):
         output_file = file.replace(".md", ".html")
         title = meta.get("title", [file.replace(".md", "").title()])[0]
         description = meta.get("description", [""])[0]
-        canonical_slug = slug_from_filename(output_file, f"{title} {description}")
+        requested_slug = meta.get("slug", [""])[0].strip()
+        canonical_slug = sanitize_url(requested_slug).strip("/").lower() if requested_slug else slug_from_filename(output_file, f"{title} {description}")
         art = {
             "title": title,
             "file": output_file,
@@ -920,6 +921,17 @@ for art in all_arts:
     with open(legacy_path, "w", encoding="utf-8") as f:
         f.write(legacy_redirect)
 
+# Preserve the previous clean URL as a static redirect after a canonical slug change.
+legacy_clean_redirects = {
+    "/mind-manipulation/mind-manipulation-complete-guide-bangla/": "/mind-manipulation/set-boundaries-after-emotional-manipulation/",
+}
+for old_href, new_href in legacy_clean_redirects.items():
+    redirect_path = os.path.join(OUTPUT_DIR, old_href.lstrip("/"), "index.html")
+    os.makedirs(os.path.dirname(redirect_path), exist_ok=True)
+    new_url = urllib.parse.urljoin(BASE_URL, new_href.lstrip("/"))
+    redirect_html = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="canonical" href="{new_url}"><meta http-equiv="refresh" content="0; url={new_href}"><title>Article moved</title></head><body><p>This article moved to <a href="{new_href}">{new_url}</a>.</p></body></html>'''
+    with open(redirect_path, "w", encoding="utf-8") as f:
+        f.write(redirect_html)
 with open(os.path.join(OUTPUT_DIR, INDEX_FILE), "w", encoding="utf-8") as f:
     home_html = index_template.replace("{{HERO_SECTION}}", hero_html).replace("{{DYNAMIC_CONTENT}}", dyn_html).replace("{{BREAKING_NEWS_TICKER}}", ticker)
     home_html = ensure_image_alt_attributes(normalize_html_links(home_html), "GenZ Frontier")
