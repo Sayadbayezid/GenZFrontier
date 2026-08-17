@@ -62,6 +62,32 @@ VIDEO_MIME_TYPES = {
     ".ogv": "video/ogg",
     ".ogg": "video/ogg",
 }
+FIRST_PARTY_MEDIA_PREFIXES = ("/news/", "/mind-manipulation/")
+FIRST_PARTY_MEDIA_HOSTS = {"genzfrontir.com", "www.genzfrontir.com"}
+
+
+def is_first_party_media_url(value):
+    """Allow only same-domain or site-relative article media URLs."""
+    normalized = str(value or "").strip()
+    if not normalized or normalized.startswith(("#", "data:")):
+        return False
+    if normalized.startswith("/"):
+        return normalized.startswith(FIRST_PARTY_MEDIA_PREFIXES)
+    parsed = urllib.parse.urlparse(normalized)
+    return parsed.scheme in ("http", "https") and parsed.netloc.lower() in FIRST_PARTY_MEDIA_HOSTS and parsed.path.startswith(FIRST_PARTY_MEDIA_PREFIXES)
+
+
+def validate_first_party_video_markup(markdown_text):
+    """Reject third-party native video sources, captions, and posters at build time."""
+    video_blocks = re.findall(r"<video\b[^>]*>.*?</video>", markdown_text, flags=re.IGNORECASE | re.DOTALL)
+    media_values = []
+    for block in video_blocks:
+        media_values.extend(re.findall(r'(?:src|poster)=["\']([^"\']+)["\']', block, flags=re.IGNORECASE))
+    media_values.extend(re.findall(r'\[[^\]]*\]\(([^)]+?\.(?:webm|mp4|m4v|ogv|ogg|vtt))(?:\?[^)]*)?\)', markdown_text, flags=re.IGNORECASE))
+    violations = [value for value in media_values if not is_first_party_media_url(value)]
+    if violations:
+        unique = sorted(set(violations))
+        raise ValueError("Third-party video media is not allowed; use GenZ Frontier URLs only: " + ", ".join(unique))
 
 
 def copy_news_media():
@@ -101,6 +127,7 @@ def local_video_reference(path):
 
 def validate_local_video_references(markdown_text):
     """Warn about missing local video, poster, and caption files referenced by an article."""
+    validate_first_party_video_markup(markdown_text)
     references = re.findall(r'(?:src|poster)=["\']([^"\']+)["\']', markdown_text, flags=re.IGNORECASE)
     references += re.findall(r'\[[^\]]*\]\(([^)]+)\)', markdown_text, flags=re.IGNORECASE)
     for reference in references:
