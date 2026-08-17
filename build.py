@@ -345,7 +345,7 @@ def clean_and_prepare():
     for root, _, files in os.walk(NEWS_DIR):
         for file in files:
             # Check if the file is an image (handling both lowercase and uppercase extensions)
-            if file.lower().endswith(('.svg', '.webp', '.avif', '.jpg', '.jpeg', '.png', '.gif')):
+            if file.lower().endswith(('.svg', '.webp', '.avif', '.jpg', '.jpeg', '.png', '.gif', '.mp4', '.webm', '.vtt')):
                 src_file = os.path.join(root, file)
                 dest_dir = os.path.join(OUTPUT_DIR, root) 
                 os.makedirs(dest_dir, exist_ok=True)
