@@ -145,6 +145,16 @@
         .article-middle-ad { margin: 34px 0; padding: 14px 16px 18px; border: 1px solid #E7E7E7; border-radius: 8px; background: #FAFAFA; text-align: center; clear: both; }
         .article-ad-label { display: block; margin-bottom: 10px; color: #777; font-size: 10px; letter-spacing: 0.14em; font-weight: 700; }
         .article-middle-ad__content { min-height: 90px; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .article-ad-slot { margin: 34px auto; padding: 14px 16px 18px; border: 1px solid #E7E7E7; border-radius: 8px; background: #FAFAFA; text-align: center; clear: both; max-width: 100%; }
+        .article-ad-slot .ad-slot-content { min-height: 50px; display: flex; justify-content: center; align-items: center; overflow: hidden; max-width: 100%; }
+        .article-ad-slot .ad-slot-content iframe { max-width: 100%; border: 0; }
+        .ad-slot-native .ad-slot-content { min-height: 90px; }
+        .ad-slot-tall .ad-slot-content { min-height: 600px; }
+        .ad-slot-medium .ad-slot-content { min-height: 300px; }
+        .ad-slot-banner-small .ad-slot-content { min-height: 50px; }
+        .ad-slot-banner-wide .ad-slot-content { min-height: 90px; }
+        .ad-slot-rectangle .ad-slot-content { min-height: 250px; }
+        .ad-slot-banner-medium .ad-slot-content { min-height: 60px; }
         .article-table-wrap { width: 100%; margin: 28px 0 34px; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; border: 1px solid #E4E4E4; border-radius: 8px; background: #FFF; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
         .article-table-wrap:focus-visible { outline: 3px solid rgba(180, 35, 50, 0.35); outline-offset: 3px; }
         .article-content table { width: 100%; min-width: 680px; border-collapse: collapse; table-layout: auto; font-size: 16px; line-height: 1.45; }
@@ -152,7 +162,7 @@
         .article-content th { background: #F7F7F7; color: #171717; font-weight: 750; white-space: nowrap; }
         .article-content tbody tr:nth-child(even) { background: #FCFCFC; }
         .article-content tbody tr:hover { background: #FFF5F5; }
-        @media (max-width: 768px) { .desktop-only-ad { display: none !important; } .article-middle-ad { margin: 28px -4px; } }
+        @media (max-width: 768px) { .desktop-only-ad { display: none !important; } .article-middle-ad, .article-ad-slot { margin: 28px -4px; } .article-ad-slot { padding-left: 8px; padding-right: 8px; } }
         .article-content h1 { font-size: 42px; line-height: 1.1; margin-bottom: 25px; font-weight: bold; color: #000; }
         .article-content p { font-size: 19px; margin-bottom: 25px; line-height: 1.6; color: #333; }
         .article-content a { color: #B42332; font-weight: 600; text-decoration-line: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; text-decoration-color: rgba(180, 35, 50, 0.45); transition: color 0.2s ease, text-decoration-color 0.2s ease; }
@@ -297,16 +307,7 @@
 <h3>'৬৯-এর গণ-আন্দোলন ও বঙ্গবন্ধু</h3>
 <p>’৬৯-এর গণ-আন্দোলনে যদি তোফায়েল আহমেদ না থাকতেন, যদি বঙ্গবন্ধুকে পাকিস্তানের কারাগার থেকে না বের করে আনতে পারতাম, বঙ্গবন্ধু যদি ’৬৯-এ মুক্তি না পেতেন, আইয়ুব খানের বিদায় না হতো, তাহলে আজ বাংলাদেশ হতো না। পাকিস্তানের পর ’৫২-এর ভাষা আন্দোলন, তারপর ’৫৪ সালে নির্বাচন হয়েছিল এবং ’৬২-তে শিক্ষা কমিশন—এসব আন্দোলন মুক্তিযুদ্ধের ভিত। বিশেষ করে ’৬৯-এর ২২ ফেব্রুয়ারি বঙ্গবন্ধুকে পাকিস্তানের কারাগার থেকে আমরা বের করে এনেছিলাম। সেই আন্দোলনের নেতা ছিলেন মহানায়ক তোফায়েল আহমেদ। আজ কোনো বিতর্কিত কথায় যেতে ইচ্ছা করছে না।</p>
 <h3>রক্ষীবাহিনী ও রাজনৈতিক ষড়যন্ত্র</h3>
-<p>তোফায়েল আহমেদের জানাজায় আমি যেতে চেয়েছিলাম, শুনছি আজ মাগরিবের পরে জানাজা হবে। এটা আরেকটা ব্যর্থতা, বেদনার। তোফায়েল আহমেদ রক্ষীবাহিনী দেখাশোনা করতেন, এটা পরে শুনেছি। বঙ্গবন্ধু মারা যাওয়ার আগে কোনো দিনও শুনিনি যে রক্ষীবাহিনীর নেতৃত্ব দিয়েছেন মহানায়ক তোফায়েল আহমেদ। পরে অনেকে অনেক ইনিয়ে-বিনিয়ে অনেক কথা বলেছেন।</p>
-            <!-- Adsterra Native Banner: article-middle placement -->
-            <aside class="article-middle-ad" aria-label="Advertisement">
-                <span class="article-ad-label">ADVERTISEMENT</span>
-                <div class="article-middle-ad__content">
-                    <script async="async" data-cfasync="false" src="https://pl30308054.effectivecpmnetwork.com/ec56a821de60d9845e8059349f970dbf/invoke.js"></script>
-                    <div id="container-ec56a821de60d9845e8059349f970dbf"></div>
-                </div>
-            </aside>
-    
+<p>তোফায়েল আহমেদের জানাজায় আমি যেতে চেয়েছিলাম, শুনছি আজ মাগরিবের পরে জানাজা হবে। এটা আরেকটা ব্যর্থতা, বেদনার। তোফায়েল আহমেদ রক্ষীবাহিনী দেখাশোনা করতেন, এটা পরে শুনেছি। বঙ্গবন্ধু মারা যাওয়ার আগে কোনো দিনও শুনিনি যে রক্ষীবাহিনীর নেতৃত্ব দিয়েছেন মহানায়ক তোফায়েল আহমেদ। পরে অনেকে অনেক ইনিয়ে-বিনিয়ে অনেক কথা বলেছেন।</p><aside class="article-ad-slot article-middle-ad ad-slot-banner-wide desktop-only-ad" aria-label="Advertisement"><span class="article-ad-label">ADVERTISEMENT</span><div class="ad-slot-content"><script>atOptions = {'key' : '408a580368a45b8ea139e174fa740252','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};</script><script src="https://www.highperformanceformat.com/408a580368a45b8ea139e174fa740252/invoke.js"></script></div></aside>
 <p>আমাদের দেশে যাঁরা সফল হন, যাঁরা বড় ভূমিকা নেন, তাঁদের পক্ষে অজস্র মানুষ থাকে, বিপক্ষেও অনেক শক্তি থাকে। তোফায়েল আহমেদেরও তেমনি ছিল। নানাজন তাঁকে নাজেহাল করার চেষ্টা করেছিল। একটা কথা আমি শুনেছি, রক্ষীবাহিনী গিয়েছিল তাঁর হুকুম চাইতে। যুদ্ধে সব সময় হুকুম লাগে না। তোফায়েল আহমেদ হুকুম দিলেই রক্ষীবাহিনী একদম ঝাঁপিয়ে পড়ত? কি করেছিল রক্ষীবাহিনী? কিন্তু ঝাঁপিয়ে পড়েনি। আর রক্ষীবাহিনীর অস্ত্র নিজেদের ঘরে রাখা হয়নি। রাখা হয়েছিল পিলখানায়। অন্যের অস্ত্রাগারে অস্ত্র রেখে কোনো যোদ্ধা যুদ্ধ করতে পারেন না।</p>
 <p>আমার কাছে মনে হয়েছে, বঙ্গবন্ধু তো শারীরিকভাবে নিহত হয়েছিলেন, তাঁর সহকর্মীদের রাজনৈতিকভাবে হত্যা করার উদ্দেশ্যে শত্রুপক্ষ তোফায়েল আহমেদের বিরুদ্ধে এ রকম অভিযোগ এনেছিল। ’৭৫-এর ঘটনার প্রতিবাদের জন্য কারো তেমন অনুমতির প্রয়োজন হয়, এটা একটা বানানো কথা।</p>
 <h3>ব্যক্তিগত স্মৃতি ও শ্রদ্ধাঞ্জলি</h3>

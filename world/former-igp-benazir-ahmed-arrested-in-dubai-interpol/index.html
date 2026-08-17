@@ -145,6 +145,16 @@
         .article-middle-ad { margin: 34px 0; padding: 14px 16px 18px; border: 1px solid #E7E7E7; border-radius: 8px; background: #FAFAFA; text-align: center; clear: both; }
         .article-ad-label { display: block; margin-bottom: 10px; color: #777; font-size: 10px; letter-spacing: 0.14em; font-weight: 700; }
         .article-middle-ad__content { min-height: 90px; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .article-ad-slot { margin: 34px auto; padding: 14px 16px 18px; border: 1px solid #E7E7E7; border-radius: 8px; background: #FAFAFA; text-align: center; clear: both; max-width: 100%; }
+        .article-ad-slot .ad-slot-content { min-height: 50px; display: flex; justify-content: center; align-items: center; overflow: hidden; max-width: 100%; }
+        .article-ad-slot .ad-slot-content iframe { max-width: 100%; border: 0; }
+        .ad-slot-native .ad-slot-content { min-height: 90px; }
+        .ad-slot-tall .ad-slot-content { min-height: 600px; }
+        .ad-slot-medium .ad-slot-content { min-height: 300px; }
+        .ad-slot-banner-small .ad-slot-content { min-height: 50px; }
+        .ad-slot-banner-wide .ad-slot-content { min-height: 90px; }
+        .ad-slot-rectangle .ad-slot-content { min-height: 250px; }
+        .ad-slot-banner-medium .ad-slot-content { min-height: 60px; }
         .article-table-wrap { width: 100%; margin: 28px 0 34px; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; border: 1px solid #E4E4E4; border-radius: 8px; background: #FFF; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
         .article-table-wrap:focus-visible { outline: 3px solid rgba(180, 35, 50, 0.35); outline-offset: 3px; }
         .article-content table { width: 100%; min-width: 680px; border-collapse: collapse; table-layout: auto; font-size: 16px; line-height: 1.45; }
@@ -152,7 +162,7 @@
         .article-content th { background: #F7F7F7; color: #171717; font-weight: 750; white-space: nowrap; }
         .article-content tbody tr:nth-child(even) { background: #FCFCFC; }
         .article-content tbody tr:hover { background: #FFF5F5; }
-        @media (max-width: 768px) { .desktop-only-ad { display: none !important; } .article-middle-ad { margin: 28px -4px; } }
+        @media (max-width: 768px) { .desktop-only-ad { display: none !important; } .article-middle-ad, .article-ad-slot { margin: 28px -4px; } .article-ad-slot { padding-left: 8px; padding-right: 8px; } }
         .article-content h1 { font-size: 42px; line-height: 1.1; margin-bottom: 25px; font-weight: bold; color: #000; }
         .article-content p { font-size: 19px; margin-bottom: 25px; line-height: 1.6; color: #333; }
         .article-content a { color: #B42332; font-weight: 600; text-decoration-line: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; text-decoration-color: rgba(180, 35, 50, 0.45); transition: color 0.2s ease, text-decoration-color 0.2s ease; }
@@ -301,16 +311,7 @@
 * <strong>ঘোষিত সম্পদ:</strong> বেনজীর তার দাখিল করা সম্পদ বিবরণীতে ৬ কোটি ৪৫ লাখ ৩৭ হাজার ৩৬৫ টাকার স্থাবর এবং ৫ কোটি ৭৪ লাখ ৮৯ হাজার ৯৬৬ টাকার অস্থাবর সম্পদের ঘোষণা দিয়েছিলেন।
 * <strong>তদন্তে প্রাপ্ত সম্পদ:</strong> কিন্তু দুদকের নিবিড় তদন্তে তার নামে ৭ কোটি ৫২ লাখ ৬৮ হাজার ৯৮৭ টাকার স্থাবর এবং ৮ কোটি ১৫ লাখ ৩১ হাজার ২৬৪ টাকার অস্থাবর সম্পদের গোপন তথ্য বেরিয়ে আসে।
 * <strong>অবৈধ সম্পদের পরিমাণ:</strong> তদন্তে মোট ১৫ কোটি ৬৮ লাখ টাকার সম্পদ অর্জনের প্রমাণ পাওয়া গেলেও তার বৈধ আয়ের উৎস ছিল মাত্র ৬ কোটি ৫৯ লাখ ৪২ হাজার ৬৬৮ টাকা। পারিবারিক ও অন্যান্য ব্যয় বাদ দিলে তার নিট সঞ্চয় দাঁড়ায় ৪ কোটি ৬৩ লাখ ৫৬ হাজার ৬৭৫ টাকা। হিসাব অনুযায়ী, তার জ্ঞাত আয়বহির্ভূত সম্পদের পরিমাণ ১১ কোটি ৪ লাখ ৪৩ হাজার ৫৭৬ টাকা।</p>
-<p>অভিযোগপত্রে আরও উল্লেখ করা হয়, ক্ষমতার অপব্যবহার করে অর্জিত এসব অর্থের অবৈধ উৎস, প্রকৃতি ও মালিকানা গোপন করতে তিনি বিভিন্ন ব্যাংক হিসাব, ব্যবসাপ্রতিষ্ঠান ও যৌথ মূলধনি প্রতিষ্ঠানে তা বিনিয়োগ, স্থানান্তর ও রূপান্তর করেছেন।</p>
-            <!-- Adsterra Native Banner: article-middle placement -->
-            <aside class="article-middle-ad" aria-label="Advertisement">
-                <span class="article-ad-label">ADVERTISEMENT</span>
-                <div class="article-middle-ad__content">
-                    <script async="async" data-cfasync="false" src="https://pl30308054.effectivecpmnetwork.com/ec56a821de60d9845e8059349f970dbf/invoke.js"></script>
-                    <div id="container-ec56a821de60d9845e8059349f970dbf"></div>
-                </div>
-            </aside>
-    
+<p>অভিযোগপত্রে আরও উল্লেখ করা হয়, ক্ষমতার অপব্যবহার করে অর্জিত এসব অর্থের অবৈধ উৎস, প্রকৃতি ও মালিকানা গোপন করতে তিনি বিভিন্ন ব্যাংক হিসাব, ব্যবসাপ্রতিষ্ঠান ও যৌথ মূলধনি প্রতিষ্ঠানে তা বিনিয়োগ, স্থানান্তর ও রূপান্তর করেছেন।</p><aside class="article-ad-slot article-middle-ad ad-slot-banner-wide desktop-only-ad" aria-label="Advertisement"><span class="article-ad-label">ADVERTISEMENT</span><div class="ad-slot-content"><script>atOptions = {'key' : '408a580368a45b8ea139e174fa740252','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};</script><script src="https://www.highperformanceformat.com/408a580368a45b8ea139e174fa740252/invoke.js"></script></div></aside>
 <h3>⚖️ বিচারিক কার্যক্রম ও পরোয়ানা</h3>
 <p>গত ৮ মার্চ আদালত মামলার অভিযোগপত্র আমলে নিয়ে সাবেক এই ক্ষমতাধর আইজিপির বিরুদ্ধে গ্রেফতারি পরোয়ানা জারি করেন। এরপর গত ৩ মে বেনজীর আহমেদের বিরুদ্ধে অভিযোগ গঠনের মধ্য দিয়ে এই চাঞ্চল্যকর মামলার আনুষ্ঠানিক বিচারকাজ শুরু হয়। পলাতক অবস্থাতেই তার অনুপস্থিতিতে বিচারকার্য চলছিলো। </p>
 <h3>🚔 ক্ষমতা, প্রভাব ও আন্তর্জাতিক নিষেধাজ্ঞা</h3>

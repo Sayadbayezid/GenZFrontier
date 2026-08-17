@@ -145,6 +145,16 @@
         .article-middle-ad { margin: 34px 0; padding: 14px 16px 18px; border: 1px solid #E7E7E7; border-radius: 8px; background: #FAFAFA; text-align: center; clear: both; }
         .article-ad-label { display: block; margin-bottom: 10px; color: #777; font-size: 10px; letter-spacing: 0.14em; font-weight: 700; }
         .article-middle-ad__content { min-height: 90px; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .article-ad-slot { margin: 34px auto; padding: 14px 16px 18px; border: 1px solid #E7E7E7; border-radius: 8px; background: #FAFAFA; text-align: center; clear: both; max-width: 100%; }
+        .article-ad-slot .ad-slot-content { min-height: 50px; display: flex; justify-content: center; align-items: center; overflow: hidden; max-width: 100%; }
+        .article-ad-slot .ad-slot-content iframe { max-width: 100%; border: 0; }
+        .ad-slot-native .ad-slot-content { min-height: 90px; }
+        .ad-slot-tall .ad-slot-content { min-height: 600px; }
+        .ad-slot-medium .ad-slot-content { min-height: 300px; }
+        .ad-slot-banner-small .ad-slot-content { min-height: 50px; }
+        .ad-slot-banner-wide .ad-slot-content { min-height: 90px; }
+        .ad-slot-rectangle .ad-slot-content { min-height: 250px; }
+        .ad-slot-banner-medium .ad-slot-content { min-height: 60px; }
         .article-table-wrap { width: 100%; margin: 28px 0 34px; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; border: 1px solid #E4E4E4; border-radius: 8px; background: #FFF; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
         .article-table-wrap:focus-visible { outline: 3px solid rgba(180, 35, 50, 0.35); outline-offset: 3px; }
         .article-content table { width: 100%; min-width: 680px; border-collapse: collapse; table-layout: auto; font-size: 16px; line-height: 1.45; }
@@ -152,7 +162,7 @@
         .article-content th { background: #F7F7F7; color: #171717; font-weight: 750; white-space: nowrap; }
         .article-content tbody tr:nth-child(even) { background: #FCFCFC; }
         .article-content tbody tr:hover { background: #FFF5F5; }
-        @media (max-width: 768px) { .desktop-only-ad { display: none !important; } .article-middle-ad { margin: 28px -4px; } }
+        @media (max-width: 768px) { .desktop-only-ad { display: none !important; } .article-middle-ad, .article-ad-slot { margin: 28px -4px; } .article-ad-slot { padding-left: 8px; padding-right: 8px; } }
         .article-content h1 { font-size: 42px; line-height: 1.1; margin-bottom: 25px; font-weight: bold; color: #000; }
         .article-content p { font-size: 19px; margin-bottom: 25px; line-height: 1.6; color: #333; }
         .article-content a { color: #B42332; font-weight: 600; text-decoration-line: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; text-decoration-color: rgba(180, 35, 50, 0.45); transition: color 0.2s ease, text-decoration-color 0.2s ease; }
@@ -296,16 +306,7 @@
 <p>বিজ্ঞানীরা বহু বছর ধরেই এই ধারণা করে আসছিলেন যে, অন্যান্য পরিযায়ী পাখি বা প্রাণীর মতো কবুতরও পথ চেনার জন্য মূলত পৃথিবীর চৌম্বক ক্ষেত্র বা ম্যাগনেটিক ফিল্ডের সাহায্য নিয়ে থাকে। পৃথিবীর উত্তর ও দক্ষিণ মেরুর চৌম্বকীয় টানকে অনুভব করে এরা নিজেদের মস্তিষ্কে একটি অদৃশ্য ম্যাপ তৈরি করে নেয়। কিন্তু প্রশ্ন ছিল— শরীরের ঠিক কোন অঙ্গের মাধ্যমে তারা এই চৌম্বকীয় সংকেত ধরতে পারে? </p>
 <p>কেউ কেউ ধারণা করতেন কবুতরের চোখের রেটিনায় এই সেন্সর রয়েছে, আবার কারও ধারণা ছিল তাদের ঠোঁটের উপরিভাগে থাকা কোনো স্নায়ু হয়তো এই কাজ করে। তবে অতীতের সব ধারণাকে ভুল প্রমাণ করে জার্মানির ইউনিভার্সিটি অব বন (University of Bonn) এবং ম্যাক্স প্ল্যাঙ্ক ইনস্টিটিউট অব অ্যানিমেল বিহেভিয়ারের (Max Planck Institute of Animal Behavior) একদল গবেষক এবার এ বিষয়ে একেবারে অকাট্য ও যুগান্তকারী প্রমাণ খুঁজে পেয়েছেন।</p>
 <h3>মস্তিষ্ক বা চোখ নয়, কম্পাস লুকিয়ে আছে যকৃতে!</h3>
-<p>ম্যাক্স প্ল্যাঙ্ক ইনস্টিটিউটের পরিচালক ও প্রধান বিজ্ঞানী মার্টিন উইকেলস্কি এই আবিষ্কার সম্পর্কে অত্যন্ত চমকপ্রদ তথ্য দিয়েছেন। তিনি বলেন, “পাখিদের পথ চেনার এই অসামান্য সক্ষমতাকে আমরা এত দিন তাদের কেবলই সহজাত প্রবৃত্তি, বংশগত বৈশিষ্ট্য বা মনের কোনো বিশেষ অনুভূতি বলে ভাবতাম। কিন্তু আমাদের সাম্প্রতিক গবেষণা প্রমাণ করেছে যে, এর পেছনে অত্যন্ত চমৎকার এবং সুনির্দিষ্ট ভৌত ও বৈজ্ঞানিক ভিত্তি রয়েছে।”</p>
-            <!-- Adsterra Native Banner: article-middle placement -->
-            <aside class="article-middle-ad" aria-label="Advertisement">
-                <span class="article-ad-label">ADVERTISEMENT</span>
-                <div class="article-middle-ad__content">
-                    <script async="async" data-cfasync="false" src="https://pl30308054.effectivecpmnetwork.com/ec56a821de60d9845e8059349f970dbf/invoke.js"></script>
-                    <div id="container-ec56a821de60d9845e8059349f970dbf"></div>
-                </div>
-            </aside>
-    
+<p>ম্যাক্স প্ল্যাঙ্ক ইনস্টিটিউটের পরিচালক ও প্রধান বিজ্ঞানী মার্টিন উইকেলস্কি এই আবিষ্কার সম্পর্কে অত্যন্ত চমকপ্রদ তথ্য দিয়েছেন। তিনি বলেন, “পাখিদের পথ চেনার এই অসামান্য সক্ষমতাকে আমরা এত দিন তাদের কেবলই সহজাত প্রবৃত্তি, বংশগত বৈশিষ্ট্য বা মনের কোনো বিশেষ অনুভূতি বলে ভাবতাম। কিন্তু আমাদের সাম্প্রতিক গবেষণা প্রমাণ করেছে যে, এর পেছনে অত্যন্ত চমৎকার এবং সুনির্দিষ্ট ভৌত ও বৈজ্ঞানিক ভিত্তি রয়েছে।”</p><aside class="article-ad-slot article-middle-ad ad-slot-native" aria-label="Advertisement"><span class="article-ad-label">ADVERTISEMENT</span><div class="ad-slot-content"><script async="async" data-cfasync="false" src="https://pl30308054.effectivecpmnetwork.com/ec56a821de60d9845e8059349f970dbf/invoke.js"></script><div id="container-ec56a821de60d9845e8059349f970dbf"></div></div></aside>
 <p>সবচেয়ে অবাক করার মতো বিষয় হলো, বিজ্ঞানীরা জানিয়েছেন কবুতরের এই অভ্যন্তরীণ কম্পাসটি তাদের মস্তিষ্ক, চোখ বা ঠোঁটে নয়, বরং লুকিয়ে আছে তাদের লিভার বা যকৃতের একেবারে গভীর কোষে! গবেষণায় দেখা গেছে, কবুতরের লিভারে প্রচুর পরিমাণে আয়রন বা লৌহকণা সঞ্চিত থাকে। আর এই আয়রনই তাদের দিক নির্ণয়ের মূল হাতিয়ার হিসেবে কাজ করে।</p>
 <h3>ম্যাক্রোফেজ: রোগ প্রতিরোধের কোষ যখন পথপ্রদর্শক</h3>
 <p>গবেষণায় অত্যন্ত নিবিড়ভাবে পরীক্ষা করে দেখা গেছে, কবুতরের লিভারে থাকা বিশেষ একধরনের কোষ এই পথ চেনার কাজে প্রধান ভূমিকা পালন করে। এই কোষগুলোকে জীববিজ্ঞানের ভাষায় বলা হয় ‘ম্যাক্রোফেজ’ (Macrophage)। সাধারণত প্রাণিদেহে ম্যাক্রোফেজ হলো একধরনের বিশেষ শ্বেত রক্তকণিকা বা রোগ প্রতিরোধক্ষমতা–সম্পন্ন কোষ (Immune cells), যাদের মূল কাজ হলো শরীরের ভেতরের ক্ষতিকর ব্যাকটেরিয়া, ভাইরাস বা মৃত কোষগুলোকে ধ্বংস করা। </p>

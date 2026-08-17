@@ -145,6 +145,16 @@
         .article-middle-ad { margin: 34px 0; padding: 14px 16px 18px; border: 1px solid #E7E7E7; border-radius: 8px; background: #FAFAFA; text-align: center; clear: both; }
         .article-ad-label { display: block; margin-bottom: 10px; color: #777; font-size: 10px; letter-spacing: 0.14em; font-weight: 700; }
         .article-middle-ad__content { min-height: 90px; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .article-ad-slot { margin: 34px auto; padding: 14px 16px 18px; border: 1px solid #E7E7E7; border-radius: 8px; background: #FAFAFA; text-align: center; clear: both; max-width: 100%; }
+        .article-ad-slot .ad-slot-content { min-height: 50px; display: flex; justify-content: center; align-items: center; overflow: hidden; max-width: 100%; }
+        .article-ad-slot .ad-slot-content iframe { max-width: 100%; border: 0; }
+        .ad-slot-native .ad-slot-content { min-height: 90px; }
+        .ad-slot-tall .ad-slot-content { min-height: 600px; }
+        .ad-slot-medium .ad-slot-content { min-height: 300px; }
+        .ad-slot-banner-small .ad-slot-content { min-height: 50px; }
+        .ad-slot-banner-wide .ad-slot-content { min-height: 90px; }
+        .ad-slot-rectangle .ad-slot-content { min-height: 250px; }
+        .ad-slot-banner-medium .ad-slot-content { min-height: 60px; }
         .article-table-wrap { width: 100%; margin: 28px 0 34px; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; border: 1px solid #E4E4E4; border-radius: 8px; background: #FFF; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
         .article-table-wrap:focus-visible { outline: 3px solid rgba(180, 35, 50, 0.35); outline-offset: 3px; }
         .article-content table { width: 100%; min-width: 680px; border-collapse: collapse; table-layout: auto; font-size: 16px; line-height: 1.45; }
@@ -152,7 +162,7 @@
         .article-content th { background: #F7F7F7; color: #171717; font-weight: 750; white-space: nowrap; }
         .article-content tbody tr:nth-child(even) { background: #FCFCFC; }
         .article-content tbody tr:hover { background: #FFF5F5; }
-        @media (max-width: 768px) { .desktop-only-ad { display: none !important; } .article-middle-ad { margin: 28px -4px; } }
+        @media (max-width: 768px) { .desktop-only-ad { display: none !important; } .article-middle-ad, .article-ad-slot { margin: 28px -4px; } .article-ad-slot { padding-left: 8px; padding-right: 8px; } }
         .article-content h1 { font-size: 42px; line-height: 1.1; margin-bottom: 25px; font-weight: bold; color: #000; }
         .article-content p { font-size: 19px; margin-bottom: 25px; line-height: 1.6; color: #333; }
         .article-content a { color: #B42332; font-weight: 600; text-decoration-line: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; text-decoration-color: rgba(180, 35, 50, 0.45); transition: color 0.2s ease, text-decoration-color 0.2s ease; }
@@ -295,16 +305,7 @@
 <hr />
 <h2>জন্ম ও শিক্ষাজীবন</h2>
 <p>কবির পুরো নাম হিশাম আল মুজাহিদী। ১৯৪৩ সালে টাঙ্গাইল জেলার নারুচি গ্রামে তিনি জন্মগ্রহণ করেন। মেধা ও মননে তিনি ছোটবেলা থেকেই ছিলেন অনন্য। </p>
-<p>শিক্ষাজীবনে তিনি দেশের সর্বোচ্চ বিদ্যাপীঠ ঢাকা বিশ্ববিদ্যালয় থেকে বাংলা সাহিত্য এবং সমাজবিজ্ঞান—উভয় বিষয়ে মাস্টার্স ডিগ্রি অর্জন করেন। প্রাতিষ্ঠানিক শিক্ষার পাশাপাশি তিনি বহুমাত্রিক জ্ঞানে সমৃদ্ধ ছিলেন। মাতৃভাষা বাংলার পাশাপাশি ইংরেজি, উর্দু এবং হিন্দিতে অনর্গল বক্তৃতা প্রদানে তাঁর অসামান্য দক্ষতা ও পাণ্ডিত্য ছিল।</p>
-            <!-- Adsterra Native Banner: article-middle placement -->
-            <aside class="article-middle-ad" aria-label="Advertisement">
-                <span class="article-ad-label">ADVERTISEMENT</span>
-                <div class="article-middle-ad__content">
-                    <script async="async" data-cfasync="false" src="https://pl30308054.effectivecpmnetwork.com/ec56a821de60d9845e8059349f970dbf/invoke.js"></script>
-                    <div id="container-ec56a821de60d9845e8059349f970dbf"></div>
-                </div>
-            </aside>
-    
+<p>শিক্ষাজীবনে তিনি দেশের সর্বোচ্চ বিদ্যাপীঠ ঢাকা বিশ্ববিদ্যালয় থেকে বাংলা সাহিত্য এবং সমাজবিজ্ঞান—উভয় বিষয়ে মাস্টার্স ডিগ্রি অর্জন করেন। প্রাতিষ্ঠানিক শিক্ষার পাশাপাশি তিনি বহুমাত্রিক জ্ঞানে সমৃদ্ধ ছিলেন। মাতৃভাষা বাংলার পাশাপাশি ইংরেজি, উর্দু এবং হিন্দিতে অনর্গল বক্তৃতা প্রদানে তাঁর অসামান্য দক্ষতা ও পাণ্ডিত্য ছিল।</p><aside class="article-ad-slot article-middle-ad ad-slot-rectangle" aria-label="Advertisement"><span class="article-ad-label">ADVERTISEMENT</span><div class="ad-slot-content"><script>atOptions = {'key' : 'f6e57b56ca931a8024e4741fa8b443ea','format' : 'iframe','height' : 250,'width' : 300,'params' : {}};</script><script src="https://www.highperformanceformat.com/f6e57b56ca931a8024e4741fa8b443ea/invoke.js"></script></div></aside>
 <hr />
 <h2>বর্ণাঢ্য কর্মজীবন ও মহান মুক্তিযুদ্ধ</h2>
 <p>আল মুজাহিদী কেবল একজন কলমযোদ্ধাই ছিলেন না, তিনি ছিলেন রণাঙ্গনের অকুতোভয় বীর মুক্তিযোদ্ধা। ১৯৭১ সালের মহান মুক্তিযুদ্ধে তিনি সক্রিয়ভাবে অংশগ্রহণ করেন এবং দেশের স্বাধীনতার জন্য লড়াই করেন। </p>
