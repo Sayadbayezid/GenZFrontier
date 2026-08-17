@@ -402,7 +402,13 @@ def ad_slot_html(profile_name, placement="article"):
         "rectangle-300x250": '''<aside class="article-ad-slot article-middle-ad ad-slot-rectangle" aria-label="Advertisement"><span class="article-ad-label">ADVERTISEMENT</span><div class="ad-slot-content"><script>atOptions = {'key' : 'f6e57b56ca931a8024e4741fa8b443ea','format' : 'iframe','height' : 250,'width' : 300,'params' : {}};</script><script src="https://www.highperformanceformat.com/f6e57b56ca931a8024e4741fa8b443ea/invoke.js"></script></div></aside>''',
         "banner-468x60": '''<aside class="article-ad-slot article-middle-ad ad-slot-banner-medium desktop-only-ad" aria-label="Advertisement"><span class="article-ad-label">ADVERTISEMENT</span><div class="ad-slot-content"><script>atOptions = {'key' : 'f6678c6f84bf003f94564ce757f58307','format' : 'iframe','height' : 60,'width' : 468,'params' : {}};</script><script src="https://www.highperformanceformat.com/f6678c6f84bf003f94564ce757f58307/invoke.js"></script></div></aside>''',
     }
-    return wrappers.get(profile_name, wrappers["native"])
+    slot = wrappers.get(profile_name, wrappers["native"])
+    if placement == "category":
+        slot = slot.replace("article-middle-ad", "category-ad-slot")
+    elif placement == "home":
+        slot = slot.replace("article-middle-ad", "home-ad-slot")
+    slot = slot.replace('<aside class="article-ad-slot', f'<aside data-ad-network="adsterra" data-ad-profile="{html.escape(profile_name, quote=True)}" class="article-ad-slot')
+    return slot
 
 def choose_article_ad_profile(article, word_count):
     """Choose one format per article; long articles can receive desktop-only formats."""
