@@ -219,6 +219,11 @@ def normalize_html_links(content):
     return content
 
 
+def normalize_title_tag(match):
+    title_text = re.sub(r"\s+", " ", match.group(1)).strip()
+    return f'<title>{html.escape(shorten_seo_title(title_text), quote=False)}</title>'
+
+
 def normalize_static_page(path):
     """Add baseline SEO metadata and heading structure to copied static pages."""
     filename = os.path.basename(path)
@@ -229,7 +234,7 @@ def normalize_static_page(path):
     description = html.escape(STATIC_PAGE_DESCRIPTIONS.get(filename, default_description), quote=True)
     if not re.search(r'<meta\s+[^>]*name=["\']description["\']', content, flags=re.IGNORECASE):
         content = re.sub(r'(<meta\s+charset=["\'][^>]+>)', r'\1\n    <meta name="description" content="' + description + '">', content, count=1, flags=re.IGNORECASE)
-    content = re.sub(r'<title>(.*?)</title>', lambda m: f'<title>{html.escape(shorten_seo_title(re.sub(r"\s+", " ", m.group(1)).strip()), quote=False)}</title>', content, count=1, flags=re.IGNORECASE | re.DOTALL)
+    content = re.sub(r'<title>(.*?)</title>', normalize_title_tag, content, count=1, flags=re.IGNORECASE | re.DOTALL)
     if not re.search(r'<h1\b', content, flags=re.IGNORECASE):
         heading = html.escape(Path(filename).stem.replace("-", " ").title())
         content = content.replace("<body>", f'<body>\n<main><h1>{heading}</h1></main>', 1)
