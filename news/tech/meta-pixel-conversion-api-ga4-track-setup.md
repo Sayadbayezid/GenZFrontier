@@ -1,17 +1,18 @@
 Title: Meta Pixel, Conversions API, GA4 & Microsoft Clarity: Complete A–Z Tracking Setup Guide
 
 Description: Meta Pixel + Conversions API + GA4 + Microsoft Clarity — from Sandbox Testing to Production Deployment
-Image: /images/metapixel.jps
-Website analytics শুধু একটি tracking script বসিয়ে শেষ হয়ে যায় না।
+Image: https://genzfrontir.com/news/images/73971B14-FD52-47F2-82A6-F66B20EA2ACF.jpeg
 
-একটি production website-এ marketing attribution, conversion measurement, behavioural analytics এবং server-side event delivery সঠিকভাবে করতে হলে প্রথমে একটি পরিষ্কার event architecture, তারপর browser tracking, server tracking, validation, deduplication, privacy controls এবং production monitoring তৈরি করতে হয়।
+# Website analytics শুধু একটি tracking script বসিয়ে শেষ হয়ে যায় না।
 
+## একটি production website-এ marketing attribution, conversion measurement, behavioural analytics এবং server-side event delivery সঠিকভাবে করতে হলে প্রথমে একটি পরিষ্কার event architecture, তারপর browser tracking, server tracking, validation, deduplication, privacy controls এবং production monitoring তৈরি করতে হয়।
+![workflwo](https://www.genzfrontir.com/news/images/858F9F98-1020-4159-A852-9B2CDD51BA5C.jpeg)
 এই guide-এ আমরা একটি বাস্তব developer workflow অনুসরণ করব:
 
 Planning → Sandbox → Event Schema → Meta Pixel → Meta Conversions API → Deduplication → GA4 → Measurement Protocol → Microsoft Clarity → Validation → Debugging → Privacy → Production
 
 এই guide-এর লক্ষ্য হলো:
-
+[Introduced](news/images/C4F68971-5B14-44CC-8BD6-9EA82E80EB3A.jpeg)
 একজন developer যেন শুধু copy-paste tutorial অনুসরণ না করে বুঝতে পারে কোন data কোথায় যাচ্ছে, কেন যাচ্ছে, কীভাবে validate করতে হবে এবং production-এ tracking ভুল হলে কীভাবে diagnose করতে হবে।
 
 ⸻
@@ -95,7 +96,7 @@ Table of Contents
 * privacy এবং consent requirements বিবেচনা করা
 
 ⸻
-
+[Meta Pixel, CAPI, GA4](https://www.genzfrontir.com/news/images/F0B15FA1-919B-4242-9EF4-58333BA8EFA0.jpeg)
 2. কেন Meta Pixel, CAPI, GA4 এবং Clarity একসঙ্গে?
 
 চারটি tool একই কাজ করে না।
