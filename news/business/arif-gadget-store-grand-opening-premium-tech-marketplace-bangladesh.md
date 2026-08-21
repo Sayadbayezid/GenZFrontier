@@ -47,7 +47,7 @@ There is also an important reporting distinction. The live homepage currently sh
 
 ## The developer case study: where the real story sits
 
-The public case-study index on [Sayad Md Bayezid Hosan’s portfolio](https://sayadbayezid.com/case-studies/) describes the Arif Gadgets project as a mobile-first commerce platform with a live catalogue, product galleries, cart and checkout, payments, courier booking, order tracking, customer accounts, printable invoices, analytics, margin arithmetic, a stock ledger, inventory alerts, customer operations, and Bangla documentation.[2] The supplied archive expands that description into a detailed implementation narrative.
+The official [Arif Gadgets case study by Sayad Md Bayezid Hosan](https://sayadbayezid.com/case-studies/arif-gadgets.html) describes the project as a mobile-first commerce platform with a live catalogue, product galleries, cart and checkout, payments, courier booking, order tracking, customer accounts, printable invoices, analytics, margin arithmetic, a stock ledger, inventory alerts, customer operations, and Bangla documentation.[2] The full case study expands that description into a detailed implementation narrative for readers who want to inspect the architecture and delivery decisions directly.
 
 The interesting point is not simply that a stack was selected. It is that the stack was chosen around the shop’s constraints. The case study describes a React and TypeScript frontend, a Hono-based API running on Cloudflare Workers, Cloudflare D1 for relational data, R2 for product photographs, KV for selected caching needs, Pages for the web build, and GitHub Actions for the delivery pipeline. The archive also identifies integrations or payment instructions for Steadfast Courier, bKash, Nagad, Rocket, bank transfer, and cash on delivery.
 
@@ -200,7 +200,7 @@ For developers, the public work is documented at [Sayad Bayezid’s case-study i
 ## References
 
 [1]: https://arifgadget.store/ "Arif Gadgets — live storefront and public business information"
-[2]: https://sayadbayezid.com/case-studies/ "Sayad Md Bayezid Hosan — public case-study index"
+[2]: https://sayadbayezid.com/case-studies/arif-gadgets.html "Arif Gadgets — official case study by Sayad Md Bayezid Hosan"
 [3]: https://smartgentools.com/tools/ "SmartGenTools — public free tools directory"
 [4]: https://connectwithbayezid.it.com/ "SmartFlow AI — public automation product page"
 [5]: https://sayadbayezid.com/ "Sayad Md Bayezid Hosan — public portfolio"
