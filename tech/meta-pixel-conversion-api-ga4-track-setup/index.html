@@ -323,15 +323,16 @@
         </div>
 
         <article class="article-content">
-            <h1>Meta Pixel, Conversions API, GA4 &amp; Microsoft Clarity: Complete A–Z Tracking Setup Guide</h1>
-<p>Description: Meta Pixel + Conversions API + GA4 + Microsoft Clarity — from Sandbox Testing to Production Deployment
-Image: /images/metapixel.jps
-Website analytics শুধু একটি tracking script বসিয়ে শেষ হয়ে যায় না।</p>
-<p>একটি production website-এ marketing attribution, conversion measurement, behavioural analytics এবং server-side event delivery সঠিকভাবে করতে হলে প্রথমে একটি পরিষ্কার event architecture, তারপর browser tracking, server tracking, validation, deduplication, privacy controls এবং production monitoring তৈরি করতে হয়।</p>
-<p>এই guide-এ আমরা একটি বাস্তব developer workflow অনুসরণ করব:</p>
+            <p>Description: Meta Pixel + Conversions API + GA4 + Microsoft Clarity — from Sandbox Testing to Production Deployment
+Image: https://genzfrontir.com/news/images/73971B14-FD52-47F2-82A6-F66B20EA2ACF.jpeg</p>
+<h1>Website analytics শুধু একটি tracking script বসিয়ে শেষ হয়ে যায় না।</h1>
+<h2>একটি production website-এ marketing attribution, conversion measurement, behavioural analytics এবং server-side event delivery সঠিকভাবে করতে হলে প্রথমে একটি পরিষ্কার event architecture, তারপর browser tracking, server tracking, validation, deduplication, privacy controls এবং production monitoring তৈরি করতে হয়।</h2>
+<p><img alt="workflwo" src="https://www.genzfrontir.com/news/images/858F9F98-1020-4159-A852-9B2CDD51BA5C.jpeg" />
+এই guide-এ আমরা একটি বাস্তব developer workflow অনুসরণ করব:</p>
 <p>Planning → Sandbox → Event Schema → Meta Pixel → Meta Conversions API → Deduplication → GA4 → Measurement Protocol → Microsoft Clarity → Validation → Debugging → Privacy → Production</p>
-<p>এই guide-এর লক্ষ্য হলো:</p>
-<p>একজন developer যেন শুধু copy-paste tutorial অনুসরণ না করে বুঝতে পারে কোন data কোথায় যাচ্ছে, কেন যাচ্ছে, কীভাবে validate করতে হবে এবং production-এ tracking ভুল হলে কীভাবে diagnose করতে হবে।</p>
+<p>এই guide-এর লক্ষ্য হলো:
+<a href="news/images/C4F68971-5B14-44CC-8BD6-9EA82E80EB3A.jpeg">Introduced</a>
+একজন developer যেন শুধু copy-paste tutorial অনুসরণ না করে বুঝতে পারে কোন data কোথায় যাচ্ছে, কেন যাচ্ছে, কীভাবে validate করতে হবে এবং production-এ tracking ভুল হলে কীভাবে diagnose করতে হবে।</p>
 <p>⸻</p>
 <p>Table of Contents</p>
 <ol>
@@ -410,10 +411,9 @@ Website analytics শুধু একটি tracking script বসিয়ে শ�
 <li>sensitive credentials browser-এ না পাঠানো</li>
 <li>privacy এবং consent requirements বিবেচনা করা</li>
 </ul>
-<p>⸻</p>
-<ol>
-<li>কেন Meta Pixel, CAPI, GA4 এবং Clarity একসঙ্গে?</li>
-</ol>
+<p>⸻
+<a href="https://www.genzfrontir.com/news/images/F0B15FA1-919B-4242-9EF4-58333BA8EFA0.jpeg">Meta Pixel, CAPI, GA4</a>
+2. কেন Meta Pixel, CAPI, GA4 এবং Clarity একসঙ্গে?</p>
 <p>চারটি tool একই কাজ করে না।</p>
 <p>Tool    Primary Purpose
 Meta Pixel  Meta advertising-এর জন্য browser-side events
@@ -1032,7 +1032,7 @@ Backend</p>
 <ol>
 <li>Unified Event Mapping</li>
 </ol>
-<p>এখন চারটি system একসঙ্গে map করি।</p><aside data-ad-network="adsterra" data-ad-profile="banner-468x60" class="article-ad-slot article-middle-ad ad-slot-banner-medium desktop-only-ad" aria-label="Advertisement"><span class="article-ad-label">ADVERTISEMENT</span><div class="ad-slot-content"><script>atOptions = {'key' : 'f6678c6f84bf003f94564ce757f58307','format' : 'iframe','height' : 60,'width' : 468,'params' : {}};</script><script src="https://www.highperformanceformat.com/f6678c6f84bf003f94564ce757f58307/invoke.js"></script></div></aside>
+<p>এখন চারটি system একসঙ্গে map করি।</p>
 <p>Business Action Internal    Meta    GA4 Clarity
 Page visit  page_view   PageView    page_view   Session
 Product view    product_view    ViewContent view_item   Behaviour
@@ -1041,7 +1041,7 @@ Cart    cart_add    AddToCart   add_to_cart Behaviour
 Checkout    checkout_start  InitiateCheckout    begin_checkout  Behaviour
 Purchase    purchase    Purchase    purchase    Behaviour
 Signup  signup  CompleteRegistration    sign_up Behaviour
-Lead    lead    Lead    generate_lead   Behaviour</p>
+Lead    lead    Lead    generate_lead   Behaviour</p><aside data-ad-network="adsterra" data-ad-profile="banner-468x60" class="article-ad-slot article-middle-ad ad-slot-banner-medium desktop-only-ad" aria-label="Advertisement"><span class="article-ad-label">ADVERTISEMENT</span><div class="ad-slot-content"><script>atOptions = {'key' : 'f6678c6f84bf003f94564ce757f58307','format' : 'iframe','height' : 60,'width' : 468,'params' : {}};</script><script src="https://www.highperformanceformat.com/f6678c6f84bf003f94564ce757f58307/invoke.js"></script></div></aside>
 <p>Clarity-এর ক্ষেত্রে প্রতিটি action-কে GA4/Meta-এর মতো revenue attribution event হিসেবে ভাবার প্রয়োজন নেই। এটি মূলত behavioural context দেয়।</p>
 <p>⸻</p>
 <ol>
