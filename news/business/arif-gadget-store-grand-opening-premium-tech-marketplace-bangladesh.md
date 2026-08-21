@@ -1,6 +1,7 @@
 ---
 description: Arif Gadget Store’s grand opening introduces a premium tech marketplace for Bangladesh, combining retail and reseller shopping with cash on delivery, courier delivery, order tracking, inventory controls, and a developer-built commerce system.
 image: https://www.genzfrontir.com/news/business/images/arif-gadget-store-grand-opening.webp
+
 date: August 21, 2026
 author: GenZ Frontier Business Desk
 breaking: false
