@@ -1,11 +1,11 @@
 ---
 description: Arif Gadget Store’s grand opening introduces a premium tech marketplace for Bangladesh, combining retail and reseller shopping with cash on delivery, courier delivery, order tracking, inventory controls, and a developer-built commerce system.
-image: /news/business/images/arif-gadget-store-grand-opening.webp
+image: https://www.genzfrontir.com/news/business/images/arif-gadget-store-grand-opening.webp
 date: August 21, 2026
 author: GenZ Frontier Business Desk
 breaking: false
 
-![Arif Gadget Store grand-opening cover](images/arif-gadget-store-grand-opening.webp)
+![Arif Gadget Store grand-opening cover](https://www.genzfrontir.com/news/business/images/arif-gadget-store-grand-opening.webp)
 
 # Arif Gadget Store’s Grand Opening Signals a More Serious Way to Buy Tech Online in Bangladesh
 
@@ -31,7 +31,7 @@ The homepage’s central message combines product breadth with transaction reass
 
 The public site also exposes practical customer-service routes. The footer identifies **Ariful Islam** as the owner and provides a Savar, Dhaka location, two telephone numbers, a public email address, a Facebook page, WhatsApp contact, order tracking, and links to delivery, warranty, refund, return, privacy, payment, and pre-order policies.[1] A buyer can therefore move from discovery to support without having to hunt for a contact channel inside a social-media comment thread.
 
-![Arif Gadget Store welcome banner showing the navy-and-orange marketplace visual system, product categories, search, shopping actions, and trust strip.](images/arif-gadget-store-welcome-banner.png)
+![Arif Gadget Store welcome banner showing the navy-and-orange marketplace visual system, product categories, search, shopping actions, and trust strip.](https://www.genzfrontir.com/news/business/images/arif-gadget-store-welcome-banner.png)
 
 *Image 1 — The welcome banner: the supplied case-study capture shows the brand’s dark navy and orange-gold language, a search-led header, clear category navigation, two primary actions, and a trust strip that surfaces genuine products, cash on delivery, returns, and delivery speed. The screenshot is a design reference supplied with the case study; live product counts can change.*
 
@@ -53,7 +53,7 @@ The interesting point is not simply that a stack was selected. It is that the st
 
 In practical terms, that architecture aims to keep the storefront and the administrative system close to the same source of truth. The browser displays the shop, while the API and database remain responsible for pricing, order calculations, delivery state, stock movements, customer data, and operational permissions. The archive describes the system as a low-running-cost design at the shop’s volume, but that statement should be read as a project-specific implementation note, not a universal guarantee for every online retailer.
 
-![Architecture diagram showing shoppers and staff flowing through a Cloudflare Pages and Worker layer to D1, R2, KV, courier, payment, and GitHub Actions services.](images/arif-gadget-store-architecture.svg)
+![Architecture diagram showing shoppers and staff flowing through a Cloudflare Pages and Worker layer to D1, R2, KV, courier, payment, and GitHub Actions services.](https://www.genzfrontir.com/news/business/images/arif-gadget-store-architecture.svg)
 
 *Image 2 — The architecture map: a clean, navy-and-orange system diagram explains how the storefront, staff dashboard, database, product photographs, courier integration, payment instructions, and deployment pipeline relate to one another. It also calls out integer-based poisha accounting and an explicit taka-conversion boundary for courier communication.*
 
@@ -73,7 +73,7 @@ The case study also describes two distinct identifiers for each order: an order 
 
 The project’s pricing logic is similarly operational. The case study says the browser sends product identifiers and quantities, while the server resolves the current price and any applicable quantity tier. That means the final calculation is not based on a price the browser is allowed to invent. It also says that monetary values are stored as integer poisha rather than floating-point numbers, so the cart, invoice, courier amount, and profit report can share the same arithmetic basis.
 
-![Cart screen showing live quantity-based pricing, making the one-piece and reseller pathways visible in the same shopping flow.](images/arif-gadget-store-volume-pricing.png)
+![Cart screen showing live quantity-based pricing, making the one-piece and reseller pathways visible in the same shopping flow.](https://www.genzfrontir.com/news/business/images/arif-gadget-store-volume-pricing.png)
 
 *Image 3 — The volume-pricing cart: this supplied capture illustrates the distinction between a normal cart and an operational commerce cart. Quantity changes are reflected in the pricing tier, allowing a small reseller to see the commercial effect of ordering more than one unit. The values shown are demonstration data, not the client’s private trading figures.*
 
@@ -85,7 +85,7 @@ The product table puts cost, price, margin, stock, stock value, status, and edit
 
 The archive is careful to say that the revenue, margin, stock, and order figures shown in the screenshots were generated through demonstration orders and a demonstration dataset. They are the system’s own calculations, but they are **not Arif Gadgets’ private trading figures**. That distinction is essential for honest promotion. The platform can be praised for making those calculations possible without pretending that a screenshot is a financial statement.
 
-![Admin product table showing product, category, cost, price, margin, stock, stock value, status, and edit controls.](images/arif-gadget-store-product-margins.png)
+![Admin product table showing product, category, cost, price, margin, stock, stock value, status, and edit controls.](https://www.genzfrontir.com/news/business/images/arif-gadget-store-product-margins.png)
 
 *Image 4 — The product economics view: a staff-facing table turns the catalogue into a decision surface. The visual hierarchy makes margin and stock value easy to scan while preserving direct edit actions. Every quantity and price visible in this supplied capture is demonstration data.*
 
@@ -97,7 +97,7 @@ That matters in a gadget shop because inventory problems are rarely just arithme
 
 The inventory screen is described as ranking restocking priorities by capital tied up. That is a more useful question than simply asking which item has the lowest count. A product with two units left may be inexpensive, while another product with ten units left may represent much more money tied up in stock. The dashboard is therefore designed to help the owner decide where the next purchase should go.
 
-![Admin stock-ledger dialog showing inventory movements as a traceable history rather than a single editable number.](images/arif-gadget-store-stock-ledger.png)
+![Admin stock-ledger dialog showing inventory movements as a traceable history rather than a single editable number.](https://www.genzfrontir.com/news/business/images/arif-gadget-store-stock-ledger.png)
 
 *Image 5 — The stock ledger: this individual capture represents the audit trail behind the product count. Its purpose is accountability—showing the reason and resulting balance for a movement—rather than merely displaying a green or red stock badge.*
 
@@ -109,7 +109,7 @@ The archive says courier status is treated as an external authority: delivered m
 
 The case study also calls out the taka-versus-poisha conversion boundary. Arif Gadgets’ system counts money internally in poisha, while the courier expects taka. The conversion is kept explicit so a unit error cannot silently multiply a collection amount. The dashboard is also described as distinguishing missing keys, rejected keys, courier errors, and unreachable services instead of showing one vague “failed” message.
 
-![Courier panel showing staff-controlled delivery actions and status context rather than an opaque automatic dispatch.](images/arif-gadget-store-courier-panel.png)
+![Courier panel showing staff-controlled delivery actions and status context rather than an opaque automatic dispatch.](https://www.genzfrontir.com/news/business/images/arif-gadget-store-courier-panel.png)
 
 *Image 6 — The courier panel: the design keeps dispatch under staff control, makes the collection amount visible before confirmation, and treats returned or unresolved delivery states differently from completed deliveries.*
 
@@ -121,11 +121,11 @@ That phone-first approach is more than a responsive layout checkbox. If a large 
 
 The staff side receives a parallel accessibility decision. The archive says the dashboard includes a Bangla handbook that explains the meaning of order states, product photography guidance, courier statuses, and common connection problems. Documentation in the language used by the people operating the shop is a practical form of product design. It reduces hand-offs to the developer and helps the business remain usable after launch.
 
-![Mobile home capture showing how the marketplace compresses the search, category, trust, and shopping pathway for a phone screen.](images/arif-gadget-store-mobile-home.png)
+![Mobile home capture showing how the marketplace compresses the search, category, trust, and shopping pathway for a phone screen.](https://www.genzfrontir.com/news/business/images/arif-gadget-store-mobile-home.png)
 
 *Image 7 — The mobile storefront: the individual phone capture focuses on the first-screen journey, where a shopper needs to understand the shop, search or browse, and reach the cart or tracking path without navigating a desktop-style layout.*
 
-![Bangla admin guide capture showing in-product documentation for the people who operate the store.](images/arif-gadget-store-bangla-guide.png)
+![Bangla admin guide capture showing in-product documentation for the people who operate the store.](https://www.genzfrontir.com/news/business/images/arif-gadget-store-bangla-guide.png)
 
 *Image 8 — The Bangla guide: this capture shows documentation treated as part of the product, not an afterthought. The guide is intended to explain the operational meaning of the dashboard, including product handling and order workflows.*
 
