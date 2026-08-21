@@ -1,7 +1,7 @@
 Title: Meta Pixel, Conversions API, GA4 & Microsoft Clarity: Complete A–Z Tracking Setup Guide
 
 Description: Meta Pixel + Conversions API + GA4 + Microsoft Clarity — from Sandbox Testing to Production Deployment
-Image: "https://genzfrontir.com/news/images/73971B14-FD52-47F2-82A6-F66B20EA2ACF.jpeg"
+Image: [https://genzfrontir.com/news/images/73971B14-FD52-47F2-82A6-F66B20EA2ACF.jpeg]
 
 # Website analytics শুধু একটি tracking script বসিয়ে শেষ হয়ে যায় না।
 
