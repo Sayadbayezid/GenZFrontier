@@ -42,7 +42,7 @@ For a deeper explanation of the workflow, read the [Google Maps lead generation 
 
 The phrase âGoogle Maps lead scraperâ is often used for several different types of tools. Some browser extensions detect tables and export CSV files. Some web-scraping platforms support visual extraction, APIs, scheduling, and cloud processing. Some sales-intelligence products provide contact databases, lead scoring, and sales sequences.
 
-A focused lead-research workflow serves a different purpose. It helps a team define a market, find public businesses, apply a verification rule, prepare a reviewable outreach batch, and organize the result in a spreadsheet.
+A focused lead-research workflow serves a different purpose. The [NexusLeads dashboard](https://leads.sayadbayezid.com/) helps a team define a market, find public businesses, apply a verification rule, prepare a reviewable outreach batch, and organize the result in a spreadsheet. For the underlying [Google Sheets export workflow](https://sayadbayezid.com/blog/google-maps-lead-generation-google-sheets/), see the detailed guide on discovery, verification, and selected-row sync.
 
 | Business goal | Tool category to evaluate | Important questions |
 |---|---|---|
@@ -96,7 +96,7 @@ It means that the record passed the stated quality condition. Clear wording make
 
 A useful spreadsheet can separate factual lead data from proposed communication.
 
-The **Leads** tab may include business name, category, location, website, public phone, public email signal, verification status, source link, and notes. The **Outreach** tab may include the selected lead, campaign angle, draft message, channel, review status, and next action.
+The **Leads** tab may include business name, category, location, website, public phone, public email signal, verification status, source link, and notes. The **Outreach** tab may include the selected lead, campaign angle, draft message, channel, review status, and next action. This two-tab model is demonstrated in the [NexusLeads Google Sheets workflow](https://sayadbayezid.com/blog/google-maps-lead-generation-google-sheets/), while the live [Boyok Lead Collector](https://leads.sayadbayezid.com/) provides the product entry point.
 
 This structure makes it easier to review a record before contacting the business. It also prevents a generated draft from being mistaken for an approved message.
 
@@ -122,7 +122,7 @@ Local marketing teams can use Google Sheets to assign businesses, track territor
 
 Real-estate teams, property managers, contractors, and related companies often operate by geography. A territory-based workflow can help identify businesses for partnerships, referrals, or service expansion while keeping location context visible.
 
-## NexusLeads pricing and plan considerations
+## [NexusLeads](https://leads.sayadbayezid.com/) pricing and plan considerations
 
 Pricing should be evaluated against the entire workflow, not only the number displayed on a pricing page. A low-cost extractor may still require manual cleaning, spreadsheet setup, verification, deduplication, and message preparation.
 
@@ -144,7 +144,7 @@ The most useful pricing question is not âWhich plan is cheapest?â It i
 
 ## Privacy and responsible outreach
 
-A privacy-conscious workflow should explain what it collects and what it does not access. The NexusLeads product page states that it searches public business information and does not access private account data. It also states that the tool prepares email and WhatsApp drafts rather than sending messages automatically.
+A privacy-conscious workflow should explain what it collects and what it does not access. The [NexusLeads product page](https://leads.sayadbayezid.com/) states that it searches public business information and does not access private account data. It also states that the tool prepares email and WhatsApp drafts rather than sending messages automatically.
 
 Users should still follow applicable privacy, anti-spam, marketing, platform, and data-protection requirements. Public business information can be incomplete or outdated, and public availability does not automatically mean that every type of contact is appropriate.
 
@@ -193,7 +193,7 @@ Google Maps lead generation works best when it is treated as a decision-making w
 
 For agencies, freelancers, local growth teams, and technical founders, the real advantage is not simply finding more businesses. It is creating a repeatable path from **keyword and location** to **relevant, reviewable, and responsibly organized prospects**.
 
-**Recommended CTA:** [Read the complete Google Maps lead generation to Google Sheets guide](https://sayadbayezid.com/blog/google-maps-lead-generation-google-sheets/) or [try the NexusLeads dashboard](https://leads.sayadbayezid.com/).
+**Recommended CTA:** [Read the complete Google Maps lead generation to Google Sheets guide](https://sayadbayezid.com/blog/google-maps-lead-generation-google-sheets/), [try the NexusLeads dashboard](https://leads.sayadbayezid.com/), or explore the [Boyok Lead Collector workflow](https://leads.sayadbayezid.com/).
 
 ## Publishing and CTR recommendations
 
@@ -207,6 +207,8 @@ The header image URL in this draft is a recommended Genz Frontier asset path. Up
 
 ## References
 
-[1]: [NexusLeads official product page](https://leads.sayadbayezid.com/)
-[2]: [Google Maps lead generation to Google Sheets guide](https://sayadbayezid.com/blog/google-maps-lead-generation-google-sheets/)
-[3]: [Genz Frontier](https://genzfrontir.com/google-maps-lead-generation-workflow/)
+[1]: https://leads.sayadbayezid.com/ "NexusLeads and Boyok Lead Collector official product page"
+[2]: https://sayadbayezid.com/blog/google-maps-lead-generation-google-sheets/ "Google Maps lead generation to Google Sheets guide"
+[3]: https://genzfrontir.com/ "Genz Frontier"
+
+> **Link-validity note:** The singular `https://lead.sayadbayezid.com/` hostname did not resolve during validation. The canonical live product URL is `https://leads.sayadbayezid.com/`. No separate public API URL was verified, so API-related wording links to the product page rather than inventing an endpoint.
