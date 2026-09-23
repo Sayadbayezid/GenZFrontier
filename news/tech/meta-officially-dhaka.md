@@ -5,7 +5,7 @@ Date: September 24, 2026
 Author: Sayad Md Bayezid Hosan 
 Breaking: Yes
 
-[GenZ Frontier News Header](/news/tech/images/IMG_0939.jpeg)
+![GenZ Frontier News Header](/news/tech/images/IMG_0939.jpeg)
 
 # **The Silicon Delta: Meta’s Strategic Expansion and the Gen Z Digital Frontier in Bangladesh**
 **নিজেশ্ব প্রতিবেদন | September 24, 2026**
