@@ -1,11 +1,11 @@
 Title: The Silicon Delta: Meta’s Strategic Expansion and the Gen Z Digital Frontier in Bangladesh 
 Description: Meta is in high-level diplomatic talks to open an operational hub in Dhaka, promising major impacts for local e-commerce, cybersecurity, and the booming Gen Z creator economy. 
-Image:  /news/tech/images/IMG_0939.jpeg
+Image: https://www.genzfrontir.com/news/tech/images/IMG_0939.jpeg
 Date: September 24, 2026 
 Author: Sayad Md Bayezid Hosan 
 Breaking: Yes
 
-[GenZ Frontier News Header](/news/tech/images/IMG_0939.jpeg)
+[GenZ Frontier News Header](https://www.genzfrontir.com/news/tech/images/IMG_0939.jpeg)
 
 # **The Silicon Delta: Meta’s Strategic Expansion and the Gen Z Digital Frontier in Bangladesh**
 **নিজেশ্ব প্রতিবেদন | September 24, 2026**
