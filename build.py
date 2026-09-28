@@ -536,7 +536,7 @@ def clean_and_prepare():
     os.makedirs(os.path.join(OUTPUT_DIR, ADS_DIR), exist_ok=True)
     
     # Copy basic files
-    for f in ["index.html", "404.html", "contact.html", "about.html", "privacy-policy.html", "terms.html", "disclaimer.html", "cookie-policy.html", "submit-guest-post.html", "CNAME", "sitemap.xml", "robots.txt", "style.css", "favicon.ico", "2f91fd414fbc449ba9072df8cca9804a.txt"]:
+    for f in ["index.html", "404.html", "contact.html", "about.html", "privacy-policy.html", "terms.html", "disclaimer.html", "cookie-policy.html", "submit-guest-post.html", "CNAME", "sitemap.xml", "robots.txt", "sw.js", "style.css", "favicon.ico", "2f91fd414fbc449ba9072df8cca9804a.txt"]:
         if os.path.exists(f):
             destination = os.path.join(OUTPUT_DIR, f)
             shutil.copy2(f, destination)
