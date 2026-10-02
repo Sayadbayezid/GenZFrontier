@@ -383,12 +383,8 @@ def render_related_cards(items, relation_label="Related article"):
 
 AD_PROFILES = (
     {"name": "native", "class_name": "ad-slot-native", "min_words": 0},
-    {"name": "tall-160x600", "class_name": "ad-slot-tall desktop-only-ad", "min_words": 900},
-    {"name": "medium-160x300", "class_name": "ad-slot-medium desktop-only-ad", "min_words": 650},
     {"name": "banner-320x50", "class_name": "ad-slot-banner-small", "min_words": 0},
-    {"name": "banner-728x90", "class_name": "ad-slot-banner-wide desktop-only-ad", "min_words": 700},
     {"name": "rectangle-300x250", "class_name": "ad-slot-rectangle", "min_words": 0},
-    {"name": "banner-468x60", "class_name": "ad-slot-banner-medium desktop-only-ad", "min_words": 500},
 )
 
 def ad_slot_html(profile_name, placement="article"):
@@ -418,15 +414,15 @@ def choose_article_ad_profile(article, word_count):
 
 CATEGORY_AD_PROFILES = {
     "world": "rectangle-300x250",
-    "politics": "banner-728x90",
+    "politics": "rectangle-300x250",
     "business": "banner-320x50",
-    "tech": "banner-468x60",
-    "science": "medium-160x300",
+    "tech": "rectangle-300x250",
+    "science": "rectangle-300x250",
     "health": "banner-320x50",
     "sports": "rectangle-300x250",
-    "entertainment": "banner-468x60",
-    "careers": "medium-160x300",
-    "legacy-archives": "banner-728x90",
+    "entertainment": "rectangle-300x250",
+    "careers": "rectangle-300x250",
+    "legacy-archives": "rectangle-300x250",
     "mind-manipulation": "native",
 }
 
