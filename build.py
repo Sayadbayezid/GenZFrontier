@@ -869,27 +869,32 @@ for art in all_arts:
         article_html
     )
     
-    # User-approved ad policy: exclude Social Bar and choose exactly one banner
-    # profile per substantive article. No header, footer, or stacked ad injection.
+    # Use paragraph-based placement because visual line count changes with device
+    # width and font size. Insert one mobile-safe unit after roughly every four
+    # paragraphs, capped at three units per article to protect UX and viewability.
     ads_enabled = True
     word_count = len(re.findall(r"\b\w+\b", md_content, flags=re.UNICODE))
     selected_profile = choose_article_ad_profile(art, word_count) if ads_enabled else ""
-    article_ad_html = ad_slot_html(selected_profile) if selected_profile else ""
     article_desktop_ad_html = ""
     social_bar_html = ""
     paragraph_ends = list(re.finditer(r"</p>", article_html, flags=re.IGNORECASE))
-    # Every non-empty article receives one selected unit, but never before the
-    # title. Longer articles get a midpoint slot; short articles get the slot
-    # after their body so the header and opening remain uncluttered.
-    if article_ad_html:
+    if ads_enabled and article_html.strip():
+        mobile_safe_profiles = ("native", "rectangle-300x250", "banner-320x50")
         if len(paragraph_ends) >= 4:
-            midpoint = paragraph_ends[max(1, (len(paragraph_ends) // 2) - 1)].end()
-            article_html = article_html[:midpoint] + article_ad_html + article_html[midpoint:]
+            insertion_indexes = list(range(3, len(paragraph_ends), 4))[:3]
         elif len(paragraph_ends) >= 2:
-            insertion = paragraph_ends[0].end()
-            article_html = article_html[:insertion] + article_ad_html + article_html[insertion:]
-        elif article_html.strip():
-            article_html += article_ad_html
+            insertion_indexes = [0]
+        else:
+            insertion_indexes = []
+        if not insertion_indexes:
+            article_html += ad_slot_html(selected_profile)
+        else:
+            # Insert from the end so earlier paragraph offsets remain stable.
+            digest = int(hashlib.sha1(art["slug"].encode("utf-8")).hexdigest()[:8], 16)
+            for slot_number, paragraph_index in reversed(list(enumerate(insertion_indexes))):
+                profile = mobile_safe_profiles[(digest + slot_number) % len(mobile_safe_profiles)]
+                insertion = paragraph_ends[paragraph_index].end()
+                article_html = article_html[:insertion] + ad_slot_html(profile) + article_html[insertion:]
 
     # === Map Views to Article (New) ===
     article_path = art["href"]
